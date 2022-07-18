@@ -123,8 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemsContainer: {fileID: 610259900746943541}
   _gridContainer: {fileID: 468868836747610736}
-  _poiLT: {fileID: 3603963989846532697}
-  _poiRB: {fileID: 7699192860217285146}
+  _animalsContainer: {fileID: 1278421171504114904}
   _dim: {x: 4, y: 5}
   _gridSpace: 1.25
   _listItems: []
@@ -152,7 +151,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4895620254315257695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 4}
+  m_LocalPosition: {x: -2, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

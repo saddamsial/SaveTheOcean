@@ -17,109 +17,15 @@ public class Level : MonoBehaviour
   [Header("Refs")]
   [SerializeField] Transform _itemsContainer;
   [SerializeField] Transform _gridContainer;
-  [SerializeField] Transform _poiLT;
-  [SerializeField] Transform _poiRB;
+  [SerializeField] Transform _animalsContainer;
+  //[SerializeField] Transform _poiLT;
+  //[SerializeField] Transform _poiRB;
 
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
   [SerializeField] float      _gridSpace = 1.0f;
   [Header("Items")]
   [SerializeField] List<Item> _listItems;
-
-  // public class Grid
-  // {
-  //   Vector2Int  _dim = Vector2Int.zero;
-  //   Item[,]     _grid = null;
-  //   GridElem[,] _elems = null;
-
-  //   public void Init(Vector2Int dims)
-  //   {
-  //     _grid = new Item[dims.y, dims.x];
-  //     _elems = new GridElem[dims.y, dims.x];
-  //     _dim = dims;
-  //   }
-
-  //   public void Clear()
-  //   {
-  //     System.Array.Clear(_grid, 0, _grid.Length);
-  //   }
-  //   public Vector2Int dim => _dim;
-  //   public bool IsInside(Vector2Int v)
-  //   {
-  //     return v.x >= -_dim.x / 2 && v.x <= _dim.x / 2 && v.y >= -_dim.y / 2 && v.y <= _dim.y / 2;
-  //   }
-
-  //   public void Set(Item item)
-  //   {
-  //     Set(item.vgrid, item);
-  //   }
-  //   public void Set(Vector2Int igrid, Item item)
-  //   {
-  //     var v = igrid + _dim / 2;
-  //     _grid[v.y, v.x] = item;
-  //   }
-  //   public Item Get(Vector2Int grid)
-  //   {
-  //     return GetA(grid + _dim/2);
-  //   }
-  //   public Item GetA(Vector2Int grid)
-  //   {
-  //     Item item = null;
-  //     if(grid.x >= 0 && grid.x < dim.x && grid.y >= 0 && grid.y < dim.y)
-  //       item = _grid[grid.y, grid.x];
-      
-  //     return item;
-  //   }
-  //   public Vector2Int Clamp(Vector2Int igrid)
-  //   {
-  //     return new Vector2Int(Mathf.Clamp(igrid.x, -_dim.x/2, _dim.x/2), Mathf.Clamp(igrid.y, -_dim.y/2, _dim.y/2));
-  //   }
-  //   // public List<Item> GetNB(Vector2Int v)
-  //   // {
-  //   //   List<Item> list = new List<Item>();
-  //   //   Vector2Int vv = Vector2Int.zero;
-  //   //   for(int y = -1; y <= 1; ++y)
-  //   //   {
-  //   //     vv.y = y;
-  //   //     for(int x = -1; x <= 1; ++x)
-  //   //     {
-  //   //       vv.x = x;
-  //   //       if(x != 0 || y != 0)
-  //   //       {
-  //   //         var item = Get(v + vv);
-  //   //         if(item != null)
-  //   //           list.Add(item);
-  //   //       }
-  //   //     }
-  //   //   }
-  //   //   return list;
-  //   // }
-  //   // public void update(List<Item> _items, Level lvl)
-  //   // {
-  //   //   Clear();
-  //   //   for(int q = 0; q < _items.Count; ++q)
-  //   //   {
-  //   //     if(IsInside(_items[q].grid))
-  //   //       Set(_items[q]);
-  //   //   }
-  //   // }
-  //   public GridElem GetElem(Vector2Int vi)
-  //   {
-  //     if(IsInside(vi))
-  //     {
-  //       var v = _dim / 2 + vi;
-  //       return _elems[v.y, v.x];      
-  //     }
-  //     else
-  //       return null;  
-  //   }
-  //   public void SetElem(GridElem elem)
-  //   {
-  //     var v = _dim / 2 + elem.vgrid;
-  //     _elems[v.y, v.x] = elem;
-  //   }    
-  //   public GridElem[,] elems => _elems;
-  // }
 
   public int    LevelIdx => GameState.Progress.Level;
   public bool   Succeed {get; private set;}
@@ -130,26 +36,20 @@ public class Level : MonoBehaviour
 
   bool      _started = false;
   UISummary _uiSummary = null;
+  Transform _cameraContainer = null;
+  Animal[]  _animals;
 
   Item       _itemSelected;
   List<Item> _items = new List<Item>();
-  Transform  _cameraContainer = null;
-  bool       _inputBlocked = false;
-  bool       _sequence = false;
-  Grid       _grid = new Grid();
-
 
   void Awake()
   {
     Item.GridSpace = _gridSpace;
-    // if(_usePerLevelPOI)
-    // {
-    //   _poiLT.position = new Vector3(-_grid.dim().x/2 - 2, 0, _grid.dim().y / 2 + 2);
-    //   _poiRB.position = new Vector3(_grid.dim().x / 2 + 2, 0, -_grid.dim().y / 2 - 2);
-    // }
     _cameraContainer = GameObject.Find("_cameraContainer").transform;
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     _uiSummary = FindObjectOfType<UISummary>(true);
+    _animals = _animalsContainer.GetComponentsInChildren<Animal>(true);
+
     onCreate?.Invoke(this);
   }
   void OnDestroy()
@@ -161,11 +61,13 @@ public class Level : MonoBehaviour
     Init();
     yield return null;
     _started = true;
+    
+    System.Array.ForEach(_animals, (animal) => animal.Activate());
+    
     onStart?.Invoke(this);
   }
   void Init()
   {
-    //_grid.Init(_dim);
     for(int y = 0; y < _dim.y; ++y)
     {
       float yy = (-_dim.y + 1) * 0.5f + y;
