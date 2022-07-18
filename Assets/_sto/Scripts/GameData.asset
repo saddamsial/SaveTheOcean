@@ -15,21 +15,12 @@ MonoBehaviour:
   _items:
   - _items:
     - {fileID: 6445466529311080229, guid: 327790c7af694224bbd1ab6ba6db2630, type: 3}
-    - {fileID: 6445466529311080229, guid: 3e7760b3a84f1b043af8cb5515654dba, type: 3}
-    - {fileID: 6445466529311080229, guid: 23337a9516cd58e409feb4515c4ebc07, type: 3}
-  - _items:
     - {fileID: 6445466529311080229, guid: bbaf147057b39f7488c3642937cb1d2c, type: 3}
-    - {fileID: 6445466529311080229, guid: bde382c2a5e89cb4aaf80c1d9f7407e8, type: 3}
+    - {fileID: 6445466529311080229, guid: efdceaad2179d694781dc6ed5ec1227f, type: 3}
+  - _items:
     - {fileID: 6445466529311080229, guid: c0cb0084ae12d184fa41b89d0fe99aeb, type: 3}
-  - _items:
-    - {fileID: 6445466529311080229, guid: 7446650113ada244995b416d4cf358b0, type: 3}
-    - {fileID: 6445466529311080229, guid: b905e00f580c537488ca8f87a96acdbd, type: 3}
-  - _items:
-    - {fileID: 6445466529311080229, guid: cabbff61c8046b642b2bf000b39d1af1, type: 3}
-    - {fileID: 6445466529311080229, guid: 6f573eea312e59245aeb1020ff08fb18, type: 3}
-  - _items:
-    - {fileID: 6445466529311080229, guid: a32f0c719a9a31d4fa78cbc6c407d33c, type: 3}
-    - {fileID: 6445466529311080229, guid: fad9f945899acfd4f98e0d8d524ccdbf, type: 3}
+    - {fileID: 6445466529311080229, guid: 23337a9516cd58e409feb4515c4ebc07, type: 3}
+    - {fileID: 6445466529311080229, guid: bde382c2a5e89cb4aaf80c1d9f7407e8, type: 3}
   _gridElem: {fileID: 7566253647186876143, guid: 0e0b47018aa1f2648b626fdb9a2ff321, type: 3}
   _listLevels:
   - {fileID: 2229698086017596401, guid: c01b6befe631c5b44bf560095e70ab39, type: 3}
