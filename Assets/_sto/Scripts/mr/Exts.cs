@@ -153,6 +153,10 @@ public static class ListEx
   {
     return list[Random.Range(0, list.Count)];
   }
+  public static int get_random_idx<T>(this List<T> list)
+  {
+    return Random.Range(0,list.Count); 
+  }
   public static T first<T>(this List<T> list)
   {
     return list[0];
@@ -182,6 +186,10 @@ public static class ArrayEx
   {
     return array[Random.Range(0, array.Length)];
   }
+  public static int get_random_idx<T>(this T[] array)
+  {
+    return Random.Range(0, array.Length);
+  }  
   public static T first<T>(this T[] array)
   {
     return array[0];

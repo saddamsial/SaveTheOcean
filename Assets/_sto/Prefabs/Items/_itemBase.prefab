@@ -113,7 +113,6 @@ GameObject:
   - component: {fileID: 7845557772794626158}
   - component: {fileID: 6752348163733698667}
   - component: {fileID: 7798136041665752175}
-  - component: {fileID: 7273517201562458461}
   - component: {fileID: 2079218385271069147}
   - component: {fileID: 4908890458060838249}
   m_Layer: 9
@@ -154,10 +153,8 @@ MonoBehaviour:
   _mrs: []
   _modelContainer: {fileID: 5137363068744547674}
   _activatable: {fileID: 7798136041665752175}
-  _ocb: {fileID: 7273517201562458461}
   _objShake: {fileID: 7252232302845462380}
   _sm: {fileID: 2079218385271069147}
-  _color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &7798136041665752175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,58 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3153182826125854873}
---- !u!114 &7273517201562458461
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4092142241397789765}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39a14500fdb319742b5360e4c264da8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loop: 0
-  rendererContainers:
-  - {fileID: 0}
-  blendCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 7.5007696
-      outSlope: 7.5007696
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.13065326
-    - serializedVersion: 3
-      time: 0.25
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2.6059508
-      outSlope: -2.6059508
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.117253006
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  blendTime: 1.5
-  speedMultiplier: 1
-  baseColor: {r: 1, g: 1, b: 1, a: 1}
-  targetColor: {r: 2.1185474, g: 2.1185474, b: 2.1185474, a: 1}
 --- !u!114 &2079218385271069147
 MonoBehaviour:
   m_ObjectHideFlags: 0

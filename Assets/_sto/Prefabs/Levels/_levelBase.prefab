@@ -125,7 +125,7 @@ MonoBehaviour:
   _gridContainer: {fileID: 468868836747610736}
   _poiLT: {fileID: 3603963989846532697}
   _poiRB: {fileID: 7699192860217285146}
-  _dim: {x: 5, y: 5}
+  _dim: {x: 4, y: 5}
   _gridSpace: 1.25
   _listItems: []
 --- !u!1 &4895620254315257695

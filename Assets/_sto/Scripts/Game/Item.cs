@@ -10,16 +10,16 @@ public class Item : MonoBehaviour
   [SerializeField] MeshRenderer[]     _mrs = null;
   [SerializeField] GameObject         _modelContainer;
   [SerializeField] ActivatableObject  _activatable;
-  [SerializeField] ObjectColorBlender _ocb;
   [SerializeField] ObjectShake        _objShake;
   [SerializeField] SpringMove         _sm;
 
-  [Header("Props")]
-  [SerializeField] Color _color;
+  //[Header("Props")]
+  Color _color;
+  List<GameObject> _models = new List<GameObject>();
 
-  MaterialPropertyBlock _mpb = null;
-  float                 _lifetime = 0;
-  Vector2Int            _grid = Vector2Int.zero;
+  //MaterialPropertyBlock _mpb = null;
+  float      _lifetime = 0;
+  Vector2    _grid = Vector2.zero;
   
   public int type {get;set;} = 0;
   public int lvl  {get;set;} = 0;
@@ -52,7 +52,7 @@ public class Item : MonoBehaviour
     }
     return new_item;
   }
-  static Vector3     ToPos(Vector2Int vgrid) => new Vector3(vgrid.x, 0, vgrid.y) * Item.GridSpace;
+  static Vector3     ToPos(Vector2 vgrid) => new Vector3(vgrid.x, 0, vgrid.y) * Item.GridSpace;
   public static bool EqType(Item item0, Item item1)
   {
     return item0 != null && item1 != null && item0.lvl == item1.lvl && item0.type == item1.type;
@@ -61,7 +61,7 @@ public class Item : MonoBehaviour
   static public int layer = 0;
   static public int layerMask = 0;
 
-  public Vector2Int vgrid {get => _grid; set{_grid = value;}}
+  public Vector2    vgrid {get => _grid; set{_grid = value;}}
   public Vector3    vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
   public Vector3    vwpos { get => transform.position; set { transform.position = value;}}
   // public Color      color
@@ -87,14 +87,24 @@ public class Item : MonoBehaviour
     _mrs = _modelContainer.GetComponentsInChildren<MeshRenderer>();
     layer = gameObject.layer;
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(layer));
+
+    for(int q = 0; q < _modelContainer.transform.childCount; ++q)
+      _models.Add(_modelContainer.transform.GetChild(q).gameObject);
   }
-  public void Init(Vector2Int grid)
+  public void Init(Vector2 grid)
   {
-    _mpb = new MaterialPropertyBlock();
-    _mrs[0]?.GetPropertyBlock(_mpb, 0);
+    //_mpb = new MaterialPropertyBlock();
+    //_mrs[0]?.GetPropertyBlock(_mpb, 0);
     //color = _color;
     vgrid = grid;
     vlpos = Item.ToPos(vgrid);
+
+    SetModel(_models.get_random_idx());
+  }
+  void SetModel(int model_idx)
+  {
+    for(int q = 0; q < _models.Count; ++q)
+      _models[q].SetActive(q == model_idx);
   }
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
   public void Show()
