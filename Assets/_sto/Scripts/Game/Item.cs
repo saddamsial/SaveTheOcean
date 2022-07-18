@@ -7,8 +7,8 @@ using GameLib.Utilities;
 public class Item : MonoBehaviour
 {
   [Header("Refs")]
-  [SerializeField] MeshRenderer[] _mrs = null;
-  [SerializeField] GameObject     _modelContainer;
+  [SerializeField] MeshRenderer[]     _mrs = null;
+  [SerializeField] GameObject         _modelContainer;
   [SerializeField] ActivatableObject  _activatable;
   [SerializeField] ObjectColorBlender _ocb;
   [SerializeField] ObjectShake        _objShake;
@@ -64,21 +64,21 @@ public class Item : MonoBehaviour
   public Vector2Int vgrid {get => _grid; set{_grid = value;}}
   public Vector3    vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
   public Vector3    vwpos { get => transform.position; set { transform.position = value;}}
-  public Color      color
-  {
-    get => _color;
-    set
-    {
-      _color = value;
-      //_mr.material.color = _color;
-      foreach(var _mr in _mrs)
-      {
-        _mpb.SetColor("_MainColor", _color);
-        _mpb.SetColor("_BaseColor", _color);
-        _mr.SetPropertyBlock(_mpb);
-      }
-    }
-  }
+  // public Color      color
+  // {
+  //   get => _color;
+  //   set
+  //   {
+  //     _color = value;
+  //     //_mr.material.color = _color;
+  //     foreach(var _mr in _mrs)
+  //     {
+  //       _mpb.SetColor("_MainColor", _color);
+  //       _mpb.SetColor("_BaseColor", _color);
+  //       _mr.SetPropertyBlock(_mpb);
+  //     }
+  //   }
+  // }
   public bool IsUpgradable => lvl + 1 < GameData.Prefabs.ItemLevelsCnt(type);
   public bool IsSelected {get; set;}
 
@@ -92,7 +92,7 @@ public class Item : MonoBehaviour
   {
     _mpb = new MaterialPropertyBlock();
     _mrs[0]?.GetPropertyBlock(_mpb, 0);
-    color = _color;
+    //color = _color;
     vgrid = grid;
     vlpos = Item.ToPos(vgrid);
   }
