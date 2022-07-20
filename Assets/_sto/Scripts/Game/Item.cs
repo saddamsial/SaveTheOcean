@@ -20,10 +20,8 @@ public class Item : MonoBehaviour
   //MaterialPropertyBlock _mpb = null;
   float      _lifetime = 0;
   Vector2    _grid = Vector2.zero;
-  
-  public int type {get;set;} = 0;
-  public int lvl  {get;set;} = 0;
-
+  public int type {get; set;} = 0;
+  public int lvl {get;set;} = 0;
 
   public static float GridSpace = 1.0f;
 
@@ -79,6 +77,7 @@ public class Item : MonoBehaviour
   //     }
   //   }
   // }
+  public bool IsMaxLevel => lvl + 1 == GameData.Prefabs.ItemLevelsCnt(type);
   public bool IsUpgradable => lvl + 1 < GameData.Prefabs.ItemLevelsCnt(type);
   public bool IsSelected {get; set;}
 
@@ -90,6 +89,12 @@ public class Item : MonoBehaviour
 
     for(int q = 0; q < _modelContainer.transform.childCount; ++q)
       _models.Add(_modelContainer.transform.GetChild(q).gameObject);
+  }
+  public void SetAsStatic()
+  {
+    _activatable.ActivateObject();
+    GetComponent<BoxCollider>().enabled = false;
+    SetModel(0);
   }
   public void Init(Vector2 grid)
   {

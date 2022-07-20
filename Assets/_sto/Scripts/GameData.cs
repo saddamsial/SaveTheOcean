@@ -16,11 +16,24 @@ public class GameData : ScriptableObject
     _static_this = this;
   }
 
+  public static void Init()
+  {
+    var items = get()._items;
+    for(int type = 0; type < items.Length; ++type)
+    {
+      var item = items[type];
+      for(int lvl = 0; lvl < item.Count; ++lvl)
+      {
+        item.Get(lvl).type = type;
+        item.Get(lvl).lvl = lvl;
+      }
+    }
+  }
+
   [System.Serializable]
   struct Items
   {
     [SerializeField] Item[] _items;
-
     public Item Get(int idx) => _items[Mathf.Clamp(idx, 0, _items.Length -1)];
     public int  Count => _items.Length;
   }
@@ -48,6 +61,13 @@ public class GameData : ScriptableObject
       item = Instantiate(get()._items[item_type].Get(item_level), parent);
       item.type = item_type;
       item.lvl = item_level;
+      return item;
+    }
+    public static Item CreateStaticItem(Item item_prefab, Transform parent)
+    {
+      Item item = CreateItem(item_prefab.type, item_prefab.lvl, parent);
+      item.SetAsStatic();
+      item.enabled = false;
       return item;
     }
     public static int ItemLevelsCnt(int item_type) => get()._items[item_type].Count;

@@ -78,6 +78,12 @@ public static class Vector3Ex
 }
 public static class TrasformEx
 {
+  public static void reset(this Transform tr)
+  {
+    tr.localPosition = Vector3.zero;
+    tr.localRotation = Quaternion.identity;
+    tr.localScale = Vector3.one;
+  }
   public static void set_pos_x(this Transform tr, float x)
   {
     tr.position = new Vector3(x, tr.position.y, tr.position.z);

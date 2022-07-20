@@ -17,6 +17,7 @@ public class Main : MonoBehaviour
   {
     Application.targetFrameRate = 60;
     DataManager.LoadAllData();
+    GameData.Init();
   }
   void OnApplicationPause(bool paused)
   {

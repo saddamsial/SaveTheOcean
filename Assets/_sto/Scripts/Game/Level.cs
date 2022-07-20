@@ -48,7 +48,7 @@ public class Level : MonoBehaviour
     _cameraContainer = GameObject.Find("_cameraContainer").transform;
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     _uiSummary = FindObjectOfType<UISummary>(true);
-    _animals = _animalsContainer.GetComponentsInChildren<Animal>(true);
+    _animals = _animalsContainer.GetComponentsInChildren<Animal>();
 
     onCreate?.Invoke(this);
   }
@@ -62,7 +62,7 @@ public class Level : MonoBehaviour
     yield return null;
     _started = true;
     
-    System.Array.ForEach(_animals, (animal) => animal.Activate());
+    System.Array.ForEach(_animals, (animal) => animal.Activate(true));
     
     onStart?.Invoke(this);
   }
@@ -101,6 +101,7 @@ public class Level : MonoBehaviour
       {
         _itemNearest.Hover(true);
       }
+
     }
   }
   public void OnInputEnd(TouchInputData tid)
@@ -113,17 +114,31 @@ public class Level : MonoBehaviour
     {
       var newItem = Item.Merge(_itemSelected, itemHit, _items);
       if(newItem)
+      {
         newItem.Show();
+        System.Array.ForEach(_animals, (animal) => animal.AnimTalk());
+      }
       else
       {
         _itemSelected.Select(false);
         _itemSelected.MoveBack();
-      }  
+      }
     }
     else
     {
-      _itemSelected.Select(false);
-      _itemSelected.MoveBack();
+      var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
+      if(animalHit && animalHit.CanPut(_itemSelected)) //   _itemSelected.IsMaxLevel)
+      {
+        animalHit.Deactivate();
+        animalHit.Put(_itemSelected);
+        _items.Remove(_itemSelected);
+        
+      }
+      else
+      {
+        _itemSelected.Select(false);
+        _itemSelected.MoveBack();
+      }
     }
     _itemSelected = null;
   }
