@@ -13,18 +13,32 @@ public class Item : MonoBehaviour
   [SerializeField] ObjectShake        _objShake;
   [SerializeField] SpringMove         _sm;
 
-  //[Header("Props")]
   Color _color;
   List<GameObject> _models = new List<GameObject>();
 
-  //MaterialPropertyBlock _mpb = null;
-  float      _lifetime = 0;
-  Vector2    _grid = Vector2.zero;
-  public int type {get; set;} = 0;
-  public int lvl {get;set;} = 0;
+  [System.Serializable]
+  public struct ID
+  {
+    [SerializeField] int _type;
+    [SerializeField] int _lvl;
+
+    public ID(int item_type, int item_lvl)
+    {
+      _type = item_type;
+      _lvl = item_lvl;
+    }
+
+    public int type {get => _type; set{_type = value;}}
+    public int lvl {get => _lvl; set{_lvl = value;}}
+    public static bool Eq(ID id0, ID id1) => id0.type == id1.type && id0.lvl == id1.lvl;
+  }
+
+  [SerializeField] ID      _id = new ID();
+  float   _lifetime = 0;
+  Vector2 _grid = Vector2.zero;
+  public ID id {get => _id; set{_id = value;}}
 
   public static float GridSpace = 1.0f;
-
   public static System.Action<Item> onShow, onHide, onMerged;
   public static Item Merge(Item item0, Item item1, List<Item> _items)
   {
@@ -41,7 +55,8 @@ public class Item : MonoBehaviour
     Item new_item = null;
     if(item.IsUpgradable)
     {
-      new_item = GameData.Prefabs.CreateItem(item.type, item.lvl + 1, item.transform.parent);
+      item.incLvl();
+      new_item = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
       item.Hide();
       new_item.Init(item.vgrid);
 
@@ -53,33 +68,19 @@ public class Item : MonoBehaviour
   static Vector3     ToPos(Vector2 vgrid) => new Vector3(vgrid.x, 0, vgrid.y) * Item.GridSpace;
   public static bool EqType(Item item0, Item item1)
   {
-    return item0 != null && item1 != null && item0.lvl == item1.lvl && item0.type == item1.type;
+    return item0 != null && item1 != null && ID.Eq(item0.id, item1.id);
   }
 
   static public int layer = 0;
   static public int layerMask = 0;
 
-  public Vector2    vgrid {get => _grid; set{_grid = value;}}
-  public Vector3    vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
-  public Vector3    vwpos { get => transform.position; set { transform.position = value;}}
-  // public Color      color
-  // {
-  //   get => _color;
-  //   set
-  //   {
-  //     _color = value;
-  //     //_mr.material.color = _color;
-  //     foreach(var _mr in _mrs)
-  //     {
-  //       _mpb.SetColor("_MainColor", _color);
-  //       _mpb.SetColor("_BaseColor", _color);
-  //       _mr.SetPropertyBlock(_mpb);
-  //     }
-  //   }
-  // }
-  public bool IsMaxLevel => lvl + 1 == GameData.Prefabs.ItemLevelsCnt(type);
-  public bool IsUpgradable => lvl + 1 < GameData.Prefabs.ItemLevelsCnt(type);
-  public bool IsSelected {get; set;}
+  public Vector2 vgrid {get => _grid; set{_grid = value;}}
+  public Vector3 vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
+  public Vector3 vwpos { get => transform.position; set { transform.position = value;}}
+  public bool    IsMaxLevel => id.lvl + 1 == GameData.Prefabs.ItemLevelsCnt(id.type);
+  public bool    IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
+  public bool    IsSelected {get; set;}
+  public void    incLvl(){_id.lvl++;}
 
   void Awake()
   {

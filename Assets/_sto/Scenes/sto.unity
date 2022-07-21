@@ -951,6 +951,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _mouseInputOverlay
       objectReference: {fileID: 0}
+    - target: {fileID: 2069437960188110450, guid: eed4949d94505a340932a7b461322ae1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2069437960188110451, guid: eed4949d94505a340932a7b461322ae1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

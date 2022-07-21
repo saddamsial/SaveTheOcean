@@ -24,8 +24,7 @@ public class GameData : ScriptableObject
       var item = items[type];
       for(int lvl = 0; lvl < item.Count; ++lvl)
       {
-        item.Get(lvl).type = type;
-        item.Get(lvl).lvl = lvl;
+        item.Get(lvl).id = new Item.ID(type, lvl);
       }
     }
   }
@@ -53,19 +52,18 @@ public class GameData : ScriptableObject
     { 
       return Instantiate(get()._gridElem, parent); 
     }
-    public static Item CreateItem(int item_type, int item_level, Transform parent)
+    public static Item CreateItem(Item.ID id, Transform parent)
     {
       Item item = null;
-      if(item_type < 0)
-        item_type = Random.Range(0, ItemTypesCnt);
-      item = Instantiate(get()._items[item_type].Get(item_level), parent);
-      item.type = item_type;
-      item.lvl = item_level;
+      if(id.type < 0)
+        id.type = Random.Range(0, ItemTypesCnt);
+      item = Instantiate(get()._items[id.type].Get(id.lvl), parent);
+      item.id = id;
       return item;
     }
-    public static Item CreateStaticItem(Item item_prefab, Transform parent)
+    public static Item CreateStaticItem(Item.ID id, Transform parent)
     {
-      Item item = CreateItem(item_prefab.type, item_prefab.lvl, parent);
+      Item item = CreateItem(id, parent);
       item.SetAsStatic();
       item.enabled = false;
       return item;

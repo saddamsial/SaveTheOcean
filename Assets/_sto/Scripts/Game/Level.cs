@@ -18,14 +18,26 @@ public class Level : MonoBehaviour
   [SerializeField] Transform _itemsContainer;
   [SerializeField] Transform _gridContainer;
   [SerializeField] Transform _animalsContainer;
+  [SerializeField] Transform[] _animalContainers;
   //[SerializeField] Transform _poiLT;
   //[SerializeField] Transform _poiRB;
 
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
   [SerializeField] float      _gridSpace = 1.0f;
-  [Header("Items")]
-  [SerializeField] List<Item> _listItems;
+  [Header("LvlDesc")]
+  //[SerializeField] List<Item> _listItems;
+  [SerializeField] LvlDesc[]  _lvlDescs;
+
+  [System.Serializable]
+  public struct LvlDesc
+  {
+    [SerializeField] Animal _animal;
+    [SerializeField] Item[] _reqItems;
+
+    public Animal  animal => _animal;
+    public Item[]  items => _reqItems;
+  }
 
   public int    LevelIdx => GameState.Progress.Level;
   public bool   Succeed {get; private set;}
@@ -34,10 +46,11 @@ public class Level : MonoBehaviour
   public int    Stars {get; set;}
   public Vector2Int Dim => _dim;
 
-  bool      _started = false;
-  UISummary _uiSummary = null;
-  Transform _cameraContainer = null;
-  Animal[]  _animals;
+
+  bool         _started = false;
+  UISummary    _uiSummary = null;
+  Transform    _cameraContainer = null;
+  List<Animal> _animals = new List<Animal>();
 
   Item       _itemSelected;
   List<Item> _items = new List<Item>();
@@ -48,8 +61,14 @@ public class Level : MonoBehaviour
     _cameraContainer = GameObject.Find("_cameraContainer").transform;
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     _uiSummary = FindObjectOfType<UISummary>(true);
-    _animals = _animalsContainer.GetComponentsInChildren<Animal>();
-
+    //_animals = _animalsContainer.GetComponentsInChildren<Animal>();
+      
+    for(int q = 0; q < _lvlDescs.Length; ++q)
+    {
+      var animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
+      animal.Init(_lvlDescs[q].items[0]);
+      _animals.Add(animal);
+    }
     onCreate?.Invoke(this);
   }
   void OnDestroy()
@@ -62,23 +81,48 @@ public class Level : MonoBehaviour
     yield return null;
     _started = true;
     
-    System.Array.ForEach(_animals, (animal) => animal.Activate(true));
-    
+    _animals.ForEach((animal) => animal.Activate(true));
+        
     onStart?.Invoke(this);
   }
   void Init()
   {
+    List<Vector2> vs = new List<Vector2>();
+    Vector2 v = Vector2.zero;
     for(int y = 0; y < _dim.y; ++y)
     {
-      float yy = (-_dim.y + 1) * 0.5f + y;
+      v.y = (-_dim.y + 1) * 0.5f + y;
       for(int x = 0; x < _dim.x; ++x)
       {
-        float xx = (-_dim.x + 1) * 0.5f + x;
-        var item = GameData.Prefabs.CreateItem(-1, 0, _itemsContainer);
-        item.Init(new Vector2(xx, yy));
-        item.Show();
-        _items.Add(item);
+        v.x = (-_dim.x + 1) * 0.5f + x;
+        vs.Add(v);
       }
+    }
+    Item.ID id = new Item.ID();
+    List<Item.ID> ids = new List<Item.ID>();
+    for(int q = 0; q < _lvlDescs.Length; ++q)
+    {
+      var lvlDesc = _lvlDescs[q];
+      for(int i = 0; i < lvlDesc.items.Length; ++i)
+      {
+        var garb = _lvlDescs[q].items[i];
+        id.type = garb.id.type;
+        for(int d = 0; d < 1<<garb.id.lvl; ++d)
+        {
+          id.lvl = 0;
+          ids.Add(id);
+        }
+      }
+    }
+    vs.shuffle(1000);
+    vs.Reverse();
+    for(int q = 0; q < ids.Count; ++q)
+    {
+      var item = GameData.Prefabs.CreateItem(ids[q], _itemsContainer);
+      item.Init(vs.first());
+      vs.RemoveAt(0);
+      item.Show();
+      _items.Add(item);
     }
   }
 
@@ -116,7 +160,7 @@ public class Level : MonoBehaviour
       if(newItem)
       {
         newItem.Show();
-        System.Array.ForEach(_animals, (animal) => animal.AnimTalk());
+        System.Array.ForEach(_lvlDescs, (lvlDesc) => lvlDesc.animal.AnimTalk());
       }
       else
       {
