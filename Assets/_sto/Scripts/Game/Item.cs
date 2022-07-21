@@ -7,20 +7,19 @@ using GameLib.Utilities;
 public class Item : MonoBehaviour
 {
   [Header("Refs")]
-  [SerializeField] MeshRenderer[]     _mrs = null;
+  //[SerializeField] MeshRenderer[]     _mrs = null;
   [SerializeField] GameObject         _modelContainer;
   [SerializeField] ActivatableObject  _activatable;
-  [SerializeField] ObjectShake        _objShake;
+  //[SerializeField] ObjectShake        _objShake;
   [SerializeField] SpringMove         _sm;
 
   Color _color;
   List<GameObject> _models = new List<GameObject>();
 
-  [System.Serializable]
   public struct ID
   {
-    [SerializeField] int _type;
-    [SerializeField] int _lvl;
+    int _type;
+    int _lvl;
 
     public ID(int item_type, int item_lvl)
     {
@@ -33,9 +32,10 @@ public class Item : MonoBehaviour
     public static bool Eq(ID id0, ID id1) => id0.type == id1.type && id0.lvl == id1.lvl;
   }
 
-  [SerializeField] ID      _id = new ID();
-  float   _lifetime = 0;
-  Vector2 _grid = Vector2.zero;
+  ID         _id = new ID();
+  float      _lifetime = 0;
+  Vector2    _grid = Vector2.zero;
+  Vector2Int _agrid = Vector2Int.zero;
   public ID id {get => _id; set{_id = value;}}
 
   public static float GridSpace = 1.0f;
@@ -65,8 +65,8 @@ public class Item : MonoBehaviour
     }
     return new_item;
   }
-  static Vector3     ToPos(Vector2 vgrid) => new Vector3(vgrid.x, 0, vgrid.y) * Item.GridSpace;
-  public static bool EqType(Item item0, Item item1)
+  public static Vector3 ToPos(Vector2 vgrid) => new Vector3(vgrid.x, 0, vgrid.y) * Item.GridSpace;
+  public static bool    EqType(Item item0, Item item1)
   {
     return item0 != null && item1 != null && ID.Eq(item0.id, item1.id);
   }
@@ -75,6 +75,7 @@ public class Item : MonoBehaviour
   static public int layerMask = 0;
 
   public Vector2 vgrid {get => _grid; set{_grid = value;}}
+  public Vector2Int agrid {get => _agrid; set{_agrid = value;}}
   public Vector3 vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
   public Vector3 vwpos { get => transform.position; set { transform.position = value;}}
   public bool    IsMaxLevel => id.lvl + 1 == GameData.Prefabs.ItemLevelsCnt(id.type);
@@ -84,7 +85,7 @@ public class Item : MonoBehaviour
 
   void Awake()
   {
-    _mrs = _modelContainer.GetComponentsInChildren<MeshRenderer>();
+    //_mrs = _modelContainer.GetComponentsInChildren<MeshRenderer>();
     layer = gameObject.layer;
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(layer));
 
@@ -99,9 +100,6 @@ public class Item : MonoBehaviour
   }
   public void Init(Vector2 grid)
   {
-    //_mpb = new MaterialPropertyBlock();
-    //_mrs[0]?.GetPropertyBlock(_mpb, 0);
-    //color = _color;
     vgrid = grid;
     vlpos = Item.ToPos(vgrid);
 

@@ -55,6 +55,52 @@ public class Level : MonoBehaviour
   Item       _itemSelected;
   List<Item> _items = new List<Item>();
 
+  public class Grid
+  {
+    Vector2Int  _dim;
+    int[,]      _grid;
+    GridTile[,] _tiles;
+    public void Init(Vector2Int dim)
+    {
+      _dim = dim;
+      _grid = new int[dim.y, dim.x];
+      _tiles = new GridTile[dim.y, dim.x];
+      System.Array.Clear(_grid, 0, _grid.Length);
+    }
+    public static Vector2Int g2a(Vector2 vgrid, Vector2Int _dim)
+    {
+      int ax = (int)System.Math.Round(vgrid.x + _dim.x * 0.5f - 0.1f, System.MidpointRounding.AwayFromZero);
+      int ay = (int)System.Math.Round(vgrid.y + _dim.y * 0.5f - 0.1f, System.MidpointRounding.AwayFromZero);
+      return new Vector2Int(ax, ay);
+    }
+    public static Vector2 a2g(Vector2Int va, Vector2Int _dim)
+    {
+      Vector2 v = Vector2.zero;
+      v.y = -((-_dim.y + 1) * 0.5f + va.y);
+      v.x = (-_dim.x + 1) * 0.5f + va.x;
+      return v;
+    }
+    public void set(Vector2 vgrid, int val)
+    {
+      var va = g2a(vgrid, _dim);
+      _grid[va.y, va.x] = val;
+      _tiles[va.y, va.x].set((val!=0)? true : false);
+    }
+    public int get(Vector2 vgrid)
+    {
+      var va = g2a(vgrid, _dim);
+      return _grid[va.y, va.x];
+    }
+    public void tile(GridTile gt, Vector2 vgrid)
+    {
+      var va = g2a(vgrid, _dim);
+      _tiles[va.y, va.x] = gt;
+      gt.set(false);
+    }
+  }
+
+  Grid _grid = new Grid();
+
   void Awake()
   {
     Item.GridSpace = _gridSpace;
@@ -62,13 +108,7 @@ public class Level : MonoBehaviour
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     _uiSummary = FindObjectOfType<UISummary>(true);
     //_animals = _animalsContainer.GetComponentsInChildren<Animal>();
-      
-    for(int q = 0; q < _lvlDescs.Length; ++q)
-    {
-      var animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
-      animal.Init(_lvlDescs[q].items[0]);
-      _animals.Add(animal);
-    }
+
     onCreate?.Invoke(this);
   }
   void OnDestroy()
@@ -79,23 +119,34 @@ public class Level : MonoBehaviour
   {
     Init();
     yield return null;
+
+    for(int q = 0; q < _lvlDescs.Length; ++q)
+    {
+      var animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
+      animal.Init(_lvlDescs[q].items[0]);
+      animal.Activate(true);
+      _animals.Add(animal);
+    }
+
     _started = true;
-    
-    _animals.ForEach((animal) => animal.Activate(true));
-        
     onStart?.Invoke(this);
   }
   void Init()
   {
+    _grid.Init(_dim);
+
     List<Vector2> vs = new List<Vector2>();
     Vector2 v = Vector2.zero;
     for(int y = 0; y < _dim.y; ++y)
     {
-      v.y = (-_dim.y + 1) * 0.5f + y;
+      v.y = -((-_dim.y + 1) * 0.5f + y);
       for(int x = 0; x < _dim.x; ++x)
       {
         v.x = (-_dim.x + 1) * 0.5f + x;
         vs.Add(v);
+        var tile = GameData.Prefabs.CreateGridElem(_gridContainer);
+        tile.transform.localPosition = Item.ToPos(v);
+        _grid.tile(tile, v);
       }
     }
     Item.ID id = new Item.ID();
@@ -122,6 +173,7 @@ public class Level : MonoBehaviour
       item.Init(vs.first());
       vs.RemoveAt(0);
       item.Show();
+      _grid.set(item.vgrid, 1);
       _items.Add(item);
     }
   }
@@ -159,6 +211,7 @@ public class Level : MonoBehaviour
       var newItem = Item.Merge(_itemSelected, itemHit, _items);
       if(newItem)
       {
+        _grid.set(_itemSelected.vgrid, 0);
         newItem.Show();
         System.Array.ForEach(_lvlDescs, (lvlDesc) => lvlDesc.animal.AnimTalk());
       }
@@ -171,10 +224,11 @@ public class Level : MonoBehaviour
     else
     {
       var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
-      if(animalHit && animalHit.CanPut(_itemSelected)) //   _itemSelected.IsMaxLevel)
+      if(animalHit && animalHit.CanPut(_itemSelected))
       {
         animalHit.Deactivate();
         animalHit.Put(_itemSelected);
+        _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
         
       }
@@ -211,7 +265,6 @@ public class Level : MonoBehaviour
       StartCoroutine(coEnd());
     }
   }
-
   void Process()
   {
     foreach(var _item in _items)

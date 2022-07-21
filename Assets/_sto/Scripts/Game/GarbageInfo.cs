@@ -29,7 +29,6 @@ public class GarbageInfo : MonoBehaviour
   {
     _requestedItem = request;
     _requestedItem.transform.parent = requestContainer.transform;
-    //System.Array.ForEach(_requestedItem.GetComponentsInChildren<Transform>(), (Transform tr) =>  tr.ResetTransform());
     _actObj.ActivateObject();
     onShow?.Invoke(this);
   }

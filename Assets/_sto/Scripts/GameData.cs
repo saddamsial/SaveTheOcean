@@ -39,7 +39,7 @@ public class GameData : ScriptableObject
 
   [Header("Prefabs")]
   [SerializeField] Items[] _items;
-  [SerializeField] GridElem _gridElem;
+  [SerializeField] GridTile _gridTile;
   [Header("Levels")]
   [SerializeField] List<Level> _listLevels;
 
@@ -48,9 +48,9 @@ public class GameData : ScriptableObject
 
   public static class Prefabs
   {
-    public static GridElem CreateGridElem(Transform parent) 
+    public static GridTile CreateGridElem(Transform parent) 
     { 
-      return Instantiate(get()._gridElem, parent); 
+      return Instantiate(get()._gridTile, parent); 
     }
     public static Item CreateItem(Item.ID id, Transform parent)
     {
@@ -90,6 +90,5 @@ public class GameData : ScriptableObject
 
   public static class Settings
   {
-    //public static bool inputQueue{get => get().inputQueue; set{ get().inputQueue = value;}}
   }
 }
