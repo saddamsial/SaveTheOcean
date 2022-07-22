@@ -54,6 +54,7 @@ public class Level : MonoBehaviour
 
   Item       _itemSelected;
   List<Item> _items = new List<Item>();
+  List<Item> _items2 = new List<Item>();
 
   public class Grid
   {
@@ -170,11 +171,19 @@ public class Level : MonoBehaviour
     for(int q = 0; q < ids.Count; ++q)
     {
       var item = GameData.Prefabs.CreateItem(ids[q], _itemsContainer);
-      item.Init(vs.first());
-      vs.RemoveAt(0);
-      item.Show();
-      _grid.set(item.vgrid, 1);
-      _items.Add(item);
+      if(vs.Count > 0)
+      {
+        item.Init(vs.first());
+        vs.RemoveAt(0);
+        item.Show();
+        _grid.set(item.vgrid, 1);
+        _items.Add(item);
+      }
+      else
+      {
+        item.Init(Vector2.zero);
+        _items2.Add(item);
+      }
     }
   }
 

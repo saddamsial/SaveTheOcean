@@ -78,7 +78,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4509933857829436113}
-  - {fileID: 8796608033866315954}
   m_Father: {fileID: 7845557772794626158}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -150,10 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ff66c5abf378e241a23c7a2cdaab463, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mrs: []
   _modelContainer: {fileID: 5137363068744547674}
   _activatable: {fileID: 7798136041665752175}
-  _objShake: {fileID: 7252232302845462380}
   _sm: {fileID: 2079218385271069147}
 --- !u!114 &7798136041665752175
 MonoBehaviour:
@@ -277,110 +274,3 @@ MonoBehaviour:
   randomizeScale: 0
   scaleSnap: 0.01
   scaleRange: {x: 0.8, y: 1.2}
---- !u!1001 &9050384888914485081
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 7930696908549789317}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.91
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.91
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.91
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -7511558181221131132, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_CastShadows
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_Name
-      value: itemArrowRing
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
---- !u!1 &8167283193695871496 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-  m_PrefabInstance: {fileID: 9050384888914485081}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1567948672638210614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8167283193695871496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ddbd64eee165884bace9e878b928693, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectMultiplier: 1
-  useRandomPhaseOffset: 1
-  axis: {x: 1, y: 0, z: 0}
-  speed: 50
---- !u!4 &8796608033866315954 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 522b385059303634e9f7961cd5d5b6df, type: 3}
-  m_PrefabInstance: {fileID: 9050384888914485081}
-  m_PrefabAsset: {fileID: 0}
