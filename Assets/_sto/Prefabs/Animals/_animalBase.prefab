@@ -30,7 +30,7 @@ Transform:
   m_Children:
   - {fileID: 5991072100772495526}
   m_Father: {fileID: 2713116170127780520}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3698934528631460153
 GameObject:
@@ -60,7 +60,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3050413858318360191}
   m_Father: {fileID: 2713116170127780520}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -112,8 +113,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2713116170127780520}
-  m_RootOrder: 1
+  m_Father: {fileID: 8758133303071510880}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8714682521566971472
 GameObject:
@@ -146,7 +147,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8758133303071510880}
-  - {fileID: 3050413858318360191}
   - {fileID: 5159345164832268285}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -165,9 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 7143939878425974827}
   _garbageContainer: {fileID: 3050413858318360191}
-  _garbageContainerUI: {fileID: 8081038340043278295}
   _garbageInfo: {fileID: 7567173587057776728}
-  _garbagePrefab: {fileID: 0}
 --- !u!65 &3230293322258310716
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -270,8 +268,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa249b93c452b9b41823b099b25e6554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8081038340043278295 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6729113014817131966, guid: b8cd97d1e57090e488e3ab6c2469e881, type: 3}
-  m_PrefabInstance: {fileID: 3262577745409182313}
-  m_PrefabAsset: {fileID: 0}
