@@ -54,8 +54,8 @@ public class Animal : MonoBehaviour
     isReady = false;
     isActive = false;
     _garbageInfo.Hide();
+    _animator.SetTrigger("deactivate");
     GetComponent<Collider>().enabled = false;
-    this.Invoke(() => _animator.SetTrigger("deactivate"), 0.5f);
     this.Invoke(() => gameObject.SetActive(false), 4.0f);
   }
   public void AnimFailed() => _animator.SetTrigger("fail");

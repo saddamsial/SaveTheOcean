@@ -226,11 +226,11 @@ public class Level : MonoBehaviour
       var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
       if(animalHit && animalHit.CanPut(_itemSelected))
       {
-        animalHit.Deactivate();
         animalHit.Put(_itemSelected);
+        animalHit.Deactivate();
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
-        
+        CheckEnd();
       }
       else
       {
@@ -259,7 +259,8 @@ public class Level : MonoBehaviour
   }
   void CheckEnd()
   {
-    if(!Finished)
+    int activeAnimals = _animals.Count((animal) => animal.isActive);
+    if(!Finished && activeAnimals == 0)
     {
       Finished = true;
       StartCoroutine(coEnd());
