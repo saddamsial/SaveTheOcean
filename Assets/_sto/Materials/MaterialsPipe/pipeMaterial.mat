@@ -145,7 +145,7 @@ Material:
     - _waveScale: 4
     - _waveSpeed: 0.1
     m_Colors:
-    - _BaseColor: {r: 0.5566038, g: 0.4949291, b: 0.44370773, a: 1}
+    - _BaseColor: {r: 0.6132076, g: 0.5546326, b: 0.5524653, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Mapping: {r: 3, g: 0.25, b: 0, a: 0}
