@@ -186,7 +186,17 @@ public class Level : MonoBehaviour
       }
     }
   }
-
+  void SpawnItem(Vector2 vgrid)
+  {
+    if(_items2.Count > 0)
+    {
+      var item = _items2.first();
+      _items2.RemoveAt(0);
+      item.Init(vgrid);
+      item.Show();
+      _grid.set(item.vgrid, 1);
+    }
+  }
   public void OnInputBeg(TouchInputData tid)
   {
     _itemSelected = null;
@@ -222,6 +232,7 @@ public class Level : MonoBehaviour
       {
         _grid.set(_itemSelected.vgrid, 0);
         newItem.Show();
+        SpawnItem(_itemSelected.vgrid);
       }
       else
       {
@@ -237,6 +248,7 @@ public class Level : MonoBehaviour
         animalHit.Put(_itemSelected);
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
+        SpawnItem(_itemSelected.vgrid);
         CheckEnd();
       }
       else

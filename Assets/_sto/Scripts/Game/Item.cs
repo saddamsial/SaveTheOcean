@@ -7,13 +7,10 @@ using GameLib.Utilities;
 public class Item : MonoBehaviour
 {
   [Header("Refs")]
-  //[SerializeField] MeshRenderer[]     _mrs = null;
   [SerializeField] GameObject         _modelContainer;
   [SerializeField] ActivatableObject  _activatable;
-  //[SerializeField] ObjectShake        _objShake;
   [SerializeField] SpringMove         _sm;
 
-  Color _color;
   List<GameObject> _models = new List<GameObject>();
 
   public struct ID
@@ -158,9 +155,8 @@ public class Item : MonoBehaviour
   {
     _lifetime += Time.deltaTime;
   }
-  void OnDrawGizmos()
-  {
-    Gizmos.color = _color;
-    Gizmos.DrawCube(transform.position + new Vector3(0,1.0f, 0), Vector3.one * 0.25f);
-  }
+  // void OnDrawGizmos()
+  // {
+  //   Gizmos.DrawCube(transform.position + new Vector3(0,1.0f, 0), Vector3.one * 0.25f);
+  // }
 }

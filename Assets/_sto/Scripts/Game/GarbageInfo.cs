@@ -33,7 +33,7 @@ public class GarbageInfo : MonoBehaviour
     for(int q = 0; q < _requestedItems.Count; ++q)
     {
       float x = (-_requestedItems.Count + 1) * 0.5f + q;
-      _requestedItems[q].transform.localPosition = new Vector3(x * 0.75f, 0, 0);
+      _requestedItems[q].transform.localPosition = new Vector3(x * 1.25f, 0, 0);
     }
     _actObj.ActivateObject();
     onShow?.Invoke(this);
