@@ -29,10 +29,11 @@ public class GarbageInfo : MonoBehaviour
   {
     _requestedItems.AddRange(requests);
     _requestedItems.ForEach((request) => request.transform.parent = requestContainer.transform);
-    int beg = -_requestedItems.Count / 2;
+
     for(int q = 0; q < _requestedItems.Count; ++q)
     {
-      _requestedItems[q].transform.localPosition = new Vector3((beg + q) * 0.5f, 0, 0);
+      float x = (-_requestedItems.Count + 1) * 0.5f + q;
+      _requestedItems[q].transform.localPosition = new Vector3(x * 0.75f, 0, 0);
     }
     _actObj.ActivateObject();
     onShow?.Invoke(this);

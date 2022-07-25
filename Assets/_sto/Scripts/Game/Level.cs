@@ -222,7 +222,6 @@ public class Level : MonoBehaviour
       {
         _grid.set(_itemSelected.vgrid, 0);
         newItem.Show();
-        System.Array.ForEach(_lvlDescs, (lvlDesc) => lvlDesc.animal.AnimTalk());
       }
       else
       {

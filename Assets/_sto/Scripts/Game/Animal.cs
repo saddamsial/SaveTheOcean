@@ -92,10 +92,14 @@ public class Animal : MonoBehaviour
         _garbageInfo.Remove(it.id);
         _garbagesCleared.Add(it);
         garbages.Remove(it);        
-        if(garbages.Count == 0)
+        if(garbages.Count > 0)
+        {
+          AnimTalk();
+        }
+        else
         {
           isReady = false;
-          Deactivate();
+          Deactivate();          
         }
       }
       this.Invoke(()=> item.gameObject.SetActive(false), 2.0f);
