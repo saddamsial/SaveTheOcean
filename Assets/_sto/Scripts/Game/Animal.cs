@@ -73,7 +73,6 @@ public class Animal : MonoBehaviour
     GetComponent<Collider>().enabled = false;
     this.Invoke(() => gameObject.SetActive(false), 4.0f);
   }
-  public void AnimFailed() => _animator.SetTrigger("fail");
   public void AnimThrow()
   {
     if(isReady)
@@ -100,6 +99,8 @@ public class Animal : MonoBehaviour
         if(garbages.Count > 0)
         {
           AnimThrow();
+          isReady = false;
+          this.Invoke(() => isReady = true, 2.0f);
         }
         else
         {

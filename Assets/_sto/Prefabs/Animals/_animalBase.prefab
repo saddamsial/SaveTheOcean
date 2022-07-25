@@ -210,6 +210,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: garbageInfo
       objectReference: {fileID: 0}
+    - target: {fileID: 6729113014817131966, guid: b8cd97d1e57090e488e3ab6c2469e881, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 6729113014817131966, guid: b8cd97d1e57090e488e3ab6c2469e881, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -48
+      objectReference: {fileID: 0}
     - target: {fileID: 7373343789543755764, guid: b8cd97d1e57090e488e3ab6c2469e881, type: 3}
       propertyPath: m_Enabled
       value: 0

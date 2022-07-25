@@ -11,6 +11,7 @@ public class GarbageInfo : MonoBehaviour
 {
   [SerializeField] GameObject content;
   [SerializeField] GameObject requestContainer;
+  [SerializeField] RectTransform _popupRect;
   [SerializeField] ActivatableObject _actObj;
 
   public static int layer { get; private set; } = 0;
@@ -29,12 +30,7 @@ public class GarbageInfo : MonoBehaviour
   {
     _requestedItems.AddRange(requests);
     _requestedItems.ForEach((request) => request.transform.parent = requestContainer.transform);
-
-    for(int q = 0; q < _requestedItems.Count; ++q)
-    {
-      float x = (-_requestedItems.Count + 1) * 0.5f + q;
-      _requestedItems[q].transform.localPosition = new Vector3(x * 1.25f, 0, 0);
-    }
+    UpdateLayout();
     _actObj.ActivateObject();
     onShow?.Invoke(this);
   }
@@ -46,7 +42,17 @@ public class GarbageInfo : MonoBehaviour
       _requestedItems.Remove(item);
       item.gameObject.SetActive(false);
     }
-  } 
+    UpdateLayout();
+  }
+  void UpdateLayout()
+  {
+    for(int q = 0; q < _requestedItems.Count; ++q)
+    {
+      float x = (-_requestedItems.Count + 1) * 0.5f + q;
+      _requestedItems[q].transform.localPosition = new Vector3(x * 1.25f, 0, 0);
+    }
+    _popupRect.sizeDelta = new Vector2(88 + _requestedItems.Count * 80, _popupRect.sizeDelta.y);
+  }
   public void Hide()
   {
     _actObj.DeactivateObject();
