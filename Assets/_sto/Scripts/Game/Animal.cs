@@ -33,7 +33,7 @@ public class Animal : MonoBehaviour
   {
     yield return StartCoroutine(WaitForAnimState("_active"));
     isReady = true;
-    _garbageInfo.Show(garbages[0]);
+    _garbageInfo.Show(garbages);
   }
   IEnumerator WaitForAnimState(string anim)
   {
@@ -55,9 +55,6 @@ public class Animal : MonoBehaviour
     {
       garbages.Add(GameData.Prefabs.CreateStaticItem(id, _garbageInfo.itemContainer));
     }
-    //garbages = new List<Item>(items_prefab);
-    //foreach(var garbage in 
-    //garbage = GameData.Prefabs.CreateStaticItem(item_prefab.id, _garbageInfo.itemContainer);
   }
   public void Activate(bool show_garbage_info)
   { 
@@ -86,14 +83,20 @@ public class Animal : MonoBehaviour
   {
     if(isReady)
     {
-      isReady = false;
+      
       item.transform.parent = _garbageContainer;
       item.transform.reset();
       Item it = garbages.Find((garbage) => Item.EqType(garbage, item));
       if(it)
       {
-        garbages.Remove(it);
+        _garbageInfo.Remove(it.id);
         _garbagesCleared.Add(it);
+        garbages.Remove(it);        
+        if(garbages.Count == 0)
+        {
+          isReady = false;
+          Deactivate();
+        }
       }
       this.Invoke(()=> item.gameObject.SetActive(false), 2.0f);
     }

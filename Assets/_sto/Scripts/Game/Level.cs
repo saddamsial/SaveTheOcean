@@ -236,7 +236,6 @@ public class Level : MonoBehaviour
       if(animalHit && animalHit.CanPut(_itemSelected))
       {
         animalHit.Put(_itemSelected);
-        animalHit.Deactivate();
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
         CheckEnd();
