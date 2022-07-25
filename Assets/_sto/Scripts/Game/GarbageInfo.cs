@@ -42,7 +42,10 @@ public class GarbageInfo : MonoBehaviour
   {
     Item item = _requestedItems.Find((req) => Item.ID.Eq(req.id, id));
     if(item)
+    {
+      _requestedItems.Remove(item);
       item.gameObject.SetActive(false);
+    }
   } 
   public void Hide()
   {

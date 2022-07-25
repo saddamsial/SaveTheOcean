@@ -18,6 +18,7 @@ public class Animal : MonoBehaviour
   public List<Item>    garbages {get; private set;} = new List<Item>();
   public bool          isActive  {get; private set;} = false;
   public bool          isReady  {get; private set;} = false;
+  public int           requests => garbages.Count;
 
 
   static public int layer = 0;
@@ -73,6 +74,11 @@ public class Animal : MonoBehaviour
     this.Invoke(() => gameObject.SetActive(false), 4.0f);
   }
   public void AnimFailed() => _animator.SetTrigger("fail");
+  public void AnimThrow()
+  {
+    if(isReady)
+      _animator.Play("itemPush");
+  }
   public void AnimTalk()
   {
     if(isReady)
@@ -83,7 +89,6 @@ public class Animal : MonoBehaviour
   {
     if(isReady)
     {
-      
       item.transform.parent = _garbageContainer;
       item.transform.reset();
       Item it = garbages.Find((garbage) => Item.EqType(garbage, item));
@@ -94,7 +99,7 @@ public class Animal : MonoBehaviour
         garbages.Remove(it);        
         if(garbages.Count > 0)
         {
-          AnimTalk();
+          AnimThrow();
         }
         else
         {

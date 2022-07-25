@@ -18,9 +18,10 @@ public class Level : MonoBehaviour
   [SerializeField] Transform _itemsContainer;
   [SerializeField] Transform _gridContainer;
   [SerializeField] Transform _animalsContainer;
+  [SerializeField] Pipes     _pipes;
   [SerializeField] Transform[] _animalContainers;
-  [SerializeField] Transform[] _paths;
-
+  
+  //[SerializeField] Transform[] _paths;
   //[SerializeField] Transform _poiLT;
   //[SerializeField] Transform _poiRB;
 
@@ -47,16 +48,15 @@ public class Level : MonoBehaviour
   public int    Stars {get; set;}
   public Vector2Int Dim => _dim;
 
-
   bool         _started = false;
   UISummary    _uiSummary = null;
   Transform    _cameraContainer = null;
   List<Animal> _animals = new List<Animal>();
 
-  Item       _itemSelected;
-  List<Item> _items = new List<Item>();
-  List<Item> _items2 = new List<Item>();
-  Vector3[,] _pipePaths;
+  Item        _itemSelected;
+  List<Item>  _items = new List<Item>();
+  List<Item>  _items2 = new List<Item>();
+  int         _requestCnt = 0;
 
   public class Grid
   {
@@ -138,14 +138,6 @@ public class Level : MonoBehaviour
   {
     _grid.Init(_dim);
 
-    _pipePaths = new Vector3[2,4];
-    for(int p = 0; p < _paths.Length; ++p)
-    {
-      int cnt = _pipePaths.GetLength(1);
-      for(int q = 0; q < cnt; ++q)
-        _pipePaths[p,q] = _paths[p].GetChild(q).transform.position;
-    }
-
     List<Vector2> vs = new List<Vector2>();
     Vector2 v = Vector2.zero;
     for(int y = 0; y < _dim.y; ++y)
@@ -165,6 +157,7 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _lvlDescs.Length; ++q)
     {
       var lvlDesc = _lvlDescs[q];
+      _requestCnt += lvlDesc.items.Length;
       for(int i = 0; i < lvlDesc.items.Length; ++i)
       {
         var garb = _lvlDescs[q].items[i];
@@ -202,11 +195,19 @@ public class Level : MonoBehaviour
     {
       var item = _items2.first();
       _items2.RemoveAt(0);
-      item.Init(vgrid);
-      item.Show();
+      int pipe_idx = (vgrid.x < 0)? 0 : 1;
+      item.Spawn(vgrid, _pipes.GetPath(pipe_idx));
       _grid.set(item.vgrid, 1);
     }
   }
+  float RequestRate()
+  {
+    int requests = 0;
+    _animals.ForEach((animal) => requests += animal.requests);
+
+    return (float)requests / _requestCnt;
+  }
+
   public void OnInputBeg(TouchInputData tid)
   {
     _itemSelected = null;
@@ -258,6 +259,7 @@ public class Level : MonoBehaviour
         animalHit.Put(_itemSelected);
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
+        _pipes.PollutionRate(RequestRate());
         SpawnItem(_itemSelected.vgrid);
         CheckEnd();
       }
@@ -280,6 +282,7 @@ public class Level : MonoBehaviour
 
   IEnumerator coEnd()
   {
+    _pipes.PollutionRate(0);
     yield return new WaitForSeconds(1.0f);
     Succeed = true;
     onFinished?.Invoke(this);

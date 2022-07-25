@@ -266,7 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   randomizePosition: 0
   positionSnap: 0.1
-  positionRange: {x: 1, y: 1, z: 1}
+  positionRange: {x: 0.75, y: 0.5, z: 0.75}
   randomizeRotation: 1
   axis: {x: 0, y: 1, z: 0}
   rotationSnap: 5

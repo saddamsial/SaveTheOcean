@@ -33,7 +33,9 @@ public class Item : MonoBehaviour
   float      _lifetime = 0;
   Vector2    _grid = Vector2.zero;
   Vector2Int _agrid = Vector2Int.zero;
-  public ID id {get => _id; set{_id = value;}}
+  Vector3[]  _path = new Vector3[4];
+  
+  
 
   public static float GridSpace = 1.0f;
   public static System.Action<Item> onShow, onHide, onMerged;
@@ -71,6 +73,7 @@ public class Item : MonoBehaviour
   static public int layer = 0;
   static public int layerMask = 0;
 
+  public ID      id { get => _id; set { _id = value; } }
   public Vector2 vgrid {get => _grid; set{_grid = value;}}
   public Vector2Int agrid {get => _agrid; set{_agrid = value;}}
   public Vector3 vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
@@ -112,6 +115,34 @@ public class Item : MonoBehaviour
   {
     _activatable.ActivateObject();
     onShow?.Invoke(this);
+  }
+  public void Spawn(Vector2 vgrid, Vector3[] vpath)
+  {
+    Init(vgrid);
+    gameObject.SetActive(true);
+    GetComponent<Collider>().enabled = false;
+    _activatable.ActivateObject();
+
+    System.Array.Copy(vpath, _path, 3);    
+    _path[3] = ToPos(vgrid);
+    vwpos = _path[0];
+    onShow?.Invoke(this);
+    
+    StartCoroutine(MovePath());
+  }
+  IEnumerator MovePath()
+  {
+    float t = 0.0f;
+    while(t <= 1)
+    {
+      t += Time.deltaTime;
+      float tc = Mathf.Clamp01(t);
+      vwpos = Vector3Ex.bezier(_path, tc);
+      yield return null;
+    }
+    _sm.Touch(15f);
+    _path = null;
+    GetComponent<Collider>().enabled = true;
   }
   public void Hide(bool silent = false)
   {
