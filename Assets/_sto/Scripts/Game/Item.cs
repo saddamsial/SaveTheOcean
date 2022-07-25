@@ -16,10 +16,11 @@ public class Item : MonoBehaviour
   Color _color;
   List<GameObject> _models = new List<GameObject>();
 
+  [System.Serializable]
   public struct ID
   {
-    int _type;
-    int _lvl;
+    [SerializeField] int _type;
+    [SerializeField] int _lvl;
 
     public ID(int item_type, int item_lvl)
     {
@@ -32,7 +33,7 @@ public class Item : MonoBehaviour
     public static bool Eq(ID id0, ID id1) => id0.type == id1.type && id0.lvl == id1.lvl;
   }
 
-  ID         _id = new ID();
+  [SerializeField] ID         _id = new ID();
   float      _lifetime = 0;
   Vector2    _grid = Vector2.zero;
   Vector2Int _agrid = Vector2Int.zero;

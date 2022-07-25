@@ -1,21 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using GameLib;
 
 public class Animal : MonoBehaviour
 {
   [Header("Refs")]
-  [SerializeField] Animator  _animator;
-  [SerializeField] Transform _garbageContainer;
-  [SerializeField] GarbageInfo _garbageInfo;
+  [SerializeField] Animator     _animator;
+  [SerializeField] Transform    _garbageContainer;
+  [SerializeField] GarbageInfo  _garbageInfo;
+
+
+  List<Item.ID>    _garbages = new List<Item.ID>();
+  List<Item>       _garbagesCleared = new List<Item>();
+
+  public List<Item>    garbages {get; private set;} = new List<Item>();
+  public bool          isActive  {get; private set;} = false;
+  public bool          isReady  {get; private set;} = false;
+
 
   static public int layer = 0;
   static public int layerMask = 0;
-
-  public Item garbage {get; private set;} = null;
-  public bool isActive  {get; private set;} = false;
-  public bool isReady { get; private set; } = false;
 
   void Awake()
   {
@@ -27,7 +33,7 @@ public class Animal : MonoBehaviour
   {
     yield return StartCoroutine(WaitForAnimState("_active"));
     isReady = true;
-    _garbageInfo.Show(garbage);
+    _garbageInfo.Show(garbages[0]);
   }
   IEnumerator WaitForAnimState(string anim)
   {
@@ -38,9 +44,20 @@ public class Animal : MonoBehaviour
     }
     yield return null;
   }
-  public void Init(Item item_prefab)
+  public void Init(Item[] items_prefab)
   {
-    garbage = GameData.Prefabs.CreateStaticItem(item_prefab.id, _garbageInfo.itemContainer);
+    _garbages = new List<Item.ID>();
+    foreach(var item in items_prefab)
+    {
+      _garbages.Add(item.id);
+    }
+    foreach(var id in _garbages)
+    {
+      garbages.Add(GameData.Prefabs.CreateStaticItem(id, _garbageInfo.itemContainer));
+    }
+    //garbages = new List<Item>(items_prefab);
+    //foreach(var garbage in 
+    //garbage = GameData.Prefabs.CreateStaticItem(item_prefab.id, _garbageInfo.itemContainer);
   }
   public void Activate(bool show_garbage_info)
   { 
@@ -64,7 +81,7 @@ public class Animal : MonoBehaviour
     if(isReady)
       _animator.Play("talk", 0);
   }
-  public bool CanPut(Item item) => Item.EqType(item, garbage) && isReady;
+  public bool CanPut(Item item) => isReady && garbages.Find((garbage)=> Item.EqType(item, garbage)) != null;
   public void Put(Item item)
   {
     if(isReady)
@@ -72,6 +89,12 @@ public class Animal : MonoBehaviour
       isReady = false;
       item.transform.parent = _garbageContainer;
       item.transform.reset();
+      Item it = garbages.Find((garbage) => Item.EqType(garbage, item));
+      if(it)
+      {
+        garbages.Remove(it);
+        _garbagesCleared.Add(it);
+      }
       this.Invoke(()=> item.gameObject.SetActive(false), 2.0f);
     }
   }

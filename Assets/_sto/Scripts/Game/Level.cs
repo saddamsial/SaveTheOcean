@@ -124,7 +124,7 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _lvlDescs.Length; ++q)
     {
       var animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
-      animal.Init(_lvlDescs[q].items[0]);
+      animal.Init(_lvlDescs[q].items);
       animal.Activate(true);
       _animals.Add(animal);
     }
