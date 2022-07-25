@@ -837,6 +837,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: dolphin_var
       objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9848078
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.17364816
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8758133303071510880, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
 --- !u!4 &484418456107511652 stripped
