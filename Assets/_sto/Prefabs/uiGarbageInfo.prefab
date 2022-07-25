@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 4918776749266407985}
   - component: {fileID: 1399646412645008182}
   m_Layer: 10
-  m_Name: garbageInfo
+  m_Name: uiGarbageInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

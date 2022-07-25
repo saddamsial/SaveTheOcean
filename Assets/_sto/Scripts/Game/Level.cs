@@ -19,6 +19,8 @@ public class Level : MonoBehaviour
   [SerializeField] Transform _gridContainer;
   [SerializeField] Transform _animalsContainer;
   [SerializeField] Transform[] _animalContainers;
+  [SerializeField] Transform[] _paths;
+
   //[SerializeField] Transform _poiLT;
   //[SerializeField] Transform _poiRB;
 
@@ -26,7 +28,6 @@ public class Level : MonoBehaviour
   [SerializeField] Vector2Int _dim;
   [SerializeField] float      _gridSpace = 1.0f;
   [Header("LvlDesc")]
-  //[SerializeField] List<Item> _listItems;
   [SerializeField] LvlDesc[]  _lvlDescs;
 
   [System.Serializable]
@@ -55,6 +56,7 @@ public class Level : MonoBehaviour
   Item       _itemSelected;
   List<Item> _items = new List<Item>();
   List<Item> _items2 = new List<Item>();
+  Vector3[,] _pipePaths;
 
   public class Grid
   {
@@ -135,6 +137,14 @@ public class Level : MonoBehaviour
   void Init()
   {
     _grid.Init(_dim);
+
+    _pipePaths = new Vector3[2,4];
+    for(int p = 0; p < _paths.Length; ++p)
+    {
+      int cnt = _pipePaths.GetLength(1);
+      for(int q = 0; q < cnt; ++q)
+        _pipePaths[p,q] = _paths[p].GetChild(q).transform.position;
+    }
 
     List<Vector2> vs = new List<Vector2>();
     Vector2 v = Vector2.zero;
