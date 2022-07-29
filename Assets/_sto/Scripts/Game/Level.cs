@@ -106,7 +106,8 @@ public class Level : MonoBehaviour
 
   void Awake()
   {
-    Item.GridSpace = _gridSpace;
+    Item.itemsOffset = _itemsContainer.localPosition;
+    Item.gridSpace = _gridSpace;
     _cameraContainer = GameObject.Find("_cameraContainer").transform;
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     _uiSummary = FindObjectOfType<UISummary>(true);

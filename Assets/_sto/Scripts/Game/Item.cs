@@ -34,10 +34,8 @@ public class Item : MonoBehaviour
   Vector2    _grid = Vector2.zero;
   Vector2Int _agrid = Vector2Int.zero;
   Vector3[]  _path = new Vector3[4];
-  
-  
 
-  public static float GridSpace = 1.0f;
+  public static float gridSpace = 1.0f;
   public static System.Action<Item> onShow, onHide, onMerged;
   public static Item Merge(Item item0, Item item1, List<Item> _items)
   {
@@ -64,11 +62,12 @@ public class Item : MonoBehaviour
     }
     return new_item;
   }
-  public static Vector3 ToPos(Vector2 vgrid) => new Vector3(vgrid.x, 0, vgrid.y) * Item.GridSpace;
+  public static Vector3 ToPos(Vector2 vgrid) => new Vector3(vgrid.x, 0, vgrid.y) * Item.gridSpace;
   public static bool    EqType(Item item0, Item item1)
   {
     return item0 != null && item1 != null && ID.Eq(item0.id, item1.id);
   }
+  public static Vector3 itemsOffset = new Vector3(0,0,0);
 
   static public int layer = 0;
   static public int layerMask = 0;
@@ -96,6 +95,7 @@ public class Item : MonoBehaviour
   {
     _activatable.ActivateObject();
     GetComponent<BoxCollider>().enabled = false;
+    System.Array.ForEach(GetComponentsInChildren<ObjectRandomizeTransform>(), (ort) => ort.transform.reset());
     SetModel(0);
   }
   public void Init(Vector2 grid)
@@ -103,7 +103,7 @@ public class Item : MonoBehaviour
     vgrid = grid;
     vlpos = Item.ToPos(vgrid);
 
-    SetModel(_models.get_random_idx());
+    SetModel(0);//_models.get_random_idx());
   }
   void SetModel(int model_idx)
   {
@@ -125,6 +125,7 @@ public class Item : MonoBehaviour
 
     System.Array.Copy(vpath, _path, 3);    
     _path[3] = ToPos(vgrid);
+    _path[3] += itemsOffset;
     vwpos = _path[0];
     onShow?.Invoke(this);
     
