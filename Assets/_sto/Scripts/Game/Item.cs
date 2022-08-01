@@ -10,6 +10,8 @@ public class Item : MonoBehaviour
   [SerializeField] GameObject         _modelContainer;
   [SerializeField] ActivatableObject  _activatable;
   [SerializeField] SpringMove         _sm;
+  [Header("Settings")]
+  [SerializeField] float _moveStep = 1.0f;
 
   List<GameObject> _models = new List<GameObject>();
 
@@ -34,6 +36,7 @@ public class Item : MonoBehaviour
   Vector2    _grid = Vector2.zero;
   Vector2Int _agrid = Vector2Int.zero;
   Vector3[]  _path = new Vector3[4];
+  Vector3?   _vdstPos = null;
 
   public static float gridSpace = 1.0f;
   public static System.Action<Item> onShow, onHide, onMerged;
@@ -72,15 +75,16 @@ public class Item : MonoBehaviour
   static public int layer = 0;
   static public int layerMask = 0;
 
-  public ID      id { get => _id; set { _id = value; } }
-  public Vector2 vgrid {get => _grid; set{_grid = value;}}
+  public ID         id { get => _id; set { _id = value; } }
+  public Vector2    vgrid {get => _grid; set{_grid = value;}}
   public Vector2Int agrid {get => _agrid; set{_agrid = value;}}
-  public Vector3 vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
-  public Vector3 vwpos { get => transform.position; set { transform.position = value;}}
-  public bool    IsMaxLevel => id.lvl + 1 == GameData.Prefabs.ItemLevelsCnt(id.type);
-  public bool    IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
-  public bool    IsSelected {get; set;}
-  public void    incLvl(){_id.lvl++;}
+  public Vector3    vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
+  public Vector3    vwpos {  get => transform.position; set { transform.position = value;}}
+  public Vector3?   vdstPos { get=> _vdstPos; set { _vdstPos = value;}}
+  public bool       IsMaxLevel => id.lvl + 1 == GameData.Prefabs.ItemLevelsCnt(id.type);
+  public bool       IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
+  public bool       IsSelected {get; set;}
+  public void       incLvl(){_id.lvl++;}
 
   void Awake()
   {
@@ -102,7 +106,7 @@ public class Item : MonoBehaviour
   {
     vgrid = grid;
     vlpos = Item.ToPos(vgrid);
-
+    GetComponent<BoxCollider>().enabled = false;
     SetModel(0);//_models.get_random_idx());
   }
   void SetModel(int model_idx)
@@ -114,6 +118,7 @@ public class Item : MonoBehaviour
   public void Show()
   {
     _activatable.ActivateObject();
+    this.Invoke(()=> GetComponent<Collider>().enabled = true, 0.5f);
     onShow?.Invoke(this);
   }
   public void Spawn(Vector2 vgrid, Vector3[] vpath)
@@ -200,6 +205,8 @@ public class Item : MonoBehaviour
   void Update()
   {
     _lifetime += Time.deltaTime;
+    if(IsSelected)
+      vwpos = Vector3.MoveTowards(vwpos, vdstPos.Value, _moveStep * Time.deltaTime);
   }
   // void OnDrawGizmos()
   // {

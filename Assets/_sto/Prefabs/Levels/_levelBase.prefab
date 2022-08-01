@@ -481,6 +481,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pipes
       objectReference: {fileID: 0}
+    - target: {fileID: 6082824326448625330, guid: 369bbcecc384eaa4287f910b88bba2a9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7141595619551860995, guid: 369bbcecc384eaa4287f910b88bba2a9, type: 3}
       propertyPath: m_RootOrder
       value: 4

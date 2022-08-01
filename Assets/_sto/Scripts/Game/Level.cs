@@ -215,13 +215,15 @@ public class Level : MonoBehaviour
     _itemSelected = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
     _itemSelected?.Select(true);
   }
+  Vector3 voffs = Vector3.zero;
   public void OnInputMov(TouchInputData tid)
   {
     if(Finished)
       return;
     if(_itemSelected)
     {
-      _itemSelected.vwpos = tid.RaycastData.Value.point + new Vector3(0, 0.5f, 0);
+      voffs.y = Mathf.MoveTowards(voffs.y, 1.75f, Time.deltaTime * 10);
+      _itemSelected.vdstPos = tid.RaycastData.Value.point + voffs;
 
       var _itemNearest = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
       if(_itemNearest)
@@ -237,7 +239,7 @@ public class Level : MonoBehaviour
       return;
 
     var itemHit = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
-    if(itemHit)
+    if(itemHit && itemHit != _itemSelected)
     {
       var newItem = Item.Merge(_itemSelected, itemHit, _items);
       if(newItem)

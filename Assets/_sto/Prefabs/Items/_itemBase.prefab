@@ -152,6 +152,7 @@ MonoBehaviour:
   _modelContainer: {fileID: 5137363068744547674}
   _activatable: {fileID: 7798136041665752175}
   _sm: {fileID: 2079218385271069147}
+  _moveStep: 30
 --- !u!114 &7798136041665752175
 MonoBehaviour:
   m_ObjectHideFlags: 0
