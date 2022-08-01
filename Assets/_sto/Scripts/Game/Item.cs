@@ -123,12 +123,26 @@ public class Item : MonoBehaviour
     GetComponent<Collider>().enabled = false;
     _activatable.ActivateObject();
 
-    System.Array.Copy(vpath, _path, 3);    
-    _path[3] = ToPos(vgrid);
-    _path[3] += itemsOffset;
+    if(vpath != null)
+    {
+      System.Array.Copy(vpath, _path, 3);
+      _path[3] = ToPos(vgrid);
+      _path[3] += itemsOffset;      
+    }
+    else
+    {
+      float immers = -6;
+      _path[0] = ToPos(vgrid);
+      _path[0].y = immers;
+      _path[3] = ToPos(vgrid);
+      _path[3] += itemsOffset;
+
+      _path[1] = Vector3.Lerp(_path[0], _path[3], 0.25f);
+      _path[2] = Vector3.Lerp(_path[0], _path[3], 0.75f);
+    }
+
     vwpos = _path[0];
     onShow?.Invoke(this);
-    
     StartCoroutine(MovePath());
   }
   IEnumerator MovePath()

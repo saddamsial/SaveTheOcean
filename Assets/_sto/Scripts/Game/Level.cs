@@ -197,7 +197,7 @@ public class Level : MonoBehaviour
       var item = _items2.first();
       _items2.RemoveAt(0);
       int pipe_idx = (vgrid.x < 0)? 0 : 1;
-      item.Spawn(vgrid, _pipes.GetPath(pipe_idx));
+      item.Spawn(vgrid, null);//_pipes.GetPath(pipe_idx));
       _grid.set(item.vgrid, 1);
     }
   }
