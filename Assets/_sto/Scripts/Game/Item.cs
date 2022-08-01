@@ -76,6 +76,7 @@ public class Item : MonoBehaviour
   static public int layerMask = 0;
 
   public ID         id { get => _id; set { _id = value; } }
+  public GameObject mdl => _models[0];
   public Vector2    vgrid {get => _grid; set{_grid = value;}}
   public Vector2Int agrid {get => _agrid; set{_agrid = value;}}
   public Vector3    vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
@@ -85,6 +86,7 @@ public class Item : MonoBehaviour
   public bool       IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
   public bool       IsSelected {get; set;}
   public void       incLvl(){_id.lvl++;}
+  
 
   void Awake()
   {
@@ -205,8 +207,8 @@ public class Item : MonoBehaviour
   void Update()
   {
     _lifetime += Time.deltaTime;
-    if(IsSelected)
-      vwpos = Vector3.MoveTowards(vwpos, vdstPos.Value, _moveStep * Time.deltaTime);
+    // if(IsSelected)
+    //   vwpos = Vector3.MoveTowards(vwpos, vdstPos.Value, _moveStep * Time.deltaTime);
   }
   // void OnDrawGizmos()
   // {

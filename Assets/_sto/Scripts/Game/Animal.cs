@@ -88,14 +88,20 @@ public class Animal : MonoBehaviour
   {
     if(isReady)
     {
-      item.transform.parent = _garbageContainer;
-      item.transform.reset();
       Item it = garbages.Find((garbage) => Item.EqType(garbage, item));
       if(it)
       {
+        var model = item.mdl;
+        model.transform.parent =  _garbageContainer;
+        model.transform.localPosition = Vector2.zero;
+
         _garbageInfo.Remove(it.id);
         _garbagesCleared.Add(it);
-        garbages.Remove(it);        
+        garbages.Remove(it);
+        item.gameObject.SetActive(false);
+        model.SetActive(true);
+        this.Invoke(()=> model.SetActive(false), 2.0f);
+
         if(garbages.Count > 0)
         {
           AnimThrow();
@@ -105,10 +111,10 @@ public class Animal : MonoBehaviour
         else
         {
           isReady = false;
-          Deactivate();          
+          Deactivate();
         }
       }
-      this.Invoke(()=> item.gameObject.SetActive(false), 2.0f);
+      //this.Invoke(()=> item.gameObject.SetActive(false), 4.0f);
     }
   }
 }
