@@ -259,6 +259,7 @@ public class Level : MonoBehaviour
       var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
       if(animalHit && animalHit.CanPut(_itemSelected))
       {
+        Item.onPut(_itemSelected);
         animalHit.Put(_itemSelected);
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);

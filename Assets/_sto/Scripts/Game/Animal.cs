@@ -19,7 +19,7 @@ public class Animal : MonoBehaviour
   public bool          isActive  {get; private set;} = false;
   public bool          isReady  {get; private set;} = false;
   public int           requests => garbages.Count;
-
+  public Vector3       garbagePos => _garbageContainer.transform.position;
 
   static public int layer = 0;
   static public int layerMask = 0;
@@ -101,7 +101,6 @@ public class Animal : MonoBehaviour
         item.gameObject.SetActive(false);
         model.SetActive(true);
         this.Invoke(()=> model.SetActive(false), 2.0f);
-
         if(garbages.Count > 0)
         {
           AnimThrow();

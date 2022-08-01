@@ -2792,6 +2792,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1301126275}
     m_Modifications:
+    - target: {fileID: 5483926277836527142, guid: e0db3b670ee5c6d408f68b018272d657, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483926277836527142, guid: e0db3b670ee5c6d408f68b018272d657, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8108016443953103888, guid: e0db3b670ee5c6d408f68b018272d657, type: 3}
       propertyPath: m_Name
       value: _fx

@@ -50,12 +50,20 @@ public class EffectsManager : MonoBehaviour
       Level.onStart += OnLevelStart;
       Level.onDone += OnLevelDone;
       Level.onFinished += OnLevelFinished;
+
+      Item.onMerged += OnItemMerged;
+      Item.onShown += OnItemShown;
+      Item.onPut += OnItemPut;
     }
     private void OnDisable()
     {
       Level.onStart -= OnLevelStart;
       Level.onDone -= OnLevelDone;
       Level.onFinished -= OnLevelFinished;
+
+      Item.onMerged -= OnItemMerged;
+      Item.onShown -= OnItemShown;
+      Item.onPut -= OnItemPut;
     }
 
     Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -86,6 +94,22 @@ public class EffectsManager : MonoBehaviour
     void OnLevelStart(Level lvl)
     {
       //_lvl = lvl;
+    }
+
+    void OnItemMerged(Item sender)
+    {
+      //PlayFXAtPosition(fxHit, sender.transform.position);
+      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 0);
+    }
+    void OnItemShown(Item sender)
+    {
+      //var psmain = fxPaintSplat.main;
+      //psmain.startColor = sender.color;
+      PlayFXAtPosition(fxPaintSplat, sender.gridPos, 0, false);
+    }
+    void OnItemPut(Item sender)
+    {
+      PlayFXAtPosition(fxHit, sender.transform.position, 0, false);
     }
     void OnItemExplo(Item sender)
     {

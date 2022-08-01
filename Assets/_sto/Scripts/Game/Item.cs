@@ -39,13 +39,14 @@ public class Item : MonoBehaviour
   Vector3?   _vdstPos = null;
 
   public static float gridSpace = 1.0f;
-  public static System.Action<Item> onShow, onHide, onMerged;
+  public static System.Action<Item> onShow, onShown, onMerged, onPut, onHide;
   public static Item Merge(Item item0, Item item1, List<Item> _items)
   {
     if(EqType(item0, item1) && item1.IsUpgradable)
     {
       item0.Hide();
       _items.Remove(item0);
+      onMerged?.Invoke(item1);
       return Upgrade(item1, _items);
     }
     return null;
@@ -82,6 +83,7 @@ public class Item : MonoBehaviour
   public Vector3    vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
   public Vector3    vwpos {  get => transform.position; set { transform.position = value;}}
   public Vector3?   vdstPos { get=> _vdstPos; set { _vdstPos = value;}}
+  public Vector3    gridPos => Item.ToPos(vgrid);
   public bool       IsMaxLevel => id.lvl + 1 == GameData.Prefabs.ItemLevelsCnt(id.type);
   public bool       IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
   public bool       IsSelected {get; set;}
@@ -157,11 +159,15 @@ public class Item : MonoBehaviour
     float t = 0.0f;
     while(t <= 1)
     {
+      float prev_t = t;
       t += Time.deltaTime;
       float tc = Mathf.Clamp01(t);
       vwpos = Vector3Ex.bezier(_path, tc);
+      if(prev_t < 0.8f && t >= 0.8f)
+        onShown?.Invoke(this);
       yield return null;
     }
+    
     _sm.Touch(15f);
     _path = null;
     GetComponent<Collider>().enabled = true;
