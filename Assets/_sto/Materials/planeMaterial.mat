@@ -87,32 +87,34 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaClip: 0
-    - _AlphaCutoff: 0.5
+    - _AlphaCutoff: 0.7
     - _Blend: 0
     - _BumpScale: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _Depth: 8
+    - _Depth: 16
     - _DepthFalloff: 4
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _FoamBlend: 1
+    - _FoamCutoff: 0.01
     - _FoamFalloff: 4
-    - _FoamFill: 4
+    - _FoamFill: 16
+    - _FoamFrequency: 64
     - _FoamHardLineWidth: 0.8
     - _FoamOffset: 3.11
     - _FoamScale: 128
-    - _FoamSize: 32
-    - _FoamSpeed: 0.02
-    - _FoamWidth: -0.85
+    - _FoamSize: 2
+    - _FoamSpeed: 0.2
+    - _FoamWidth: -0.99
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HeigthWaveOpacity: 0.323
+    - _HeigthWaveOpacity: 0.6
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -124,25 +126,25 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _SurfaceCausticsOpacity: 0.5
-    - _SurfaceCausticsSize: 0.5
-    - _SurfaceCausticsSpeed: 0.1
+    - _SurfaceCausticsOpacity: 0.75
+    - _SurfaceCausticsSize: 1
+    - _SurfaceCausticsSpeed: 0.05
     - _SurfaceCellExponent: 6
     - _SurfaceCellOpacity: 0.25
     - _SurfaceCellSize: 24
     - _SurfaceCellSpeed: 2
-    - _WaterOpacity: 0.5
-    - _WaveAmplitude: 1
-    - _WaveFrequency: 0.5
-    - _WaveSpeed: 0.1
+    - _WaterOpacity: 0.7
+    - _WaveAmplitude: 0.05
+    - _WaveFrequency: 0.05
+    - _WaveSpeed: 0.2
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.096787095, g: 0.6191956, b: 0.8207547, a: 1}
+    - _BaseColor: {r: 0.109803915, g: 0.72217286, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FarColor: {r: 0.37715, g: 0.95, b: 0.88075435, a: 1}
-    - _HeigthWaveColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FarColor: {r: 0.13803846, g: 0.8867924, b: 0.88679224, a: 1}
+    - _HeigthWaveColor: {r: 0, g: 1, b: 0.6511245, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2255716190660928287
