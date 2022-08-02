@@ -61,11 +61,13 @@ public class Level : MonoBehaviour
   public class Grid
   {
     Vector2Int  _dim;
+    float       _gridSpace;
     int[,]      _grid;
     GridTile[,] _tiles;
-    public void Init(Vector2Int dim)
+    public void Init(Vector2Int dim, float grid_space)
     {
       _dim = dim;
+      _gridSpace = grid_space;
       _grid = new int[dim.y, dim.x];
       _tiles = new GridTile[dim.y, dim.x];
       System.Array.Clear(_grid, 0, _grid.Length);
@@ -99,6 +101,12 @@ public class Level : MonoBehaviour
       var va = g2a(vgrid, _dim);
       _tiles[va.y, va.x] = gt;
       gt.set(false);
+    }
+    public bool isOverZ(Vector3 vpos)
+    {
+      Vector2 vdim = new Vector2(_dim.x, _dim.y) * _gridSpace;
+      //return vpos.x >= -vdim.x/2 && vpos.x <= vdim.x / 2 && vpos.z >= -vdim.y / 2 && vpos.z <= vdim.y / 2;
+      return vpos.z <= vdim.y / 2;
     }
   }
 
@@ -137,7 +145,7 @@ public class Level : MonoBehaviour
   }
   void Init()
   {
-    _grid.Init(_dim);
+    _grid.Init(_dim, _gridSpace);
 
     List<Vector2> vs = new List<Vector2>();
     Vector2 v = Vector2.zero;
@@ -223,8 +231,11 @@ public class Level : MonoBehaviour
       return;
     if(_itemSelected && tid.RaycastData.HasValue)
     {
-      voffs.y = Mathf.MoveTowards(voffs.y, 1.75f, Time.deltaTime * 10);
-      _itemSelected.vwpos = tid.RaycastData.Value.point + voffs; //_itemSelected.vdstPos.Value;
+      if(_grid.isOverZ(tid.RaycastData.Value.point))
+        voffs.y = Mathf.MoveTowards(voffs.y, 0.5f, Time.deltaTime * 10);
+      else
+        voffs.y = Mathf.MoveTowards(voffs.y, 1.75f, Time.deltaTime * 10);
+      _itemSelected.vwpos = tid.RaycastData.Value.point + voffs;
 
       var _itemNearest = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
       if(_itemNearest)
