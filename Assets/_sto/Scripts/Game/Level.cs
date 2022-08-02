@@ -232,10 +232,10 @@ public class Level : MonoBehaviour
     if(_itemSelected && tid.RaycastData.HasValue)
     {
       if(_grid.isOverZ(tid.RaycastData.Value.point))
-        voffs.y = Mathf.MoveTowards(voffs.y, 0.5f, Time.deltaTime * 10);
+        voffs.y = Mathf.Lerp(voffs.y, 0.5f, Time.deltaTime * 10);
       else
-        voffs.y = Mathf.MoveTowards(voffs.y, 1.75f, Time.deltaTime * 10);
-      _itemSelected.vwpos = tid.RaycastData.Value.point + voffs;
+        voffs.y = Mathf.Lerp(voffs.y, 1.8f, Time.deltaTime * 10);
+      _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, tid.RaycastData.Value.point + voffs, Time.deltaTime * 20);
 
       var _itemNearest = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
       if(_itemNearest)
