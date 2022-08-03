@@ -243,3 +243,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _liningGameObject: {fileID: 7976196177638975859}
   _indexLevel: 0
+  _modelTransform: {fileID: 9054775393889712420}
