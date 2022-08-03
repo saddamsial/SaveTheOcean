@@ -71,7 +71,7 @@ public class Item : MonoBehaviour
   {
     return item0 != null && item1 != null && ID.Eq(item0.id, item1.id);
   }
-  public static Vector3 itemsOffset = new Vector3(0,0,0);
+  //public static Vector3 itemsOffset = new Vector3(0,0,0);
 
   static public int layer = 0;
   static public int layerMask = 0;
@@ -136,7 +136,7 @@ public class Item : MonoBehaviour
     {
       System.Array.Copy(vpath, _path, 3);
       _path[3] = ToPos(vgrid);
-      _path[3] += itemsOffset;      
+      //_path[3] += itemsOffset;      
     }
     else
     {
@@ -144,7 +144,7 @@ public class Item : MonoBehaviour
       _path[0] = ToPos(vgrid);
       _path[0].y = immers;
       _path[3] = ToPos(vgrid);
-      _path[3] += itemsOffset;
+      //_path[3] += itemsOffset;
 
       _path[1] = Vector3.Lerp(_path[0], _path[3], 0.25f);
       _path[2] = Vector3.Lerp(_path[0], _path[3], 0.75f);
