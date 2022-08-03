@@ -34,12 +34,13 @@ public class Rotation : MonoBehaviour
     {
         _isRotateToSelectLevel = true;
         _rigidbody.isKinematic = true;
-        
-        var targetAngle = Quaternion.Euler(0, angle, 0); 
+   
+        var targetAngle = Quaternion.Euler(0, -angle, 0); 
         var _thisTransform = transform; 
         
-        Debug.Log("Start Coroutine: " + _thisTransform.rotation.y + "  " + targetAngle.y);
-        while ( true )
+        Debug.Log("Start Coroutine: " + _thisTransform.eulerAngles.y + "  " + targetAngle.eulerAngles.y);
+        while ( _thisTransform.eulerAngles.y + _offsetRotationToSelectLevel <= targetAngle.eulerAngles.y ||
+                _thisTransform.eulerAngles.y - _offsetRotationToSelectLevel >= targetAngle.eulerAngles.y )
         {
             _thisTransform.rotation = Quaternion.Lerp(_thisTransform.rotation, targetAngle,
                 Time.deltaTime * _speedRotationToSelectLevel);

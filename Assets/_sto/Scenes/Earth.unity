@@ -470,14 +470,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4126757476705115912, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-      propertyPath: _speedRotationToSelectLevel
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4126757476705115912, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-      propertyPath: _offsetRotationToSelectLevel
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_RootOrder
       value: 2

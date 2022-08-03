@@ -39,7 +39,6 @@ public class SelectLevel : MonoBehaviour
         }
         
         Debug.Log("Select the Level: " + _currentLevelEarth.IndexLevel);
-        Debug.Log("Angle: " + _currentLevelEarth.transform.rotation.y);
-        _rotation.RotateToSelectLevel(_currentLevelEarth.transform.rotation.y); 
+        _rotation.RotateToSelectLevel(_currentLevelEarth.AngleY); 
     }
 }

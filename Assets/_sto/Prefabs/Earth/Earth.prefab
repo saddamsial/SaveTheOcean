@@ -68,6 +68,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 4126757476705115919}
   _speedRotation: 100
+  _speedRotationToSelectLevel: 3
+  _offsetRotationToSelectLevel: 2
 --- !u!114 &4329183550062796699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,6 +82,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99fc82146ace74d46866198924563564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 0}
+  _rotation: {fileID: 0}
 --- !u!1 &4126757477303580407
 GameObject:
   m_ObjectHideFlags: 0
