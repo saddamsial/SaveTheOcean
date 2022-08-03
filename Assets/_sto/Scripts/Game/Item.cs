@@ -125,13 +125,12 @@ public class Item : MonoBehaviour
     this.Invoke(()=> GetComponent<Collider>().enabled = true, 0.5f);
     onShow?.Invoke(this);
   }
-  public void Spawn(Vector2 vgrid, Vector3[] vpath)
+  public void Spawn(Vector2 vgrid, Vector3[] vpath, float speed = 1)
   {
     Init(vgrid);
     gameObject.SetActive(true);
     GetComponent<Collider>().enabled = false;
     _activatable.ActivateObject();
-
     if(vpath != null)
     {
       System.Array.Copy(vpath, _path, 3);
@@ -152,15 +151,15 @@ public class Item : MonoBehaviour
 
     vwpos = _path[0];
     onShow?.Invoke(this);
-    StartCoroutine(MovePath());
+    StartCoroutine(MovePath(speed));
   }
-  IEnumerator MovePath()
+  IEnumerator MovePath(float speed)
   {
     float t = 0.0f;
     while(t <= 1)
     {
       float prev_t = t;
-      t += Time.deltaTime;
+      t += Time.deltaTime * speed;
       float tc = Mathf.Clamp01(t);
       vwpos = Vector3Ex.bezier(_path, tc);
       if(prev_t < 0.8f && t >= 0.8f)

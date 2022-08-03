@@ -15,11 +15,11 @@ public class Level : MonoBehaviour
   public static System.Action<Level>   onDone, onFinished, onDestroy;
 
   [Header("Refs")]
-  [SerializeField] Transform _itemsContainer;
-  [SerializeField] Transform _gridContainer;
-  [SerializeField] Transform _animalsContainer;
-  [SerializeField] Pipes     _pipes;
-  [SerializeField] Transform[] _animalContainers;
+  [SerializeField] Transform    _itemsContainer;
+  [SerializeField] Transform    _tilesContainer;
+  [SerializeField] Transform    _animalsContainer;
+  [SerializeField] Pipes        _pipes;
+  [SerializeField] Transform[]  _animalContainers;
   
   //[SerializeField] Transform[] _paths;
   //[SerializeField] Transform _poiLT;
@@ -156,7 +156,7 @@ public class Level : MonoBehaviour
       {
         v.x = (-_dim.x + 1) * 0.5f + x;
         vs.Add(v);
-        var tile = GameData.Prefabs.CreateGridElem(_gridContainer);
+        var tile = GameData.Prefabs.CreateGridElem(_tilesContainer);
         tile.transform.localPosition = Item.ToPos(v);
         _grid.tile(tile, v);
       }
@@ -187,7 +187,7 @@ public class Level : MonoBehaviour
       {
         item.Init(vs.first());
         vs.RemoveAt(0);
-        item.Show();
+        item.Spawn(item.vgrid, null, Random.Range(0.5f, 1.5f));
         _grid.set(item.vgrid, 1);
         _items.Add(item);
       }
@@ -298,7 +298,7 @@ public class Level : MonoBehaviour
   IEnumerator coEnd()
   {
     _pipes.PollutionRate(0);
-    yield return new WaitForSeconds(1.0f);
+    yield return new WaitForSeconds(3.0f);
     Succeed = true;
     onFinished?.Invoke(this);
     yield return new WaitForSeconds(0.5f);
