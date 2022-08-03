@@ -3,6 +3,8 @@ using UnityEngine;
 public class SelectLevel : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
+    [SerializeField] private Rotation _rotation; 
+    
     private LevelEarth _currentLevelEarth; 
     private void Update()
     {
@@ -37,5 +39,7 @@ public class SelectLevel : MonoBehaviour
         }
         
         Debug.Log("Select the Level: " + _currentLevelEarth.IndexLevel);
+        Debug.Log("Angle: " + _currentLevelEarth.transform.localRotation.y);
+        _rotation.RotateToSelectLevel(_currentLevelEarth.transform.localRotation.y); 
     }
 }
