@@ -55,7 +55,6 @@ public class SelectLevel : MonoBehaviour
         _vec1 = _camera.transform.position - transform.position;
         _vec1 = Vector3.Normalize(Vector3.ProjectOnPlane(_vec1, Vector3.up));
         _vec2 = levelEarth.ModelTransform.position - transform.position;
-        _vec2.Normalize();
         _vec2 = Vector3.Normalize(Vector3.ProjectOnPlane(_vec2, Vector3.up));
         var angle = Vector3.SignedAngle(_vec1, _vec2, Vector3.up);
         return angle;
