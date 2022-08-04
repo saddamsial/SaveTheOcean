@@ -237,13 +237,10 @@ public class Level : MonoBehaviour
     {
       var vpt = tid.RaycastData.Value.point;
       if(_grid.isOverAxisZ(tid.RaycastData.Value.point))
-        voffs.y = Mathf.Lerp(voffs.y, 0.5f, Time.deltaTime * 10);
+        voffs.y = Mathf.Lerp(voffs.y, 0.6f, Time.deltaTime * 10);
       else
-      {
-        //voffs.y = Mathf.Lerp(voffs.y, 2.0f, Time.deltaTime * 10);
         voffs.y = 1 + 0.30f * (vpt.z - _grid.getMaxZ());
-      }
-      _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + new Vector3(0,_itemSelected.vdim.y * 0.5f,0), Time.deltaTime * 20);
+      _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + _itemSelected.vbtmExtent, Time.deltaTime * 20);
 
       var _itemNearest = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
       if(_itemNearest)
