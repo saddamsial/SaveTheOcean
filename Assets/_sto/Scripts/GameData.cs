@@ -84,8 +84,9 @@ public class GameData : ScriptableObject
     }
     static public int   NextLevel(int lvl_idx)
     {
-      return (int)Mathf.Repeat(lvl_idx + 1.0f, get()._listLevels.Count); // - 1.0f);
+      return (int)Mathf.Repeat(lvl_idx + 1.0f, get()._listLevels.Count);
     }
+    static public int   LevelsCnt => get()._listLevels.Count;
   }
 
   public static class Settings

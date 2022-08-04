@@ -53,7 +53,7 @@ public class Game : MonoBehaviour
     if(level)
       Destroy(level.gameObject);
 
-    level = GameData.Levels.CreateLevel(GameState.Progress.Level, levelsContainer);
+    level = GameData.Levels.CreateLevel(GameState.Progress.levelIdx, levelsContainer);
     //FindObjectOfType<UIStart>(true).Show(level);
   }
   public void RestartLevel()
@@ -63,12 +63,12 @@ public class Game : MonoBehaviour
   }
   public void PrevLevel()
   {
-    GameState.Progress.Level = GameData.Levels.PrevLevel(GameState.Progress.Level);
+    GameState.Progress.levelIdx = GameData.Levels.PrevLevel(GameState.Progress.levelIdx);
     CreateLevel();
   }
   public void NextLevel()
   {
-    GameState.Progress.Level = GameData.Levels.NextLevel(GameState.Progress.Level);
+    GameState.Progress.levelIdx = GameData.Levels.NextLevel(GameState.Progress.levelIdx);
     CreateLevel();
   }
 

@@ -41,7 +41,7 @@ public class Level : MonoBehaviour
     public Item[]  items => _reqItems;
   }
 
-  public int    LevelIdx => GameState.Progress.Level;
+  public int    LevelIdx => GameState.Progress.levelIdx;
   public bool   Succeed {get; private set;}
   public bool   Finished {get; private set;}
   public int    Points {get; set;} = 0;
@@ -309,6 +309,8 @@ public class Level : MonoBehaviour
     yield return new WaitForSeconds(3.0f);
     Succeed = true;
     onFinished?.Invoke(this);
+    GameState.Progress.Levels.SetLevelFinished();
+    GameState.Progress.Levels.UnlockNextLevel();
     yield return new WaitForSeconds(0.5f);
     _uiSummary.Show(this);
   }

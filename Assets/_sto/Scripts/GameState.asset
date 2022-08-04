@@ -16,7 +16,8 @@ MonoBehaviour:
   dataPath: Data
   version: 0
   progress:
-    level: 0
+    _level: 0
+    _levels: []
   economy:
     cash: 0
   settings:
