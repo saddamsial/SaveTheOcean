@@ -217,7 +217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemsContainer: {fileID: 610259900746943541}
-  _gridContainer: {fileID: 468868836747610736}
   _tilesContainer: {fileID: 6848804485864095692}
   _animalsContainer: {fileID: 1278421171504114904}
   _pipes: {fileID: 1735212974581814910}
@@ -609,7 +608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 512b9f0a523f1884caadd86b0f2c74c3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 512b9f0a523f1884caadd86b0f2c74c3, type: 3}
       propertyPath: m_LocalPosition.z
