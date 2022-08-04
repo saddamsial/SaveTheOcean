@@ -126,15 +126,15 @@ public class Item : MonoBehaviour
 
     _vdim = Vector3.zero;
     Renderer[] renderers = GetComponentsInChildren<Renderer>();
+    var _center = Vector3.zero;
     System.Array.ForEach(renderers, (rend) => 
     {
-      _vdim = Vector3.Max(_vdim, rend.bounds.extents);
+      _center = rend.bounds.center;
+      _vdim = Vector3.Max(_vdim, rend.bounds.size);
       _vmin = Vector3.Min(_vmin, rend.bounds.min);
       _vmax = Vector3.Min(_vmax, rend.bounds.max);
     });
-    _vbtmExtent.y = -_vmin.y;// * _models[model_idx].transform.localScale.y;
-    //_vbtmExtent.y = _vdim.y;
-    _vdim *= 2.0f;
+    _vbtmExtent.y = -(_center.y - _vdim.y * 0.5f);
   }
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
   public void Show()
