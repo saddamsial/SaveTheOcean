@@ -52,7 +52,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 94
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!114 &4126757476705115912
 MonoBehaviour:
@@ -68,7 +68,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 4126757476705115919}
   _speedRotation: 100
-  _speedRotationToSelectLevel: 3
+  _speedRotationToSelectLevel: 70
   _offsetRotationToSelectLevel: 2
 --- !u!114 &4329183550062796699
 MonoBehaviour:
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 0}
-  _rotation: {fileID: 0}
+  _rotation: {fileID: 4126757476705115912}
 --- !u!1 &4126757477303580407
 GameObject:
   m_ObjectHideFlags: 0

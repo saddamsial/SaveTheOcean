@@ -11,11 +11,4 @@ public class LevelEarth : MonoBehaviour
     public Transform ModelTransform => _modelTransform; 
     public GameObject LiningGameObject => _liningGameObject;
     public int IndexLevel => _indexLevel;
-    public float AngleY => _angleY;
-
-    private void Start()
-    {
-        _angleY = transform.localEulerAngles.y; 
-        Debug.Log(gameObject.name + " " + _angleY);
-    }
 }
