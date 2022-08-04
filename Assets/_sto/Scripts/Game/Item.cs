@@ -39,6 +39,8 @@ public class Item : MonoBehaviour
   Vector3?   _vdstPos = null;
   Vector3    _vdim = Vector3.one;
   Vector3    _vbtmExtent = Vector3.zero;
+  Vector3    _vmin = Vector3.zero;
+  Vector3    _vmax = Vector3.zero;
 
   public static float gridSpace = 1.0f;
   public static System.Action<Item> onShow, onShown, onMerged, onPut, onHide;
@@ -124,8 +126,14 @@ public class Item : MonoBehaviour
 
     _vdim = Vector3.zero;
     Renderer[] renderers = GetComponentsInChildren<Renderer>();
-    System.Array.ForEach(renderers, (rend) => _vdim = Vector3.Max(_vdim, rend.bounds.extents));
-    _vbtmExtent.y = -renderers[0].bounds.min.y;// * _models[model_idx].transform.localScale.y;
+    System.Array.ForEach(renderers, (rend) => 
+    {
+      _vdim = Vector3.Max(_vdim, rend.bounds.extents);
+      _vmin = Vector3.Min(_vmin, rend.bounds.min);
+      _vmax = Vector3.Min(_vmax, rend.bounds.max);
+    });
+    _vbtmExtent.y = -_vmin.y;// * _models[model_idx].transform.localScale.y;
+    //_vbtmExtent.y = _vdim.y;
     _vdim *= 2.0f;
   }
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
