@@ -37,6 +37,7 @@ public class Item : MonoBehaviour
   Vector2Int _agrid = Vector2Int.zero;
   Vector3[]  _path = new Vector3[4];
   Vector3?   _vdstPos = null;
+  Vector3    _vdim = Vector3.one;
 
   public static float gridSpace = 1.0f;
   public static System.Action<Item> onShow, onShown, onMerged, onPut, onHide;
@@ -78,6 +79,7 @@ public class Item : MonoBehaviour
 
   public ID         id { get => _id; set { _id = value; } }
   public GameObject mdl => _models[0];
+  public Vector3    vdim => _vdim;
   public Vector2    vgrid {get => _grid; set{_grid = value;}}
   public Vector2Int agrid {get => _agrid; set{_agrid = value;}}
   public Vector3    vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
@@ -117,6 +119,11 @@ public class Item : MonoBehaviour
   {
     for(int q = 0; q < _models.Count; ++q)
       _models[q].SetActive(q == model_idx);
+
+    _vdim = Vector3.zero;
+    Renderer[] renderers = GetComponentsInChildren<Renderer>();
+    System.Array.ForEach(renderers, (rend) => _vdim = Vector3.Max(_vdim, rend.localBounds.extents));
+    _vdim *= 2.0f;
   }
   public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
   public void Show()

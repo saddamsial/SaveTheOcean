@@ -102,11 +102,15 @@ public class Level : MonoBehaviour
       _tiles[va.y, va.x] = gt;
       gt.set(false);
     }
-    public bool isOverZ(Vector3 vpos)
+    public bool isOverAxisZ(Vector3 vpos)
     {
       Vector2 vdim = new Vector2(_dim.x, _dim.y) * _gridSpace;
       //return vpos.x >= -vdim.x/2 && vpos.x <= vdim.x / 2 && vpos.z >= -vdim.y / 2 && vpos.z <= vdim.y / 2;
       return vpos.z <= vdim.y / 2;
+    }
+    public float getMaxZ()
+    {
+      return _dim.y * 0.5f * _gridSpace;
     }
   }
 
@@ -231,11 +235,15 @@ public class Level : MonoBehaviour
       return;
     if(_itemSelected && tid.RaycastData.HasValue)
     {
-      if(_grid.isOverZ(tid.RaycastData.Value.point))
-        voffs.y = Mathf.Lerp(voffs.y, 1.0f, Time.deltaTime * 10);
+      var vpt = tid.RaycastData.Value.point;
+      if(_grid.isOverAxisZ(tid.RaycastData.Value.point))
+        voffs.y = Mathf.Lerp(voffs.y, 0.5f, Time.deltaTime * 10);
       else
-        voffs.y = Mathf.Lerp(voffs.y, 2.0f, Time.deltaTime * 10);
-      _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, tid.RaycastData.Value.point + voffs, Time.deltaTime * 20);
+      {
+        //voffs.y = Mathf.Lerp(voffs.y, 2.0f, Time.deltaTime * 10);
+        voffs.y = 1 + 0.30f * (vpt.z - _grid.getMaxZ());
+      }
+      _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + new Vector3(0,_itemSelected.vdim.y * 0.5f,0), Time.deltaTime * 20);
 
       var _itemNearest = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
       if(_itemNearest)
