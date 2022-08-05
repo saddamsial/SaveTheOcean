@@ -89,7 +89,7 @@ public class Game : MonoBehaviour
   public void DestroyLevel()
   {
     if(_level)
-      Destroy(_level);
+      Destroy(_level.gameObject);
     _level = null;  
   }
 #if UNITY_EDITOR
