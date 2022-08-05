@@ -1,17 +1,21 @@
 using System;
-using System.Collections;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
+[RequireComponent(typeof(EarthLevels))]
 public class SelectLevel : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
     [SerializeField] private Rotation _rotation;
+
+    private EarthLevels _earthLevels;
     private LevelEarth _currentLevelEarth;
     private Vector3 _vec1;
     private Vector3 _vec2;
+
+    private void Start()
+    {
+        _earthLevels = GetComponent<EarthLevels>();
+    }
 
     private void Update()
     {
@@ -32,6 +36,7 @@ public class SelectLevel : MonoBehaviour
             Select(level);
             var angle = GetAngleToSelectLevel(level);
             _rotation.RotateToSelectLevel(angle);
+            _earthLevels.UIButtonEarth.SetParametersLevelUI(level.IndexLevel, level.StateLevel);
         }
     }
 
