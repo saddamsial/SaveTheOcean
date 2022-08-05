@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(EarthLevels))]
@@ -12,9 +11,10 @@ public class SelectLevel : MonoBehaviour
     private Vector3 _vec1;
     private Vector3 _vec2;
 
-    private void Start()
+    private void Awake()
     {
         _earthLevels = GetComponent<EarthLevels>();
+        _earthLevels.SetSelectLevel(this);
     }
 
     private void Update()
@@ -33,11 +33,16 @@ public class SelectLevel : MonoBehaviour
         var level = raycastHit.collider.GetComponentInParent<LevelEarth>();
         if (level)
         {
-            Select(level);
-            var angle = GetAngleToSelectLevel(level);
-            _rotation.RotateToSelectLevel(angle);
-            _earthLevels.UIButtonEarth.SetParametersLevelUI(level.IndexLevel, level.StateLevel);
+            SelectLevelEarth(level);
         }
+    }
+
+    public void SelectLevelEarth(LevelEarth level)
+    {
+        Select(level);
+        var angle = GetReceiveAngleToSelectLevel(level);
+        _rotation.RotateToSelectLevel(angle);
+        _earthLevels.UIButtonEarth.SetParametersLevelUI(level.IndexLevel, level.StateLevel);
     }
 
     private void Select(LevelEarth levelEarth)
@@ -55,7 +60,7 @@ public class SelectLevel : MonoBehaviour
         }
     }
 
-    private float GetAngleToSelectLevel(LevelEarth levelEarth)
+    public float GetReceiveAngleToSelectLevel(LevelEarth levelEarth)
     {
         _vec1 = _camera.transform.position - transform.position;
         _vec1 = Vector3.Normalize(Vector3.ProjectOnPlane(_vec1, Vector3.up));
