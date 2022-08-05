@@ -21,7 +21,7 @@ public class Rotation : MonoBehaviour
     private void Rotate()
     {
         var rotationY = _speedRotation * Input.GetAxis("Mouse X") * Time.deltaTime;
-        _rigidbody.AddTorque(transform.up * -rotationY);
+        _rigidbody.AddTorque(Vector3.up * -rotationY);
     }
 
     public void RotateToSelectLevel(float angle)

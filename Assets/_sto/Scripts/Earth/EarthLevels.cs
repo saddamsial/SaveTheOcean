@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -22,10 +23,28 @@ public class EarthLevels : MonoBehaviour
 
     private void HandlerLevelEarthsState()
     {
-        foreach (var level in _levelEarths)
+        var levels = GameState.Progress.Levels.GetStates();
+        var size = _levelEarths.Length < levels.Length ? _levelEarths.Length : levels.Length; 
+        for (var i = 0; i < size; i++)
         {
-            level.SetStateLevel(level.StateLevel);
+            switch (levels[i])
+            {
+                case Level.State.Locked:
+                    _levelEarths[i].SetStateLevel(i,StateLevel.Lock);
+                    break;
+                case Level.State.Unlocked:
+                    _levelEarths[i].SetStateLevel(i,StateLevel.Unlock);
+                    break;
+                case Level.State.Started:
+                    break;
+                case Level.State.Finished:
+                    _levelEarths[i].SetStateLevel(i,StateLevel.Passed);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
+        
     }
 
     private void SetFirstLevelUI()

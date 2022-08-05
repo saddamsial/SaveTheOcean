@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(EarthLevels))]
@@ -15,11 +16,11 @@ public class Earth : MonoBehaviour
 
     public void Show(int indexLevel, Level.State[] states)
     {
-        if (indexLevel < _earthLevels.LevelEarths.Length || indexLevel > _earthLevels.LevelEarths.Length)
+  /*      if (indexLevel < _earthLevels.LevelEarths.Length || indexLevel > _earthLevels.LevelEarths.Length)
         {
             Debug.LogError("Error index level");
             return;
-        }
+        }*/
         
         _earthLevels.SelectLevel.SelectLevelEarth(_earthLevels.LevelEarths[0]);
       
@@ -40,4 +41,17 @@ public class Earth : MonoBehaviour
       }
     }
   #endif
+
+  private void OnEnable()
+  {
+    onLevelStart += Disable;
+    UIButtonEarth.OnEnableButton?.Invoke();
+  }
+
+  private void OnDisable()
+  {
+    onLevelStart -= Disable;
+  }
+
+  private void Disable(int i) => gameObject.SetActive(false); 
 }
