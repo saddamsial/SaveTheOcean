@@ -962,7 +962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsContainer: {fileID: 1401569532}
-  _earth: {fileID: 0}
+  _earth: {fileID: 1606619430}
 --- !u!1001 &1309126050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1542,6 +1542,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7401070327861742263, guid: 76079254ce79ffc45875a9ed07210bf1, type: 3}
   m_PrefabInstance: {fileID: 2554269812391350599}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1606619430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2799034045481787298, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+  m_PrefabInstance: {fileID: 1448327308}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261892b2367190b4bab839f496f61a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1636470855 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7685651995914563493, guid: 17945256735b2df4bbd1163a51bb8ccc, type: 3}

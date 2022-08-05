@@ -33,7 +33,7 @@ public class Game : MonoBehaviour
   IEnumerator Start()
   {
     yield return new WaitForSeconds(0.125f);
-    _earth.Show(GameState.Progress.levelIdx, new Level.State[0]);
+    _earth.Show(GameState.Progress.levelIdx);
   }
 
   void OnInputTapped(TouchInputData tid)
