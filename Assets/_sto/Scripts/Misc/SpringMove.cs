@@ -41,8 +41,8 @@ public class SpringMove : MonoBehaviour
       _vvel += _vforce;
       _vpos += _vvel * Time.deltaTime * _speedFactor;
       _vpos = _vpos.clamp(_vminLimit, _vmaxLimit);
-      _vvel *= 0.95f;
-      if(_vvel.magnitude < 0.0001f)   //(_vvel.y > 0 && _vpos.y > 0) || _vvel.magnitude < 0.0001f)
+      _vvel *=_damping;
+      if(_vvel.magnitude < 0.0001f)
       {
         _vvel.Set(0, 0, 0);
         _vforce.Set(0, 0, 0);

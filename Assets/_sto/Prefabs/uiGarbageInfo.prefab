@@ -209,7 +209,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4981947356274711598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 80, z: -40}
+  m_LocalPosition: {x: 0, y: 98.4, z: 0}
   m_LocalScale: {x: 89.999985, y: 89.999985, z: 89.999985}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4981947356274711598}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6b52b5f161781b4797a023af9695f84, type: 3}
   m_Name: 
@@ -232,7 +232,7 @@ MonoBehaviour:
   useRandomPhaseOffset: 1
   axis: {x: 0, y: 1, z: 0}
   speed: 0.25
-  maxAngle: 15
+  maxAngle: 10
 --- !u!1 &5094007939421716468
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,8 +260,8 @@ RectTransform:
   m_GameObject: {fileID: 5094007939421716468}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.8000002, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5687369953757371151}
   m_Father: {fileID: 5257264905172812846}
@@ -269,7 +269,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 17.5}
   m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5682736889173580455
@@ -293,14 +293,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.6509804}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1370733954, guid: d0c4717704c2b1b40b441688ed86fd7c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2006ec55eb5a7fa419a736836558a298, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5687369953757371151
 RectTransform:
   m_ObjectHideFlags: 0

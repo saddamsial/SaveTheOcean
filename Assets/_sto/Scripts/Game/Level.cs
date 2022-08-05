@@ -54,6 +54,7 @@ public class Level : MonoBehaviour
   List<Animal> _animals = new List<Animal>();
 
   Item        _itemSelected;
+  Animal      _animalSelected;
   List<Item>  _items = new List<Item>();
   List<Item>  _items2 = new List<Item>();
   int         _requestCnt = 0;
@@ -118,12 +119,10 @@ public class Level : MonoBehaviour
 
   void Awake()
   {
-    //Item.itemsOffset = _itemsContainer.localPosition;
     Item.gridSpace = _gridSpace;
     _cameraContainer = GameObject.Find("_cameraContainer").transform;
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     _uiSummary = FindObjectOfType<UISummary>(true);
-    //_animals = _animalsContainer.GetComponentsInChildren<Animal>();
 
     onCreate?.Invoke(this);
   }
@@ -242,11 +241,16 @@ public class Level : MonoBehaviour
         voffs.y = 1 + 0.30f * (vpt.z - _grid.getMaxZ());
       _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + _itemSelected.vbtmExtent, Time.deltaTime * 20);
 
-      var _itemNearest = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
-      if(_itemNearest)
+      var _nearestHit = tid.GetClosestCollider(0.5f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
+      _nearestHit?.GetComponent<Item>()?.Hover(true);
+      var _nearestAnimal = _nearestHit.GetComponent<Animal>();
+      if(_nearestAnimal && _animalSelected == null)
       {
-        _itemNearest.Hover(true);
+        _animalSelected = _nearestAnimal;
+        _animalSelected.AnimTalk();
       }
+      else
+        _animalSelected = null;
     }
   }
   public void OnInputEnd(TouchInputData tid)
