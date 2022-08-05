@@ -4,9 +4,8 @@ using UnityEngine;
 public class EarthLevels : MonoBehaviour
 {
     [SerializeField] private UIButtonEarth _uiButtonEarth;
-    [SerializeField] private SelectLevel _selectLevel;
+    [SerializeField] private LevelEarth[] _levelEarths;
     
-    private LevelEarth[] _levelEarths;
     private LevelEarth _currentUnlockLevel;
     private LevelEarth _currentPassedLevel;
 
@@ -14,9 +13,10 @@ public class EarthLevels : MonoBehaviour
 
     private void Start()
     {
-        _levelEarths = GetComponentsInChildren<LevelEarth>();
+   //     _levelEarths = GetComponentsInChildren<LevelEarth>();
         HandlerLevelEarthsState();
         SetFirstLevelUI();
+        gameObject.GetComponentsInChildren<Transform>();
     }
 
     private void HandlerLevelEarthsState()
