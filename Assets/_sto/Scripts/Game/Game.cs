@@ -10,8 +10,7 @@ public class Game : MonoBehaviour
   public static System.Action<Level> onLevelRestart;
 
   Level _level = null;
-  [SerializeField] 
-  EarthClazz _earth = null;
+  [SerializeField] Earth _earth = null;
 
 	void Awake()
   {
@@ -20,7 +19,7 @@ public class Game : MonoBehaviour
     TouchInputData.onInputUpdated += OnInputMov;
     TouchInputData.onInputEnded += OnInputEnd;
 
-    EarthClazz.onLevelStart += CreateLevel;
+    Earth.onLevelStart += CreateLevel;
   }
   void OnDestroy()
   {
@@ -29,7 +28,7 @@ public class Game : MonoBehaviour
     TouchInputData.onInputUpdated -= OnInputMov;
     TouchInputData.onInputEnded -= OnInputEnd;
 
-    EarthClazz.onLevelStart -= CreateLevel;
+    Earth.onLevelStart -= CreateLevel;
   }
   IEnumerator Start()
   {

@@ -314,7 +314,6 @@ public class Level : MonoBehaviour
     GameState.Progress.Levels.UnlockNextLevel();
     yield return new WaitForSeconds(0.5f);
     _uiSummary.Show(this);
-    Destroy(this.gameObject);
   }
   void CheckEnd()
   {

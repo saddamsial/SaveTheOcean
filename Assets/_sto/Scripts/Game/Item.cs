@@ -230,11 +230,5 @@ public class Item : MonoBehaviour
   void Update()
   {
     _lifetime += Time.deltaTime;
-    // if(IsSelected)
-    //   vwpos = Vector3.MoveTowards(vwpos, vdstPos.Value, _moveStep * Time.deltaTime);
   }
-  // void OnDrawGizmos()
-  // {
-  //   Gizmos.DrawCube(transform.position + new Vector3(0,1.0f, 0), Vector3.one * 0.25f);
-  // }
 }

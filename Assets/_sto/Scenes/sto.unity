@@ -946,7 +946,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsContainer: {fileID: 1401569532}
-  _earth: {fileID: 1508879737}
+  _earth: {fileID: 0}
 --- !u!1001 &1309126050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1353,7 +1353,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1508879736}
-  - component: {fileID: 1508879737}
   m_Layer: 0
   m_Name: _earth
   m_TagString: Untagged
@@ -1377,19 +1376,6 @@ Transform:
   m_Father: {fileID: 9882444}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 40, y: 0, z: 0}
---- !u!114 &1508879737
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1508879735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e478a0224359a2a43a53589cb4f9ae8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _antonEarth: {fileID: 1561491763}
 --- !u!1 &1516127414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,11 +1445,6 @@ Transform:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8253727410657249327, guid: 988bebb30c0f25145b62ce9bb8c33e5e, type: 3}
   m_PrefabInstance: {fileID: 8253727411663379399}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1561491763 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4126757476705115914, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-  m_PrefabInstance: {fileID: 1448327308}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1561491764 stripped
 Transform:
