@@ -31,6 +31,14 @@ public class Level : MonoBehaviour
   [Header("LvlDesc")]
   [SerializeField] LvlDesc[]  _lvlDescs;
 
+  public enum State
+  {
+    Locked,
+    Unlocked,
+    Started,
+    Finished,
+  }
+
   [System.Serializable]
   public struct LvlDesc
   {
@@ -243,7 +251,7 @@ public class Level : MonoBehaviour
 
       var _nearestHit = tid.GetClosestCollider(0.5f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
       _nearestHit?.GetComponent<Item>()?.Hover(true);
-      var _nearestAnimal = _nearestHit.GetComponent<Animal>();
+      var _nearestAnimal = _nearestHit?.GetComponent<Animal>();
       if(_nearestAnimal && _animalSelected == null)
       {
         _animalSelected = _nearestAnimal;
@@ -295,14 +303,6 @@ public class Level : MonoBehaviour
     }
     _itemSelected = null;
   }
-  void Sequence()
-  {
-    // if(!_sequence)
-    // {
-    //   _sequence = true;
-    //   StartCoroutine(coSequenece());
-    // }
-  }
 
   IEnumerator coEnd()
   {
@@ -314,6 +314,7 @@ public class Level : MonoBehaviour
     GameState.Progress.Levels.UnlockNextLevel();
     yield return new WaitForSeconds(0.5f);
     _uiSummary.Show(this);
+    Destroy(this.gameObject);
   }
   void CheckEnd()
   {
@@ -335,6 +336,17 @@ public class Level : MonoBehaviour
   void Update()
   {
     Process();
+
+  #if UNITY_EDITOR
+    if(Input.GetKeyDown(KeyCode.E))
+    {
+      if(!Finished)
+      {
+        Finished = true;
+        StartCoroutine(coEnd());
+      }
+    }
+  #endif     
   }
 
   void OnDrawGizmos()

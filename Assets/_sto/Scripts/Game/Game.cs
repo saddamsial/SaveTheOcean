@@ -9,7 +9,9 @@ public class Game : MonoBehaviour
 
   public static System.Action<Level> onLevelRestart;
 
-  Level level = null;
+  Level _level = null;
+  [SerializeField] 
+  EarthClazz _earth = null;
 
 	void Awake()
   {
@@ -17,6 +19,8 @@ public class Game : MonoBehaviour
     TouchInputData.onInputStarted += OnInputBeg;
     TouchInputData.onInputUpdated += OnInputMov;
     TouchInputData.onInputEnded += OnInputEnd;
+
+    EarthClazz.onLevelStart += CreateLevel;
   }
   void OnDestroy()
   {
@@ -24,70 +28,87 @@ public class Game : MonoBehaviour
     TouchInputData.onInputStarted -= OnInputBeg;
     TouchInputData.onInputUpdated -= OnInputMov;
     TouchInputData.onInputEnded -= OnInputEnd;
+
+    EarthClazz.onLevelStart -= CreateLevel;
   }
   IEnumerator Start()
   {
     yield return new WaitForSeconds(0.125f);
-    CreateLevel();
+    _earth.Show(GameState.Progress.levelIdx, new Level.State[0]);
   }
 
   void OnInputTapped(TouchInputData tid)
   {
-    //level?.OnInputTapped(tid);
+    //_level?.OnInputTapped(tid);
   }
   void OnInputBeg(TouchInputData tid)
   {
-    level?.OnInputBeg(tid);
+    _level?.OnInputBeg(tid);
   }
   void OnInputMov(TouchInputData tid)
   {
-    level?.OnInputMov(tid);
+    _level?.OnInputMov(tid);
   }
   void OnInputEnd(TouchInputData tid)
   {
-    level?.OnInputEnd(tid);
+    _level?.OnInputEnd(tid);
   }
 
+  public void CreateLevel(int levelIdx)
+  {
+    if(_level)
+      Destroy(_level.gameObject);
+    _level = null;
+    GameState.Progress.levelIdx = levelIdx;
+    CreateLevel();
+  }
   public void CreateLevel()
   {
-    if(level)
-      Destroy(level.gameObject);
+    if(_level)
+      Destroy(_level.gameObject);
+    _level = null;  
 
-    level = GameData.Levels.CreateLevel(GameState.Progress.levelIdx, levelsContainer);
-    //FindObjectOfType<UIStart>(true).Show(level);
+    _level = GameData.Levels.CreateLevel(GameState.Progress.levelIdx, levelsContainer);
   }
   public void RestartLevel()
   {
-    onLevelRestart?.Invoke(level);
+    onLevelRestart?.Invoke(_level);
     CreateLevel();
   }
-  public void PrevLevel()
+  public void PrevLevel(bool create = true)
   {
     GameState.Progress.levelIdx = GameData.Levels.PrevLevel(GameState.Progress.levelIdx);
-    CreateLevel();
+    if(create)
+      CreateLevel();
   }
-  public void NextLevel()
+  public void NextLevel(bool create = true)
   {
     GameState.Progress.levelIdx = GameData.Levels.NextLevel(GameState.Progress.levelIdx);
-    CreateLevel();
+    if(create)
+      CreateLevel();
   }
-
+  public void DestroyLevel()
+  {
+    if(_level)
+      Destroy(_level);
+    _level = null;  
+  }
 #if UNITY_EDITOR
   void Update()
   {
     if(Input.GetKeyDown(KeyCode.Z))
     {
-      Level.onFinished?.Invoke(level);
+      Level.onFinished?.Invoke(_level);
       PrevLevel();
     }
     else if(Input.GetKeyDown(KeyCode.X))
     {
-      Level.onFinished?.Invoke(level);
+      Level.onFinished?.Invoke(_level);
       NextLevel();
     }
     else if(Input.GetKeyDown(KeyCode.R))
     {
-      Level.onFinished?.Invoke(level);
+      Level.onFinished?.Invoke(_level);
       RestartLevel();
     }
     // else if(Input.GetKeyDown(KeyCode.E))

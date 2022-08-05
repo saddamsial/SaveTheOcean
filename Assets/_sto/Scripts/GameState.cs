@@ -17,70 +17,67 @@ public class GameState : SavableScriptableObject
 
 
   [System.Serializable]
-  public class Level
+  class LevelState
   {
-    public enum State
-    {
-      Locked,
-      Unlocked,
-      Started,
-      Finished,
-    }
-
     [SerializeField] int _idx = 0;
-    [SerializeField] State _state;
+    [SerializeField] Level.State _state;
     //other level states data
 
-    public Level(int lvl_idx, State st = State.Unlocked)
+    public LevelState(int lvl_idx, Level.State st = Level.State.Unlocked)
     {
       _idx = lvl_idx;
       _state = st;
     }
     public int idx => _idx;
-    public State state { get => _state; set { _state = value; } }
+    public Level.State state { get => _state; set { _state = value; } }
   }
 
   [System.Serializable]
   class ProgressState
   {
     [SerializeField] int _level = 0;
-    [SerializeField] List<Level> _levels;
+    [SerializeField] List<LevelState> _levels;
 
 
     public  int level { get => _level; set { _level = value; }}
-    public  List<Level> levels { get => _levels; }
-    public  Level   FindLevel(int lvl_idx)
+    public  List<LevelState> levels { get => _levels; }
+    public  LevelState       FindLevel(int lvl_idx)
     {
       return _levels.Find((lvl) => lvl.idx == lvl_idx);
     }
-    public  bool    IsLevelUnlocked(int lvl_idx)
+    public  bool        IsLevelUnlocked(int lvl_idx)
     {
       var lvl = FindLevel(lvl_idx);
       return (lvl != null)? lvl.state >= Level.State.Unlocked : false;
     }
-    public  bool    IsLevelPassed(int lvl_idx)
+    public  bool        IsLevelPassed(int lvl_idx)
     {
       var lvl = FindLevel(lvl_idx);
       return (lvl != null) ? lvl.state == Level.State.Finished : false;
     }
-    public  void    UnlockLevel(int lvl_idx)
+    public  void        UnlockLevel(int lvl_idx)
     {
       var lvl = FindLevel(lvl_idx);
       if(lvl == null)
-        _levels.Add(new Level(lvl_idx, Level.State.Unlocked));
+        _levels.Add(new LevelState(lvl_idx, Level.State.Unlocked));
       else
       {
         if(lvl.state == Level.State.Locked)
           lvl.state = Level.State.Unlocked;
       }
     }
-    public void     PassLevel(int lvl_idx)
+    public void         PassLevel(int lvl_idx)
     {
       var lvl = FindLevel(lvl_idx);
       if(lvl == null)
-        _levels.Add(new Level(lvl_idx, Level.State.Finished));
+        _levels.Add(new LevelState(lvl_idx, Level.State.Finished));
       else
         lvl.state = Level.State.Finished;
+    }
+    public Level.State GetLevelState(int lvl_idx)
+    {
+      var lvl = FindLevel(lvl_idx);
+      return (lvl != null) ? lvl.state : Level.State.Locked;
     }
   }
   [SerializeField] ProgressState progress;
@@ -111,11 +108,7 @@ public class GameState : SavableScriptableObject
   #if UNITY_EDITOR
     for(int  q = 0; q < GameData.Levels.LevelsCnt; ++q)
     {
-      var lvl = GameState.Progress.Levels.GetLevel(q);
-      if(lvl != null)
-        Debug.Log(string.Format("lvl:{0:D2} => {1}", lvl.idx, lvl.state));
-      else
-        Debug.Log(string.Format("lvl:{0:D2} => {1}", q, GameState.Level.State.Locked));
+      Debug.Log(string.Format("lvl:{0:D2} => {1}", q, GameState.Progress.Levels.GetLevelState(q)));
     }
   #endif
   }
@@ -132,13 +125,22 @@ public class GameState : SavableScriptableObject
     }
     public static class Levels
     {
-      public static Level GetLevel(int lvl_idx) => get().progress.FindLevel(lvl_idx);
-      public static bool  IsLevelUnlocked(int lvl_idx) => get().progress.IsLevelUnlocked(lvl_idx);
-      public static bool  IsLevelFinished(int lvl_idx) => get().progress.IsLevelPassed(lvl_idx);
-      public static void  SetLevelFinished(int lvl_idx) => get().progress.PassLevel(lvl_idx);
-      public static void  SetLevelFinished() => SetLevelFinished(levelIdx);
-      public static void  UnlockNextLevel(int lvl_idx) => get().progress.UnlockLevel(GameData.Levels.NextLevel(lvl_idx));
-      public static void  UnlockNextLevel() => UnlockNextLevel(levelIdx);
+      public static Level.State   GetLevelState(int lvl_idx) => get().progress.GetLevelState(lvl_idx);
+      //public static void        SetLevelState(int lvl_idx, Level.State state) => get().progress.SetLevelState(lvl_idx, state);
+      public static bool          IsLevelUnlocked(int lvl_idx) => get().progress.IsLevelUnlocked(lvl_idx);
+      public static bool          IsLevelFinished(int lvl_idx) => get().progress.IsLevelPassed(lvl_idx);
+      public static void          SetLevelFinished(int lvl_idx) => get().progress.PassLevel(lvl_idx);
+      public static void          SetLevelFinished() => SetLevelFinished(levelIdx);
+      public static void          UnlockNextLevel(int lvl_idx) => get().progress.UnlockLevel(GameData.Levels.NextLevel(lvl_idx));
+      public static void          UnlockNextLevel() => UnlockNextLevel(levelIdx);
+      public static Level.State[] GetStates()
+      {
+        var states = new Level.State[GameData.Levels.LevelsCnt];
+        for(int q = 0; q < states.Length; q++)
+          states[q] = GetLevelState(q);
+
+        return states;  
+      }
     }
   }
   public static class Econo
