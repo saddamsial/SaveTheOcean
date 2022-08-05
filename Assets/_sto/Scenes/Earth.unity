@@ -819,6 +819,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Earth
       objectReference: {fileID: 0}
+    - target: {fileID: 4126757476705115914, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4126757477005729576, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7372774

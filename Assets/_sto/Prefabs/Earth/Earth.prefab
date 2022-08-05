@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4126757476705115913}
   - component: {fileID: 4126757476705115919}
+  - component: {fileID: 2799034045481787298}
   - component: {fileID: 4126757476705115912}
   - component: {fileID: 4329183550062796699}
   - component: {fileID: 2604012205585923717}
@@ -55,6 +56,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!114 &2799034045481787298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4126757476705115914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 261892b2367190b4bab839f496f61a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4126757476705115912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013eec73b77c62a439ed4ad4df13a50b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiButtonEarth: {fileID: 0}
+  _levelEarths: []
 --- !u!1 &4126757477303580407
 GameObject:
   m_ObjectHideFlags: 0

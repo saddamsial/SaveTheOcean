@@ -8,15 +8,16 @@ public class EarthLevels : MonoBehaviour
     
     private LevelEarth _currentUnlockLevel;
     private LevelEarth _currentPassedLevel;
+    private SelectLevel _selectLevel;
 
     public UIButtonEarth UIButtonEarth => _uiButtonEarth;
-
+    public LevelEarth[] LevelEarths => _levelEarths;
+    public SelectLevel SelectLevel => _selectLevel;
+    
     private void Start()
     {
-   //     _levelEarths = GetComponentsInChildren<LevelEarth>();
         HandlerLevelEarthsState();
         SetFirstLevelUI();
-        gameObject.GetComponentsInChildren<Transform>();
     }
 
     private void HandlerLevelEarthsState()
@@ -31,13 +32,15 @@ public class EarthLevels : MonoBehaviour
     {
         _currentUnlockLevel = _levelEarths.FirstOrDefault(level => level.StateLevel == StateLevel.Unlock);
 
-        if (_currentUnlockLevel == null)
+        if (_currentUnlockLevel != null)
         {
-            _currentPassedLevel = _levelEarths.FirstOrDefault(level => level.StateLevel == StateLevel.Passed);
-            _uiButtonEarth.SetParametersLevelUI(_currentPassedLevel.IndexLevel, _currentPassedLevel.StateLevel);
+            _selectLevel.SelectLevelEarth(_currentUnlockLevel);
             return;
         }
         
-        _uiButtonEarth.SetParametersLevelUI(_currentUnlockLevel.IndexLevel, _currentUnlockLevel.StateLevel);
+        _currentPassedLevel = _levelEarths.LastOrDefault(level => level.StateLevel == StateLevel.Passed);
+        _selectLevel.SelectLevelEarth(_currentPassedLevel);
     }
+    
+    public void SetSelectLevel(SelectLevel selectLevel) => _selectLevel = selectLevel;
 }
