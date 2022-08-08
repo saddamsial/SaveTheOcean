@@ -10,6 +10,13 @@ public class Rotation : MonoBehaviour
 
     private bool _isRotateToSelectLevel;
 
+    private void Start()
+    {
+        Debug.Log("Center of mass: " + _rigidbody.centerOfMass);
+        _rigidbody.centerOfMass = Vector3.zero; 
+        Debug.Log("Center of mass: " + _rigidbody.centerOfMass);
+    }
+
     private void FixedUpdate()
     {
         if (Input.GetMouseButton(0) && !_isRotateToSelectLevel)
@@ -26,6 +33,7 @@ public class Rotation : MonoBehaviour
 
     public void RotateToSelectLevel(float angle)
     {
+        Debug.Log("RotateToSelectLevel");
         StopAllCoroutines();
         StartCoroutine(RotateToSelectLevelCoroutine(angle));
     }

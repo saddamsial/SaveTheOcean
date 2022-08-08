@@ -21,6 +21,11 @@ public class EarthLevels : MonoBehaviour
         SetFirstLevelUI();
     }
 
+    private void OnEnable()
+    {
+        HandlerLevelEarthsState();
+    }
+
     private void HandlerLevelEarthsState()
     {
         var levels = GameState.Progress.Levels.GetStates();
