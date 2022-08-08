@@ -182,7 +182,7 @@ public class EffectsManager : MonoBehaviour
     }
     void OnLevelDone(Level lvl)
     {
-      if(lvl.Succeed)
+      if(lvl.succeed)
         fxConfettiLevel.Play();
     }
     void OnLevelFinished(Level lvl) 

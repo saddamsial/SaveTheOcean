@@ -28,13 +28,13 @@ public class UISummary : MonoBehaviour
 
   public void Show(Level level)
   {
-    levelInfo.text = "Level " + (level.LevelIdx + 1);
-    destValue = level.LevelIdx+1;
-    scores.text = string.Format(strScoresFmt, level.Points.ToString());
+    levelInfo.text = "Level " + (level.levelIdx + 1);
+    destValue = level.levelIdx+1;
+    scores.text = string.Format(strScoresFmt, level.points.ToString());
 
     updateSlider = false;
     for(int q = 0; q < stars.Length; ++q)
-      stars[q].SetState(level.Stars > q);
+      stars[q].SetState(level.stars > q);
 
     onShow?.Invoke();
 
@@ -42,11 +42,11 @@ public class UISummary : MonoBehaviour
     //   _uiRewards = rewardContainer.GetComponentsInChildren<UIReward>(true);
     // showReward = (level.LevelIdx == range.end && GameData.Rewards.ToClaim(level.LevelIdx));
 
-    winContainer.gameObject.SetActive(level.Succeed);
-    navWinRestartPanel.SetActive(level.Succeed && level.Stars < 3);
-    failContainer.gameObject.SetActive(!level.Succeed);
+    winContainer.gameObject.SetActive(level.succeed);
+    navWinRestartPanel.SetActive(level.succeed && level.stars < 3);
+    failContainer.gameObject.SetActive(!level.succeed);
     GetComponent<UIPanel>().ActivatePanel();
-    if(level.Succeed)
+    if(level.succeed)
     {
       winContainer.ActivatePanel();
       StartCoroutine(Sequence(level));
@@ -67,11 +67,11 @@ public class UISummary : MonoBehaviour
     yield return new WaitForSeconds(1.0f);
     updateSlider = true;
     yield return new WaitForSeconds(0.25f);
-    if(level.Succeed)
+    if(level.succeed)
     {
       navNextPanel.ActivatePanel();
       yield return new WaitForSeconds(0.25f);
-      if(level.Stars < 3)
+      if(level.stars < 3)
         navWinRestartPanel.SetActive(true);
     }
     else

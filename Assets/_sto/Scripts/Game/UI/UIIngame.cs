@@ -16,8 +16,8 @@ public class UIIngame : MonoBehaviour
   [Header("Settings")]
   [SerializeField] UIToggleButton muteBtn;
 
-  int   _pointDest = 0;
-  float _pointCurr = 0;
+  float _pollution = 0;
+  float _pollutionDest = 0;
   Level _lvl = null;
 
   void Awake()
@@ -27,9 +27,9 @@ public class UIIngame : MonoBehaviour
     Level.onFinished += OnLevelFinished;
     Level.onTutorialStart += OnTutorialStart;
     Level.onDestroy += OnLevelDestroy;
+    Level.onGarbageOut += OnLevelGarbageOut;
 
     muteBtn.SetState(!GameState.Settings.IsMuted);
-    //ApplySettings();
   }
   void OnDestroy()
   {
@@ -38,6 +38,7 @@ public class UIIngame : MonoBehaviour
     Level.onFinished -= OnLevelFinished;
     Level.onTutorialStart -= OnTutorialStart;
     Level.onDestroy -= OnLevelDestroy;
+    Level.onGarbageOut -= OnLevelGarbageOut;
   }
 
   public void Show(Level level)
@@ -58,13 +59,13 @@ public class UIIngame : MonoBehaviour
   void OnLevelStart(Level lvl)
   {
     _lvl = lvl;
-    _lblLevelInfo.text = "Level " + (lvl.LevelIdx + 1);
+    _lblLevelInfo.text = "Level " + (lvl.levelIdx + 1);
 
-    // _progress.minValue = 0;
-    // _progress.value = 0;
-    // _progress.maxValue = lvl.PointsMax;
-    _pointCurr = 0;
-    _pointDest = 0;
+    _progress.minValue = 0;
+    _progress.maxValue = 1;
+    _progress.value = 1;
+    _pollution = 1;
+    _pollutionDest = 1;
     
     UpdateScore();
     Show(lvl);
@@ -83,15 +84,15 @@ public class UIIngame : MonoBehaviour
   }
   void UpdateScore()
   {
-    //_score.text = "Score " + (int)_pointCurr;
+    _score.text = "";//"Score " + (int)_pointCurr;
   }
   void OnLevelDestroy(Level lvl)
   {
     _lvl = null;
   }
-  void OnPointsAdded(Level lvl)
+  void OnLevelGarbageOut(Level lvl)
   {
-    _pointDest = lvl.Points;
+    _pollutionDest = lvl.PollutionRate();
   }
   void OnTutorialStart(Level lvl)
   {
@@ -108,11 +109,10 @@ public class UIIngame : MonoBehaviour
 
   void Update()
   {
-    if(_pointCurr != _pointDest)
+    if(_pollution >= _pollutionDest)
     {
-      _pointCurr = Mathf.MoveTowards(_pointCurr, _pointDest, Time.deltaTime * 1200);
-      _progress.value = _pointCurr;
-      UpdateScore();
+      _pollution = Mathf.Lerp(_pollution, _pollutionDest, Time.deltaTime * 2);
+      _progress.value = Mathf.Clamp01(1-_pollution);
     }
   }
 }

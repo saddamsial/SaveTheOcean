@@ -11,7 +11,7 @@ using TMPLbl = TMPro.TextMeshPro;
 
 public class Level : MonoBehaviour
 {
-  public static System.Action<Level>   onCreate, onStart, onTutorialStart;
+  public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut;
   public static System.Action<Level>   onDone, onFinished, onDestroy;
 
   [Header("Refs")]
@@ -50,11 +50,13 @@ public class Level : MonoBehaviour
     public Item[]  items => _reqItems;
   }
 
-  public int    LevelIdx => GameState.Progress.levelIdx;
-  public bool   Succeed {get; private set;}
-  public bool   Finished {get; private set;}
-  public int    Points {get; set;} = 0;
-  public int    Stars {get; set;}
+  public int    levelIdx => GameState.Progress.levelIdx;
+  public bool   succeed {get; private set;}
+  public bool   finished {get; private set;}
+  public int    points {get; set;} = 0;
+  public int    stars {get; set;}
+  public int    itemsCount => _items.Count + _items2.Count;
+  public int    initialItemsCnt => _initialItemsCnt;
   public Vector2Int Dim => _dim;
 
   bool         _started = false;
@@ -68,6 +70,7 @@ public class Level : MonoBehaviour
   List<Item>  _items = new List<Item>();
   List<Item>  _items2 = new List<Item>();
   int         _requestCnt = 0;
+  int         _initialItemsCnt = 0;
 
   float       _pollutionRate = 1.0f;
   float       _pollutionDest = 1.0f;
@@ -215,6 +218,7 @@ public class Level : MonoBehaviour
         _items2.Add(item);
       }
     }
+    _initialItemsCnt = itemsCount;
   }
   void SpawnItem(Vector2 vgrid)
   {
@@ -235,7 +239,7 @@ public class Level : MonoBehaviour
     _mpb.SetFloat("_HeigthWaveOpacity", _pollutionRate);
     _waterRenderer.SetPropertyBlock(_mpb);
   }
-  float RequestsCompletedRate()
+  public float PollutionRate()
   {
     int requests = 0;
     _animals.ForEach((animal) => requests += animal.requests);
@@ -252,7 +256,7 @@ public class Level : MonoBehaviour
   Vector3 voffs = Vector3.zero;
   public void OnInputMov(TouchInputData tid)
   {
-    if(Finished)
+    if(finished)
       return;
     if(_itemSelected && tid.RaycastData.HasValue)
     {
@@ -306,7 +310,8 @@ public class Level : MonoBehaviour
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
         //_pipes.PollutionRate(RequestRate());
-        _pollutionDest = RequestsCompletedRate();
+        _pollutionDest = PollutionRate();
+        onGarbageOut?.Invoke(this);
         SpawnItem(_itemSelected.vgrid);
         CheckEnd();
       }
@@ -323,7 +328,7 @@ public class Level : MonoBehaviour
   {
     _pipes.PollutionRate(0);
     yield return new WaitForSeconds(3.0f);
-    Succeed = true;
+    succeed = true;
     onFinished?.Invoke(this);
     GameState.Progress.Levels.SetLevelFinished();
     GameState.Progress.Levels.UnlockNextLevel();
@@ -333,9 +338,9 @@ public class Level : MonoBehaviour
   void CheckEnd()
   {
     int activeAnimals = _animals.Count((animal) => animal.isActive);
-    if(!Finished && activeAnimals == 0)
+    if(!finished && activeAnimals == 0)
     {
-      Finished = true;
+      finished = true;
       StartCoroutine(coEnd());
     }
   }
@@ -356,9 +361,9 @@ public class Level : MonoBehaviour
   #if UNITY_EDITOR
     if(Input.GetKeyDown(KeyCode.E))
     {
-      if(!Finished)
+      if(!finished)
       {
-        Finished = true;
+        finished = true;
         StartCoroutine(coEnd());
       }
     }
