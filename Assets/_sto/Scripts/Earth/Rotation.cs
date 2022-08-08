@@ -48,7 +48,7 @@ public class Rotation : MonoBehaviour
         {
             yield return null;
             angle -= Time.deltaTime * _speedRotationToSelectLevel;
-            transform.RotateAround(transform.position, Vector3.down,
+            transform.RotateAround(transform.position, -transform.up,
                 Time.deltaTime * mult * _speedRotationToSelectLevel);
         }
 
