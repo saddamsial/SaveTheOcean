@@ -11,9 +11,7 @@ public class Rotation : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Center of mass: " + _rigidbody.centerOfMass);
         _rigidbody.centerOfMass = Vector3.zero; 
-        Debug.Log("Center of mass: " + _rigidbody.centerOfMass);
     }
 
     private void FixedUpdate()

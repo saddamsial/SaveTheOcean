@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(EarthLevels))]
+[DefaultExecutionOrder(-5)]
 public class SelectLevel : MonoBehaviour
 {
     [SerializeField] private Camera _camera;

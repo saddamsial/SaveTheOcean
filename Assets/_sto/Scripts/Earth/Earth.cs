@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(EarthLevels))]
@@ -27,8 +26,11 @@ public class Earth : MonoBehaviour
   private void OnEnable()
   {
     onLevelStart += Disable;
-    UIButtonEarth.OnEnableButton?.Invoke();
+    Invoke("ActivateButtonPlay", 0.5f);
   }
+
+  private void ActivateButtonPlay() => UIButtonEarth.OnEnableButton?.Invoke();
+
 
   private void OnDisable()
   {

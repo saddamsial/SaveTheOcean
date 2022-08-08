@@ -15,15 +15,10 @@ public class EarthLevels : MonoBehaviour
     public LevelEarth[] LevelEarths => _levelEarths;
     public SelectLevel SelectLevel => _selectLevel;
     
-    private void Start()
-    {
-        HandlerLevelEarthsState();
-        SetFirstLevelUI();
-    }
-
     private void OnEnable()
     {
         HandlerLevelEarthsState();
+        SetFirstLevelUI();
     }
 
     private void HandlerLevelEarthsState()
