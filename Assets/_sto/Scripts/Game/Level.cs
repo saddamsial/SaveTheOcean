@@ -20,6 +20,7 @@ public class Level : MonoBehaviour
   [SerializeField] Transform    _animalsContainer;
   [SerializeField] Pipes        _pipes;
   [SerializeField] Transform[]  _animalContainers;
+  [SerializeField] Renderer     _waterRenderer;
   
   //[SerializeField] Transform[] _paths;
   //[SerializeField] Transform _poiLT;
@@ -60,12 +61,16 @@ public class Level : MonoBehaviour
   UISummary    _uiSummary = null;
   Transform    _cameraContainer = null;
   List<Animal> _animals = new List<Animal>();
+  MaterialPropertyBlock _mpb = null;
 
   Item        _itemSelected;
   Animal      _animalSelected;
   List<Item>  _items = new List<Item>();
   List<Item>  _items2 = new List<Item>();
   int         _requestCnt = 0;
+
+  float       _pollutionRate = 1.0f;
+  float       _pollutionDest = 1.0f;
 
   public class Grid
   {
@@ -131,6 +136,8 @@ public class Level : MonoBehaviour
     _cameraContainer = GameObject.Find("_cameraContainer").transform;
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     _uiSummary = FindObjectOfType<UISummary>(true);
+
+    _mpb = new MaterialPropertyBlock();
 
     onCreate?.Invoke(this);
   }
@@ -220,11 +227,18 @@ public class Level : MonoBehaviour
       _grid.set(item.vgrid, 1);
     }
   }
-  float RequestRate()
+
+  void  UpdatePollution()
+  {
+    _pollutionRate = Mathf.Lerp(_pollutionRate, _pollutionDest, Time.deltaTime * 2);
+    _waterRenderer.GetPropertyBlock(_mpb);
+    _mpb.SetFloat("_HeigthWaveOpacity", _pollutionRate);
+    _waterRenderer.SetPropertyBlock(_mpb);
+  }
+  float RequestsCompletedRate()
   {
     int requests = 0;
     _animals.ForEach((animal) => requests += animal.requests);
-
     return (float)requests / _requestCnt;
   }
 
@@ -291,7 +305,8 @@ public class Level : MonoBehaviour
         animalHit.Put(_itemSelected);
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
-        _pipes.PollutionRate(RequestRate());
+        //_pipes.PollutionRate(RequestRate());
+        _pollutionDest = RequestsCompletedRate();
         SpawnItem(_itemSelected.vgrid);
         CheckEnd();
       }
@@ -335,6 +350,8 @@ public class Level : MonoBehaviour
   void Update()
   {
     Process();
+
+    UpdatePollution();
 
   #if UNITY_EDITOR
     if(Input.GetKeyDown(KeyCode.E))

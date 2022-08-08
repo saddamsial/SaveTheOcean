@@ -58,7 +58,7 @@ public class UIIngame : MonoBehaviour
   void OnLevelStart(Level lvl)
   {
     _lvl = lvl;
-    //_lblLevelInfo.text = "Level " + (lvl.LevelIdx + 1);
+    _lblLevelInfo.text = "Level " + (lvl.LevelIdx + 1);
 
     // _progress.minValue = 0;
     // _progress.value = 0;

@@ -288,6 +288,8 @@ MonoBehaviour:
   - {fileID: 8522299307696825627}
   - {fileID: 8536298820559939731}
   - {fileID: 7930286490525139754}
+  _waterRenderer: {fileID: 6418255281977202600}
+  _syff: 0
   _dim: {x: 4, y: 5}
   _gridSpace: 1.25
   _lvlDescs: []
@@ -751,6 +753,11 @@ PrefabInstance:
 --- !u!4 &5285279761924975815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 512b9f0a523f1884caadd86b0f2c74c3, type: 3}
+  m_PrefabInstance: {fileID: 5680073279363353388}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6418255281977202600 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 512b9f0a523f1884caadd86b0f2c74c3, type: 3}
   m_PrefabInstance: {fileID: 5680073279363353388}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8766894846701082663
