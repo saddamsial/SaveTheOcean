@@ -100,7 +100,7 @@ public class Animal : MonoBehaviour
         garbages.Remove(it);
         item.gameObject.SetActive(false);
         model.SetActive(true);
-        this.Invoke(()=> model.SetActive(false), 2.0f);
+        this.Invoke(()=> model.SetActive(false), 4.0f);
         if(garbages.Count > 0)
         {
           AnimThrow();
