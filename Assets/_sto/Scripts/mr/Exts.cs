@@ -286,3 +286,70 @@ public static class MonoExt
     action(invoke_args.Item1, invoke_args.Item2, invoke_args.Item3);
   }
 }
+
+public static class AnimatorExt
+{
+  public static IEnumerator WaitForAnimState(this Animator animator, string anim)
+  {
+    yield return null;
+    while(!animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
+    {
+      yield return null;
+    }
+    yield return null;
+  }
+  public static IEnumerator InvokeForAnimState(this Animator animator, string anim, System.Action action)
+  {
+    yield return null;
+    while(!animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
+    {
+      yield return null;
+    }
+    yield return null;
+
+    action?.Invoke();
+  }  
+  public static IEnumerator InvokeForAnimState<T>(this Animator animator, string anim, System.Action<T> action, T invoke_args)
+  {
+    yield return null;
+    while(!animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
+    {
+      yield return null;
+    }
+    yield return null;
+
+    action?.Invoke(invoke_args);
+  }
+
+  public static IEnumerator WaitForAnimStateEnd(this Animator animator, string anim)
+  {
+    yield return null;
+    while(animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
+    {
+      yield return null;
+    }
+    yield return null;
+  }
+  public static IEnumerator InvokeForAnimStateEnd(this Animator animator, string anim, System.Action action)
+  {
+    yield return null;
+    while(animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
+    {
+      yield return null;
+    }
+    yield return null;
+
+    action?.Invoke();
+  }
+  public static IEnumerator InvokeForAnimStateEnd<T>(this Animator animator, string anim, System.Action<T> action, T invoke_args)
+  {
+    yield return null;
+    while(animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
+    {
+      yield return null;
+    }
+    yield return null;
+
+    action?.Invoke(invoke_args);
+  }  
+}

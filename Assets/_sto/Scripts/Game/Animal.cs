@@ -32,19 +32,33 @@ public class Animal : MonoBehaviour
 
   IEnumerator ShowGarbageInfo()
   {
-    yield return StartCoroutine(WaitForAnimState("_active"));
+    //yield return StartCoroutine(WaitForAnimState("_active"));
+    yield return _animator.WaitForAnimState("_active");
     isReady = true;
     _garbageInfo.Show(garbages);
   }
-  IEnumerator WaitForAnimState(string anim)
-  {
-    yield return null;
-    while(!_animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
-    {
-      yield return null;
-    }
-    yield return null;
-  }
+  // IEnumerator WaitForAnimState(string anim, System.Action action = null)
+  // {
+  //   yield return null;
+  //   while(!_animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
+  //   {
+  //     yield return null;
+  //   }
+  //   yield return null;
+
+  //   action?.Invoke();
+  // }
+  // IEnumerator WaitForAnimStateEnd(string anim, System.Action<T> action = null)
+  // {
+  //   yield return null;
+  //   while(_animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
+  //   {
+  //     yield return null;
+  //   }
+  //   yield return null;
+
+  //   action?.Invoke<T>(T);    
+  // }
   public void Init(Item[] items_prefab)
   {
     _garbages = new List<Item.ID>();
@@ -71,7 +85,7 @@ public class Animal : MonoBehaviour
     _garbageInfo.Hide();
     _animator.SetTrigger("deactivate");
     GetComponent<Collider>().enabled = false;
-    this.Invoke(() => gameObject.SetActive(false), 4.0f);
+    _animator.InvokeForAnimStateEnd("_deactivate", ()=> gameObject.SetActive(false));
   }
   public void AnimThrow()
   {
@@ -100,12 +114,16 @@ public class Animal : MonoBehaviour
         garbages.Remove(it);
         item.gameObject.SetActive(false);
         model.SetActive(true);
-        this.Invoke(()=> model.SetActive(false), 4.0f);
         if(garbages.Count > 0)
         {
           AnimThrow();
           isReady = false;
-          this.Invoke(() => isReady = true, 2.0f);
+          StartCoroutine(_animator.InvokeForAnimStateEnd("itemPush", ()=> 
+          {
+            isReady = true;
+            model.SetActive(false);
+          })
+          );
         }
         else
         {
@@ -113,7 +131,6 @@ public class Animal : MonoBehaviour
           Deactivate();
         }
       }
-      //this.Invoke(()=> item.gameObject.SetActive(false), 4.0f);
     }
   }
 }
