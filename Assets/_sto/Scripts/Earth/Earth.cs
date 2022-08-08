@@ -22,7 +22,7 @@ public class Earth : MonoBehaviour
             return;
         }*/
         
-        _earthLevels.SelectLevel.SelectLevelEarth(_earthLevels.LevelEarths[indexLevel]);
+   //     _earthLevels.SelectLevel.SelectLevelEarth(_earthLevels.LevelEarths[indexLevel]);
     }
   private void OnEnable()
   {
