@@ -21,7 +21,7 @@ public class Rotation : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
         {
             if (_enumeratorStopRotation != null)
                 StopCoroutine(_enumeratorStopRotation);

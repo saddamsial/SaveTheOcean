@@ -1893,6 +1893,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: moves
       objectReference: {fileID: 0}
+    - target: {fileID: 8851067632771146524, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39fcc812c1f222f45a9a6edea79135aa, type: 3}
 --- !u!224 &158140180073252337 stripped
@@ -2156,6 +2160,10 @@ PrefabInstance:
     - target: {fileID: 1268776940818997739, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
       propertyPath: m_Name
       value: btnMute
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268776940818997739, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1860067381406748244, guid: 0a0c519bc8cabc84e88d5a7632c6566e, type: 3}
       propertyPath: m_IsActive
