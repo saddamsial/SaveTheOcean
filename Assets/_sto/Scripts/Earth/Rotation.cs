@@ -19,15 +19,14 @@ public class Rotation : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Input.GetMouseButton(0) && !_isRotateToSelectLevel)
-        {
-            Rotate();
-        }
+      if((Input.GetMouseButton(0) || Input.touchCount > 0) && !_isRotateToSelectLevel)
+      {
+        Rotate();
+      }
     }
-
     private void Rotate()
     {
-        var mouseX = Input.GetAxis("Mouse X");
+      var mouseX = Input.GetAxis("Mouse X");
         
         HandlerForceAndVelocityRotation(mouseX);
 

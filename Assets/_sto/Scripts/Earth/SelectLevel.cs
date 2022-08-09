@@ -20,13 +20,18 @@ public class SelectLevel : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
             RaycastStart();
     }
 
     private void RaycastStart()
     {
+    #if UNITY_EDITOR
         var ray = _camera.ScreenPointToRay(Input.mousePosition);
+    #else
+        var ray = _camera.ScreenPointToRay(Input.GetTouch(0).position);
+    #endif
+
         Physics.Raycast(ray, out var raycastHit);
 
         if (raycastHit.collider == null) return;
