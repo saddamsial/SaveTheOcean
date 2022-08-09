@@ -68,7 +68,8 @@ public class EarthLevels : MonoBehaviour
         }
         
         _currentPassedLevel = _levelEarths.LastOrDefault(level => level.StateLevel == StateLevel.Passed);
-        _selectLevel.SelectLevelEarth(_currentPassedLevel);
+        if (_currentPassedLevel != null)
+            _selectLevel.SelectLevelEarth(_currentPassedLevel);
     }
     
     public void SetSelectLevel(SelectLevel selectLevel) => _selectLevel = selectLevel;

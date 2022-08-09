@@ -48,7 +48,7 @@ public class SelectLevel : MonoBehaviour
         Select(level);
         var angle = GetReceiveAngleToSelectLevel(level);
         _rotation.RotateToSelectLevel(angle);
-        _earthLevels.UIButtonEarth.SetParametersLevelUI(level.IndexLevel, level.StateLevel);
+        _earthLevels.UIButtonEarth?.SetParametersLevelUI(level.IndexLevel, level.StateLevel);
     }
 
     private void Select(LevelEarth levelEarth)

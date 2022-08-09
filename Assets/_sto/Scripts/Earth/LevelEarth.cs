@@ -8,7 +8,7 @@ public class LevelEarth : MonoBehaviour
     [SerializeField] private GameObject _liningGameObject;
    /* [SerializeField] */ private int _indexLevel;
     [SerializeField] private Transform _modelTransform;
-    [SerializeField] private StateLevel _stateLevel = StateLevel.Lock;
+    [SerializeField] private StateLevel _stateLevel = StateLevel.Passed;
     [SerializeField] private ModelsLevelEarth _modelsLevelEarth; 
     public Transform ModelTransform => _modelTransform; 
     public GameObject LiningGameObject => _liningGameObject;

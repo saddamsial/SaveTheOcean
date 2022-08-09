@@ -10,11 +10,24 @@ public class Rotation : MonoBehaviour
 
     private bool _isRotateToSelectLevel;
     private float _forceRotationY;
+    private bool _isMouseDown = false;
+    private IEnumerator _enumeratorStopRotation;
 
     private void Start()
     {
         _rigidbody.centerOfMass = Vector3.zero;
         _rigidbody.maxAngularVelocity = _maxAngularVelocity;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (_enumeratorStopRotation != null)
+                StopCoroutine(_enumeratorStopRotation);
+            _enumeratorStopRotation = StopRotationPhysic();
+            StartCoroutine(_enumeratorStopRotation);
+        }
     }
 
     private void FixedUpdate()
@@ -24,10 +37,30 @@ public class Rotation : MonoBehaviour
         Rotate();
       }
     }
+
+    private IEnumerator StopRotationPhysic()
+    {
+        var timer = 0f;
+
+        while (timer < 0.1f)
+        {
+            timer += Time.deltaTime;
+            var mouseX = Input.GetAxis("Mouse X");
+            if (mouseX is > 0.1f or < -0.1f)
+            {
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        ResetForceAndVelocityRotation();
+    }
+
     private void Rotate()
     {
-      var mouseX = Input.GetAxis("Mouse X");
-        
+        var mouseX = Input.GetAxis("Mouse X");
+
         HandlerForceAndVelocityRotation(mouseX);
 
         _forceRotationY += _speedRotation * mouseX * Time.deltaTime;
@@ -79,4 +112,10 @@ public class Rotation : MonoBehaviour
     }
 
     private void ResetForceRotation() => _forceRotationY = 0;
+
+    public void SetSpeedRotation(float speed) => _speedRotation = speed;
+
+    public void SetMaxAngularVelocity(float velocity) => _rigidbody.maxAngularVelocity = velocity;
+
+    public void SetAngularDrag(float drag) => _rigidbody.angularDrag = drag;
 }
