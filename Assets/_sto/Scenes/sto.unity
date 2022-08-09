@@ -176,17 +176,6 @@ MonoBehaviour:
   gameState: {fileID: 11400000, guid: 2f0aab7a3829ee44bb03dbb32fde791f, type: 2}
   gameData: {fileID: 11400000, guid: aa9510eb6be27ad41a4490d243c9eb8f, type: 2}
   framerate: 60
---- !u!114 &199044565 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3738390869882166522, guid: bf8225aa4209b424aaf5d3f9af078ac4, type: 3}
-  m_PrefabInstance: {fileID: 1864561754}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fcf19e52a523e48a41576f73863fde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &322664730
 GameObject:
   m_ObjectHideFlags: 0
@@ -1377,10 +1366,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 876840544}
     m_Modifications:
-    - target: {fileID: 2604012205585923717, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-      propertyPath: _uiButtonEarth
-      value: 
-      objectReference: {fileID: 199044565}
     - target: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -1429,20 +1414,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Earth
       objectReference: {fileID: 0}
-    - target: {fileID: 4126757476705115914, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4126757477303580407, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4329183550062796699, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: _camera
       value: 
       objectReference: {fileID: 1263798772}
-    m_RemovedComponents:
-    - {fileID: 2799034045481787298, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
 --- !u!1 &1508879735
 GameObject:

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EarthLevels : MonoBehaviour
 {
-    [SerializeField] private UIButtonEarth _uiButtonEarth;
+    private UIButtonEarth _uiButtonEarth;
     [SerializeField] private LevelEarth[] _levelEarths;
     
     private LevelEarth _currentUnlockLevel;
@@ -17,10 +17,13 @@ public class EarthLevels : MonoBehaviour
     
     void Awake()
     {
+
       Earth.onShow += Show;
     }
     void OnDestroy()
     {
+      _uiButtonEarth = FindObjectOfType<UIButtonEarth>(true);
+      
       Earth.onShow -= Show;
     }
 

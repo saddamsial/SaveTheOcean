@@ -4,9 +4,9 @@ using UnityEngine;
 [DefaultExecutionOrder(-5)]
 public class SelectLevel : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
     [SerializeField] private Rotation _rotation;
 
+    private Camera _camera;
     private EarthLevels _earthLevels;
     private LevelEarth _currentLevelEarth;
     private Vector3 _vec1;
@@ -14,6 +14,7 @@ public class SelectLevel : MonoBehaviour
 
     private void Awake()
     {
+      _camera = Camera.main;
         _earthLevels = GetComponent<EarthLevels>();
         _earthLevels.SetSelectLevel(this);
     }
