@@ -86,7 +86,7 @@ public class UISummary : MonoBehaviour
   {
     Hide();
     onBtnPlay?.Invoke();
-    FindObjectOfType<Game>().DestroyLevel();
+    FindObjectOfType<Game>().DestroyLevel(0.125f);
     FindObjectOfType<Game>().NextLevel(false);
     FindObjectOfType<Earth>(true).Show(GameState.Progress.levelIdx);
   }

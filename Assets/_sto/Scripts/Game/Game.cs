@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GameLib;
 using GameLib.InputSystem;
 
 public class Game : MonoBehaviour
@@ -11,6 +12,7 @@ public class Game : MonoBehaviour
 
   Level _level = null;
   [SerializeField] Earth _earth = null;
+  [SerializeField] ActivatableObject _actObj = null;
 
 	void Awake()
   {
@@ -69,6 +71,8 @@ public class Game : MonoBehaviour
     _level = null;  
 
     _level = GameData.Levels.CreateLevel(GameState.Progress.levelIdx, levelsContainer);
+    
+    this.Invoke(()=>_actObj.ActivateObject(), 0.125f);
   }
   public void RestartLevel()
   {
@@ -87,12 +91,19 @@ public class Game : MonoBehaviour
     if(create)
       CreateLevel();
   }
-  public void DestroyLevel()
+  public void DestroyLevel(float delay)
   {
+    _actObj.DeactivateObject();
+    StartCoroutine(coDestroyLevel(delay));
+  }
+  IEnumerator coDestroyLevel(float delay)
+  {
+    yield return new WaitForSeconds(delay);
     if(_level)
       Destroy(_level.gameObject);
-    _level = null;  
+    _level = null;
   }
+
 #if UNITY_EDITOR
   void Update()
   {

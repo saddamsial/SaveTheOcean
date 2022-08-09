@@ -164,6 +164,7 @@ public class Level : MonoBehaviour
     _started = true;
     onStart?.Invoke(this);
   }
+
   void Init()
   {
     _grid.Init(_dim, _gridSpace);
