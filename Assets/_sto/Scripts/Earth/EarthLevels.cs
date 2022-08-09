@@ -6,7 +6,7 @@ public class EarthLevels : MonoBehaviour
 {
     [SerializeField] private UIButtonEarth _uiButtonEarth;
     [SerializeField] private LevelEarth[] _levelEarths;
-    
+
     private LevelEarth _currentUnlockLevel;
     private LevelEarth _currentPassedLevel;
     private SelectLevel _selectLevel;
@@ -14,7 +14,7 @@ public class EarthLevels : MonoBehaviour
     public UIButtonEarth UIButtonEarth => _uiButtonEarth;
     public LevelEarth[] LevelEarths => _levelEarths;
     public SelectLevel SelectLevel => _selectLevel;
-    
+
     private void OnEnable()
     {
         HandlerLevelEarthsState();
@@ -24,27 +24,26 @@ public class EarthLevels : MonoBehaviour
     private void HandlerLevelEarthsState()
     {
         var levels = GameState.Progress.Levels.GetStates();
-        var size = _levelEarths.Length < levels.Length ? _levelEarths.Length : levels.Length; 
+        var size = _levelEarths.Length < levels.Length ? _levelEarths.Length : levels.Length;
         for (var i = 0; i < size; i++)
         {
             switch (levels[i])
             {
                 case Level.State.Locked:
-                    _levelEarths[i].SetStateLevel(i,StateLevel.Lock);
+                    _levelEarths[i].SetStateLevel(i, StateLevel.Lock);
                     break;
                 case Level.State.Unlocked:
-                    _levelEarths[i].SetStateLevel(i,StateLevel.Unlock);
+                    _levelEarths[i].SetStateLevel(i, StateLevel.Unlock);
                     break;
                 case Level.State.Started:
                     break;
                 case Level.State.Finished:
-                    _levelEarths[i].SetStateLevel(i,StateLevel.Passed);
+                    _levelEarths[i].SetStateLevel(i, StateLevel.Passed);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
     }
 
     private void SetFirstLevelUI()
@@ -56,10 +55,11 @@ public class EarthLevels : MonoBehaviour
             _selectLevel.SelectLevelEarth(_currentUnlockLevel);
             return;
         }
-        
+
         _currentPassedLevel = _levelEarths.LastOrDefault(level => level.StateLevel == StateLevel.Passed);
-        _selectLevel.SelectLevelEarth(_currentPassedLevel);
+        if (_currentPassedLevel != null)
+            _selectLevel.SelectLevelEarth(_currentPassedLevel);
     }
-    
+
     public void SetSelectLevel(SelectLevel selectLevel) => _selectLevel = selectLevel;
 }
