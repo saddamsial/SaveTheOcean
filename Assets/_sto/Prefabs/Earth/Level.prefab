@@ -339,8 +339,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
+  m_Radius: 0.25000006
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!114 &537884054286675503
@@ -406,7 +406,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _liningGameObject: {fileID: 7976196177638975859}
-  _indexLevel: 0
   _modelTransform: {fileID: 9054775393889712420}
   _stateLevel: 0
   _modelsLevelEarth: {fileID: 537884054286675503}

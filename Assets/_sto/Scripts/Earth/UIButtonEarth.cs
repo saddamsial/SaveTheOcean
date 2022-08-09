@@ -37,7 +37,7 @@ public class UIButtonEarth : MonoBehaviour
 
     private void EnableButton()
     {
-        Debug.Log("Activate Button");
+//        Debug.Log("Activate Button");
         _buttonPlay.gameObject.SetActive(true);
     }
 

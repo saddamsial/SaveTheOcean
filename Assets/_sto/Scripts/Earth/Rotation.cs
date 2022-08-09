@@ -6,12 +6,15 @@ public class Rotation : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float _speedRotation = 5f;
     [SerializeField] private float _speedRotationToSelectLevel = 20f;
+    [SerializeField] private float _maxAngularVelocity = 14f;
 
     private bool _isRotateToSelectLevel;
+    private float _forceRotationY;
 
     private void Start()
     {
-        _rigidbody.centerOfMass = Vector3.zero; 
+        _rigidbody.centerOfMass = Vector3.zero;
+        _rigidbody.maxAngularVelocity = _maxAngularVelocity;
     }
 
     private void FixedUpdate()
@@ -24,8 +27,23 @@ public class Rotation : MonoBehaviour
 
     private void Rotate()
     {
-        var rotationY = _speedRotation * Input.GetAxis("Mouse X") * Time.deltaTime;
-        _rigidbody.AddTorque(transform.up * -rotationY);
+        var mouseX = Input.GetAxis("Mouse X");
+        
+        HandlerForceAndVelocityRotation(mouseX);
+
+        _forceRotationY += _speedRotation * mouseX * Time.deltaTime;
+        _rigidbody.AddTorque(transform.up * -_forceRotationY);
+    }
+
+    private void HandlerForceAndVelocityRotation(float mouseX)
+    {
+        if ((mouseX > 0 && _rigidbody.angularVelocity.y > 0) ||
+            (mouseX < 0 && _rigidbody.angularVelocity.y < 0)
+           )
+            ResetForceAndVelocityRotation();
+
+        if (_rigidbody.angularVelocity.y is < 0.1f and > -0.1f)
+            ResetForceRotation();
     }
 
     public void RotateToSelectLevel(float angle)
@@ -37,6 +55,7 @@ public class Rotation : MonoBehaviour
 
     private IEnumerator RotateToSelectLevelCoroutine(float angle)
     {
+        ResetForceAndVelocityRotation();
         _isRotateToSelectLevel = true;
         _rigidbody.isKinematic = true;
 
@@ -53,4 +72,12 @@ public class Rotation : MonoBehaviour
         _rigidbody.isKinematic = false;
         _isRotateToSelectLevel = false;
     }
+
+    private void ResetForceAndVelocityRotation()
+    {
+        ResetForceRotation();
+        _rigidbody.angularVelocity = Vector3.zero;
+    }
+
+    private void ResetForceRotation() => _forceRotationY = 0;
 }
