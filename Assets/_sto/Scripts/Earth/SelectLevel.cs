@@ -48,6 +48,8 @@ public class SelectLevel : MonoBehaviour
 
     private void Select(LevelEarth levelEarth)
     {
+        Earth.onLevelSelected?.Invoke(levelEarth.IndexLevel);
+      
         if (_currentLevelEarth == null)
         {
             _currentLevelEarth = levelEarth;

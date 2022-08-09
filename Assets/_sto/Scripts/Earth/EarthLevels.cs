@@ -15,12 +15,22 @@ public class EarthLevels : MonoBehaviour
     public LevelEarth[] LevelEarths => _levelEarths;
     public SelectLevel SelectLevel => _selectLevel;
     
-    private void OnEnable()
+    void Awake()
     {
-        HandlerLevelEarthsState();
-        SetFirstLevelUI();
+      Earth.onShow += Show;
+    }
+    void OnDestroy()
+    {
+      Earth.onShow -= Show;
     }
 
+
+    void Show(int lvlIdx)
+    {
+      gameObject.SetActive(true);
+      HandlerLevelEarthsState();
+      SetFirstLevelUI();
+    }
     private void HandlerLevelEarthsState()
     {
         var levels = GameState.Progress.Levels.GetStates();

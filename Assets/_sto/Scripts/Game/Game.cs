@@ -55,6 +55,7 @@ public class Game : MonoBehaviour
 
   public void CreateLevel(int levelIdx)
   {
+    _earth.Hide();
     if(_level)
       Destroy(_level.gameObject);
     _level = null;
@@ -110,8 +111,6 @@ public class Game : MonoBehaviour
       Level.onFinished?.Invoke(_level);
       RestartLevel();
     }
-    // else if(Input.GetKeyDown(KeyCode.E))
-    //   level?.DbgFinishLevel();
   }
 #endif
 }
