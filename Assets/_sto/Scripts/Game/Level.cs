@@ -75,6 +75,8 @@ public class Level : MonoBehaviour
   float       _pollutionRate = 1.0f;
   float       _pollutionDest = 1.0f;
 
+  ActivatableObject _actObj = null;
+
   public class Grid
   {
     Vector2Int  _dim;
@@ -142,6 +144,8 @@ public class Level : MonoBehaviour
 
     _mpb = new MaterialPropertyBlock();
 
+    _actObj = GetComponent<ActivatableObject>();
+
     onCreate?.Invoke(this);
   }
   void OnDestroy()
@@ -163,6 +167,7 @@ public class Level : MonoBehaviour
 
     _started = true;
     onStart?.Invoke(this);
+    _actObj.ActivateObject();
   }
 
   void Init()
@@ -335,6 +340,7 @@ public class Level : MonoBehaviour
     GameState.Progress.Levels.UnlockNextLevel();
     yield return new WaitForSeconds(0.5f);
     _uiSummary.Show(this);
+    _actObj.DeactivateObject();
   }
   void CheckEnd()
   {

@@ -71,8 +71,7 @@ public class Game : MonoBehaviour
     _level = null;  
 
     _level = GameData.Levels.CreateLevel(GameState.Progress.levelIdx, levelsContainer);
-    
-    this.Invoke(()=>_actObj.ActivateObject(), 0.125f);
+    //this.Invoke(()=>_actObj.ActivateObject(), 0.125f);
   }
   public void RestartLevel()
   {
@@ -93,8 +92,11 @@ public class Game : MonoBehaviour
   }
   public void DestroyLevel(float delay)
   {
-    _actObj.DeactivateObject();
-    StartCoroutine(coDestroyLevel(delay));
+    if(_level)
+      Destroy(_level.gameObject);
+    _level = null;    
+    //_actObj.DeactivateObject();
+    //StartCoroutine(coDestroyLevel(delay));
   }
   IEnumerator coDestroyLevel(float delay)
   {
