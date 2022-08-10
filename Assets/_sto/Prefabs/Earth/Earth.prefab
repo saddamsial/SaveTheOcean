@@ -70,9 +70,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 4126757476705115919}
-  _forceRotation: 15000
-  _speedRotationTransform: 200
-  _speedRotationToSelectLevel: 70
+  _forceRotation: 30000
+  _speedRotationTransform: 50
+  _speedRotationToSelectLevel: 90
   _maxAngularVelocity: 7
 --- !u!114 &4329183550062796699
 MonoBehaviour:
