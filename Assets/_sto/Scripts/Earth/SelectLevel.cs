@@ -21,7 +21,7 @@ public class SelectLevel : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
+        if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began))
             RaycastStart();
     }
 

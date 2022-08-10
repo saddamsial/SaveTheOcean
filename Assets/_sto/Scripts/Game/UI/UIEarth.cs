@@ -55,7 +55,7 @@ public class UIEarth : MonoBehaviour
   void UpdateSlider()
   {
     if(_topPanel.IsActive)
-      _slider.value = Mathf.MoveTowards(_slider.value, _cleanDst, Time.deltaTime); // * 2.0f);
+      _slider.value = Mathf.Lerp(_slider.value, _cleanDst, Time.deltaTime * 2.0f);
   }
   void Update()
   {
