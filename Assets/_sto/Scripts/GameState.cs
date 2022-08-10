@@ -142,6 +142,13 @@ public class GameState : SavableScriptableObject
         return states;  
       }
     }
+
+    public static float GetCompletionRate()
+    {
+      Level.State[] states = Levels.GetStates();
+      float finishedCnt = states.Where((state) => state == Level.State.Finished).Count();
+      return finishedCnt / GameData.Levels.LevelsCnt;
+    }
   }
   public static class Econo
   {
