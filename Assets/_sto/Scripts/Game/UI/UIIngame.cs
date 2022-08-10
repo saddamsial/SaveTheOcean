@@ -25,6 +25,7 @@ public class UIIngame : MonoBehaviour
     Game.onLevelRestart += OnLevelRestart;
     Level.onCreate += OnLevelStart;
     Level.onFinished += OnLevelFinished;
+    Level.onHide += OnLevelHide;
     Level.onTutorialStart += OnTutorialStart;
     Level.onDestroy += OnLevelDestroy;
     Level.onGarbageOut += OnLevelGarbageOut;
@@ -36,6 +37,7 @@ public class UIIngame : MonoBehaviour
     Game.onLevelRestart -= OnLevelRestart;
     Level.onCreate -= OnLevelStart;
     Level.onFinished -= OnLevelFinished;
+    Level.onHide -= OnLevelHide;
     Level.onTutorialStart -= OnTutorialStart;
     Level.onDestroy -= OnLevelDestroy;
     Level.onGarbageOut -= OnLevelGarbageOut;
@@ -48,6 +50,7 @@ public class UIIngame : MonoBehaviour
   }
   void Hide()
   {
+    GetComponent<UIPanel>()?.ActivatePanel();
     _topPanel.DeactivatePanel();
   }
 
@@ -74,9 +77,13 @@ public class UIIngame : MonoBehaviour
   {
     Hide();
   }
-  void OnLevelFinished(Level lvl)
+  void OnLevelHide(Level lvl)
   {
     Hide();
+  }
+  void OnLevelFinished(Level lvl)
+  {
+    //Hide();
   }
   public void SetLevel(Level lvl)
   {

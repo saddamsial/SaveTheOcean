@@ -12,7 +12,7 @@ using TMPLbl = TMPro.TextMeshPro;
 public class Level : MonoBehaviour
 {
   public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut;
-  public static System.Action<Level>   onDone, onFinished, onDestroy;
+  public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
 
   [Header("Refs")]
   [SerializeField] Transform    _itemsContainer;
@@ -57,6 +57,7 @@ public class Level : MonoBehaviour
   public int    stars {get; set;}
   public int    itemsCount => _items.Count + _items2.Count;
   public int    initialItemsCnt => _initialItemsCnt;
+  public bool   InTransiton => _actObj?.InTransition ?? false;
   public Vector2Int Dim => _dim;
 
   bool         _started = false;
@@ -169,7 +170,11 @@ public class Level : MonoBehaviour
     onStart?.Invoke(this);
     _actObj.ActivateObject();
   }
-
+  public void Hide()
+  {
+    onHide?.Invoke(this);
+    _actObj?.DeactivateObject();
+  }
   void Init()
   {
     _grid.Init(_dim, _gridSpace);
@@ -340,7 +345,6 @@ public class Level : MonoBehaviour
     GameState.Progress.Levels.UnlockNextLevel();
     yield return new WaitForSeconds(0.5f);
     _uiSummary.Show(this);
-    _actObj.DeactivateObject();
   }
   void CheckEnd()
   {

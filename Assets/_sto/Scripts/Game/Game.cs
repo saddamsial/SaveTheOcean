@@ -71,7 +71,6 @@ public class Game : MonoBehaviour
     _level = null;  
 
     _level = GameData.Levels.CreateLevel(GameState.Progress.levelIdx, levelsContainer);
-    //this.Invoke(()=>_actObj.ActivateObject(), 0.125f);
   }
   public void RestartLevel()
   {
@@ -90,20 +89,35 @@ public class Game : MonoBehaviour
     if(create)
       CreateLevel();
   }
-  public void DestroyLevel(float delay)
+  public void DestroyLevel()
   {
-    if(_level)
-      Destroy(_level.gameObject);
-    _level = null;    
-    //_actObj.DeactivateObject();
-    //StartCoroutine(coDestroyLevel(delay));
+    StartCoroutine(coDestroyLevel());
   }
-  IEnumerator coDestroyLevel(float delay)
+  IEnumerator coDestroyLevel()
   {
-    yield return new WaitForSeconds(delay);
+    _level.Hide();
+    yield return null;
+    while(_level.InTransiton)
+      yield return null;
     if(_level)
       Destroy(_level.gameObject);
     _level = null;
+  }
+  public void HideLevelShowEarth()
+  {
+    //StartCoroutine(coHideLevelShowEarth());
+    this.Invoke(() => DestroyLevel(), 0.35f);
+    this.Invoke(() => 
+    {
+      NextLevel(false); 
+      _earth.Show(GameState.Progress.levelIdx);
+    },0.6f);
+  }
+  IEnumerator coHideLevelShowEarth()
+  {
+    yield return new WaitForSeconds(0.35f);
+    yield return coDestroyLevel();
+    _earth.Show(GameState.Progress.levelIdx);
   }
 
 #if UNITY_EDITOR
