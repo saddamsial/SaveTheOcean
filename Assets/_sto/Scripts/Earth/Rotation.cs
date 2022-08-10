@@ -21,7 +21,7 @@ public class Rotation : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0)
+        if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
         {
             if (_enumeratorStopRotation != null)
                 StopCoroutine(_enumeratorStopRotation);
@@ -41,7 +41,6 @@ public class Rotation : MonoBehaviour
     private IEnumerator StopRotationPhysic()
     {
         var timer = 0f;
-
         while (timer < 0.1f)
         {
             timer += Time.deltaTime;
@@ -53,7 +52,6 @@ public class Rotation : MonoBehaviour
 
             yield return null;
         }
-
         ResetForceAndVelocityRotation();
     }
 
