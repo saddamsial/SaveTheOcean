@@ -25,6 +25,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: mat_globeWater
     second: {fileID: 2100000, guid: a08003f788d098e4f9ccaffe508d1a62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_spaceDome
+    second: {fileID: 2100000, guid: dbffdcaf1d3f8154ababf1cd5202ab5b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 1
@@ -53,7 +58,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1

@@ -121,6 +121,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 292211209855933576}
     m_Modifications:
+    - target: {fileID: 2298499713923893828, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_text
+      value: Speed Rotation Transform:10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4126757476705115912, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: _speedRotationTransform
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -173,9 +181,25 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4126757476705115919, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4329183550062796699, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: _camera
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669251012874173063, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_text
+      value: Angular Drag:0.0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6337524482894354328, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867972952358816946, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_text
+      value: Max Angular Velocity:0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
@@ -189,3 +213,24 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4126757476705115914, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
   m_PrefabInstance: {fileID: 292211211431944804}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5247530172715181117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5538544014348551769, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+  m_PrefabInstance: {fileID: 292211211431944804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &976996124296416062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247530172715181117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddbd64eee165884bace9e878b928693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectMultiplier: 1
+  useRandomPhaseOffset: 1
+  axis: {x: 0, y: 1, z: 0}
+  speed: 8
