@@ -912,17 +912,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9882444}
     m_Modifications:
-    - target: {fileID: 3930152224596612593, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 2938330665848526764, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: virtualCameraNearClipPlane
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3969958582868310480, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_Name
       value: _cameraContainer
       objectReference: {fileID: 0}
-    - target: {fileID: 8491482514433418373, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+    - target: {fileID: 4684083728786367491, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684083728786367491, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -100
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8786551797539272230, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_RootOrder
@@ -2218,7 +2222,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.94666666, b: 0.84000003, a: 1}
-  m_Intensity: 1
+  m_Intensity: 1.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.802082
@@ -2227,7 +2231,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.55
+    m_Strength: 0.5
     m_Bias: 0.02
     m_NormalBias: 0.1
     m_NearPlane: 0.1
