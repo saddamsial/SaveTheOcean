@@ -17,8 +17,9 @@ public class UIEarth : MonoBehaviour
   void Awake()
   {
     Earth.onShow += OnEarthShow;
-    Earth.onHide += OnEarthHide;
+    //Earth.onHide += OnEarthHide;
     Earth.onLevelSelected += UpdateLevelInfo;
+    Earth.onLevelStart += OnEarthHide;
 
     _cleanDst = GameState.Progress.GetCompletionRate();
     _slider.minValue = 0;
@@ -28,11 +29,12 @@ public class UIEarth : MonoBehaviour
   void OnDestroy()
   {
     Earth.onShow -= OnEarthShow;
-    Earth.onHide -= OnEarthHide;
+    //Earth.onHide -= OnEarthHide;
     Earth.onLevelSelected -= UpdateLevelInfo;
+    Earth.onLevelStart -= OnEarthHide;
   }
   private void OnEarthShow(int levelIdx) => Show(levelIdx);
-  private void OnEarthHide() => Hide();
+  private void OnEarthHide(int levelIdx) => Hide();
   public void  Show(int lvlIdx)
   {
     GetComponent<UIPanel>().ActivatePanel();

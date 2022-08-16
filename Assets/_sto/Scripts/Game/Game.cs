@@ -109,7 +109,7 @@ public class Game : MonoBehaviour
     yield return new WaitForSeconds(0.5f);
     _level.Hide();
     _uiFade.BlendTo(new Color(0,0,0,1));
-    yield return new WaitForSeconds(0.75f);
+    yield return new WaitForSeconds(0.5f);
     _camCtrl.SetTo(2);
     DestroyLevel();
     _earth.Show(GameState.Progress.levelIdx);
@@ -126,7 +126,7 @@ public class Game : MonoBehaviour
   {
     _camCtrl.SwitchTo(2);
     _uiFade.BlendTo(new Color(0, 0, 0, 1));
-    yield return new WaitForSeconds(1.0f);
+    yield return new WaitForSeconds(0.5f);
     _earth.Hide();
     CreateLevel(levelIdx);
     _uiFade.BlendTo(new Color(0, 0, 0, 0));
