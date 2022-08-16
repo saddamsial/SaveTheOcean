@@ -31,14 +31,14 @@ public class UIEarth : MonoBehaviour
     Earth.onHide -= OnEarthHide;
     Earth.onLevelSelected -= UpdateLevelInfo;
   }
-
-  private void OnEarthShow(int levelIdx) => Show();
+  private void OnEarthShow(int levelIdx) => Show(levelIdx);
   private void OnEarthHide() => Hide();
-  public void  Show()
+  public void  Show(int lvlIdx)
   {
     GetComponent<UIPanel>().ActivatePanel();
     _topPanel.ActivatePanel();
     _btmPanel.ActivatePanel();
+    UpdateLevelInfo(lvlIdx);
     this.Invoke(()=> _cleanDst = GameState.Progress.GetCompletionRate(), 0.25f);
   }
   void Hide()

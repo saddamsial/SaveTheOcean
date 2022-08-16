@@ -189,7 +189,7 @@ public class EffectsManager : MonoBehaviour
     {
       // if(lvl.Succeed)
       //   fxConfettiLevel.Play();
-      cameraShakeContainer.Shake(objShakePresetHi);
+      //cameraShakeContainer.Shake(objShakePresetHi);
       //_lvl = null;
     }
 }

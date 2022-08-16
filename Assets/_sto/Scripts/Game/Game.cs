@@ -12,7 +12,10 @@ public class Game : MonoBehaviour
 
   Level _level = null;
   [SerializeField] Earth _earth = null;
-  [SerializeField] ActivatableObject _actObj = null;
+  [SerializeField] CamCtlr _camCtrl = null;
+
+  UIEarth _uiEarth;
+  UIFade  _uiFade;
 
 	void Awake()
   {
@@ -21,7 +24,9 @@ public class Game : MonoBehaviour
     TouchInputData.onInputUpdated += OnInputMov;
     TouchInputData.onInputEnded += OnInputEnd;
 
-    Earth.onLevelStart += CreateLevel;
+    Earth.onLevelStart += ShowLevel;
+
+    _uiFade = FindObjectOfType<UIFade>(true);
   }
   void OnDestroy()
   {
@@ -30,7 +35,7 @@ public class Game : MonoBehaviour
     TouchInputData.onInputUpdated -= OnInputMov;
     TouchInputData.onInputEnded -= OnInputEnd;
 
-    Earth.onLevelStart -= CreateLevel;
+    Earth.onLevelStart -= ShowLevel;
   }
   IEnumerator Start()
   {
@@ -91,33 +96,41 @@ public class Game : MonoBehaviour
   }
   public void DestroyLevel()
   {
-    StartCoroutine(coDestroyLevel());
-  }
-  IEnumerator coDestroyLevel()
-  {
-    _level.Hide();
-    yield return null;
-    while(_level.InTransiton)
-      yield return null;
     if(_level)
       Destroy(_level.gameObject);
     _level = null;
   }
-  public void HideLevelShowEarth()
+  public void ShowEarth()
   {
-    //StartCoroutine(coHideLevelShowEarth());
-    this.Invoke(() => DestroyLevel(), 0.35f);
-    this.Invoke(() => 
-    {
-      NextLevel(false); 
-      _earth.Show(GameState.Progress.levelIdx);
-    },0.6f);
+    StartCoroutine(coShowEarth());
   }
-  IEnumerator coHideLevelShowEarth()
+  private IEnumerator coShowEarth()
   {
-    yield return new WaitForSeconds(0.35f);
-    yield return coDestroyLevel();
+    yield return new WaitForSeconds(0.5f);
+    _level.Hide();
+    _uiFade.BlendTo(new Color(0,0,0,1));
+    yield return new WaitForSeconds(0.5f);
+    _camCtrl.SetTo(2);
+    DestroyLevel();
     _earth.Show(GameState.Progress.levelIdx);
+    _uiFade.BlendTo(new Color(0, 0, 0, 0));
+    yield return new WaitForSeconds(0.5f);
+    _camCtrl.SwitchTo(1);
+  }
+  public void ShowLevel(int levelIdx)
+  {
+    GameState.Progress.levelIdx = levelIdx;
+    StartCoroutine(coShowLevel(levelIdx));
+  }
+  IEnumerator coShowLevel(int levelIdx)
+  {
+    _camCtrl.SwitchTo(2);
+    _uiFade.BlendTo(new Color(0, 0, 0, 1));
+    yield return new WaitForSeconds(1.0f);
+    _earth.Hide();
+    CreateLevel(levelIdx);
+    _uiFade.BlendTo(new Color(0, 0, 0, 0));
+    _camCtrl.SwitchTo(0);    
   }
 
 #if UNITY_EDITOR

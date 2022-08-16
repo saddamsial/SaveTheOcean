@@ -63,7 +63,6 @@ GameObject:
   m_Component:
   - component: {fileID: 292211211678103440}
   - component: {fileID: 292211211678103441}
-  - component: {fileID: 292211211678103442}
   m_Layer: 0
   m_Name: _earth
   m_TagString: Untagged
@@ -101,19 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _antonEarth: {fileID: 4416646416499981678}
   _animator: {fileID: 292211209855933577}
---- !u!114 &292211211678103442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292211211678103455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 193f46466a377ef45bc5f1d67bf5b08e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 292211209855933577}
 --- !u!1001 &292211211431944804
 PrefabInstance:
   m_ObjectHideFlags: 0

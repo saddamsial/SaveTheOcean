@@ -57,7 +57,7 @@ public class Level : MonoBehaviour
   public int    stars {get; set;}
   public int    itemsCount => _items.Count + _items2.Count;
   public int    initialItemsCnt => _initialItemsCnt;
-  public bool   InTransiton => _actObj?.InTransition ?? false;
+  //public bool   InTransiton => _actObj?.InTransition ?? false;
   public Vector2Int Dim => _dim;
 
   bool         _started = false;
@@ -145,7 +145,7 @@ public class Level : MonoBehaviour
 
     _mpb = new MaterialPropertyBlock();
 
-    _actObj = GetComponent<ActivatableObject>();
+    //_actObj = GetComponent<ActivatableObject>();
 
     onCreate?.Invoke(this);
   }
@@ -168,12 +168,10 @@ public class Level : MonoBehaviour
 
     _started = true;
     onStart?.Invoke(this);
-    _actObj.ActivateObject();
   }
   public void Hide()
   {
     onHide?.Invoke(this);
-    _actObj?.DeactivateObject();
   }
   void Init()
   {

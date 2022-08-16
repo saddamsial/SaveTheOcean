@@ -30,7 +30,7 @@ public class EarthLevels : MonoBehaviour
     {
       gameObject.SetActive(true);
       HandlerLevelEarthsState();
-      SetFirstLevelUI();
+      SetLevelUI(lvlIdx);
     }
     private void HandlerLevelEarthsState()
     {
@@ -57,7 +57,10 @@ public class EarthLevels : MonoBehaviour
         }
         
     }
-
+    private void SetLevelUI(int lvlIdx)
+    {
+      _currentUnlockLevel = _levelEarths.FirstOrDefault(level => level.StateLevel == StateLevel.Unlock);
+    }
     private void SetFirstLevelUI()
     {
         _currentUnlockLevel = _levelEarths.FirstOrDefault(level => level.StateLevel == StateLevel.Unlock);

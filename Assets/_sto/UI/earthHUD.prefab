@@ -827,7 +827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4270927306262247871
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1007,6 +1007,8 @@ MonoBehaviour:
   _btmPanel: {fileID: 1012634878578359100}
   _lblLevelInfo: {fileID: 6646049981724893541}
   _slider: {fileID: 3241451194289900726}
+  _fade: {fileID: 0}
+  _fadeSpeed: 6
 --- !u!225 &8806748610962000972
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1820,11 +1822,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5751959172274746608, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.502
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5751959172274746608, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6619511749217051437, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_IsActive

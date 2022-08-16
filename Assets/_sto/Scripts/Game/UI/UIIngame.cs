@@ -23,8 +23,9 @@ public class UIIngame : MonoBehaviour
   void Awake()
   {
     Game.onLevelRestart += OnLevelRestart;
-    Level.onCreate += OnLevelStart;
+    Level.onCreate += OnLevelCreated;
     Level.onFinished += OnLevelFinished;
+    Level.onStart += OnLevelStart;
     Level.onHide += OnLevelHide;
     Level.onTutorialStart += OnTutorialStart;
     Level.onDestroy += OnLevelDestroy;
@@ -35,8 +36,9 @@ public class UIIngame : MonoBehaviour
   void OnDestroy()
   {
     Game.onLevelRestart -= OnLevelRestart;
-    Level.onCreate -= OnLevelStart;
+    Level.onCreate -= OnLevelCreated;
     Level.onFinished -= OnLevelFinished;
+    Level.onStart -= OnLevelStart;
     Level.onHide -= OnLevelHide;
     Level.onTutorialStart -= OnTutorialStart;
     Level.onDestroy -= OnLevelDestroy;
@@ -57,8 +59,9 @@ public class UIIngame : MonoBehaviour
   void OnLevelCreated(Level lvl)
   {
     _lvl = lvl;
-    OnLevelStart(lvl);
+    //OnLevelStart(lvl);
   }
+
   void OnLevelStart(Level lvl)
   {
     _lvl = lvl;
@@ -79,11 +82,11 @@ public class UIIngame : MonoBehaviour
   }
   void OnLevelHide(Level lvl)
   {
-    Hide();
+    //Hide();
   }
   void OnLevelFinished(Level lvl)
   {
-    //Hide();
+    Hide();
   }
   public void SetLevel(Level lvl)
   {

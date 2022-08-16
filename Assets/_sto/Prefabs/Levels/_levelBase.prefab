@@ -244,7 +244,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2424569502049627348}
   - component: {fileID: 4886946996522908060}
-  - component: {fileID: 7748395927665042187}
   m_Layer: 0
   m_Name: _levelBase
   m_TagString: Untagged
@@ -293,19 +292,6 @@ MonoBehaviour:
   _dim: {x: 4, y: 5}
   _gridSpace: 1.25
   _lvlDescs: []
---- !u!114 &7748395927665042187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3432588927805292013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 193f46466a377ef45bc5f1d67bf5b08e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 4040115479685236695}
 --- !u!1 &4494250454681055070
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +468,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5007030670280906191}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a93d2ccd0141ceb4695ea09a52528aca, type: 2}
   m_CullingMode: 0
