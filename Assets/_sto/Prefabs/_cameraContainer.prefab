@@ -229,7 +229,7 @@ MonoBehaviour:
   _cameraContainer: {fileID: 8878362080284490223}
   virtualCameraFOV: 30
   virtualCameraNearClipPlane: 4
-  virtualCameraFarClipPlane: 64
+  virtualCameraFarClipPlane: 24
 --- !u!1 &7761996887961092628
 GameObject:
   m_ObjectHideFlags: 0
