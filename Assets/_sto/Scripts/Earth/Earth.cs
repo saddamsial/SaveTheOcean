@@ -22,7 +22,6 @@ public class Earth : MonoBehaviour
   public float _rotateMax = 900;
 
   float _rotateAngle = 0;
-  float _rotateForce = 0;
   float _rotateSpeed = 0;
   public float _rotateDamping = 0;
   Vector2? _vdragBeg = null;
@@ -77,7 +76,6 @@ public class Earth : MonoBehaviour
     {
       _rotateAngle = (tid.InputPosition.x - _vdragBeg.Value.x) * _rotateDragDegrees;
       _vdragPrev.Add(tid.InputPosition);
-      
     }
   }  
   public void OnInputEnd(TouchInputData tid)
@@ -85,17 +83,18 @@ public class Earth : MonoBehaviour
     if(!_earthPrefab.activeSelf)
       return;
 
-    if(tid.HoveredCollider)
+    if(tid.HoveredCollider && Mathf.Abs(tid.InputPosition.x - _vdragBeg.Value.x) < 0.1f)
     {
       var levelEarth = tid.HoveredCollider.GetComponentInParent<LevelEarth>();
       if(levelEarth)
         SelectLevel(levelEarth);
     }
+
     _vdragBeg = null;
-    int idx = (_vdragPrev.Count > 2)? -2 : -1;
-    _rotateForce = 500 * (tid.InputPosition.x - _vdragPrev.last(idx).x) / Mathf.Clamp(tid.InputTime, Time.deltaTime, Time.deltaTime * 20);
-    _rotateSpeed += Mathf.Clamp(_rotateForce, -_rotateMax, _rotateMax);
-    _rotateForce = 0;
+    int prev_idx = (_vdragPrev.Count > 2) ? -2 : -1;
+    float moveDist = tid.InputPosition.x - _vdragPrev.last(prev_idx).x;    
+    float rotateAcc = 500 * moveDist / Mathf.Clamp(tid.InputTime, Time.deltaTime, Time.deltaTime * 20);
+    _rotateSpeed += Mathf.Clamp(rotateAcc, -_rotateMax, _rotateMax);
   }
   void OnBtnPlay()
   {
@@ -128,7 +127,7 @@ public class Earth : MonoBehaviour
     }
     else
     {
-      _rotateSpeed *= _rotateDamping;
+      _rotateSpeed *= Mathf.Pow(_rotateDamping, Time.deltaTime / 0.016666f);
       _fx.transform.localRotation *= Quaternion.AngleAxis(-_rotateSpeed * Time.deltaTime, Vector3.up);
     }
   }
