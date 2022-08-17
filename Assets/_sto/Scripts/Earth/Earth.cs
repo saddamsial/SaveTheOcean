@@ -18,7 +18,8 @@ public class Earth : MonoBehaviour
   int _selectedLevel = 0;
 
   [SerializeField] float _rotateDragDegrees = 180.0f;
-  [SerializeField] float _rotateMax = 900;
+  [SerializeField] float _rotateMax = 720;
+  [SerializeField] float _rotateToLvlSpeed = 90.0f;
   [SerializeField] float _rotateDamping = 0;
 
   float       _rotateSpeed = 0;
@@ -61,6 +62,7 @@ public class Earth : MonoBehaviour
     _vdragBeg = tid.InputPosition;
     _vdragPrev = _vdragBeg.Value;
     _rotateSpeed = 0;
+    _move2Lvl = false;
   }
   public void OnInputMov(TouchInputData tid)
   {
@@ -114,11 +116,18 @@ public class Earth : MonoBehaviour
 
   void StartRotateToLevel(LevelEarth level)
   {
-    //level.get
+    _move2Lvl = true;
   }
   void RotateToLevel()
   {
-
+    if(_move2Lvl)
+    {
+      _rotateSpeed = 0;
+      var rotDest = _levels[_selectedLevel].localDstRoto;
+      _fx.transform.localRotation = Quaternion.Lerp(_fx.transform.localRotation, rotDest, _rotateToLvlSpeed * Time.deltaTime);
+      if(Mathf.Abs(Quaternion.Angle(_fx.transform.localRotation, rotDest)) < 0.1f)
+        _move2Lvl = false;
+    }
   }
 
   void Update()

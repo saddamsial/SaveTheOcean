@@ -86,6 +86,7 @@ MonoBehaviour:
   _fx: {fileID: 292211209855933576}
   _rotateDragDegrees: 180
   _rotateMax: 500
+  _rotateToLvlSpeed: 8
   _rotateDamping: 0.95
 --- !u!1001 &292211211431944804
 PrefabInstance:

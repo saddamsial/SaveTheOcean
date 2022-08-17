@@ -53,6 +53,7 @@ MonoBehaviour:
   _markerModel: {fileID: 4876487254171362856}
   _selectionModel: {fileID: 8698661391525078172}
   _state: 0
+  _modelTransf: {fileID: 6866172737749676710}
 --- !u!1001 &6396011715451360589
 PrefabInstance:
   m_ObjectHideFlags: 0

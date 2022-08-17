@@ -8,11 +8,23 @@ public class LevelEarth : MonoBehaviour
   [SerializeField] GameObject   _markerModel;
   [SerializeField] GameObject   _selectionModel;
   [SerializeField] Level.State  _state = Level.State.Locked;
+  [SerializeField] Transform    _modelTransf;
 
+
+  Quaternion _localDstRoto = Quaternion.identity;
   private int _idx = -1;
 
-
+  public Quaternion localDstRoto => _localDstRoto;
   public int  idx => _idx;
+
+
+  void Awake()
+  {
+    var posxz = transform.localRotation * _modelTransf.localPosition;
+    posxz.y = 0;
+    _localDstRoto = Quaternion.AngleAxis(Vector3.SignedAngle(posxz.normalized, -Vector3.forward, Vector3.up), Vector3.up);
+  }
+  
   public void Init(int idx, Level.State level_state)
   { 
     _idx = idx;
