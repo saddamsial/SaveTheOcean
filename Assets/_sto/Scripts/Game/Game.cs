@@ -7,15 +7,13 @@ using GameLib.InputSystem;
 public class Game : MonoBehaviour
 {
   [SerializeField] Transform levelsContainer;
+  [SerializeField] CamCtlr _camCtrl = null;
 
   public static System.Action<Level> onLevelRestart;
 
-  Level _level = null;
-  [SerializeField] Earth _earth = null;
-  [SerializeField] CamCtlr _camCtrl = null;
-
-  UIEarth _uiEarth;
-  UIFade  _uiFade;
+  Level   _level = null;
+  Earth   _earth = null;
+  UIFade  _uiFade = null;
 
 	void Awake()
   {
@@ -26,6 +24,7 @@ public class Game : MonoBehaviour
 
     Earth.onLevelStart += ShowLevel;
 
+    _earth = FindObjectOfType<Earth>(true);
     _uiFade = FindObjectOfType<UIFade>(true);
   }
   void OnDestroy()

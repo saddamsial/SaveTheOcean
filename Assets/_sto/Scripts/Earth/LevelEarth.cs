@@ -22,7 +22,7 @@ public class LevelEarth : MonoBehaviour
   {
     var posxz = transform.localRotation * _modelTransf.localPosition;
     posxz.y = 0;
-    _localDstRoto = Quaternion.AngleAxis(Vector3.SignedAngle(posxz.normalized, -Vector3.forward, Vector3.up), Vector3.up);
+    _localDstRoto = Quaternion.AngleAxis(Vector3.SignedAngle(posxz, -Vector3.forward, Vector3.up), Vector3.up);
   }
   
   public void Init(int idx, Level.State level_state)
