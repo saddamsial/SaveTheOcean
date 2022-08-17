@@ -1005,10 +1005,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _topPanel: {fileID: 5381649582025133276}
   _btmPanel: {fileID: 1012634878578359100}
+  _btnPlay: {fileID: 2044693470781400068}
   _lblLevelInfo: {fileID: 6646049981724893541}
   _slider: {fileID: 3241451194289900726}
-  _fade: {fileID: 0}
-  _fadeSpeed: 6
 --- !u!225 &8806748610962000972
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2451,14 +2450,14 @@ PrefabInstance:
     - target: {fileID: 6806184856311787577, guid: a67504a3c67f7a34dbd55f57499e0252, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 3738390869882166522}
+      objectReference: {fileID: 2431476288509703704}
     - target: {fileID: 6806184856311787577, guid: a67504a3c67f7a34dbd55f57499e0252, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnBtnPlay
       objectReference: {fileID: 0}
     - target: {fileID: 6806184856311787577, guid: a67504a3c67f7a34dbd55f57499e0252, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UIButtonEarth, Assembly-CSharp
+      value: UIEarth, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8025202361718519677, guid: a67504a3c67f7a34dbd55f57499e0252, type: 3}
       propertyPath: m_Name
@@ -2475,30 +2474,12 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6806184856311787577, guid: a67504a3c67f7a34dbd55f57499e0252, type: 3}
   m_PrefabInstance: {fileID: 4761528494060934205}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263816667003396928}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &3263816667003396928 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8025202361718519677, guid: a67504a3c67f7a34dbd55f57499e0252, type: 3}
-  m_PrefabInstance: {fileID: 4761528494060934205}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3738390869882166522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3263816667003396928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2fcf19e52a523e48a41576f73863fde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buttonPlay: {fileID: 2044693470781400068}
 --- !u!114 &4688346675583800497 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 217301457281040524, guid: a67504a3c67f7a34dbd55f57499e0252, type: 3}

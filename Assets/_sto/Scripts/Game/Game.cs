@@ -50,14 +50,17 @@ public class Game : MonoBehaviour
   void OnInputBeg(TouchInputData tid)
   {
     _level?.OnInputBeg(tid);
+    _earth?.OnInputBeg(tid);
   }
   void OnInputMov(TouchInputData tid)
   {
     _level?.OnInputMov(tid);
+    _earth?.OnInputMov(tid);
   }
   void OnInputEnd(TouchInputData tid)
   {
     _level?.OnInputEnd(tid);
+    _earth?.OnInputEnd(tid);
   }
 
   public void CreateLevel(int levelIdx)

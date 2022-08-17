@@ -625,7 +625,7 @@ MonoBehaviour:
     height: 0.9
   layerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 2304
   queryRaycastTriggersInteraction: 0
   ignoreInputOverUI: 1
   canvasRaycaster: {fileID: 1656759795}
@@ -927,6 +927,10 @@ PrefabInstance:
     - target: {fileID: 4684083728786367491, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_LocalPosition.z
       value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8491482514105513082, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 3895
       objectReference: {fileID: 0}
     - target: {fileID: 8786551797539272230, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_RootOrder
@@ -2469,6 +2473,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 292211209855933577, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+    - {fileID: 4042681106082610687, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+    - {fileID: 2318627862396230881, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
 --- !u!1001 &2554269812391350599
 PrefabInstance:

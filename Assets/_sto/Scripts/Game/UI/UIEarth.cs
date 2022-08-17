@@ -9,8 +9,13 @@ public class UIEarth : MonoBehaviour
 {
   [SerializeField] UIPanel _topPanel;
   [SerializeField] UIPanel _btmPanel;
-  [SerializeField] TMPLbl _lblLevelInfo;
-  [SerializeField] Slider _slider;
+  [SerializeField] Button  _btnPlay;
+  [SerializeField] TMPLbl  _lblLevelInfo;
+  [SerializeField] Slider  _slider;
+
+
+  public static System.Action onBtnPlay;
+
 
   float _cleanDst = 0.0f;
 
@@ -51,7 +56,13 @@ public class UIEarth : MonoBehaviour
 
   void UpdateLevelInfo(int level)
   {
+    _btnPlay.interactable = GameState.Progress.Levels.GetLevelState(level) != Level.State.Locked;
     _lblLevelInfo.text = "LEVEL: " + (level + 1);
+  }
+
+  public void OnBtnPlay()
+  {
+    onBtnPlay?.Invoke();
   }
 
   void UpdateSlider()
@@ -63,5 +74,4 @@ public class UIEarth : MonoBehaviour
   {
     UpdateSlider();
   }
-
 }
