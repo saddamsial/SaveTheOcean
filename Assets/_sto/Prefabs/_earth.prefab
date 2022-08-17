@@ -85,7 +85,7 @@ MonoBehaviour:
   - {fileID: 2961430865730925137}
   _fx: {fileID: 292211209855933576}
   _rotateDragDegrees: 180
-  _rotateMax: 900
+  _rotateMax: 1000
   _rotateDamping: 0.95
 --- !u!1001 &292211211431944804
 PrefabInstance:
@@ -124,15 +124,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000074505797
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -152,7 +152,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4126757476705115914, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4126757476705115919, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_AngularDrag
