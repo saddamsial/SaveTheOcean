@@ -83,6 +83,10 @@ MonoBehaviour:
   - {fileID: 6739108435250719821}
   - {fileID: 941164946882228741}
   - {fileID: 2961430865730925137}
+  _fx: {fileID: 292211209855933576}
+  _rotateDragDegrees: 180
+  _rotateMax: 900
+  _rotateDamping: 0.95
 --- !u!1001 &292211211431944804
 PrefabInstance:
   m_ObjectHideFlags: 0

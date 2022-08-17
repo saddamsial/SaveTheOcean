@@ -31,7 +31,7 @@ public class LevelEarth : MonoBehaviour
   public void Select(bool sel)
   {
     _markerModel.SetActive(sel);
-    _selectionModel.SetActive(sel);
+    _selectionModel.SetActive(false);
   }
 
   int  State2MI(Level.State state) => (int)state;

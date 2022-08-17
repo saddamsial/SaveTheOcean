@@ -2463,9 +2463,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 292211211678103441, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+      propertyPath: _rotateMax
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 292211211678103441, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+      propertyPath: _rotateDamping
+      value: 0.95
+      objectReference: {fileID: 0}
     - target: {fileID: 292211211678103455, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
       propertyPath: m_Name
       value: _earth
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416646416499981677, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416646416499981677, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416646416499981677, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416646416499981677, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416646416499981677, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4416646416499981678, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
       propertyPath: m_IsActive
