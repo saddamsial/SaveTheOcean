@@ -11,7 +11,6 @@ public class Item : MonoBehaviour
   [SerializeField] ActivatableObject  _activatable;
   [SerializeField] SpringMove         _sm;
   [Header("Settings")]
-  [SerializeField] float _moveStep = 1.0f;
 
   List<GameObject> _models = new List<GameObject>();
 

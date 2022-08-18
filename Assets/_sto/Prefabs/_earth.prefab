@@ -78,15 +78,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _earthPrefab: {fileID: 4416646416499981678}
-  _levels:
-  - {fileID: 128081394675617021}
-  - {fileID: 6739108435250719821}
-  - {fileID: 941164946882228741}
-  - {fileID: 2961430865730925137}
+  _locations: []
   _fx: {fileID: 292211209855933576}
   _rotateDragDegrees: 180
   _rotateMax: 500
-  _rotateToLvlSpeed: 8
+  _rotateToLocationSpeed: 5
   _rotateDamping: 0.95
 --- !u!1001 &292211211431944804
 PrefabInstance:
@@ -181,39 +177,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
---- !u!114 &128081394675617021 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 416914837641342617, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-  m_PrefabInstance: {fileID: 292211211431944804}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01bee89d2240ce409ce0e1567366d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &941164946882228741 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 648962566977966177, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-  m_PrefabInstance: {fileID: 292211211431944804}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01bee89d2240ce409ce0e1567366d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2961430865730925137 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3249128478289514549, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-  m_PrefabInstance: {fileID: 292211211431944804}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01bee89d2240ce409ce0e1567366d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &4416646416499981677 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
@@ -245,14 +208,3 @@ MonoBehaviour:
   useRandomPhaseOffset: 1
   axis: {x: 0, y: 1, z: 0}
   speed: 8
---- !u!114 &6739108435250719821 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6451472328747159081, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-  m_PrefabInstance: {fileID: 292211211431944804}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e01bee89d2240ce409ce0e1567366d36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -60,7 +60,6 @@ public class Level : MonoBehaviour
   //public bool   InTransiton => _actObj?.InTransition ?? false;
   public Vector2Int Dim => _dim;
 
-  bool         _started = false;
   UISummary    _uiSummary = null;
   Transform    _cameraContainer = null;
   List<Animal> _animals = new List<Animal>();
@@ -75,8 +74,6 @@ public class Level : MonoBehaviour
 
   float       _pollutionRate = 1.0f;
   float       _pollutionDest = 1.0f;
-
-  ActivatableObject _actObj = null;
 
   public class Grid
   {
@@ -166,7 +163,6 @@ public class Level : MonoBehaviour
       _animals.Add(animal);
     }
 
-    _started = true;
     onStart?.Invoke(this);
   }
   public void Hide()

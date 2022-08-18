@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class LevelEarth : MonoBehaviour
+public class Location : MonoBehaviour
 {
 
   [SerializeField] GameObject[] _stateModels;
