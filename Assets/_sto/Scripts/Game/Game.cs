@@ -39,7 +39,7 @@ public class Game : MonoBehaviour
   IEnumerator Start()
   {
     yield return new WaitForSeconds(0.125f);
-    _earth.Show(GameState.Progress.levelIdx);
+    _earth.Show(GameState.Progress.levelIdx, false);
   }
 
   void OnInputTapped(TouchInputData tid)
@@ -102,11 +102,11 @@ public class Game : MonoBehaviour
       Destroy(_level.gameObject);
     _level = null;
   }
-  public void ShowEarth()
+  public void ShowEarth(bool show_next)
   {
-    StartCoroutine(coShowEarth());
+    StartCoroutine(coShowEarth(show_next));
   }
-  private IEnumerator coShowEarth()
+  private IEnumerator coShowEarth(bool show_next)
   {
     yield return new WaitForSeconds(0.5f);
     _level.Hide();
@@ -114,7 +114,7 @@ public class Game : MonoBehaviour
     yield return new WaitForSeconds(0.5f);
     _camCtrl.SetTo(2);
     DestroyLevel();
-    _earth.Show(GameState.Progress.levelIdx);
+    _earth.Show(GameState.Progress.levelIdx, show_next);
     yield return new WaitForSeconds(0.5f);
     _uiFade.BlendTo(new Color(0, 0, 0, 0));
     _camCtrl.SwitchTo(1);

@@ -10,22 +10,21 @@ public class Earth : MonoBehaviour
   [SerializeField] Location[]   _locations;
   [SerializeField] Transform    _fx;
 
-
   public static System.Action<int> onShow;
   public static System.Action onHide;
   public static System.Action<int> onLevelStart, onLevelSelected;
 
-  int _selectedLocation = 0;
-
   [SerializeField] float _rotateDragDegrees = 180.0f;
   [SerializeField] float _rotateMax = 720;
-  [SerializeField] float _rotateToLocationSpeed = 90.0f;
+  [SerializeField] float _rotateToLocationSpeed = 5.0f;
   [SerializeField] float _rotateDamping = 0;
 
+  int         _selectedLocation = 0;
   float       _rotateSpeed = 0;
   Vector2?    _vdragBeg = null;
   Vector2     _vdragPrev;
   bool        _move2location = false;
+
 
   void Awake()
   {
@@ -39,14 +38,19 @@ public class Earth : MonoBehaviour
     UIEarth.onBtnPlay -= OnBtnPlay;
   }
 
-  public void Show(int indexLevel)
+  public void Show(int indexLocation, bool show_next)
   {
-    SelectLocation(indexLevel);
+    SelectLocation(indexLocation);
     _earthPrefab.SetActive(true);
 
     UpdateLevelsStates();
-
-    onShow?.Invoke(indexLevel);
+    int location_idx = (show_next)? indexLocation+1 : indexLocation;      
+    this.Invoke(()=> 
+    {
+      SelectLocation(location_idx); 
+      StartRotateToLocation(_locations[location_idx]);
+      onShow?.Invoke(location_idx);
+    }, 1.0f);
   }
   public void Hide()
   {
@@ -110,7 +114,7 @@ public class Earth : MonoBehaviour
       _locations[_selectedLocation].Select(false);
     _locations[location].Select(true);
     _selectedLocation = location;
-
+    GameState.Progress.levelIdx = location;
     onLevelSelected?.Invoke(location);
   }
 
