@@ -44,7 +44,7 @@ public class Earth : MonoBehaviour
     _earthPrefab.SetActive(true);
 
     UpdateLevelsStates();
-    int location_idx = (show_next)? indexLocation+1 : indexLocation;      
+    int location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;      
     this.Invoke(()=> 
     {
       SelectLocation(location_idx); 
@@ -117,7 +117,10 @@ public class Earth : MonoBehaviour
     GameState.Progress.levelIdx = location;
     onLevelSelected?.Invoke(location);
   }
-
+  int GetNextLocation(int location)
+  {
+    return Mathf.Clamp(location + 1, 0, _locations.Length - 1);
+  }
   void StartRotateToLocation(Location location)
   {
     _move2location = true;
