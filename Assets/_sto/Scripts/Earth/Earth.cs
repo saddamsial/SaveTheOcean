@@ -7,17 +7,20 @@ using GameLib.InputSystem;
 public class Earth : MonoBehaviour
 {
   [SerializeField] GameObject   _earthPrefab;
+  [SerializeField] Transform    _levelsContainer;
+  [SerializeField] Transform    _locationsContainer;
   [SerializeField] Location[]   _locations;
   [SerializeField] Transform    _fx;
-
-  public static System.Action<int> onShow;
-  public static System.Action onHide;
-  public static System.Action<int> onLevelStart, onLevelSelected;
 
   [SerializeField] float _rotateDragDegrees = 180.0f;
   [SerializeField] float _rotateMax = 720;
   [SerializeField] float _rotateToLocationSpeed = 5.0f;
   [SerializeField] float _rotateDamping = 0;
+
+
+  public static System.Action<int> onShow;
+  public static System.Action onHide;
+  public static System.Action<int> onLevelStart, onLevelSelected;
 
   int         _selectedLocation = 0;
   float       _rotateSpeed = 0;
@@ -25,11 +28,11 @@ public class Earth : MonoBehaviour
   Vector2     _vdragPrev;
   bool        _move2location = false;
 
-
   void Awake()
   {
-    for(int q = 0; q < _locations.Length; ++q)
-      _locations[q].Init(q, GameState.Progress.Levels.GetLevelState(q));
+    InitLocations();
+
+    _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
 
     UIEarth.onBtnPlay += OnBtnPlay;
   }
@@ -38,10 +41,26 @@ public class Earth : MonoBehaviour
     UIEarth.onBtnPlay -= OnBtnPlay;
   }
 
+  private void InitLocations()
+  {
+    _locations = new Location[_levelsContainer.childCount];
+    for(int q = 0; q < _levelsContainer.childCount; ++q)
+    {
+      var levelTransf = _levelsContainer.GetChild(q);
+      _locations[q] = GameData.Prefabs.CreateLocation(_locationsContainer);
+      _locations[q].Init(q, levelTransf, GameState.Progress.Levels.GetLevelState(q));
+    }
+  }
+
   public void Show(int indexLocation, bool show_next)
   {
     SelectLocation(indexLocation);
     _earthPrefab.SetActive(true);
+
+    _rotateSpeed = 0;
+    _vdragBeg = null;
+    _vdragPrev = Vector2.zero;
+    _move2location = false;
 
     UpdateLevelsStates();
     int location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;      

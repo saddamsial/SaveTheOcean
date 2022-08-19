@@ -17,18 +17,17 @@ public class Location : MonoBehaviour
   public Quaternion localDstRoto => _localDstRoto;
   public int  idx => _idx;
 
-
-  void Awake()
-  {
-    var posxz = transform.localRotation * _modelTransf.localPosition;
-    posxz.y = 0;
-    _localDstRoto = Quaternion.AngleAxis(Vector3.SignedAngle(posxz, -Vector3.forward, Vector3.up), Vector3.up);
-  }
-  
-  public void Init(int idx, Level.State level_state)
+  public void Init(int idx, Transform levelTransf, Level.State level_state)
   { 
     _idx = idx;
     state = level_state;
+
+    transform.localPosition = levelTransf.localPosition;
+    transform.localRotation = Quaternion.LookRotation(-levelTransf.localPosition) * Quaternion.AngleAxis(-90, Vector3.right);
+    var posxz = transform.localPosition;
+    posxz.y = 0;
+    _localDstRoto = Quaternion.AngleAxis(Vector3.SignedAngle(posxz, -Vector3.forward, Vector3.up), Vector3.up);
+
     Select(false);
   }
   public Level.State state 

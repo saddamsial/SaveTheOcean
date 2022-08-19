@@ -21,9 +21,8 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: c0cb0084ae12d184fa41b89d0fe99aeb, type: 3}
     - {fileID: 6445466529311080229, guid: 23337a9516cd58e409feb4515c4ebc07, type: 3}
     - {fileID: 6445466529311080229, guid: bde382c2a5e89cb4aaf80c1d9f7407e8, type: 3}
-  - _items:
-    - {fileID: 6445466529311080229, guid: 3e7760b3a84f1b043af8cb5515654dba, type: 3}
   _gridTile: {fileID: 8178171026830446907, guid: 764369db777a63a4d9a3efac1f67b645, type: 3}
+  _locationPrefab: {fileID: 4694188858287188799, guid: 7e2dc7caea333c54a97c83e5d2ddcc26, type: 3}
   _listLevels:
   - {fileID: 2229698086017596401, guid: c01b6befe631c5b44bf560095e70ab39, type: 3}
   - {fileID: 2229698086017596401, guid: 26112caae72b86d46a016484bf618140, type: 3}

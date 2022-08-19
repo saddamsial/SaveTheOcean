@@ -40,6 +40,7 @@ public class GameData : ScriptableObject
   [Header("Prefabs")]
   [SerializeField] Items[] _items;
   [SerializeField] GridTile _gridTile;
+  [SerializeField] Location _locationPrefab;
   [Header("Levels")]
   [SerializeField] List<Level> _listLevels;
 
@@ -70,6 +71,8 @@ public class GameData : ScriptableObject
     }
     public static int ItemLevelsCnt(int item_type) => get()._items[item_type].Count;
     public static int ItemTypesCnt => get()._items.Length;
+
+    public static Location CreateLocation(Transform parent) => Instantiate(get()._locationPrefab, parent);
   } 
   public static class Levels
   {
