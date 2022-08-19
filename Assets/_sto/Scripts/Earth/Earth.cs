@@ -10,6 +10,7 @@ public class Earth : MonoBehaviour
   [SerializeField] Transform    _levelsContainer;
   [SerializeField] Transform    _locationsContainer;
   [SerializeField] Location[]   _locations;
+  [SerializeField] EarthFx      _earthFx;
   [SerializeField] Transform    _fx;
 
   [SerializeField] float _rotateDragDegrees = 180.0f;
@@ -31,9 +32,6 @@ public class Earth : MonoBehaviour
   void Awake()
   {
     InitLocations();
-
-    _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
-
     UIEarth.onBtnPlay += OnBtnPlay;
   }
   void OnDestroy()
@@ -52,15 +50,19 @@ public class Earth : MonoBehaviour
     }
   }
 
+  public void Setup()
+  {
+    _selectedLocation = GameState.Progress.levelIdx;
+    SelectLocation(_selectedLocation);
+    _earthPrefab.SetActive(true);
+    _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
+    UpdateLevelsStates();
+    onShow?.Invoke(_selectedLocation);
+  }
   public void Show(int indexLocation, bool show_next)
   {
     SelectLocation(indexLocation);
     _earthPrefab.SetActive(true);
-
-    _rotateSpeed = 0;
-    _vdragBeg = null;
-    _vdragPrev = Vector2.zero;
-    _move2location = false;
 
     UpdateLevelsStates();
     int location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;      
@@ -161,5 +163,6 @@ public class Earth : MonoBehaviour
     RotateToLocation();
     _rotateSpeed *= Mathf.Pow(_rotateDamping, Time.deltaTime / 0.016666f);
     _fx.transform.localRotation *= Quaternion.AngleAxis(-_rotateSpeed, Vector3.up);
+    _earthFx?.RotoSpeed(_rotateSpeed);
   }
 }

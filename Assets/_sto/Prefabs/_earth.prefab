@@ -42,6 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 292211211678103440}
   - component: {fileID: 292211211678103441}
+  - component: {fileID: 8373776387233828538}
   m_Layer: 0
   m_Name: _earth
   m_TagString: Untagged
@@ -81,11 +82,27 @@ MonoBehaviour:
   _levelsContainer: {fileID: 5457614949840750715}
   _locationsContainer: {fileID: 7186966284304345571}
   _locations: []
+  _earthFx: {fileID: 8373776387233828538}
   _fx: {fileID: 292211209855933576}
   _rotateDragDegrees: 180
   _rotateMax: 500
   _rotateToLocationSpeed: 5
   _rotateDamping: 0.95
+--- !u!114 &8373776387233828538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292211211678103455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67dea2f5c30eb7048913bbe763dac13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _globeRenderer: {fileID: 8037140112630612770}
+  _globeRotator: {fileID: 292211209855933576}
+  _roto2SwayFactor: 3
 --- !u!1001 &292211211431944804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -196,6 +213,10 @@ PrefabInstance:
     - target: {fileID: 7313383873259751041, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_CastShadows
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8055993033723695986, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_Name
+      value: _locations
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3452a28e342bab41a52c04675e4dced, type: 3}

@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Location : MonoBehaviour
 {
-
   [SerializeField] GameObject[] _stateModels;
   [SerializeField] GameObject   _markerModel;
   [SerializeField] GameObject   _selectionModel;

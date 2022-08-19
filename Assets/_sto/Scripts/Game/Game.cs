@@ -38,8 +38,8 @@ public class Game : MonoBehaviour
   }
   IEnumerator Start()
   {
-    yield return new WaitForSeconds(0.125f);
-    _earth.Show(GameState.Progress.levelIdx, false);
+    yield return new WaitForSeconds(0.0125f);
+    _earth.Setup();
   }
 
   void OnInputTapped(TouchInputData tid)
