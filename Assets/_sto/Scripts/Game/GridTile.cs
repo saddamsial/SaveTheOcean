@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class GridTile : MonoBehaviour
 {
-  [SerializeField] SpriteRenderer _sr;
-  [SerializeField] Color _colorAct;
-  [SerializeField] Color _colorInact;
+  [SerializeField] GameObject _dirty;
+  [SerializeField] GameObject _clear;
+
   public void set(bool act)
   {
-    _sr.material.color = (act)? _colorAct : _colorInact;
+    _dirty.SetActive(act);
+    _clear.SetActive(!act);
   }
 }
