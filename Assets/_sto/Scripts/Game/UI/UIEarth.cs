@@ -57,7 +57,7 @@ public class UIEarth : MonoBehaviour
   void UpdateLevelInfo(int level)
   {
     _btnPlay.interactable = GameState.Progress.Levels.GetLevelState(level) != Level.State.Locked;
-    _lblLevelInfo.text = "LEVEL: " + (level + 1);
+    _lblLevelInfo.text = "LEVEL " + (level + 1);
   }
 
   public void OnBtnPlay()
