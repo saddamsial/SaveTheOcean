@@ -18,7 +18,11 @@ public class UIFade : MonoBehaviour
   public void FadeIn() { _t = 0; _colorDst = _fadeIn;}
   public void FadeOut() { _t = 0; _colorDst = _fadeOut;}
   //public void SetColor(Color color) => _colorDst = _image.color = color;
-
+  void Awake()
+  {
+    _image.color = _fadeIn;
+    FadeOut();
+  }
   void Update()
   {
     // _t = Mathf.Clamp01(_t + Time.deltaTime * _fadeSpeed);

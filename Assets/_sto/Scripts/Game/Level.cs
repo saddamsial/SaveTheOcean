@@ -18,7 +18,7 @@ public class Level : MonoBehaviour
   [SerializeField] Transform    _itemsContainer;
   [SerializeField] Transform    _tilesContainer;
   [SerializeField] Transform    _animalsContainer;
-  [SerializeField] Pipes        _pipes;
+  //[SerializeField] Pipes        _pipes;
   [SerializeField] Transform[]  _animalContainers;
   [SerializeField] Renderer     _waterRenderer;
   
@@ -269,7 +269,7 @@ public class Level : MonoBehaviour
       if(_grid.isOverAxisZ(tid.RaycastData.Value.point))
         voffs.y = Mathf.Lerp(voffs.y, 0.6f, Time.deltaTime * 10);
       else
-        voffs.y = 1 + 0.30f * (vpt.z - _grid.getMaxZ());
+        voffs.y = Mathf.Clamp(1 + 0.20f * (vpt.z - _grid.getMaxZ()), 0, 2.0f);
       _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + _itemSelected.vbtmExtent, Time.deltaTime * 20);
 
       var _nearestHit = tid.GetClosestCollider(0.5f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
@@ -331,7 +331,7 @@ public class Level : MonoBehaviour
 
   IEnumerator coEnd()
   {
-    _pipes.PollutionRate(0);
+    //_pipes.PollutionRate(0);
     yield return new WaitForSeconds(3.0f);
     succeed = true;
     onFinished?.Invoke(this);

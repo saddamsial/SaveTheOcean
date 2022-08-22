@@ -827,7 +827,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4270927306262247871
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1570,6 +1570,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5212143127011186326}
     m_Modifications:
+    - target: {fileID: 3904755089539597646, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4490174652667170618, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1654,17 +1658,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4877255232535979744, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5751959172274746608, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.502
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5751959172274746608, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6619511749217051437, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7114563255017448932, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_Name
       value: scoreSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979445396645249961, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
