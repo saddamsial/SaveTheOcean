@@ -6,13 +6,8 @@ public class Vessel : MonoBehaviour
 {
   [SerializeField] float _flyAlt = 1.1f;
 
-  Vector3 _vdest;
-
-  void Awake()
-  {
-    _vdest = vpos;
-  }
-
+  Vector3     _vdst;
+ 
   public Vector3  vpos
   { 
     get => transform.localPosition; 
@@ -24,22 +19,24 @@ public class Vessel : MonoBehaviour
     set => transform.localRotation = value;
   }
 
+  public void Init(Vector3 locationPos)
+  {
+    vpos = locationPos.normalized * _flyAlt;
+    vrot = Quaternion.LookRotation(vpos) * Quaternion.AngleAxis(90, Vector3.right);
+    _vdst = vpos;
+  }
   public void FlyTo(Vector3 vdest)
   {
-    _vdest = vdest.normalized * _flyAlt;
+    _vdst = vdest.normalized * _flyAlt;
   }
-  float rots = 1;
+
   void Fly()
   {
-    if(Vector3.Distance(vpos, _vdest) > 0.01f)
+    if(Vector3.Distance(vpos, _vdst) > 0.01f)
     {
       var vprev = vpos;
-      var v = Vector3.Lerp(vpos, _vdest, Time.deltaTime * rots * 4);
-      vpos = v.normalized * _flyAlt;
-      var rotDst = Quaternion.LookRotation(vpos-vprev, vpos);
-      var ang = Quaternion.Angle(vrot, rotDst);
-      rots = ang < 10 ? 1-ang/10 : 0.1f;
-      vrot = Quaternion.Lerp(vrot, rotDst, Time.deltaTime * 4);
+      vpos = Vector3.Slerp(vpos, _vdst, Time.deltaTime);
+      vrot = Quaternion.Lerp(vrot, Quaternion.LookRotation(vpos - vprev, vpos), Time.deltaTime * 6);
     }
   }
   void Update()

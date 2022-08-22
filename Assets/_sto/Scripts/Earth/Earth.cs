@@ -61,7 +61,7 @@ public class Earth : MonoBehaviour
   {
     _selectedLocation = GameState.Progress.levelIdx;
     SelectLocation(_selectedLocation);
-    _vessel.transform.position = _locations[_selectedLocation].transform.position;
+    _vessel.Init(_locations[_selectedLocation].transform.localPosition);
     _earthPrefab.SetActive(true);
     _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
     UpdateLevelsStates();
