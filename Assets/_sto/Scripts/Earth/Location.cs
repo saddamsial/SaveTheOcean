@@ -16,7 +16,7 @@ public class Location : MonoBehaviour
   public Quaternion localDstRoto => _localDstRoto;
   public int  idx => _idx;
 
-  public void Init(int idx, Transform levelTransf, Level.State level_state)
+  public void Init(int idx, Transform levelTransf, float vert_roto_range, Level.State level_state)
   { 
     _idx = idx;
     state = level_state;
@@ -26,6 +26,9 @@ public class Location : MonoBehaviour
     var posxz = transform.localPosition;
     posxz.y = 0;
     _localDstRoto = Quaternion.AngleAxis(Vector3.SignedAngle(posxz, -Vector3.forward, Vector3.up), Vector3.up);
+    var posyz = transform.localPosition;
+    posyz.x = 0;
+    _localDstRoto = Quaternion.AngleAxis(Mathf.Clamp(Vector3.SignedAngle(posyz, -Vector3.forward, Vector3.right), -vert_roto_range, vert_roto_range), Vector3.right) * _localDstRoto;
 
     Select(false);
   }

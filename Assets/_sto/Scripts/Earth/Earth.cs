@@ -24,6 +24,7 @@ public class Earth : MonoBehaviour
   [SerializeField] float _rotateMax = 720;
   [SerializeField] float _rotateToLocationSpeed = 5.0f;
   [SerializeField] float _rotateDamping = 0;
+  [SerializeField] float _rotateVertRotoRange = 20;
 
 
   public static System.Action<int> onShow;
@@ -53,7 +54,7 @@ public class Earth : MonoBehaviour
     {
       var levelTransf = _levelsContainer.GetChild(q);
       _locations[q] = GameData.Prefabs.CreateLocation(_locationsContainer);
-      _locations[q].Init(q, levelTransf, GameState.Progress.Levels.GetLevelState(q));
+      _locations[q].Init(q, levelTransf, _rotateVertRotoRange, GameState.Progress.Levels.GetLevelState(q));
     }
   }
 
