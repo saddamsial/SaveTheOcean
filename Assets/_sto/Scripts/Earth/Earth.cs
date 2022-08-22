@@ -6,13 +6,20 @@ using GameLib.InputSystem;
 
 public class Earth : MonoBehaviour
 {
+  [Header("Refs")]
   [SerializeField] GameObject   _earthPrefab;
   [SerializeField] Transform    _levelsContainer;
   [SerializeField] Transform    _locationsContainer;
   [SerializeField] Location[]   _locations;
-  [SerializeField] EarthFx      _earthFx;
   [SerializeField] Transform    _fx;
 
+  [Header("Earth fx")]
+  [SerializeField] EarthFx      _earthFx;
+
+  [Header("Vessel")]
+  [SerializeField] Vessel _vessel;
+
+  [Header("Rotate params")]
   [SerializeField] float _rotateDragDegrees = 180.0f;
   [SerializeField] float _rotateMax = 720;
   [SerializeField] float _rotateToLocationSpeed = 5.0f;
@@ -54,6 +61,7 @@ public class Earth : MonoBehaviour
   {
     _selectedLocation = GameState.Progress.levelIdx;
     SelectLocation(_selectedLocation);
+    _vessel.transform.position = _locations[_selectedLocation].transform.position;
     _earthPrefab.SetActive(true);
     _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
     UpdateLevelsStates();
@@ -70,6 +78,9 @@ public class Earth : MonoBehaviour
     {
       SelectLocation(location_idx); 
       StartRotateToLocation(_locations[location_idx]);
+      if(show_next)
+        MoveVesselToLocation(location_idx);
+
       onShow?.Invoke(location_idx);
     }, 1.0f);
   }
@@ -108,11 +119,12 @@ public class Earth : MonoBehaviour
 
     if(tid.HoveredCollider && Mathf.Abs(tid.InputPosition.x - _vdragBeg.Value.x) < 0.05f)
     {
-      var levelEarth = tid.HoveredCollider.GetComponentInParent<Location>();
-      if(levelEarth)
+      var location = tid.HoveredCollider.GetComponentInParent<Location>();
+      if(location)
       {
-        SelectLocation(levelEarth);
-        StartRotateToLocation(levelEarth);
+        SelectLocation(location);
+        StartRotateToLocation(location);
+        MoveVesselToLocation(location.idx);
       }
     }
     _vdragBeg = null;
@@ -137,6 +149,10 @@ public class Earth : MonoBehaviour
     _selectedLocation = location;
     GameState.Progress.levelIdx = location;
     onLevelSelected?.Invoke(location);
+  }
+  void MoveVesselToLocation(int location)
+  {
+    _vessel.FlyTo(_locations[location].transform.localPosition);
   }
   int GetNextLocation(int location)
   {

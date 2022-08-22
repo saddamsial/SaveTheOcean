@@ -13,7 +13,7 @@ public class UITutorial : MonoBehaviour
 
   List<Transform> listPositions = new List<Transform>();
 
-  Level level = null;
+  //Level level = null;
   
   void Awake()
   {
@@ -37,6 +37,6 @@ public class UITutorial : MonoBehaviour
   }
   void OnLevelFinished(Level lvl)
   {
-    level = null;
+    //level = null;
   }
 }

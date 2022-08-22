@@ -12,22 +12,22 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ObjectShakePreset objShakePresetHi;
     [SerializeField] float offsetToCamera = .25f;
   [Header("FX Systems")]
-    [SerializeField] ParticleSystem fxSparks = null;
+    //[SerializeField] ParticleSystem fxSparks = null;
     //[SerializeField] ParticleSystem fxItemCompleted = null;
-    [SerializeField] ParticleSystem fxConfettiIngame = null;
+    //[SerializeField] ParticleSystem fxConfettiIngame = null;
     [SerializeField] ParticleSystem fxConfettiLevel = null;
     [SerializeField] ParticleSystem fxPaintSplat = null;
-    [SerializeField] int ballFracturesEmitCnt = 1;
-    [SerializeField] ParticleSystem fxBallFracturesSub = null;
-    [SerializeField] int ballFracturesSubEmitCnt = 1;
+//    [SerializeField] int ballFracturesEmitCnt = 1;
+    //[SerializeField] ParticleSystem fxBallFracturesSub = null;
+    //[SerializeField] int ballFracturesSubEmitCnt = 1;
     [SerializeField] ParticleSystem fxHit = null;
     //[SerializeField] int fxBombDestroyEmitCnt = 5;
     [SerializeField] ParticleSystem fxPainter = null;
 
-  [Header("FX string")]
-    [SerializeField] string strPushedOut = "{0}!";
-    [SerializeField] string strBallsMatched = "{0}!";
-    [SerializeField] string strItemExplo = "{0}!";
+  // [Header("FX string")]
+  //   [SerializeField] string strPushedOut = "{0}!";
+  //   [SerializeField] string strBallsMatched = "{0}!";
+  //   [SerializeField] string strItemExplo = "{0}!";
 
 
     ParticleSystem fxConfetti;

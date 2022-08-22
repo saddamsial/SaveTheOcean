@@ -29,6 +29,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4416646416499981677}
+  - {fileID: 2677909457532959761}
   m_Father: {fileID: 292211211678103440}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -82,8 +83,9 @@ MonoBehaviour:
   _levelsContainer: {fileID: 5457614949840750715}
   _locationsContainer: {fileID: 7186966284304345571}
   _locations: []
-  _earthFx: {fileID: 8373776387233828538}
   _fx: {fileID: 292211209855933576}
+  _earthFx: {fileID: 8373776387233828538}
+  _vessel: {fileID: 3570522155704282227}
   _rotateDragDegrees: 180
   _rotateMax: 500
   _rotateToLocationSpeed: 5
@@ -103,6 +105,111 @@ MonoBehaviour:
   _globeRenderer: {fileID: 8037140112630612770}
   _globeRotator: {fileID: 292211209855933576}
   _roto2SwayFactor: 3
+--- !u!1 &1937536856907820308
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2677909457532959761}
+  m_Layer: 0
+  m_Name: vessels
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2677909457532959761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937536856907820308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6110145915268914612}
+  m_Father: {fileID: 292211209855933576}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &204588004489758418
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2677909457532959761}
+    m_Modifications:
+    - target: {fileID: 113380666125048214, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_Name
+      value: Vessel
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+--- !u!114 &3570522155704282227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3700794852158565025, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+  m_PrefabInstance: {fileID: 204588004489758418}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc6f6790836dfaf4d9ec8d74c6100ad3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &6110145915268914612 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6205202596328856422, guid: 25634b07a00eb314bbf551a4f727973c, type: 3}
+  m_PrefabInstance: {fileID: 204588004489758418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &292211211431944804
 PrefabInstance:
   m_ObjectHideFlags: 0
