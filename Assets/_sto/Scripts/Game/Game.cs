@@ -110,13 +110,13 @@ public class Game : MonoBehaviour
   {
     yield return new WaitForSeconds(0.5f);
     _level.Hide();
-    _uiFade.BlendTo(new Color(0,0,0,1));
+    _uiFade.FadeIn();
     yield return new WaitForSeconds(0.5f);
     _camCtrl.SetTo(2);
     DestroyLevel();
     _earth.Show(GameState.Progress.levelIdx, show_next);
     yield return new WaitForSeconds(0.5f);
-    _uiFade.BlendTo(new Color(0, 0, 0, 0));
+    _uiFade.FadeOut();
     _camCtrl.SwitchTo(1);
   }
   public void ShowLevel(int levelIdx)
@@ -127,11 +127,11 @@ public class Game : MonoBehaviour
   IEnumerator coShowLevel(int levelIdx)
   {
     _camCtrl.SwitchTo(2);
-    _uiFade.BlendTo(new Color(0, 0, 0, 1));
+    _uiFade.FadeIn();
     yield return new WaitForSeconds(0.5f);
     _earth.Hide();
     CreateLevel(levelIdx);
-    _uiFade.BlendTo(new Color(0, 0, 0, 0));
+    _uiFade.FadeOut();
     _camCtrl.SwitchTo(0);    
   }
 
