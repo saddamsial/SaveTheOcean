@@ -26,18 +26,21 @@ public class Vessel : MonoBehaviour
 
   public void FlyTo(Vector3 vdest)
   {
-    _vdest = vdest;
+    _vdest = vdest.normalized * _flyAlt;
   }
   float rots = 1;
   void Fly()
   {
-    var vprev = vpos;
-    var v = Vector3.Lerp(vpos, _vdest, Time.deltaTime * rots);
-    vpos = v.normalized * _flyAlt;
-    var rotDst = Quaternion.LookRotation(vpos-vprev, vpos);
-    var ang = Quaternion.Angle(vrot, rotDst);
-    rots = ang < 10 ? 1-ang/10 : 0.1f;
-    vrot = Quaternion.Lerp(vrot, rotDst, Time.deltaTime);
+    if(Vector3.Distance(vpos, _vdest) > 0.01f)
+    {
+      var vprev = vpos;
+      var v = Vector3.Lerp(vpos, _vdest, Time.deltaTime * rots * 4);
+      vpos = v.normalized * _flyAlt;
+      var rotDst = Quaternion.LookRotation(vpos-vprev, vpos);
+      var ang = Quaternion.Angle(vrot, rotDst);
+      rots = ang < 10 ? 1-ang/10 : 0.1f;
+      vrot = Quaternion.Lerp(vrot, rotDst, Time.deltaTime * 4);
+    }
   }
   void Update()
   {
