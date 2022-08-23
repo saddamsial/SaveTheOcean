@@ -977,6 +977,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8987703992672242553}
+    - target: {fileID: 2413348281033997906, guid: c1cda9a319760c3438496ec6a396955f, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4290677036
+      objectReference: {fileID: 0}
     - target: {fileID: 2700708653856934281, guid: c1cda9a319760c3438496ec6a396955f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -993,6 +997,22 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 8987703992672242553}
+    - target: {fileID: 7192179816080203829, guid: c1cda9a319760c3438496ec6a396955f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192179816080203829, guid: c1cda9a319760c3438496ec6a396955f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192179816080203829, guid: c1cda9a319760c3438496ec6a396955f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192179816080203829, guid: c1cda9a319760c3438496ec6a396955f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8281093483230775737, guid: c1cda9a319760c3438496ec6a396955f, type: 3}
       propertyPath: m_Name
       value: uiIngameTopPanel
