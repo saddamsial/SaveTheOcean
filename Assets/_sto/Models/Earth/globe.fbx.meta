@@ -30,6 +30,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: mat_spaceDome
     second: {fileID: 2100000, guid: dbffdcaf1d3f8154ababf1cd5202ab5b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_stars
+    second: {fileID: 2100000, guid: c10657c1da377294ea7b24f36495b62c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_sun
+    second: {fileID: 2100000, guid: e91059e683fa0694aa9c5a5df1af5fbb, type: 2}
   materials:
     materialImportMode: 2
     materialName: 1
