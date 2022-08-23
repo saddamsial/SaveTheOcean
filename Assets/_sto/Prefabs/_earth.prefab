@@ -392,6 +392,27 @@ MonoBehaviour:
   useRandomPhaseOffset: 1
   axis: {x: 0, y: 1, z: 0}
   speed: 4
+--- !u!1 &6686801536249195533 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6395795495333318249, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+  m_PrefabInstance: {fileID: 292211211431944804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4610363271425856973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6686801536249195533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddbd64eee165884bace9e878b928693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectMultiplier: 1
+  useRandomPhaseOffset: 1
+  axis: {x: 0, y: 1, z: 0}
+  speed: 1
 --- !u!4 &7186966284304345571 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7472350624800230279, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
