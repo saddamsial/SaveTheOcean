@@ -309,17 +309,28 @@ public class Level : MonoBehaviour
     else
     {
       var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
-      if(animalHit && animalHit.CanPut(_itemSelected))
+      if(animalHit)
       {
-        Item.onPut(_itemSelected);
-        animalHit.Put(_itemSelected);
-        _grid.set(_itemSelected.vgrid, 0);
-        _items.Remove(_itemSelected);
-        //_pipes.PollutionRate(RequestRate());
-        _pollutionDest = PollutionRate();
-        onGarbageOut?.Invoke(this);
-        SpawnItem(_itemSelected.vgrid);
-        CheckEnd();
+        if(animalHit.CanPut(_itemSelected))
+        {
+          Item.onPut(_itemSelected);
+          animalHit.Put(_itemSelected);
+          _grid.set(_itemSelected.vgrid, 0);
+          _items.Remove(_itemSelected);
+          //_pipes.PollutionRate(RequestRate());
+          _pollutionDest = PollutionRate();
+          onGarbageOut?.Invoke(this);
+          SpawnItem(_itemSelected.vgrid);
+          CheckEnd();
+        }
+        else
+        {
+          if(!animalHit.IsReq(_itemSelected))
+            Item.onNoPut?.Invoke(_itemSelected);
+
+          _itemSelected.Select(false);
+          _itemSelected.MoveBack();            
+        }
       }
       else
       {

@@ -17,6 +17,14 @@ public class Item : MonoBehaviour
 
   List<GameObject> _models = new List<GameObject>();
 
+  public enum MergeType
+  {
+    Ok,
+    RejectMaxed,
+    RejectWrongType,
+    RejectWrongAnim,
+  }
+
   public struct ID
   {
     [SerializeField] int _type;
@@ -46,17 +54,34 @@ public class Item : MonoBehaviour
   float      _phaseOffs = 0;
 
   public static float gridSpace = 1.0f;
-  public static System.Action<Item> onShow, onShown, onMerged, onPut, onHide;
+  public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged;
   public static Item Merge(Item item0, Item item1, List<Item> _items)
   {
-    if(EqType(item0, item1) && item1.IsUpgradable)
+    Item newItem = null;
+    MergeType mergeType = MergeType.Ok;
+
+    if(EqType(item0, item1))
     {
-      item0.Hide();
-      _items.Remove(item0);
-      onMerged?.Invoke(item1);
-      return Upgrade(item1, _items);
+      if(item1.IsUpgradable)
+      {
+        item0.Hide();
+        _items.Remove(item0);
+        onMerged?.Invoke(item1);
+        newItem = Upgrade(item1, _items);
+      }
+      else
+        mergeType = MergeType.RejectMaxed;
     }
-    return null;
+    else
+      mergeType = MergeType.RejectWrongType;
+
+    if(newItem == null)
+    {
+      item0.mergeType = mergeType;
+      onNoMerged?.Invoke(item0);
+    }
+
+    return newItem;
   }
   public static Item Upgrade(Item item, List<Item> _items)
   {
@@ -97,7 +122,7 @@ public class Item : MonoBehaviour
   public bool       IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
   public bool       IsSelected {get; set;}
   public void       incLvl(){_id.lvl++;}
-  
+  public MergeType  mergeType = MergeType.Ok;
 
   void Awake()
   {

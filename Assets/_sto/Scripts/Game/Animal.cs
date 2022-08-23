@@ -98,6 +98,7 @@ public class Animal : MonoBehaviour
       _animator.Play("talk", 0);
   }
   public bool CanPut(Item item) => isReady && garbages.Find((garbage)=> Item.EqType(item, garbage)) != null;
+  public bool IsReq(Item item) => garbages.Find((garbage) => Item.EqType(item, garbage)) != null;
   public void Put(Item item)
   {
     if(isReady)

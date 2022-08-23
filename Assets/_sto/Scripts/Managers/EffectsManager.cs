@@ -24,10 +24,10 @@ public class EffectsManager : MonoBehaviour
     //[SerializeField] int fxBombDestroyEmitCnt = 5;
     [SerializeField] ParticleSystem fxPainter = null;
 
-  // [Header("FX string")]
-  //   [SerializeField] string strPushedOut = "{0}!";
-  //   [SerializeField] string strBallsMatched = "{0}!";
-  //   [SerializeField] string strItemExplo = "{0}!";
+    [Header("FX string")]
+    [SerializeField] string _strNoMergeMaxed;
+    [SerializeField] string _strNoMergeWrongType;
+    [SerializeField] string _strAnimalWrongItem;
 
 
     ParticleSystem fxConfetti;
@@ -41,7 +41,7 @@ public class EffectsManager : MonoBehaviour
     private void Awake() 
     {
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
-      //infoLblMan = GameObject.Find("infoCanvas").GetComponent<UIInfoLabelManager>();
+      infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
       //infoLblManDown = GameObject.Find("infoCanvas2").GetComponent<UIInfoLabelManager>();
       fxPainterSubs = fxPainter.GetComponentsInChildren<ParticleSystem>();
     }
@@ -51,9 +51,11 @@ public class EffectsManager : MonoBehaviour
       Level.onDone += OnLevelDone;
       Level.onFinished += OnLevelFinished;
 
-      Item.onMerged += OnItemMerged;
       Item.onShown += OnItemShown;
+      Item.onMerged += OnItemMerged;
+      Item.onNoMerged += OnItemNoMerged;
       Item.onPut += OnItemPut;
+      Item.onNoPut += OnItemNoPut;
     }
     private void OnDisable()
     {
@@ -61,9 +63,11 @@ public class EffectsManager : MonoBehaviour
       Level.onDone -= OnLevelDone;
       Level.onFinished -= OnLevelFinished;
 
-      Item.onMerged -= OnItemMerged;
       Item.onShown -= OnItemShown;
+      Item.onMerged -= OnItemMerged;
+      Item.onNoMerged -= OnItemNoMerged;
       Item.onPut -= OnItemPut;
+      Item.onNoPut -= OnItemNoPut;
     }
 
     Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -101,6 +105,13 @@ public class EffectsManager : MonoBehaviour
       //PlayFXAtPosition(fxHit, sender.transform.position);
       PlayFXAtPosition(fxPaintSplat, sender.transform.position, 0);
     }
+    void OnItemNoMerged(Item sender)
+    {
+      if(sender.mergeType == Item.MergeType.RejectMaxed)
+        infoLblMan.ShowTextPopup(sender.vwpos, _strNoMergeMaxed);
+      else if(sender.mergeType == Item.MergeType.RejectWrongType)
+        infoLblMan.ShowTextPopup(sender.vwpos, _strNoMergeWrongType);
+    }    
     void OnItemShown(Item sender)
     {
       //var psmain = fxPaintSplat.main;
@@ -111,6 +122,11 @@ public class EffectsManager : MonoBehaviour
     {
       PlayFXAtPosition(fxHit, sender.transform.position, 0, false);
     }
+    void OnItemNoPut(Item sender)
+    {
+      infoLblMan.ShowTextPopup(sender.vwpos, _strAnimalWrongItem);
+    }
+
     void OnItemExplo(Item sender)
     {
       //infoLblMan.ShowTextPopup(sender.transform.position, string.Format(strItemExplo, sender.Points), sender.color);
