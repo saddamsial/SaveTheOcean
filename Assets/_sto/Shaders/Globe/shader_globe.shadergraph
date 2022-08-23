@@ -39,6 +39,12 @@
     "m_CategoryData": [
         {
             "m_Id": "bb46106a6a9b43a798619478bac64184"
+        },
+        {
+            "m_Id": "b92ecbf15984403cbb97d47c21e4641a"
+        },
+        {
+            "m_Id": "44ae4c11ec5242b89c4276702a1b7d6f"
         }
     ],
     "m_Nodes": [
@@ -1349,7 +1355,7 @@
     "m_RefNameGeneratedByDisplayName": "SwayMultiplier",
     "m_DefaultReferenceName": "_SwayMultiplier",
     "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
+    "m_GeneratePropertyBlock": false,
     "m_UseCustomSlotLabel": false,
     "m_CustomSlotLabel": "",
     "m_Precision": 0,
@@ -1490,6 +1496,33 @@
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "44ae4c11ec5242b89c4276702a1b7d6f",
+    "m_Name": "Sway",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "f7d64cb1660d48fc85402d75ede19a33"
+        },
+        {
+            "m_Id": "f59f147232a84011b0da3bed2f2ac049"
+        },
+        {
+            "m_Id": "cc38fbfd5cd34bc88fb011b3cc55bd34"
+        },
+        {
+            "m_Id": "79f130d58bed403d9d5106a7e06e1e6a"
+        },
+        {
+            "m_Id": "7e9305412aca4ac481285e68c707d0d9"
+        },
+        {
+            "m_Id": "3cabe9ffc4d64a698d5a59e804819c62"
+        }
+    ]
 }
 
 {
@@ -2403,10 +2436,10 @@
     "m_Guid": {
         "m_GuidSerialized": "afa04d37-b83d-4059-90b7-402d6a09be95"
     },
-    "m_Name": "MaskExponent",
+    "m_Name": "SwayMaskExponent",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "MaskExponent",
-    "m_DefaultReferenceName": "_MaskExponent",
+    "m_RefNameGeneratedByDisplayName": "SwayMaskExponent",
+    "m_DefaultReferenceName": "_SwayMaskExponent",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -3329,6 +3362,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "b92ecbf15984403cbb97d47c21e4641a",
+    "m_Name": "RimLIghtning",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "e185caa914814829af216c81ec288936"
+        },
+        {
+            "m_Id": "9145f4332e2949d88e9f5d01f9bdf006"
+        }
+    ]
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.ColorRGBMaterialSlot",
     "m_ObjectId": "b9cacca9d7c94121b1936aef8eaae058",
     "m_Id": 0,
@@ -3365,30 +3413,6 @@
     "m_ChildObjectList": [
         {
             "m_Id": "8259b8e8e03b46ebb1e3e7d7d7a8d575"
-        },
-        {
-            "m_Id": "f7d64cb1660d48fc85402d75ede19a33"
-        },
-        {
-            "m_Id": "f59f147232a84011b0da3bed2f2ac049"
-        },
-        {
-            "m_Id": "cc38fbfd5cd34bc88fb011b3cc55bd34"
-        },
-        {
-            "m_Id": "79f130d58bed403d9d5106a7e06e1e6a"
-        },
-        {
-            "m_Id": "3cabe9ffc4d64a698d5a59e804819c62"
-        },
-        {
-            "m_Id": "7e9305412aca4ac481285e68c707d0d9"
-        },
-        {
-            "m_Id": "e185caa914814829af216c81ec288936"
-        },
-        {
-            "m_Id": "9145f4332e2949d88e9f5d01f9bdf006"
         },
         {
             "m_Id": "b20eed462a8140609fd1bcc3c33571f0"
@@ -3920,7 +3944,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "d8dfded194f4418c8bf50a4408ba2b95",
     "m_Id": 0,
-    "m_DisplayName": "MaskExponent",
+    "m_DisplayName": "SwayMaskExponent",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

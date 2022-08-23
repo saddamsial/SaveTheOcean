@@ -226,6 +226,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Speed Rotation Transform:10
       objectReference: {fileID: 0}
+    - target: {fileID: 3733595135171723540, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3858892043393819089, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -326,6 +330,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _locations
       objectReference: {fileID: 0}
+    - target: {fileID: 8813429773192728200, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
 --- !u!4 &4416646416499981677 stripped
@@ -348,7 +356,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5281196987026022788, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
   m_PrefabInstance: {fileID: 292211211431944804}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2798128842128172055
+--- !u!114 &3804497548590480010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
