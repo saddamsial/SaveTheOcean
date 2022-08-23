@@ -10,7 +10,10 @@ public class Item : MonoBehaviour
   [SerializeField] GameObject         _modelContainer;
   [SerializeField] ActivatableObject  _activatable;
   [SerializeField] SpringMove         _sm;
+  [SerializeField] Transform          _fx;
   [Header("Settings")]
+  [SerializeField] float              _ampl = 0;
+  [SerializeField] float              _amplSpeed = 3;
 
   List<GameObject> _models = new List<GameObject>();
 
@@ -40,6 +43,7 @@ public class Item : MonoBehaviour
   Vector3    _vbtmExtent = Vector3.zero;
   Vector3    _vmin = Vector3.zero;
   Vector3    _vmax = Vector3.zero;
+  float      _phaseOffs = 0;
 
   public static float gridSpace = 1.0f;
   public static System.Action<Item> onShow, onShown, onMerged, onPut, onHide;
@@ -103,6 +107,10 @@ public class Item : MonoBehaviour
 
     for(int q = 0; q < _modelContainer.transform.childCount; ++q)
       _models.Add(_modelContainer.transform.GetChild(q).gameObject);
+
+    _phaseOffs = Random.Range(0, 90);
+    _amplSpeed *= Random.Range(0.95f, 1.05f);
+    _fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs) * _ampl, 0);
   }
   public void SetAsStatic()
   {
@@ -239,5 +247,7 @@ public class Item : MonoBehaviour
   void Update()
   {
     _lifetime += Time.deltaTime;
+    if(IsReady && !IsSelected)
+      _fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs + _lifetime) * _ampl, 0);
   }
 }

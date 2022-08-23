@@ -287,6 +287,7 @@ MonoBehaviour:
   - {fileID: 8536298820559939731}
   - {fileID: 7930286490525139754}
   _waterRenderer: {fileID: 6418255281977202600}
+  _splitMachine: {fileID: 5136744024670335667}
   _dim: {x: 4, y: 5}
   _gridSpace: 1.25
   _lvlDescs: []
@@ -715,10 +716,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8413518768794796480, guid: b2bd01c6335be834eb8a491767363f30, type: 3}
       propertyPath: m_Name
-      value: ui
+      value: splitMachine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2bd01c6335be834eb8a491767363f30, type: 3}
+--- !u!114 &5136744024670335667 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5642068630134190268, guid: b2bd01c6335be834eb8a491767363f30, type: 3}
+  m_PrefabInstance: {fileID: 650144520768324111}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e559b60f4ef893408b3cd3e8351fd11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7355777049710017288 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8003246999451187463, guid: b2bd01c6335be834eb8a491767363f30, type: 3}

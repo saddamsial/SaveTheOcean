@@ -21,6 +21,7 @@ public class Level : MonoBehaviour
   //[SerializeField] Pipes        _pipes;
   [SerializeField] Transform[]  _animalContainers;
   [SerializeField] Renderer     _waterRenderer;
+  [SerializeField] SplitMachine _splitMachine;
   
   //[SerializeField] Transform[] _paths;
   //[SerializeField] Transform _poiLT;
@@ -322,8 +323,17 @@ public class Level : MonoBehaviour
       }
       else
       {
-        _itemSelected.Select(false);
-        _itemSelected.MoveBack();
+        var splitMachineHit = tid.GetClosestCollider(0.5f, 1);
+        if(_splitMachine?.IsDropSlot(splitMachineHit)?? false)
+        {
+          _itemSelected.Deactivate();
+          _items.Remove(_itemSelected);
+        }
+        else
+        {
+          _itemSelected.Select(false);
+          _itemSelected.MoveBack();
+        }
       }
     }
     _itemSelected = null;
