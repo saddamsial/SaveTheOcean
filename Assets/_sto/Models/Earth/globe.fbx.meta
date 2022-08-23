@@ -33,6 +33,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mat_levelPath
+    second: {fileID: 2100000, guid: b75c1515c44bd3a48ba6c0fcfcb139b7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: mat_spaceDome
     second: {fileID: 2100000, guid: dbffdcaf1d3f8154ababf1cd5202ab5b, type: 2}
   - first:
