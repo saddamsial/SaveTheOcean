@@ -13,6 +13,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mat_asteroids
+    second: {fileID: 2100000, guid: aa2cba3c533421a44bd9e590f07fa941, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: mat_globeClouds
     second: {fileID: 2100000, guid: edbb90b2947d8144eb24051ab71c905b, type: 2}
   - first:
@@ -105,7 +110,7 @@ ModelImporter:
     useFileScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
+    normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
