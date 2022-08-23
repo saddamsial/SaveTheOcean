@@ -169,7 +169,7 @@ public class Level : MonoBehaviour
   {
     onHide?.Invoke(this);
   }
-  void Init()
+  void  Init()
   {
     _grid.Init(_dim, _gridSpace);
 
@@ -225,7 +225,7 @@ public class Level : MonoBehaviour
     }
     _initialItemsCnt = itemsCount;
   }
-  void SpawnItem(Vector2 vgrid)
+  void  SpawnItem(Vector2 vgrid)
   {
     if(_items2.Count > 0)
     {
@@ -360,7 +360,6 @@ public class Level : MonoBehaviour
   void Update()
   {
     Process();
-
     UpdatePollution();
 
   #if UNITY_EDITOR

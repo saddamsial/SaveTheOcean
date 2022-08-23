@@ -218,8 +218,18 @@ public class Item : MonoBehaviour
   }
   public void MoveBack()
   {
-    vlpos = Item.ToPos(vgrid);
+    StartCoroutine(coMoveBack());
   }
+  IEnumerator coMoveBack()
+  {
+    var vdst = Item.ToPos(vgrid);
+    while(Vector3.Distance(vlpos, vdst) > 0.01f)
+    {
+      vlpos = Vector3.Lerp(vlpos, vdst, Time.deltaTime * 8);
+      yield return null;
+    }
+    vlpos = vdst;
+  } 
   public void Hover(bool act)
   {
     if(act)

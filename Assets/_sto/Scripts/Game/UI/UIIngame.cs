@@ -12,6 +12,7 @@ public class UIIngame : MonoBehaviour
   [SerializeField] TMPLbl     _score;
   [SerializeField] UIPanel    _topPanel;
   [SerializeField] TMPLbl     _lblLevelInfo;
+  [SerializeField] UIPanel    _menuPanel;
   
   [Header("Settings")]
   [SerializeField] UIToggleButton muteBtn;
@@ -108,9 +109,18 @@ public class UIIngame : MonoBehaviour
   {
 
   }
+  public void OnBtnClosePopups()
+  {
+    _menuPanel.DeactivatePanel();
+  }
   public void OnBtnRestart()
   {
     FindObjectOfType<Game>()?.RestartLevel();
+  }
+  public void OnBtnQuit()
+  {
+    Hide();
+    FindObjectOfType<Game>().ShowEarth(false);
   }
   public void OnBtnMute()
   {

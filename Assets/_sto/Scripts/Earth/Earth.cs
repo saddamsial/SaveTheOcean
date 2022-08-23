@@ -72,6 +72,7 @@ public class Earth : MonoBehaviour
   {
     SelectLocation(indexLocation);
     _earthPrefab.SetActive(true);
+    _vessel.gameObject.SetActive(true);
 
     UpdateLevelsStates();
     int location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;      
@@ -89,6 +90,7 @@ public class Earth : MonoBehaviour
   {
     onHide?.Invoke();
     _earthPrefab.SetActive(false);
+    _vessel.gameObject.SetActive(false);
   }
   
   public void OnInputBeg(TouchInputData tid)
