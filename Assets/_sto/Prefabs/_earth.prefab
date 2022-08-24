@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1958313581}
   - component: {fileID: 1958313580}
   - component: {fileID: 1958313579}
+  - component: {fileID: 295654973}
   m_Layer: 0
   m_Name: particleClouds
   m_TagString: Untagged
@@ -223,7 +224,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.9009434, g: 0.95647514, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -284,9 +285,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     startSize:
       serializedVersion: 2
-      minMaxState: 0
-      scalar: 0.6
-      minScalar: 1
+      minMaxState: 3
+      scalar: 0.7
+      minScalar: 0.4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -337,7 +338,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -390,7 +391,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -672,7 +673,7 @@ ParticleSystem:
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 2
     m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
+    m_MeshNormalOffset: -0.1
     m_MeshSpawn:
       mode: 0
       spread: 0
@@ -729,13 +730,13 @@ ParticleSystem:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-    m_Mesh: {fileID: -817564778058547306, guid: df17b828ef9625b4ca65e16177455637, type: 3}
+    m_Mesh: {fileID: 2612362942085809275, guid: df17b828ef9625b4ca65e16177455637, type: 3}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
     m_Sprite: {fileID: 0}
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
-    m_UseMeshColors: 0
+    m_UseMeshColors: 1
     alignToDirection: 0
     m_Texture: {fileID: 0}
     m_TextureClipChannel: 3
@@ -867,7 +868,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 8
+      scalar: 16
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4812,6 +4813,22 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &295654973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958313578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ddbd64eee165884bace9e878b928693, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectMultiplier: 1
+  useRandomPhaseOffset: 1
+  axis: {x: 0, y: 1, z: 0}
+  speed: 8
 --- !u!1 &292211209855933623
 GameObject:
   m_ObjectHideFlags: 0
@@ -5122,6 +5139,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4746795586118359653, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5281196987026022788, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_Layer
       value: 13
@@ -5158,6 +5179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _locations
       objectReference: {fileID: 0}
+    - target: {fileID: 8196655326863983105, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8813429773192728200, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_CastShadows
       value: 0
@@ -5183,27 +5208,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5743060865689004575, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
   m_PrefabInstance: {fileID: 292211211431944804}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5567768698074498016 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5281196987026022788, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-  m_PrefabInstance: {fileID: 292211211431944804}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3804497548590480010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5567768698074498016}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ddbd64eee165884bace9e878b928693, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectMultiplier: 1
-  useRandomPhaseOffset: 1
-  axis: {x: 0, y: 1, z: 0}
-  speed: 4
 --- !u!1 &6686801536249195533 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6395795495333318249, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
