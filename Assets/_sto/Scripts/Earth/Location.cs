@@ -48,6 +48,9 @@ public class Location : MonoBehaviour
   {
     int mi = State2MI(state);
     for(int q = 0; q < _stateModels.Length; ++q)
-      _stateModels[q].SetActive(q == mi);
+    {
+      if(_stateModels[q] != null)
+        _stateModels[q]?.SetActive(q == mi);
+    }
   }
 }
