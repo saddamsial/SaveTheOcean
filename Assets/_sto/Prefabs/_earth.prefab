@@ -90,7 +90,7 @@ MonoBehaviour:
   _rotateMax: 500
   _rotateToLocationSpeed: 5
   _rotateDamping: 0.95
-  _rotateVertRotoRange: 20
+  _rotateVertRotoRange: 30
 --- !u!114 &8373776387233828538
 MonoBehaviour:
   m_ObjectHideFlags: 0
