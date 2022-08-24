@@ -121,8 +121,8 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _SwayAmplitude: 15
-    - _SwayMaskExponent: 3
+    - _SwayAmplitude: 8
+    - _SwayMaskExponent: 5
     - _SwayMultiplier: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
