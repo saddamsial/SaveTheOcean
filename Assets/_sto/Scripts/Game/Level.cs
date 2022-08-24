@@ -18,7 +18,6 @@ public class Level : MonoBehaviour
   [SerializeField] Transform    _itemsContainer;
   [SerializeField] Transform    _tilesContainer;
   [SerializeField] Transform    _animalsContainer;
-  //[SerializeField] Pipes        _pipes;
   [SerializeField] Transform[]  _animalContainers;
   [SerializeField] Renderer     _waterRenderer;
   [SerializeField] SplitMachine _splitMachine;
@@ -119,7 +118,21 @@ public class Level : MonoBehaviour
     {
       var va = g2a(vgrid, _dim);
       _tiles[va.y, va.x] = gt;
+      gt.vgrid = vgrid;
       gt.set(false);
+    }
+    public Vector2? getEmpty()
+    {
+      List<Vector2> vps = new List<Vector2>();
+      for(int y = 0; y < _dim.y; ++y)
+      {
+        for(int x = 0; x < _dim.x; ++x)
+        {
+          if(_grid[y,x] == 0)
+            vps.Add(a2g(new Vector2Int(x, y), _dim));
+        }
+      }
+      return (vps.Count > 0)? vps.get_random() : null;
     }
     public bool isOverAxisZ(Vector3 vpos)
     {
@@ -143,6 +156,8 @@ public class Level : MonoBehaviour
     _uiSummary = FindObjectOfType<UISummary>(true);
 
     _mpb = new MaterialPropertyBlock();
+
+    _splitMachine.Init(_items);
 
     //_actObj = GetComponent<ActivatableObject>();
 
@@ -291,6 +306,18 @@ public class Level : MonoBehaviour
     if(!_itemSelected)
       return;
 
+    bool hit = IsItemHit(tid) || IsAnimalHit(tid) || IsSplitMachineHit(tid) || IsTileHit(tid);
+    if(!hit)
+    {
+      _itemSelected.Select(false);
+      _itemSelected.MoveBack();
+    }
+    _itemSelected = null;
+  }
+
+  bool IsItemHit(TouchInputData tid)
+  {
+    bool is_hit = false;
     var itemHit = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
     if(itemHit && itemHit != _itemSelected && !itemHit.IsInMachine)
     {
@@ -298,66 +325,76 @@ public class Level : MonoBehaviour
       if(newItem)
       {
         _grid.set(_itemSelected.vgrid, 0);
-        _splitMachine.Remove(_itemSelected);
+        _splitMachine.RemoveFromSplitSlot(_itemSelected);
         newItem.Show();
         SpawnItem(_itemSelected.vgrid);
-      }
-      else
-      {
-        _itemSelected.Select(false);
-        _itemSelected.MoveBack();
+        is_hit = true;
       }
     }
-    else
+    return is_hit;
+  }
+  bool IsAnimalHit(TouchInputData tid)
+  {
+    bool is_hit = false;
+    var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
+    if(animalHit)
     {
-      var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
-      if(animalHit)
+      if(animalHit.CanPut(_itemSelected))
       {
-        if(animalHit.CanPut(_itemSelected))
+        Item.onPut(_itemSelected);
+        animalHit.Put(_itemSelected);
+        _grid.set(_itemSelected.vgrid, 0);
+        if(_itemSelected.IsInMachine)
         {
-          Item.onPut(_itemSelected);
-          animalHit.Put(_itemSelected);
-          _grid.set(_itemSelected.vgrid, 0);
-          if(_itemSelected.IsInMachine)
-          {
-            _splitMachine.Remove(_itemSelected);
-            _itemSelected.transform.SetParent(_itemsContainer);
-          }
-          //_pipes.PollutionRate(RequestRate());
-          _pollutionDest = PollutionRate();
-          onGarbageOut?.Invoke(this);
-          SpawnItem(_itemSelected.vgrid);
-          CheckEnd();
+          _splitMachine.RemoveFromSplitSlot(_itemSelected);
+          _itemSelected.transform.SetParent(_itemsContainer);
         }
-        else
-        {
-          if(!animalHit.IsReq(_itemSelected))
-            Item.onNoPut?.Invoke(_itemSelected);
-
-          _itemSelected.Select(false);
-          _itemSelected.MoveBack();            
-        }
+        //_pipes.PollutionRate(RequestRate());
+        _pollutionDest = PollutionRate();
+        onGarbageOut?.Invoke(this);
+        SpawnItem(_itemSelected.vgrid);
+        CheckEnd();
+        is_hit = true;
       }
       else
       {
-        var splitMachineHit = tid.GetClosestCollider(0.5f, 1);
-        if((_splitMachine?.IsDropSlot(splitMachineHit)?? false) && _splitMachine.IsReady && _itemSelected.IsSplitable)
-        {
-          _grid.set(_itemSelected.vgrid, 0);
-          var newItems = Item.Split(_itemSelected, _items);
-          if(newItems != null)
-          {
-            _splitMachine.addSplited(newItems);
-          }
-        }
-        else
-        {
-          _itemSelected.Select(false);
-          _itemSelected.MoveBack();
-        }
+        if(!animalHit.IsReq(_itemSelected))
+          Item.onNoPut?.Invoke(_itemSelected);
       }
     }
-    _itemSelected = null;
+
+    return is_hit;
+  }
+  bool IsSplitMachineHit(TouchInputData tid)
+  {
+    bool is_hit = false;
+    var splitMachineHit = tid.GetClosestCollider(0.5f, 1);
+    if((_splitMachine?.IsDropSlot(splitMachineHit) ?? false) && _splitMachine.IsReady && _itemSelected.IsSplitable)
+    {
+      _grid.set(_itemSelected.vgrid, 0);
+      _splitMachine.AddToDropSlot(_itemSelected);
+      is_hit = true;
+    }
+    return is_hit;
+  }
+  bool IsTileHit(TouchInputData tid)
+  {
+    bool is_hit = false;
+    if(_itemSelected.IsInMachine)
+    {
+      var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
+      if(tileHit)
+      {
+        tileHit.set(true);
+        _grid.set(_itemSelected.vgrid, 0);
+        _itemSelected.vgrid = tileHit.vgrid;
+        _itemSelected.Select(false);
+        _splitMachine.RemoveFromSplitSlot(_itemSelected);
+        _itemSelected.MoveBack();
+        is_hit = true;
+      }
+    }
+    return is_hit;
   }
 
   IEnumerator coEnd()

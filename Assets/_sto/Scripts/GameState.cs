@@ -74,7 +74,7 @@ public class GameState : SavableScriptableObject
       else
         lvl.state = Level.State.Finished;
     }
-    public Level.State GetLevelState(int lvl_idx)
+    public Level.State  GetLevelState(int lvl_idx)
     {
       var lvl = FindLevel(lvl_idx);
       return (lvl != null) ? lvl.state : Level.State.Locked;
@@ -89,6 +89,15 @@ public class GameState : SavableScriptableObject
   }
   [SerializeField] EconomyState economy;
 
+  [System.Serializable]
+  class SplitMachineState
+  {
+    [SerializeField] int _capacity = 1;
+
+    public int capacity {get => _capacity ; set => _capacity = value;}
+  }
+  [SerializeField] SplitMachineState splitMachine;
+  
   [System.Serializable]
   class SettingsState
   {
@@ -152,11 +161,15 @@ public class GameState : SavableScriptableObject
   }
   public static class Econo
   {
-    public static int Cash {get => get().economy.cash; set{ get().economy.cash = value;}}
+    public static int cash {get => get().economy.cash; set{ get().economy.cash = value;}}
   }
   public static class Settings
   {
     public static bool IsMuted {get => !get().settings.sounds; set{get().settings.sounds = !value;}}
+  }
+  public static class SplitMachine
+  {
+    public static int capacity {get => get().splitMachine.capacity; set => get().splitMachine.capacity = value;}
   }
 
   [Header("Customization")]

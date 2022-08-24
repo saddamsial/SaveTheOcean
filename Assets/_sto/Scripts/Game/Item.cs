@@ -95,7 +95,7 @@ public class Item : MonoBehaviour
       new_items[0]._inMachine = true;
       new_items[1] = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
       new_items[1]._inMachine = true;
-      item.Hide();
+      //item.Hide();
 
       _items.Remove(item);
       _items.Add(new_items[0]);
@@ -133,17 +133,17 @@ public class Item : MonoBehaviour
   public GameObject mdl => _models[0];
   public Vector3    vdim => _vdim;
   public Vector3    vbtmExtent => _vbtmExtent;
-  public Vector2    vgrid {get => _grid; set{_grid = value;}}
-  public Vector2Int agrid {get => _agrid; set{_agrid = value;}}
-  public Vector3    vlpos {get => transform.localPosition; set{transform.localPosition = value;}}
-  public Vector3    vwpos {  get => transform.position; set { transform.position = value;}}
-  public Vector3?   vdstPos { get=> _vdstPos; set { _vdstPos = value;}}
+  public Vector2    vgrid {get => _grid; set => _grid = value;}
+  public Vector2Int agrid {get => _agrid; set => _agrid = value;}
+  public Vector3    vlpos {get => transform.localPosition; set => transform.localPosition = value;}
+  public Vector3    vwpos { get => transform.position; set => transform.position = value;}
+  public Vector3?   vdstPos {get=> _vdstPos; set => _vdstPos = value;}
   public Vector3    gridPos => Item.ToPos(vgrid);
   public bool       IsMaxLevel => id.lvl + 1 == GameData.Prefabs.ItemLevelsCnt(id.type);
   public bool       IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
   public bool       IsSplitable => id.lvl > 0;
   public bool       IsSelected {get; set;}
-  public bool       IsInMachine => _inMachine;
+  public bool       IsInMachine {get => _inMachine; set => _inMachine = value;}
   public void       incLvl(){_id.lvl++;}
   public void       decLvl(){if(_id.lvl > 0) _id.lvl--;}
   public MergeType  mergeType = MergeType.Ok;
@@ -266,12 +266,15 @@ public class Item : MonoBehaviour
     }
     gameObject.SetActive(false);
   }
+  Vector3 _vBackPos = Vector3.zero;
   public void Select(bool sel)
   {
     var coll = GetComponent<Collider>();
     if(coll)
       coll.enabled = !sel;
-    IsSelected = sel;  
+    IsSelected = sel;
+    if(sel)
+      _vBackPos = vlpos;
   }
   public void MoveBack()
   {
@@ -279,7 +282,7 @@ public class Item : MonoBehaviour
   }
   IEnumerator coMoveBack()
   {
-    var vdst = Item.ToPos(vgrid);
+    var vdst = (IsInMachine)? _vBackPos : Item.ToPos(vgrid);
     while(Vector3.Distance(vlpos, vdst) > 0.01f)
     {
       vlpos = Vector3.Lerp(vlpos, vdst, Time.deltaTime * 8);

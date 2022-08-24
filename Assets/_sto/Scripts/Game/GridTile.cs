@@ -8,6 +8,10 @@ public class GridTile : MonoBehaviour
   [SerializeField] GameObject _clear;
   [SerializeField] ParticleSystem _ps;
 
+  Vector2 _vgrid = Vector2.zero;
+
+  public Vector2 vgrid{get => _vgrid; set => _vgrid = value;}
+
   public void set(bool act)
   {
     _dirty.SetActive(act);

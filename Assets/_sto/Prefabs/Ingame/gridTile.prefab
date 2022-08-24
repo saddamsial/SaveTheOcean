@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8050324866816017223}
   - component: {fileID: 8178171026830446907}
+  - component: {fileID: 6953636392454261750}
   m_Layer: 0
   m_Name: gridTile
   m_TagString: Untagged
@@ -218,6 +219,19 @@ MonoBehaviour:
   _dirty: {fileID: 2113916327998355675}
   _clear: {fileID: 4263976903518794860}
   _ps: {fileID: 5034446534644560158}
+--- !u!65 &6953636392454261750
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7415505821154433624}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.28, y: 0.1, z: 1.28}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &8954560354352442966
 PrefabInstance:
   m_ObjectHideFlags: 0
