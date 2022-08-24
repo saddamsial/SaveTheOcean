@@ -18,6 +18,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mat_atmosphereDome
+    second: {fileID: 2100000, guid: e422a3a2f3be8de46992b4c8ec3826d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: mat_globeClouds
     second: {fileID: 2100000, guid: edbb90b2947d8144eb24051ab71c905b, type: 2}
   - first:
