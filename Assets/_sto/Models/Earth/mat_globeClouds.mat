@@ -102,12 +102,14 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnvironmentReflections: 1
+    - _Exponent: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossinessSource: 0
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
+    - _Opacity: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
@@ -122,14 +124,14 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _WaveAmplitude: 0.1
-    - _WaveScale: 2
+    - _WaveAmplitude: 0.2
+    - _WaveScale: 1
     - _WaveSpeed: 0.1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.44588825, g: 0.54259396, b: 0.5660378, a: 1}
+    - _BaseColor: {r: 0.7877358, g: 0.9614498, b: 1, a: 1}
     - _Color: {r: 0.504094, g: 0.58602244, b: 0.6037736, a: 1}
-    - _EmissionColor: {r: 0.062299743, g: 0.21598694, b: 0.3773585, a: 1}
+    - _EmissionColor: {r: 3.292, g: 3.774727, b: 4, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
