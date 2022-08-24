@@ -180,7 +180,7 @@ public class Earth : MonoBehaviour
   void Update()
   {
     RotateToLocation();
-    _rotateSpeed *= Mathf.Pow(_rotateDamping, Time.deltaTime / 0.016666f);
+    _rotateSpeed *= Mathf.Pow(_rotateDamping, TimeEx.deltaTimeFrame);
     _fx.transform.localRotation *= Quaternion.AngleAxis(-_rotateSpeed, Vector3.up);
     _earthFx?.RotoSpeed(_rotateSpeed);
   }
