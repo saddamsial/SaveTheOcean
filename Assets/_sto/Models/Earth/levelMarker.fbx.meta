@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: mat_globeContinents
     second: {fileID: 2100000, guid: 967240cd90fe16b47890749c5a2ddcb9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: mat_levelMarkers
+    second: {fileID: 2100000, guid: 677f1fa18277d3f4285866cfe738ab5a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 1
