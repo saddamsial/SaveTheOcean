@@ -107,7 +107,7 @@ public class Level : MonoBehaviour
     {
       var va = g2a(vgrid, _dim);
       _grid[va.y, va.x] = val;
-      _tiles[va.y, va.x].set((val!=0)? true : false);
+      _tiles[va.y, va.x].Set((val!=0)? true : false);
     }
     public int get(Vector2 vgrid)
     {
@@ -119,7 +119,17 @@ public class Level : MonoBehaviour
       var va = g2a(vgrid, _dim);
       _tiles[va.y, va.x] = gt;
       gt.vgrid = vgrid;
-      gt.set(false);
+      gt.Set(false);
+    }
+    public void hovers(bool hov)
+    {
+      for(int y = 0; y < _dim.y; ++y)
+      {
+        for(int x = 0; x < _dim.x; ++x)
+        {
+          _tiles[y,x].Hover(hov);
+        }
+      }
     }
     public Vector2? getEmpty()
     {
@@ -300,6 +310,13 @@ public class Level : MonoBehaviour
       else
         _animalSelected = null;
     }
+
+    _grid.hovers(false);
+    if(_itemSelected.IsInMachine)
+    {
+      var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
+      tileHit?.Hover(true);
+    }
   }
   public void OnInputEnd(TouchInputData tid)
   {
@@ -385,13 +402,14 @@ public class Level : MonoBehaviour
       var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
       if(tileHit)
       {
-        tileHit.set(true);
         _grid.set(_itemSelected.vgrid, 0);
         _itemSelected.vgrid = tileHit.vgrid;
+        _grid.set(_itemSelected.vgrid, 1);
         _itemSelected.Select(false);
         _splitMachine.RemoveFromSplitSlot(_itemSelected);
         _itemSelected.MoveBack();
         is_hit = true;
+        _grid.hovers(false);
       }
     }
     return is_hit;

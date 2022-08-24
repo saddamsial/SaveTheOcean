@@ -219,6 +219,7 @@ MonoBehaviour:
   _dirty: {fileID: 2113916327998355675}
   _clear: {fileID: 4263976903518794860}
   _ps: {fileID: 5034446534644560158}
+  _hoverColor: {r: 0, g: 0.6156863, b: 1, a: 0.68235296}
 --- !u!65 &6953636392454261750
 BoxCollider:
   m_ObjectHideFlags: 0
