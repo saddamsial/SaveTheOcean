@@ -102,6 +102,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 10
+    - _EdgeFadeExponent: 0.25
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -125,6 +126,10 @@ Material:
     - _Speed: -0.05
     - _SrcBlend: 5
     - _Surface: 1
+    - _WaveHeight: 0.1
+    - _WaveRepeat: 2
+    - _WaveSmootness: 16
+    - _WaveSpeed: -0.25
     - _Width: 1
     - _WorkflowMode: 1
     - _ZWrite: 0
@@ -133,8 +138,9 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Emission: {r: 3067.9844, g: 1651.9915, b: 0, a: 1}
+    - _Emission: {r: 12271.9375, g: 6617.851, b: 0, a: 1}
     - _EmissionColor: {r: 16, g: 12.800001, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TextureTiling: {r: 96, g: 1, b: 0, a: 0}
     - _Tiling: {r: 96, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
