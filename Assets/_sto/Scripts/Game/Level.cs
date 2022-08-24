@@ -337,8 +337,12 @@ public class Level : MonoBehaviour
         var splitMachineHit = tid.GetClosestCollider(0.5f, 1);
         if(_splitMachine?.IsDropSlot(splitMachineHit)?? false)
         {
+          _grid.set(_itemSelected.vgrid, 0);
           _itemSelected.Deactivate();
           _items.Remove(_itemSelected);
+          _itemSelected.decLvl();
+          
+
         }
         else
         {

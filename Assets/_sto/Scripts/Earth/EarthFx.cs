@@ -21,7 +21,7 @@ public class EarthFx : MonoBehaviour
   }
   public void RotoSpeed(float roto_speed)
   {
-    _swayDst = Mathf.Clamp(roto_speed / _roto2SwayFactor, -1, 1);
+    _swayDst = Mathf.Clamp(TimeEx.deltaTimeFrameInv * roto_speed / _roto2SwayFactor, -1, 1);
     if(Mathf.Approximately(_swayDst, 0))
       _swayDst = 0;
   }

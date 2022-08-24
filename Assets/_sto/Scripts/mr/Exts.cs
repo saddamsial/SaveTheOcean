@@ -226,7 +226,12 @@ public static class ArrayEx
     array[idx0] = tmp;
   }
 }
-
+public static class TimeEx
+{
+  ///
+  public static float deltaTimeFrame => 60 * Time.deltaTime;
+  public static float deltaTimeFrameInv => 1 / deltaTimeFrame;
+}
 public static class MonoExt
 {
   public static void Invoke(this MonoBehaviour mono, System.Action methodToInvoke, float delay)

@@ -83,6 +83,17 @@ public class Item : MonoBehaviour
 
     return newItem;
   }
+  public static Item[] Split(Item item, List<Item> _items)
+  {
+    Item[] items = new Item[2];
+    if(item.id.lvl > 0)
+    {
+
+    }
+    
+    
+    return items;
+  } 
   public static Item Upgrade(Item item, List<Item> _items)
   {
     Item new_item = null;
@@ -122,6 +133,7 @@ public class Item : MonoBehaviour
   public bool       IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
   public bool       IsSelected {get; set;}
   public void       incLvl(){_id.lvl++;}
+  public void       decLvl(){if(_id.lvl > 0) _id.lvl--;}
   public MergeType  mergeType = MergeType.Ok;
 
   void Awake()
