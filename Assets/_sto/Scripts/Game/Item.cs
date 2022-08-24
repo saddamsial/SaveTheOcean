@@ -52,6 +52,7 @@ public class Item : MonoBehaviour
   Vector3    _vmin = Vector3.zero;
   Vector3    _vmax = Vector3.zero;
   float      _phaseOffs = 0;
+  bool       _inMachine = false;
 
   public static float gridSpace = 1.0f;
   public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged;
@@ -85,14 +86,23 @@ public class Item : MonoBehaviour
   }
   public static Item[] Split(Item item, List<Item> _items)
   {
-    Item[] items = new Item[2];
+    Item[] new_items = null;
     if(item.id.lvl > 0)
     {
+      item.decLvl();
+      new_items = new Item[2];
+      new_items[0] = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
+      new_items[0]._inMachine = true;
+      new_items[1] = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
+      new_items[1]._inMachine = true;
+      item.Hide();
 
+      _items.Remove(item);
+      _items.Add(new_items[0]);
+      _items.Add(new_items[1]);
     }
-    
-    
-    return items;
+
+    return new_items;
   } 
   public static Item Upgrade(Item item, List<Item> _items)
   {
@@ -131,7 +141,9 @@ public class Item : MonoBehaviour
   public Vector3    gridPos => Item.ToPos(vgrid);
   public bool       IsMaxLevel => id.lvl + 1 == GameData.Prefabs.ItemLevelsCnt(id.type);
   public bool       IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
+  public bool       IsSplitable => id.lvl > 0;
   public bool       IsSelected {get; set;}
+  public bool       IsInMachine => _inMachine;
   public void       incLvl(){_id.lvl++;}
   public void       decLvl(){if(_id.lvl > 0) _id.lvl--;}
   public MergeType  mergeType = MergeType.Ok;

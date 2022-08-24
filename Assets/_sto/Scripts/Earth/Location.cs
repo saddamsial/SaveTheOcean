@@ -4,11 +4,8 @@ using UnityEngine;
 public class Location : MonoBehaviour
 {
   [SerializeField] GameObject[] _stateModels;
-  [SerializeField] GameObject   _markerModel;
   [SerializeField] GameObject   _selectionModel;
   [SerializeField] Level.State  _state = Level.State.Locked;
-  [SerializeField] Transform    _modelTransf;
-
 
   Quaternion _localDstRoto = Quaternion.identity;
   private int _idx = -1;
@@ -43,8 +40,7 @@ public class Location : MonoBehaviour
   }
   public void Select(bool sel)
   {
-    _markerModel.SetActive(sel);
-    _selectionModel.SetActive(false);
+    _selectionModel.SetActive(sel);
   }
 
   int  State2MI(Level.State state) => (int)state;

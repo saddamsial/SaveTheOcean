@@ -48,13 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateModels:
   - {fileID: 6900507160228118993}
+  - {fileID: 4876487254171362856}
+  - {fileID: 539588571715548367}
+  - {fileID: 539588571715548367}
   - {fileID: 7176365723557189049}
-  - {fileID: 539588571715548367}
-  - {fileID: 539588571715548367}
-  _markerModel: {fileID: 4876487254171362856}
   _selectionModel: {fileID: 8698661391525078172}
   _state: 0
-  _modelTransf: {fileID: 6866172737749676710}
 --- !u!135 &270668288023872615
 SphereCollider:
   m_ObjectHideFlags: 0

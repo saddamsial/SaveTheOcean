@@ -39,6 +39,7 @@ public class Level : MonoBehaviour
     Unlocked,
     Started,
     Finished,
+    Warning,
   }
 
   [System.Serializable]
@@ -291,12 +292,13 @@ public class Level : MonoBehaviour
       return;
 
     var itemHit = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
-    if(itemHit && itemHit != _itemSelected)
+    if(itemHit && itemHit != _itemSelected && !itemHit.IsInMachine)
     {
       var newItem = Item.Merge(_itemSelected, itemHit, _items);
       if(newItem)
       {
         _grid.set(_itemSelected.vgrid, 0);
+        _splitMachine.Remove(_itemSelected);
         newItem.Show();
         SpawnItem(_itemSelected.vgrid);
       }
@@ -316,7 +318,11 @@ public class Level : MonoBehaviour
           Item.onPut(_itemSelected);
           animalHit.Put(_itemSelected);
           _grid.set(_itemSelected.vgrid, 0);
-          _items.Remove(_itemSelected);
+          if(_itemSelected.IsInMachine)
+          {
+            _splitMachine.Remove(_itemSelected);
+            _itemSelected.transform.SetParent(_itemsContainer);
+          }
           //_pipes.PollutionRate(RequestRate());
           _pollutionDest = PollutionRate();
           onGarbageOut?.Invoke(this);
@@ -335,14 +341,14 @@ public class Level : MonoBehaviour
       else
       {
         var splitMachineHit = tid.GetClosestCollider(0.5f, 1);
-        if(_splitMachine?.IsDropSlot(splitMachineHit)?? false)
+        if((_splitMachine?.IsDropSlot(splitMachineHit)?? false) && _splitMachine.IsReady && _itemSelected.IsSplitable)
         {
           _grid.set(_itemSelected.vgrid, 0);
-          _itemSelected.Deactivate();
-          _items.Remove(_itemSelected);
-          _itemSelected.decLvl();
-          
-
+          var newItems = Item.Split(_itemSelected, _items);
+          if(newItems != null)
+          {
+            _splitMachine.addSplited(newItems);
+          }
         }
         else
         {
