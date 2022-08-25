@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: planeMaterial
+  m_Name: ingameWater
   m_Shader: {fileID: -6465566751694194690, guid: f380d70777c5cac49bde1ddb6431488b, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -114,7 +114,8 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _HeigthWaveOpacity: 0
+    - _HeigthWaveOpacity: 0.25
+    - _HueShift: 0.93
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -126,25 +127,25 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Surface: 0
-    - _SurfaceCausticsOpacity: 0.7
-    - _SurfaceCausticsSize: 1.5
+    - _SurfaceCausticsOpacity: 0.5
+    - _SurfaceCausticsSize: 2
     - _SurfaceCausticsSpeed: 0.05
     - _SurfaceCellExponent: 6
     - _SurfaceCellOpacity: 0.25
     - _SurfaceCellSize: 24
     - _SurfaceCellSpeed: 2
-    - _WaterOpacity: 0.64
+    - _WaterOpacity: 1
     - _WaveAmplitude: 0.05
     - _WaveFrequency: 1
     - _WaveSpeed: 0.05
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.5650766, b: 1, a: 1}
+    - _BaseColor: {r: 0, g: 0.56470585, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FarColor: {r: 0.514151, g: 1, b: 0.93211675, a: 1}
-    - _HeigthWaveColor: {r: 0.38679248, g: 0.31928626, b: 0.3299907, a: 1}
+    - _HeigthWaveColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2255716190660928287
