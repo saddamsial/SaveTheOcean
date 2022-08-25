@@ -29,6 +29,7 @@ public class Level : MonoBehaviour
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
   [SerializeField] float      _gridSpace = 1.0f;
+  [SerializeField] Color      _waterColor;  
   [Header("LvlDesc")]
   [SerializeField] LvlDesc[]  _lvlDescs;
 
@@ -166,6 +167,8 @@ public class Level : MonoBehaviour
     _uiSummary = FindObjectOfType<UISummary>(true);
 
     _mpb = new MaterialPropertyBlock();
+    _mpb.SetColor("_BaseColor", _waterColor);
+    _waterRenderer.SetPropertyBlock(_mpb);
 
     _splitMachine.Init(_items);
 
@@ -266,10 +269,10 @@ public class Level : MonoBehaviour
 
   void  UpdatePollution()
   {
-    _pollutionRate = Mathf.Lerp(_pollutionRate, _pollutionDest, Time.deltaTime * 2);
-    _waterRenderer.GetPropertyBlock(_mpb);
-    _mpb.SetFloat("_HeigthWaveOpacity", _pollutionRate);
-    _waterRenderer.SetPropertyBlock(_mpb);
+    // _pollutionRate = Mathf.Lerp(_pollutionRate, _pollutionDest, Time.deltaTime * 2);
+    // _waterRenderer.GetPropertyBlock(_mpb);
+    // _mpb.SetFloat("_HeigthWaveOpacity", _pollutionRate);
+    // _waterRenderer.SetPropertyBlock(_mpb);
   }
   public float PollutionRate()
   {
@@ -312,11 +315,8 @@ public class Level : MonoBehaviour
     }
 
     _grid.hovers(false);
-    if(_itemSelected.IsInMachine)
-    {
-      var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
-      tileHit?.Hover(true);
-    }
+    var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
+    tileHit?.Hover(true);
   }
   public void OnInputEnd(TouchInputData tid)
   {
@@ -397,7 +397,7 @@ public class Level : MonoBehaviour
   bool IsTileHit(TouchInputData tid)
   {
     bool is_hit = false;
-    if(_itemSelected.IsInMachine)
+    //if(_itemSelected.IsInMachine)
     {
       var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
       if(tileHit)
@@ -407,7 +407,7 @@ public class Level : MonoBehaviour
         _grid.set(_itemSelected.vgrid, 1);
         _itemSelected.Select(false);
         _splitMachine.RemoveFromSplitSlot(_itemSelected);
-        _itemSelected.MoveBack();
+        _itemSelected.MoveToGrid();
         is_hit = true;
         _grid.hovers(false);
       }
