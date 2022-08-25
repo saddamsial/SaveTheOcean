@@ -31,7 +31,13 @@ public class GridTile : MonoBehaviour
     _dirty.SetActive(act);
     _clear.SetActive(!act);
     if(act)
-      this.Invoke(() => this._ps.Play(), 1);
+    {
+      this.Invoke(() => 
+      {
+        if(_dirty.activeInHierarchy)
+          this._ps.Play();
+      }, 1);
+    }
     else
     {
       _destClearColor = _baseClearColor;

@@ -60,6 +60,7 @@ public class Item : MonoBehaviour
   {
     Item newItem = null;
     MergeType mergeType = MergeType.Ok;
+    item0.mergeType = mergeType;
 
     if(EqType(item0, item1))
     {
@@ -266,7 +267,8 @@ public class Item : MonoBehaviour
     }
     gameObject.SetActive(false);
   }
-  Vector3 _vBackPos = Vector3.zero;
+  Vector3   _vBackPos = Vector3.zero;
+  Coroutine _coMoveHandle = null;
   public void Select(bool sel)
   {
     var coll = GetComponent<Collider>();
@@ -274,11 +276,15 @@ public class Item : MonoBehaviour
       coll.enabled = !sel;
     IsSelected = sel;
     if(sel)
+    {
+      if(_coMoveHandle != null)      
+        StopCoroutine(_coMoveHandle);
       _vBackPos = vlpos;
+    }
   }
   public void MoveToGrid()
   {
-    StartCoroutine(coMoveToGrid());
+    _coMoveHandle = StartCoroutine(coMoveToGrid());
   }
   IEnumerator coMoveToGrid()
   {
@@ -292,7 +298,7 @@ public class Item : MonoBehaviour
   }
   public void MoveBack()
   {
-    StartCoroutine(coMoveBack());
+    _coMoveHandle = StartCoroutine(coMoveBack());
   }
   IEnumerator coMoveBack()
   {
@@ -303,6 +309,7 @@ public class Item : MonoBehaviour
       yield return null;
     }
     vlpos = vdst;
+    _coMoveHandle = null;
   } 
   public void Hover(bool act)
   {

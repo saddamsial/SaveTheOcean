@@ -323,8 +323,8 @@ public class Level : MonoBehaviour
     if(!_itemSelected)
       return;
 
-    bool hit = IsItemHit(tid) || IsAnimalHit(tid) || IsSplitMachineHit(tid) || IsTileHit(tid);
-    if(!hit)
+    bool is_hit = IsItemHit(tid) || IsAnimalHit(tid) || IsSplitMachineHit(tid) || IsTileHit(tid);
+    if(!is_hit)
     {
       _itemSelected.Select(false);
       _itemSelected.MoveBack();
@@ -336,8 +336,10 @@ public class Level : MonoBehaviour
   {
     bool is_hit = false;
     var itemHit = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
+    bool is_merged = false;
     if(itemHit && itemHit != _itemSelected && !itemHit.IsInMachine)
     {
+      is_hit = true;
       var newItem = Item.Merge(_itemSelected, itemHit, _items);
       if(newItem)
       {
@@ -345,9 +347,15 @@ public class Level : MonoBehaviour
         _splitMachine.RemoveFromSplitSlot(_itemSelected);
         newItem.Show();
         SpawnItem(_itemSelected.vgrid);
-        is_hit = true;
+        is_merged = true;
       }
     }
+    if(is_hit && !is_merged)
+    {
+      _itemSelected.Select(false);
+      _itemSelected.MoveBack();
+    }
+
     return is_hit;
   }
   bool IsAnimalHit(TouchInputData tid)
