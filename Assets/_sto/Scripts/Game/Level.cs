@@ -366,14 +366,12 @@ public class Level : MonoBehaviour
     {
       if(animalHit.CanPut(_itemSelected))
       {
-        Item.onPut(_itemSelected);
+        Item.onPut?.Invoke(_itemSelected);
         animalHit.Put(_itemSelected);
         _grid.set(_itemSelected.vgrid, 0);
         if(_itemSelected.IsInMachine)
-        {
           _splitMachine.RemoveFromSplitSlot(_itemSelected);
-          _itemSelected.transform.SetParent(_itemsContainer);
-        }
+
         //_pipes.PollutionRate(RequestRate());
         _pollutionDest = PollutionRate();
         onGarbageOut?.Invoke(this);
@@ -394,11 +392,25 @@ public class Level : MonoBehaviour
   {
     bool is_hit = false;
     var splitMachineHit = tid.GetClosestCollider(0.5f, 1);
-    if((_splitMachine?.IsDropSlot(splitMachineHit) ?? false) && _splitMachine.IsReady && _itemSelected.IsSplitable)
+    bool is_split_machine = _splitMachine?.IsDropSlot(splitMachineHit) ?? false;
+    if(is_split_machine)
     {
-      _grid.set(_itemSelected.vgrid, 0);
-      _splitMachine.AddToDropSlot(_itemSelected);
-      is_hit = true;
+      if(_splitMachine.IsReady)
+      {
+        if(_itemSelected.IsSplitable)
+        {
+          _splitMachine.DropDone();
+          _grid.set(_itemSelected.vgrid, 0);
+          _splitMachine.AddToDropSlot(_itemSelected);
+          is_hit = true;
+        }
+        else
+          _splitMachine.DropNoSplittable();
+      }
+      else
+        _splitMachine.DropNoCapacity();
+
+      SplitMachine.onDropped?.Invoke(_splitMachine);
     }
     return is_hit;
   }

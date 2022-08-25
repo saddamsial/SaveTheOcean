@@ -14,25 +14,38 @@ public class SplitMachine : MonoBehaviour
 
   List<Item> _itemsRef = null;
 
-  public  void Init(List<Item> _items)
+  public enum DropResult
   {
-    _itemsRef = _items;
+    Ok,
+    NoCapacity,
+    NoSplittableItem,
   }
+  DropResult _dropResult = DropResult.Ok;
 
+  public static Action<SplitMachine> onDropped, onSplitted;
+  public  void Init(List<Item> _items) =>_itemsRef = _items;
   public  bool IsDropSlot(Collider coll) => coll == _dropCollider;
   private bool IsSplitsEmpty => Array.TrueForAll(_splitSlots, (slot) => slot == null);
   public  int  capacity => GameState.SplitMachine.capacity;
-  public  bool IsReady => _dropSlots.Count < capacity;  
+  public  bool IsReady => _dropSlots.Count < capacity;
+
+  public  DropResult dropResult => _dropResult;
+  public  Vector3 dropPosition => _dropCollider.transform.position;
+  public  void DropDone() => _dropResult = DropResult.Ok;
+  public  void DropNoCapacity() => _dropResult = DropResult.NoCapacity;
+  public  void DropNoSplittable() => _dropResult = DropResult.NoSplittableItem;
+
   public  void AddToDropSlot(Item item)
   {
     _dropSlots.Add(item);
     item.IsInMachine = true;
+    onDropped?.Invoke(this);
     if(IsSplitsEmpty)
       Split();
     else
       item.vwpos = _dropCollider.transform.position;
   }
-  private void Split()
+  private void    Split()
   {
     if(_dropSlots.Count > 0)
     {
@@ -77,5 +90,6 @@ public class SplitMachine : MonoBehaviour
       _splitSlots[q].transform.position = _splitsContainers[q].position;
       _splitSlots[q].Show();
     }
+    onSplitted?.Invoke(this);
   }
 }

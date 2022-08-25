@@ -1,4 +1,4 @@
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -85,7 +85,11 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class EconomyState
   {
+    public int stamina = 50;
     public int cash = 0;
+    public int crystals = 0;
+
+    public int rewardProgress = 0;
   }
   [SerializeField] EconomyState economy;
 
@@ -161,7 +165,47 @@ public class GameState : SavableScriptableObject
   }
   public static class Econo
   {
-    public static int cash {get => get().economy.cash; set{ get().economy.cash = value;}}
+    public static Action<int> onStaminaChanged;
+    public static Action<int> onCashChanged;
+    public static Action<int> onCrystalsChanged;
+    public static Action<int> onRewardProgressChanged;
+
+    public static int stamina 
+    { 
+      get => get().economy.stamina; 
+      set 
+      { 
+        get().economy.stamina = value; 
+        onStaminaChanged?.Invoke(value);
+      } 
+    }
+    public static int cash 
+    { 
+      get => get().economy.cash; 
+      set
+      { 
+        get().economy.cash = value;
+        onCashChanged?.Invoke(value);
+      }
+    }
+    public static int crystals 
+    {
+      get => get().economy.crystals; 
+      set 
+      { 
+        get().economy.crystals = value;
+        onCrystalsChanged?.Invoke(value);
+      }
+    }
+    public static int rewards
+    {
+      get => get().economy.rewardProgress;
+      set
+      {
+        get().economy.rewardProgress = value;
+        onRewardProgressChanged?.Invoke(value);
+      }
+    }
   }
   public static class Settings
   {

@@ -65,6 +65,8 @@ MonoBehaviour:
   _strNoMergeMaxed: maxed
   _strNoMergeWrongType: not mergeable
   _strAnimalWrongItem: no need that
+  _strNoCapacity: no room for item
+  _strNoSplittableItem: no splittable item
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0

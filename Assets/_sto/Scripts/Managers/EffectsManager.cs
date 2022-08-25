@@ -28,6 +28,8 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] string _strNoMergeMaxed;
     [SerializeField] string _strNoMergeWrongType;
     [SerializeField] string _strAnimalWrongItem;
+    [SerializeField] string _strNoCapacity;
+    [SerializeField] string _strNoSplittableItem;
 
 
     ParticleSystem fxConfetti;
@@ -56,6 +58,8 @@ public class EffectsManager : MonoBehaviour
       Item.onNoMerged += OnItemNoMerged;
       Item.onPut += OnItemPut;
       Item.onNoPut += OnItemNoPut;
+
+      SplitMachine.onDropped += OnSplitMachineDrop;
     }
     private void OnDisable()
     {
@@ -68,6 +72,8 @@ public class EffectsManager : MonoBehaviour
       Item.onNoMerged -= OnItemNoMerged;
       Item.onPut -= OnItemPut;
       Item.onNoPut -= OnItemNoPut;
+
+      SplitMachine.onDropped -= OnSplitMachineDrop;
     }
 
     Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -126,6 +132,14 @@ public class EffectsManager : MonoBehaviour
     {
       infoLblMan.ShowTextPopup(sender.vwpos, _strAnimalWrongItem);
     }
+    void OnSplitMachineDrop(SplitMachine sm)
+    {
+      if(sm.dropResult == SplitMachine.DropResult.NoSplittableItem)
+        infoLblMan.ShowTextPopup(sm.dropPosition, _strNoSplittableItem);
+      else if(sm.dropResult == SplitMachine.DropResult.NoCapacity)
+        infoLblMan.ShowTextPopup(sm.dropPosition, _strNoCapacity);
+    }
+
 
     void OnItemExplo(Item sender)
     {
