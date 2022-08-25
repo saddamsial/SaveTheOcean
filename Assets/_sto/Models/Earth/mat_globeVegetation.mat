@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_globeContinents
-  m_Shader: {fileID: -6465566751694194690, guid: 25c618b50893cbb478b4a75fc4bbe71b, type: 3}
+  m_Name: mat_globeVegetation
+  m_Shader: {fileID: -6465566751694194690, guid: 53bbfae694ff3ed4aa00045138ce7640, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -103,7 +103,8 @@ Material:
     - _DstBlend: 0
     - _EmisionHueShift: 0.9
     - _EmisionHueSift: 0
-    - _Emission: 0.2
+    - _Emission: 0.3
+    - _Emission_Hue_Shift: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -115,8 +116,8 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimExponent: 4
-    - _RimIntensity: 0.5
+    - _RimExponent: 1
+    - _RimIntensity: 0.2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -125,7 +126,7 @@ Material:
     - _SwayAmplitude: 8
     - _SwayMaskExponent: 5
     - _SwayMultiplier: 0
-    - _UseSwayEffect: 0
+    - _UseSwayEffect: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:

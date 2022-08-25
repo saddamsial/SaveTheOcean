@@ -33,6 +33,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mat_globeVegetation
+    second: {fileID: 2100000, guid: a5d919afe01b60f4b8cbd54b66e17c92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: mat_globeWater
     second: {fileID: 2100000, guid: a08003f788d098e4f9ccaffe508d1a62, type: 2}
   - first:
