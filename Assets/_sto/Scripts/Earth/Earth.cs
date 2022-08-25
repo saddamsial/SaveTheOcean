@@ -123,11 +123,14 @@ public class Earth : MonoBehaviour
     if(tid.HoveredCollider && Mathf.Abs(tid.InputPosition.x - _vdragBeg.Value.x) < 0.05f)
     {
       var location = tid.HoveredCollider.GetComponentInParent<Location>();
-      if(location)
+      if(location && location.transform.position.z < 0)
       {
-        SelectLocation(location);
-        StartRotateToLocation(location);
-        MoveVesselToLocation(location.idx);
+        if(location.state >= Level.State.Unlocked)
+        {
+          SelectLocation(location);
+          StartRotateToLocation(location);
+          MoveVesselToLocation(location.idx);
+        }
       }
     }
     _vdragBeg = null;
