@@ -24,6 +24,12 @@ public class GridTile : MonoBehaviour
     _sp = _clear.GetComponent<SpriteRenderer>();
     _baseClearColor = _clear.GetComponent<SpriteRenderer>().color;
     _destClearColor = _baseClearColor;
+
+    Item.onSelect += OnItemSelection;
+  }
+  void OnDestroy()
+  {
+    Item.onSelect -= OnItemSelection;
   }
 
   public void Set(bool act)
@@ -47,6 +53,14 @@ public class GridTile : MonoBehaviour
   public void Hover(bool hov)
   {
     _destClearColor = (hov)? _hoverColor : _baseClearColor;
+  }
+  void OnItemSelection(Item sender)
+  {
+    if(_dirty.activeInHierarchy && !sender.IsInMachine && Vector3.Distance(sender.vgrid, vgrid) < 0.01f)
+    {
+      if(sender.IsSelected)
+        _ps.Stop();
+    }
   }
 
   void Update()

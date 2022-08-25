@@ -1158,6 +1158,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: _cameraContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 8491482513625605612, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8786551797539272230, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_RootOrder
       value: 0

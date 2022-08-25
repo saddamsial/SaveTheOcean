@@ -55,7 +55,7 @@ public class Item : MonoBehaviour
   bool       _inMachine = false;
 
   public static float gridSpace = 1.0f;
-  public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged;
+  public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged, onSelect;
   public static Item Merge(Item item0, Item item1, List<Item> _items)
   {
     Item newItem = null;
@@ -275,6 +275,7 @@ public class Item : MonoBehaviour
     if(coll)
       coll.enabled = !sel;
     IsSelected = sel;
+    onSelect?.Invoke(this);
     if(sel)
     {
       if(_coMoveHandle != null)      

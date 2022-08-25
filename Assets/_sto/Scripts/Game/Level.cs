@@ -408,7 +408,7 @@ public class Level : MonoBehaviour
     //if(_itemSelected.IsInMachine)
     {
       var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
-      if(tileHit)
+      if(tileHit && _grid.get(tileHit.vgrid) == 0)
       {
         _grid.set(_itemSelected.vgrid, 0);
         _itemSelected.vgrid = tileHit.vgrid;
