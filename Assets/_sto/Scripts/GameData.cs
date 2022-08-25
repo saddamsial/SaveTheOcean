@@ -43,6 +43,9 @@ public class GameData : ScriptableObject
   [SerializeField] Location _locationPrefab;
   [Header("Levels")]
   [SerializeField] List<Level> _listLevels;
+  [Header("Econo")]
+  [SerializeField] int[] _rewardsToChest;
+
 
   [SerializeField] Color[]    themeColors;
   public static Color[] GetThemeColors() => get().themeColors;
@@ -90,6 +93,10 @@ public class GameData : ScriptableObject
       return (int)Mathf.Repeat(lvl_idx + 1.0f, get()._listLevels.Count);
     }
     static public int   LevelsCnt => get()._listLevels.Count;
+  }
+  public static class Econo
+  {
+    
   }
 
   public static class Settings
