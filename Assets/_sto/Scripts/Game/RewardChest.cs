@@ -8,29 +8,39 @@ public class RewardChest : MonoBehaviour
 {
   [SerializeField] Slider _slider;
 
-  float _sliderDest = 0;
+  float _rewardPointsMov = 0;
 
   void Awake()
   {
     GameState.Econo.onRewardProgressChanged += OnRewardChanged;
-
-    _slider.value = 0;
-    //var range = GameData.Econo.GetRewardsRange(GameState.Econo.rewards);
-    _slider.minValue = 0;//range.beg;
-    _slider.maxValue = 10;//range.end;
+    _rewardPointsMov = GameState.Econo.rewards;
+    OnRewardChanged(_rewardPointsMov);
   }
   void OnDestroy()
   {
     GameState.Econo.onRewardProgressChanged -= OnRewardChanged;
   }
 
-  void OnRewardChanged(int rew_val)
+  void SetupSlider()
   {
-    _sliderDest = rew_val;
+    
+    UpdateSlider();
+  }
+  void UpdateSlider()
+  {
+    var rewardProgress = GameData.Econo.GetRewardProgress(_rewardPointsMov);
+    _slider.value = rewardProgress.progress_points;
+    _slider.minValue = rewardProgress.progress_range_lo;
+    _slider.maxValue = rewardProgress.progress_range_hi;
+  }
+  void OnRewardChanged(float rewardPoints)
+  {
+    UpdateSlider();
   }
 
   void Update()
   {
-    _slider.value = Mathf.Lerp(_slider.value, _sliderDest, Time.deltaTime * 0.5f);
+    _rewardPointsMov = Mathf.Lerp(_rewardPointsMov, GameState.Econo.rewards, Time.deltaTime);
+    UpdateSlider();
   }
 }

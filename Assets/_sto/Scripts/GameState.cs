@@ -85,11 +85,10 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class EconomyState
   {
-    public int stamina = 50;
-    public int cash = 0;
-    public int crystals = 0;
-
-    public int rewardProgress = 0;
+    public int    stamina = 50;
+    public int    cash = 0;
+    public int    crystals = 0;
+    public float  rewardPoints = 0;
   }
   [SerializeField] EconomyState economy;
 
@@ -165,10 +164,10 @@ public class GameState : SavableScriptableObject
   }
   public static class Econo
   {
-    public static Action<int> onStaminaChanged;
-    public static Action<int> onCashChanged;
-    public static Action<int> onCrystalsChanged;
-    public static Action<int> onRewardProgressChanged;
+    public static Action<int>   onStaminaChanged;
+    public static Action<int>   onCashChanged;
+    public static Action<int>   onCrystalsChanged;
+    public static Action<float> onRewardProgressChanged;
 
     public static int stamina 
     { 
@@ -197,12 +196,12 @@ public class GameState : SavableScriptableObject
         onCrystalsChanged?.Invoke(value);
       }
     }
-    public static int rewards
+    public static float rewards
     {
-      get => get().economy.rewardProgress;
+      get => get().economy.rewardPoints;
       set
       {
-        get().economy.rewardProgress = value;
+        get().economy.rewardPoints = value;
         onRewardProgressChanged?.Invoke(value);
       }
     }

@@ -19,7 +19,12 @@ MonoBehaviour:
     _level: 0
     _levels: []
   economy:
+    stamina: 50
     cash: 0
+    crystals: 0
+    rewardPoints: 0
+  splitMachine:
+    _capacity: 1
   settings:
     _sounds: 1
     _haptics: 1

@@ -1,4 +1,4 @@
-
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +60,7 @@ public class GameData : ScriptableObject
     {
       Item item = null;
       if(id.type < 0)
-        id.type = Random.Range(0, ItemTypesCnt);
+        id.type = UnityEngine.Random.Range(0, ItemTypesCnt);
       item = Instantiate(get()._items[id.type].Get(id.lvl), parent);
       item.id = id;
       return item;
@@ -96,7 +96,35 @@ public class GameData : ScriptableObject
   }
   public static class Econo
   {
-    
+    public struct RewardProgress
+    {
+      public int    lvl;
+      public float  progress_points;
+      public float  progress_range_lo;
+      public float  progress_range_hi;
+
+      public RewardProgress(int lvl_idx)
+      {
+        lvl = lvl_idx;
+        progress_points = 0;
+        progress_range_lo = 0;
+        progress_range_hi = 0;
+      }
+    }
+    public static int RewardChestValue(int lvl)
+    {
+      return get()._rewardsToChest[Mathf.Clamp(lvl, 0, get()._rewardsToChest.last_idx())];
+    }
+    public static RewardProgress GetRewardProgress(float rewardPoints)
+    {
+      int idx = Array.FindLastIndex(get()._rewardsToChest, (int rewPts) =>  rewardPoints >= rewPts);
+      var rp = new RewardProgress(idx);
+      rp.progress_range_lo = RewardChestValue(idx);
+      rp.progress_range_hi = RewardChestValue(idx+1);
+      rp.progress_points = rewardPoints;
+
+      return rp;
+    }
   }
 
   public static class Settings
