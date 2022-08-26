@@ -125,11 +125,32 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: windowBase
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 512
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 128, z: 0, w: 256}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55db838dffffffff0800000000000000
+      internalID: -667370155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: bgFill
       rect:
         serializedVersion: 2
         x: 8
-        y: 512
+        y: 528
         width: 512
         height: 192
       alignment: 0
@@ -149,8 +170,8 @@ TextureImporter:
       name: round_128
       rect:
         serializedVersion: 2
-        x: 256
-        y: 704
+        x: 448
+        y: 896
         width: 128
         height: 128
       alignment: 0
@@ -221,6 +242,7 @@ TextureImporter:
     nameFileIdTable:
       bgFill: -147044070
       round_128: 2647741350682940739
+      windowBase: -667370155
       round_256: -1001253769
       rect_96: -597952514557367733
       round_160: 2580913069511842827

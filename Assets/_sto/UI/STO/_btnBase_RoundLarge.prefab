@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7405634255431446455, guid: 21228847e966b4043ae169fe6ae0971f, type: 3}
       propertyPath: m_Name
-      value: _btnStd
+      value: _btnBase_RoundLarge
       objectReference: {fileID: 0}
     - target: {fileID: 8565004841938978135, guid: 21228847e966b4043ae169fe6ae0971f, type: 3}
       propertyPath: m_Sprite
