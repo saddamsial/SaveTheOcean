@@ -1033,6 +1033,7 @@ GameObject:
   - component: {fileID: 9150938383234393354}
   - component: {fileID: 9150938383234393353}
   - component: {fileID: 1783856008}
+  - component: {fileID: 7152201146561806830}
   m_Layer: 0
   m_Name: globeMenu
   m_TagString: Untagged
@@ -1118,6 +1119,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa17f4b152f641e4ca34908588fb5a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7152201146561806830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150938383234393358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c70c847135a6d418178b7fed20fcfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _btnPlay: {fileID: 1246491761346279748}
+  _lblLevelInfo: {fileID: 8515910531871570314}
+  _slider: {fileID: 9150938383928543504}
 --- !u!1 &9150938383259846399
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,6 +2605,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnPlay
       objectReference: {fileID: 0}
+    - target: {fileID: 8048711394836306719, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048711394836306719, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048711394836306719, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7152201146561806830}
+    - target: {fileID: 8048711394836306719, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048711394836306719, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnBtnPlay
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048711394836306719, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UIEarth, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048711394836306719, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
 --- !u!224 &1246491761346279747 stripped
@@ -2596,3 +2640,25 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8048711394836306712, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
   m_PrefabInstance: {fileID: 9150938382973903451}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1246491761346279748 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8048711394836306719, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+  m_PrefabInstance: {fileID: 9150938382973903451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8515910531871570314 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 635076248977267665, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
+  m_PrefabInstance: {fileID: 9150938382973903451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

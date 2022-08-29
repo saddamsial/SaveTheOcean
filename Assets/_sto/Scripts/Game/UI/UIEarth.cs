@@ -7,8 +7,6 @@ using GameLib.UI;
 
 public class UIEarth : MonoBehaviour
 {
-  [SerializeField] UIPanel _topPanel;
-  [SerializeField] UIPanel _btmPanel;
   [SerializeField] Button  _btnPlay;
   [SerializeField] TMPLbl  _lblLevelInfo;
   [SerializeField] Slider  _slider;
@@ -16,8 +14,8 @@ public class UIEarth : MonoBehaviour
 
   public static System.Action onBtnPlay;
 
-
-  float _cleanDst = 0.0f;
+  UIPanel _earthPanel = null;
+  float   _cleanDst = 0.0f;
 
   void Awake()
   {
@@ -25,6 +23,8 @@ public class UIEarth : MonoBehaviour
     //Earth.onHide += OnEarthHide;
     Earth.onLevelSelected += UpdateLevelInfo;
     Earth.onLevelStart += OnEarthHide;
+
+    _earthPanel = GetComponent<UIPanel>();
 
     _cleanDst = GameState.Progress.GetCompletionRate();
     _slider.minValue = 0;
@@ -42,16 +42,15 @@ public class UIEarth : MonoBehaviour
   private void OnEarthHide(int levelIdx) => Hide();
   public void  Show(int lvlIdx)
   {
-    GetComponent<UIPanel>().ActivatePanel();
-    _topPanel.ActivatePanel();
-    _btmPanel.ActivatePanel();
+    _earthPanel.ActivatePanel();
+    //_globePanel.ActivatePanel();
     UpdateLevelInfo(lvlIdx);
     this.Invoke(()=> _cleanDst = GameState.Progress.GetCompletionRate(), 0.25f);
   }
   void Hide()
   {
-    _topPanel.DeactivatePanel();
-    _btmPanel.DeactivatePanel();
+    //_globePanel.DeactivatePanel();
+    _earthPanel.DeactivatePanel();
   }  
 
   void UpdateLevelInfo(int level)
@@ -67,8 +66,8 @@ public class UIEarth : MonoBehaviour
 
   void UpdateSlider()
   {
-    if(_topPanel.IsActive)
-      _slider.value = Mathf.Lerp(_slider.value, _cleanDst, Time.deltaTime * 2.0f);
+    if(_earthPanel?.IsActive ?? false)
+       _slider.value = Mathf.Lerp(_slider.value, _cleanDst, Time.deltaTime * 2.0f);
   }
   void Update()
   {
