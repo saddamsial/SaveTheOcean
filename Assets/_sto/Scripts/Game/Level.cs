@@ -227,6 +227,7 @@ public class Level : MonoBehaviour
       {
         var garb = _lvlDescs[q].items[i];
         id.type = garb.id.type;
+        id.kind = garb.id.kind;
         for(int d = 0; d < 1<<garb.id.lvl; ++d)
         {
           id.lvl = 0;

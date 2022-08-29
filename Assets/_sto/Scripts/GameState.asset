@@ -21,8 +21,9 @@ MonoBehaviour:
   economy:
     stamina: 50
     cash: 0
-    crystals: 0
+    gems: 0
     rewardPoints: 0
+    rewardLevel: 0
   splitMachine:
     _capacity: 1
   settings:

@@ -87,8 +87,29 @@ public class GameState : SavableScriptableObject
   {
     public int    stamina = 50;
     public int    cash = 0;
-    public int    crystals = 0;
+    public int    gems = 0;
     public float  rewardPoints = 0;
+    public int    rewardLevel = 0;
+    [System.Serializable]
+    public class ChestState
+    {
+      public List<Item.ID> listStamina = new List<Item.ID>();
+      public List<Item.ID> listCoins = new List<Item.ID>();
+      public List<Item.ID> listGems = new List<Item.ID>();
+
+      // public void AddReward(Rewards.Reward rew)
+      // {
+
+      // }
+    }
+    public ChestState chestState = new ChestState();
+    void AddReward()
+    {
+      //var rewards = GameData.Econo.GetRewordChest(rewardLevel);
+      // listStamina.Add(new Item.ID(0, 0, Item.Kind.Stamina));
+      // listCoins.Add(new Item.ID(0, 0, Item.Kind.Stamina));
+      // list.Add(new Item.ID(0, 0, Item.Kind.Stamina));
+    }
   }
   [SerializeField] EconomyState economy;
 
@@ -187,12 +208,12 @@ public class GameState : SavableScriptableObject
         onCashChanged?.Invoke(value);
       }
     }
-    public static int crystals 
+    public static int gems
     {
-      get => get().economy.crystals; 
+      get => get().economy.gems; 
       set 
       { 
-        get().economy.crystals = value;
+        get().economy.gems = value;
         onCrystalsChanged?.Invoke(value);
       }
     }
@@ -201,9 +222,30 @@ public class GameState : SavableScriptableObject
       get => get().economy.rewardPoints;
       set
       {
+        var prev_points = get().economy.rewardPoints;
         get().economy.rewardPoints = value;
-        onRewardProgressChanged?.Invoke(value);
+        if(prev_points != value)
+          onRewardProgressChanged?.Invoke(value);
       }
+    }
+    public static class Chest
+    {
+      public static int   rewardLevel {get => get().economy.rewardLevel; set => get().economy.rewardLevel = value;}
+      public static int   staminaCnt => get().economy.chestState.listStamina.Count;
+      public static int   coinsCnt =>   get().economy.chestState.listCoins.Count;
+      public static int   gemsCnt =>    get().economy.chestState.listGems.Count;
+      public static void  AddRewards()
+      {
+        get().economy.chestState.AddReward();
+      }
+
+      // public static void AddStamina(Item.ID id) => get().economy.chestState.listStamina.Add(id);
+      // public static void AddCoins(Item.ID id) => get().economy.chestState.listCoins.Add(id);
+      // public static void AddGems(Item.ID id) => get().economy.chestState.listGems.Add(id);
+      
+      // public static void RemoveSamina(Item.ID id) => get().economy.chestState.listStamina.Add(id);
+      // public static void RemoveCoins(Item.ID id) => get().economy.chestState.listCoins.Add(id);
+      // public static void RemoveGems(Item.ID id) => get().economy.chestState.listGems.Add(id);
     }
   }
   public static class Settings

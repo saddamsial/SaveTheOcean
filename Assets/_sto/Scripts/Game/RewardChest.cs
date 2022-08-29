@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPLbl = TMPro.TextMeshProUGUI;
 
 public class RewardChest : MonoBehaviour
 {
   [SerializeField] Slider _slider;
+  [SerializeField] GameObject staminaInfo;
+  [SerializeField] GameObject coinsInfo;
+  [SerializeField] GameObject gemsInfo;
+  [SerializeField] TMPLbl lblStamina;
+  [SerializeField] TMPLbl lblCoins;
+  [SerializeField] TMPLbl lblGems;
 
   float _rewardPointsMov = 0;
 
@@ -23,8 +29,13 @@ public class RewardChest : MonoBehaviour
 
   void SetupSlider()
   {
-    
     UpdateSlider();
+  }
+  void UpdateInfo()
+  {
+    lblStamina.text = UIDefaults.staminaIco + string.Format($"    x{GameState.Econo.Chest.staminaCnt}");
+    lblCoins.text = UIDefaults.coinsIco + string.Format($"    x{GameState.Econo.Chest.coinsCnt}");
+    lblGems.text = UIDefaults.gemsIco + string.Format($"    x{GameState.Econo.Chest.gemsCnt}");
   }
   void UpdateSlider()
   {
@@ -36,6 +47,14 @@ public class RewardChest : MonoBehaviour
   void OnRewardChanged(float rewardPoints)
   {
     UpdateSlider();
+    UpdateInfo();
+
+    var rewardProgress = GameData.Econo.GetRewardProgress(rewardPoints);
+    if(rewardProgress.lvl > GameState.Econo.Chest.rewardLevel)
+    {
+      GameState.Econo.Chest.rewardLevel = rewardProgress.lvl;
+      GameState.Econo.Chest.AddRewards();
+    }
   }
 
   void Update()

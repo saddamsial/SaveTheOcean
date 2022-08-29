@@ -24,7 +24,7 @@ public class GameData : ScriptableObject
       var item = items[type];
       for(int lvl = 0; lvl < item.Count; ++lvl)
       {
-        item.Get(lvl).id = new Item.ID(type, lvl);
+        item.Get(lvl).id = new Item.ID(type, lvl, items[type].kind);
       }
     }
   }
@@ -32,9 +32,25 @@ public class GameData : ScriptableObject
   [System.Serializable]
   struct Items
   {
+    [SerializeField] Item.Kind _kind;
     [SerializeField] Item[] _items;
+    public Item.Kind kind => _kind;
     public Item Get(int idx) => _items[Mathf.Clamp(idx, 0, _items.Length -1)];
     public int  Count => _items.Length;
+  }
+
+  [System.Serializable]
+  struct Rewards
+  {
+    public int points2Chest;
+    [System.Serializable]
+    public struct Reward
+    {
+      public int stamina;
+      public int coins;
+      public int gems;
+    }
+    public Reward _reward;
   }
 
   [Header("Prefabs")]
@@ -44,7 +60,7 @@ public class GameData : ScriptableObject
   [Header("Levels")]
   [SerializeField] List<Level> _listLevels;
   [Header("Econo")]
-  [SerializeField] int[] _rewardsToChest;
+  [SerializeField] Rewards[] _rewards;
 
 
   [SerializeField] Color[]    themeColors;
@@ -62,6 +78,7 @@ public class GameData : ScriptableObject
       if(id.type < 0)
         id.type = UnityEngine.Random.Range(0, ItemTypesCnt);
       item = Instantiate(get()._items[id.type].Get(id.lvl), parent);
+      id.kind = get()._items[id.type].kind;
       item.id = id;
       return item;
     }
@@ -76,7 +93,7 @@ public class GameData : ScriptableObject
     public static int ItemTypesCnt => get()._items.Length;
 
     public static Location CreateLocation(Transform parent) => Instantiate(get()._locationPrefab, parent);
-  } 
+  }
   public static class Levels
   {
     static public Level GetPrefab(int idx) => get()._listLevels[idx];
@@ -113,18 +130,23 @@ public class GameData : ScriptableObject
     }
     public static int RewardChestValue(int lvl)
     {
-      return get()._rewardsToChest[Mathf.Clamp(lvl, 0, get()._rewardsToChest.last_idx())];
+      return get()._rewards[Mathf.Clamp(lvl, 0, get()._rewards.last_idx())].points2Chest;
     }
+    //public static int 
     public static RewardProgress GetRewardProgress(float rewardPoints)
     {
-      int idx = Array.FindLastIndex(get()._rewardsToChest, (int rewPts) =>  rewardPoints >= rewPts);
-      var rp = new RewardProgress(idx);
-      rp.progress_range_lo = RewardChestValue(idx);
-      rp.progress_range_hi = RewardChestValue(idx+1);
+      int rewardIdx = Array.FindLastIndex(get()._rewards, (Rewards rewards) => rewardPoints >= rewards.points2Chest);
+      var rp = new RewardProgress(Mathf.Max(rewardIdx, GameState.Econo.Chest.rewardLevel));
+      rp.progress_range_lo = RewardChestValue(rp.lvl);
+      rp.progress_range_hi = RewardChestValue(rp.lvl +1);
       rp.progress_points = rewardPoints;
 
       return rp;
     }
+    // public static Rewards.Reward GerRewards(int chestLvl)
+    // {
+    //   return get()._rewards.
+    // }
   }
 
   public static class Settings

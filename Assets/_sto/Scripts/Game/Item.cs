@@ -17,6 +17,14 @@ public class Item : MonoBehaviour
 
   List<GameObject> _models = new List<GameObject>();
 
+  public enum Kind
+  {
+    None,
+    Garbage,
+    Stamina,
+    Coin,
+    Gem,
+  }
   public enum MergeType
   {
     Ok,
@@ -25,19 +33,23 @@ public class Item : MonoBehaviour
     RejectWrongAnim,
   }
 
+  [System.Serializable]
   public struct ID
   {
-    [SerializeField] int _type;
-    [SerializeField] int _lvl;
+    [SerializeField] int   _type;
+    [SerializeField] int   _lvl;
+    [SerializeField] Kind _kind;
 
-    public ID(int item_type, int item_lvl)
+    public ID(int item_type, int item_lvl, Kind item_kind)
     {
       _type = item_type;
       _lvl = item_lvl;
+      _kind = item_kind;
     }
 
-    public int type {get => _type; set{_type = value;}}
-    public int lvl {get => _lvl; set{_lvl = value;}}
+    public int type {get => _type; set => _type = value;}
+    public int lvl {get => _lvl; set => _lvl = value;}
+    public Kind kind {get => _kind; set => _kind = value;}
     public static bool Eq(ID id0, ID id1) => id0.type == id1.type && id0.lvl == id1.lvl;
   }
 
