@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7830620305735162889}
   - component: {fileID: 2774588664174833023}
   - component: {fileID: 4535918634321722484}
+  - component: {fileID: 1276600681}
   m_Layer: 0
   m_Name: statusBar
   m_TagString: Untagged
@@ -84,6 +85,18 @@ MonoBehaviour:
   contentContainer: {fileID: 7118822520311860052}
   activateOnTop: 0
   activationDelay: 0
+--- !u!114 &1276600681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118822518963537984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa17f4b152f641e4ca34908588fb5a72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7118822520052914720
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,6 +304,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
 --- !u!224 &7118822519356682322 stripped
@@ -399,6 +420,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309862987483439586, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -623,6 +652,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309862987483439586, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

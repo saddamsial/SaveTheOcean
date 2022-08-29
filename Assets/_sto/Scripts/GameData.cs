@@ -40,7 +40,7 @@ public class GameData : ScriptableObject
   }
 
   [System.Serializable]
-  struct Rewards
+  public struct Rewards
   {
     public int points2Chest;
     [System.Serializable]
@@ -143,10 +143,15 @@ public class GameData : ScriptableObject
 
       return rp;
     }
-    // public static Rewards.Reward GerRewards(int chestLvl)
-    // {
-    //   return get()._rewards.
-    // }
+    public static Rewards.Reward GetRewards()
+    {
+      return GetRewards(GameState.Econo.Chest.rewardLevel);
+    }
+    public static Rewards.Reward GetRewards(int chestLvl)
+    {
+      int idx = Mathf.Min(chestLvl, get()._rewards.last_idx());
+      return get()._rewards[idx]._reward;
+    }
   }
 
   public static class Settings

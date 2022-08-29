@@ -97,19 +97,14 @@ public class GameState : SavableScriptableObject
       public List<Item.ID> listCoins = new List<Item.ID>();
       public List<Item.ID> listGems = new List<Item.ID>();
 
-      // public void AddReward(Rewards.Reward rew)
-      // {
-
-      // }
+      public void AddReward(GameData.Rewards.Reward rew)
+      {
+        listStamina.Add(new Item.ID(0, 0, Item.Kind.Stamina));
+        listCoins.Add(new Item.ID(0, 0, Item.Kind.Coin));
+        listGems.Add(new Item.ID(0, 0, Item.Kind.Gem));
+      }
     }
     public ChestState chestState = new ChestState();
-    void AddReward()
-    {
-      //var rewards = GameData.Econo.GetRewordChest(rewardLevel);
-      // listStamina.Add(new Item.ID(0, 0, Item.Kind.Stamina));
-      // listCoins.Add(new Item.ID(0, 0, Item.Kind.Stamina));
-      // list.Add(new Item.ID(0, 0, Item.Kind.Stamina));
-    }
   }
   [SerializeField] EconomyState economy;
 
@@ -236,7 +231,7 @@ public class GameState : SavableScriptableObject
       public static int   gemsCnt =>    get().economy.chestState.listGems.Count;
       public static void  AddRewards()
       {
-        get().economy.chestState.AddReward();
+        get().economy.chestState.AddReward(GameData.Econo.GetRewards());
       }
 
       // public static void AddStamina(Item.ID id) => get().economy.chestState.listStamina.Add(id);

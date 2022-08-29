@@ -24,6 +24,10 @@ MonoBehaviour:
     gems: 0
     rewardPoints: 0
     rewardLevel: 0
+    chestState:
+      listStamina: []
+      listCoins: []
+      listGems: []
   splitMachine:
     _capacity: 1
   settings:

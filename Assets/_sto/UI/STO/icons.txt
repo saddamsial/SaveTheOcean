@@ -1,0 +1,3 @@
+icoGlobe,0,768,256,256
+icoComingSoon,640,0,384,384
+icoRecycle,0,512,256,256

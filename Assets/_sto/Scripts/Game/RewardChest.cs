@@ -48,18 +48,22 @@ public class RewardChest : MonoBehaviour
   {
     UpdateSlider();
     UpdateInfo();
-
+    
     var rewardProgress = GameData.Econo.GetRewardProgress(rewardPoints);
     if(rewardProgress.lvl > GameState.Econo.Chest.rewardLevel)
     {
-      GameState.Econo.Chest.rewardLevel = rewardProgress.lvl;
-      GameState.Econo.Chest.AddRewards();
+      this.Invoke(()=>
+      {
+        GameState.Econo.Chest.rewardLevel = rewardProgress.lvl;
+        GameState.Econo.Chest.AddRewards();
+        UpdateInfo();
+      }, 0.25f);
     }
   }
 
   void Update()
   {
-    _rewardPointsMov = Mathf.Lerp(_rewardPointsMov, GameState.Econo.rewards, Time.deltaTime);
+    _rewardPointsMov = Mathf.Lerp(_rewardPointsMov, GameState.Econo.rewards, Time.deltaTime * 4);
     UpdateSlider();
   }
 }

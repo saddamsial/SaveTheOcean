@@ -19,6 +19,7 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: bbaf147057b39f7488c3642937cb1d2c, type: 3}
     - {fileID: 6445466529311080229, guid: c0cb0084ae12d184fa41b89d0fe99aeb, type: 3}
     - {fileID: 6445466529311080229, guid: 3e7760b3a84f1b043af8cb5515654dba, type: 3}
+    - {fileID: 6445466529311080229, guid: 70e6ed5e57603ab46a337939ff535ce0, type: 3}
   - _kind: 1
     _items:
     - {fileID: 6445466529311080229, guid: 925b9a22db2e7ce49ae9bf76da290d9c, type: 3}
@@ -29,6 +30,8 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: 316e331cb594ca54fbcef2b610a4c154, type: 3}
     - {fileID: 6445466529311080229, guid: e8e1c0ce00723b94d97b32914cf307b6, type: 3}
     - {fileID: 6445466529311080229, guid: cb33df14898c48a4eabe5a4f7f2aab6c, type: 3}
+    - {fileID: 6445466529311080229, guid: 6502d8ac5bccd8c42836da33e4d88935, type: 3}
+    - {fileID: 6445466529311080229, guid: 461c3825513b78342a843269dae8a34a, type: 3}
   _gridTile: {fileID: 8178171026830446907, guid: 764369db777a63a4d9a3efac1f67b645, type: 3}
   _locationPrefab: {fileID: 4694188858287188799, guid: 7e2dc7caea333c54a97c83e5d2ddcc26, type: 3}
   _listLevels:
@@ -54,14 +57,14 @@ MonoBehaviour:
       gems: 1
   - points2Chest: 15
     _reward:
-      stamina: 1
-      coins: 1
-      gems: 1
+      stamina: 2
+      coins: 2
+      gems: 2
   - points2Chest: 20
     _reward:
-      stamina: 1
-      coins: 1
-      gems: 1
+      stamina: 2
+      coins: 2
+      gems: 2
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}
