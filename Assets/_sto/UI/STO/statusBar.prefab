@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2774588664174833023}
   - component: {fileID: 4535918634321722484}
   - component: {fileID: 1276600681}
+  - component: {fileID: 1641372748019389791}
   m_Layer: 0
   m_Name: statusBar
   m_TagString: Untagged
@@ -97,6 +98,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa17f4b152f641e4ca34908588fb5a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1641372748019389791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7118822518963537984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13db9293f77feae478e03b130d7f5af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stamina: {fileID: 1651323134641451401}
+  _coins: {fileID: 3253032872351555705}
+  _gems: {fileID: 3253032871009006555}
 --- !u!1 &7118822520052914720
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +226,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4309862986188545785, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_text
-      value: <sprite name="icoStamina">16
+      value: <sprite name="icoStamina">0
       objectReference: {fileID: 0}
     - target: {fileID: 4309862987340023891, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_text
@@ -304,6 +320,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5759606342913597497, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: _resIco
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759606342913597497, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: _resKind
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -314,6 +338,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+--- !u!114 &1651323134641451401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5759606342913597497, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+  m_PrefabInstance: {fileID: 6414417590768341424}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aecb6df9389e7c49bd63e38182a90f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &7118822519356682322 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4309862987483439586, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
@@ -332,7 +367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309862986188545785, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_text
-      value: <sprite name="icoGem">123
+      value: <sprite name="icoGem">0
       objectReference: {fileID: 0}
     - target: {fileID: 4309862987340023891, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_text
@@ -426,6 +461,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5759606342913597497, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: _resKind
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -436,6 +475,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+--- !u!114 &3253032871009006555 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5759606342913597497, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+  m_PrefabInstance: {fileID: 7118822519072265186}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aecb6df9389e7c49bd63e38182a90f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6414417590517985792 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4309862987483439586, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
@@ -568,7 +618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4309862986188545785, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_text
-      value: <sprite name="icoCoin">123
+      value: <sprite name="icoCoin">0
       objectReference: {fileID: 0}
     - target: {fileID: 4309862987340023891, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_text
@@ -662,6 +712,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5759606342913597497, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+      propertyPath: _resKind
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5933248796491016576, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0.5
@@ -672,6 +726,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+--- !u!114 &3253032872351555705 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5759606342913597497, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}
+  m_PrefabInstance: {fileID: 7118822520414617664}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aecb6df9389e7c49bd63e38182a90f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &6414417589712232866 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4309862987483439586, guid: 1aacf64772bf9ba479f9db6b463a5f8f, type: 3}

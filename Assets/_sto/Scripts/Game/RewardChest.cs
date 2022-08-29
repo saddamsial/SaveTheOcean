@@ -33,9 +33,9 @@ public class RewardChest : MonoBehaviour
   }
   void UpdateInfo()
   {
-    lblStamina.text = UIDefaults.staminaIco + string.Format($"    x{GameState.Econo.Chest.staminaCnt}");
-    lblCoins.text = UIDefaults.coinsIco + string.Format($"    x{GameState.Econo.Chest.coinsCnt}");
-    lblGems.text = UIDefaults.gemsIco + string.Format($"    x{GameState.Econo.Chest.gemsCnt}");
+    lblStamina.text = UIDefaults.staminaIco + string.Format($" x{GameState.Econo.Chest.staminaCnt}");
+    lblCoins.text = UIDefaults.coinIco + string.Format($" x{GameState.Econo.Chest.coinsCnt}");
+    lblGems.text = UIDefaults.gemIco + string.Format($" x{GameState.Econo.Chest.gemsCnt}");
   }
   void UpdateSlider()
   {

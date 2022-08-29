@@ -472,6 +472,7 @@ GameObject:
   - component: {fileID: 3119832360860903816}
   - component: {fileID: 6212197076458586047}
   - component: {fileID: 2153965326583959728}
+  - component: {fileID: 5759606342913597497}
   m_Layer: 0
   m_Name: infoBox
   m_TagString: Untagged
@@ -634,6 +635,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5759606342913597497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4309862987483439585}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aecb6df9389e7c49bd63e38182a90f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _info: {fileID: 4309862986188545785}
+  _slider: {fileID: 1062829320867261623}
+  _resIco: <sprite name="
 --- !u!1 &4487051267685832957
 GameObject:
   m_ObjectHideFlags: 0

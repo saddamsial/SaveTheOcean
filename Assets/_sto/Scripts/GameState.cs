@@ -86,7 +86,7 @@ public class GameState : SavableScriptableObject
   class EconomyState
   {
     public int    stamina = 50;
-    public int    cash = 0;
+    public int    coins = 0;
     public int    gems = 0;
     public float  rewardPoints = 0;
     public int    rewardLevel = 0;
@@ -181,35 +181,41 @@ public class GameState : SavableScriptableObject
   public static class Econo
   {
     public static Action<int>   onStaminaChanged;
-    public static Action<int>   onCashChanged;
-    public static Action<int>   onCrystalsChanged;
+    public static Action<int>   onCoinsChanged;
+    public static Action<int>   onGemsChanged;
     public static Action<float> onRewardProgressChanged;
 
     public static int stamina 
     { 
       get => get().economy.stamina; 
       set 
-      { 
-        get().economy.stamina = value; 
-        onStaminaChanged?.Invoke(value);
+      {
+        var _prev_val = get().economy.stamina;
+        get().economy.stamina = value;
+        if(_prev_val != value)
+          onStaminaChanged?.Invoke(value);
       } 
     }
-    public static int cash 
+    public static int coins 
     { 
-      get => get().economy.cash; 
+      get => get().economy.coins; 
       set
       { 
-        get().economy.cash = value;
-        onCashChanged?.Invoke(value);
+        var _prev_val = get().economy.coins;
+        get().economy.coins = value;
+        if(_prev_val != value)
+          onCoinsChanged?.Invoke(value);
       }
     }
     public static int gems
     {
       get => get().economy.gems; 
       set 
-      { 
+      {
+        var _prev_val = get().economy.gems;
         get().economy.gems = value;
-        onCrystalsChanged?.Invoke(value);
+        if(_prev_val != value)
+          onGemsChanged?.Invoke(value);
       }
     }
     public static float rewards
@@ -222,6 +228,10 @@ public class GameState : SavableScriptableObject
         if(prev_points != value)
           onRewardProgressChanged?.Invoke(value);
       }
+    }
+    public static bool CanSpendStamina(int stamina_cost)
+    {
+      return stamina >= stamina_cost;
     }
     public static class Chest
     {

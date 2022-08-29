@@ -40,6 +40,7 @@ public class Game : MonoBehaviour
   {
     yield return new WaitForSeconds(0.0125f);
     _earth.Setup();
+    FindObjectOfType<UIStatusBar>(true).Show();
   }
 
   void OnInputTapped(TouchInputData tid)

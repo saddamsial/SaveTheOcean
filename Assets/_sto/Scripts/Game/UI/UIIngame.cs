@@ -7,15 +7,11 @@ using GameLib.UI;
 
 public class UIIngame : MonoBehaviour
 {
-  [Header("TopPanelRefs")]
+  [Header("Refs")]
   [SerializeField] Slider     _progress;
-  [SerializeField] TMPLbl     _score;
-  [SerializeField] UIPanel    _topPanel;
-  [SerializeField] TMPLbl     _lblLevelInfo;
-  [SerializeField] UIPanel    _menuPanel;
-  
-  [Header("Settings")]
-  [SerializeField] UIToggleButton muteBtn;
+  //[SerializeField] UIPanel    _topPanel;
+  //[SerializeField] TMPLbl     _score;
+  //[SerializeField] TMPLbl     _lblLevelInfo;
 
   float _pollution = 0;
   float _pollutionDest = 0;
@@ -27,12 +23,10 @@ public class UIIngame : MonoBehaviour
     Level.onCreate += OnLevelCreated;
     Level.onFinished += OnLevelFinished;
     Level.onStart += OnLevelStart;
-    Level.onHide += OnLevelHide;
+    //Level.onHide += OnLevelHide;
     Level.onTutorialStart += OnTutorialStart;
     Level.onDestroy += OnLevelDestroy;
     Level.onGarbageOut += OnLevelGarbageOut;
-
-    muteBtn.SetState(!GameState.Settings.IsMuted);
   }
   void OnDestroy()
   {
@@ -40,7 +34,7 @@ public class UIIngame : MonoBehaviour
     Level.onCreate -= OnLevelCreated;
     Level.onFinished -= OnLevelFinished;
     Level.onStart -= OnLevelStart;
-    Level.onHide -= OnLevelHide;
+    //Level.onHide -= OnLevelHide;
     Level.onTutorialStart -= OnTutorialStart;
     Level.onDestroy -= OnLevelDestroy;
     Level.onGarbageOut -= OnLevelGarbageOut;
@@ -49,25 +43,21 @@ public class UIIngame : MonoBehaviour
   public void Show(Level level)
   {
     GetComponent<UIPanel>()?.ActivatePanel();
-    _topPanel.ActivatePanel();
   }
   void Hide()
   {
-    GetComponent<UIPanel>()?.ActivatePanel();
-    _topPanel.DeactivatePanel();
+    GetComponent<UIPanel>()?.DeactivatePanel();
   }
 
   void OnLevelCreated(Level lvl)
   {
     _lvl = lvl;
-    //OnLevelStart(lvl);
   }
 
   void OnLevelStart(Level lvl)
   {
     _lvl = lvl;
-    _lblLevelInfo.text = "Level " + (lvl.levelIdx + 1);
-
+    //_lblLevelInfo.text = "Level " + (lvl.levelIdx + 1);
     _progress.minValue = 0;
     _progress.maxValue = 1;
     _progress.value = 1;
@@ -81,10 +71,10 @@ public class UIIngame : MonoBehaviour
   {
     Hide();
   }
-  void OnLevelHide(Level lvl)
-  {
-    //Hide();
-  }
+  // void OnLevelHide(Level lvl)
+  // {
+    
+  // }
   void OnLevelFinished(Level lvl)
   {
     Hide();
@@ -95,7 +85,7 @@ public class UIIngame : MonoBehaviour
   }
   void UpdateScore()
   {
-    _score.text = "";//"Score " + (int)_pointCurr;
+    //_score.text = ""
   }
   void OnLevelDestroy(Level lvl)
   {
@@ -109,10 +99,6 @@ public class UIIngame : MonoBehaviour
   {
 
   }
-  public void OnBtnClosePopups()
-  {
-    _menuPanel.DeactivatePanel();
-  }
   public void OnBtnRestart()
   {
     FindObjectOfType<Game>()?.RestartLevel();
@@ -121,10 +107,6 @@ public class UIIngame : MonoBehaviour
   {
     Hide();
     FindObjectOfType<Game>().ShowEarth(false);
-  }
-  public void OnBtnMute()
-  {
-    GameState.Settings.IsMuted = !GameState.Settings.IsMuted;
   }
 
   void Update()

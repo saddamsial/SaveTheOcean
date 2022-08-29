@@ -10,17 +10,17 @@ public class UIEarth : MonoBehaviour
   [SerializeField] Button  _btnPlay;
   [SerializeField] TMPLbl  _lblLevelInfo;
   [SerializeField] Slider  _slider;
-
+  [SerializeField] TMPLbl  _btnStaminaInfo;
 
   public static System.Action onBtnPlay;
 
   UIPanel _earthPanel = null;
   float   _cleanDst = 0.0f;
 
+
   void Awake()
   {
     Earth.onShow += OnEarthShow;
-    //Earth.onHide += OnEarthHide;
     Earth.onLevelSelected += UpdateLevelInfo;
     Earth.onLevelStart += OnEarthHide;
 
@@ -30,11 +30,12 @@ public class UIEarth : MonoBehaviour
     _slider.minValue = 0;
     _slider.maxValue = 1;
     _slider.value = _cleanDst;
+
+    _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaCost);
   }
   void OnDestroy()
   {
     Earth.onShow -= OnEarthShow;
-    //Earth.onHide -= OnEarthHide;
     Earth.onLevelSelected -= UpdateLevelInfo;
     Earth.onLevelStart -= OnEarthHide;
   }
@@ -43,7 +44,6 @@ public class UIEarth : MonoBehaviour
   public void  Show(int lvlIdx)
   {
     _earthPanel.ActivatePanel();
-    //_globePanel.ActivatePanel();
     UpdateLevelInfo(lvlIdx);
     this.Invoke(()=> _cleanDst = GameState.Progress.GetCompletionRate(), 0.25f);
   }
@@ -61,7 +61,13 @@ public class UIEarth : MonoBehaviour
 
   public void OnBtnPlay()
   {
-    onBtnPlay?.Invoke();
+    if(GameState.Econo.CanSpendStamina(GameData.Econo.staminaCost))
+    {
+      GameState.Econo.stamina -= GameData.Econo.staminaCost;
+      onBtnPlay?.Invoke();
+    }
+    //else
+    //show stamina info;
   }
 
   void UpdateSlider()

@@ -30,7 +30,6 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: 316e331cb594ca54fbcef2b610a4c154, type: 3}
     - {fileID: 6445466529311080229, guid: e8e1c0ce00723b94d97b32914cf307b6, type: 3}
     - {fileID: 6445466529311080229, guid: cb33df14898c48a4eabe5a4f7f2aab6c, type: 3}
-    - {fileID: 6445466529311080229, guid: 6502d8ac5bccd8c42836da33e4d88935, type: 3}
     - {fileID: 6445466529311080229, guid: 461c3825513b78342a843269dae8a34a, type: 3}
   - _kind: 3
     _items:
@@ -48,6 +47,13 @@ MonoBehaviour:
   - {fileID: 2229698086017596401, guid: 26112caae72b86d46a016484bf618140, type: 3}
   - {fileID: 2229698086017596401, guid: 1bf49517c8dd6314d95996effc4bc308, type: 3}
   - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
+  - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
+  - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
+  - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
+  - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
+  - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
+  - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
+  _playLevelStaminaCost: 5
   _rewards:
   - points2Chest: 0
     _reward:
