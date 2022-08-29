@@ -60,6 +60,7 @@ public class GameData : ScriptableObject
   [Header("Levels")]
   [SerializeField] List<Level> _listLevels;
   [Header("Econo")]
+  [SerializeField] int       _playLevelStaminaCost;
   [SerializeField] Rewards[] _rewards;
 
 
@@ -113,6 +114,7 @@ public class GameData : ScriptableObject
   }
   public static class Econo
   {
+    public static int staminaCost => get()._playLevelStaminaCost;
     public struct RewardProgress
     {
       public int    lvl;
@@ -128,30 +130,33 @@ public class GameData : ScriptableObject
         progress_range_hi = 0;
       }
     }
-    public static int RewardChestValue(int lvl)
-    {
-      return get()._rewards[Mathf.Clamp(lvl, 0, get()._rewards.last_idx())].points2Chest;
-    }
-    //public static int 
-    public static RewardProgress GetRewardProgress(float rewardPoints)
-    {
-      int rewardIdx = Array.FindLastIndex(get()._rewards, (Rewards rewards) => rewardPoints >= rewards.points2Chest);
-      var rp = new RewardProgress(Mathf.Max(rewardIdx, GameState.Econo.Chest.rewardLevel));
-      rp.progress_range_lo = RewardChestValue(rp.lvl);
-      rp.progress_range_hi = RewardChestValue(rp.lvl +1);
-      rp.progress_points = rewardPoints;
+    // public static class Reward
+    // {
+      public static int RewardChestValue(int lvl)
+      {
+        return get()._rewards[Mathf.Clamp(lvl, 0, get()._rewards.last_idx())].points2Chest;
+      }
+      //public static int 
+      public static RewardProgress GetRewardProgress(float rewardPoints)
+      {
+        int rewardIdx = Array.FindLastIndex(get()._rewards, (Rewards rewards) => rewardPoints >= rewards.points2Chest);
+        var rp = new RewardProgress(Mathf.Max(rewardIdx, GameState.Econo.Chest.rewardLevel));
+        rp.progress_range_lo = RewardChestValue(rp.lvl);
+        rp.progress_range_hi = RewardChestValue(rp.lvl +1);
+        rp.progress_points = rewardPoints;
 
-      return rp;
-    }
-    public static Rewards.Reward GetRewards()
-    {
-      return GetRewards(GameState.Econo.Chest.rewardLevel);
-    }
-    public static Rewards.Reward GetRewards(int chestLvl)
-    {
-      int idx = Mathf.Min(chestLvl, get()._rewards.last_idx());
-      return get()._rewards[idx]._reward;
-    }
+        return rp;
+      }
+      public static Rewards.Reward GetRewards()
+      {
+        return GetRewards(GameState.Econo.Chest.rewardLevel);
+      }
+      public static Rewards.Reward GetRewards(int chestLvl)
+      {
+        int idx = Mathf.Min(chestLvl, get()._rewards.last_idx());
+        return get()._rewards[idx]._reward;
+      }
+    //}
   }
 
   public static class Settings
