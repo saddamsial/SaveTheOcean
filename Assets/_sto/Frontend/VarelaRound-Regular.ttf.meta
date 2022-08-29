@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b1bb6f41ff1a1e4bbf36a5a9f0b1d9e
+guid: 3fdcba8272904ff46b08dd9dc57e6213
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Titillium Web
+  - Varela Round
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
