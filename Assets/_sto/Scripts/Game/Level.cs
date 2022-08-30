@@ -172,8 +172,6 @@ public class Level : MonoBehaviour
 
     _splitMachine.Init(_items);
 
-    //_actObj = GetComponent<ActivatableObject>();
-
     onCreate?.Invoke(this);
   }
   void OnDestroy()
@@ -267,6 +265,12 @@ public class Level : MonoBehaviour
       _grid.set(item.vgrid, 1);
     }
   }
+  void DestroyItem(Item item)
+  {
+    _items.Remove(item);
+    _grid.set(item.vgrid, 0);
+    item.Hide();
+  }
 
   void  UpdatePollution()
   {
@@ -288,25 +292,6 @@ public class Level : MonoBehaviour
     _itemSelected = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
     _itemSelected?.Select(true);
     voffs = Vector3.zero;
-    
-    if(_itemSelected == null)
-    {
-      var chest = tid.GetClosestCollider(0.5f, RewardChest.layerMask)?.GetComponent<RewardChest>();
-      if(chest)
-      {
-        Vector2? vg = _grid.getEmpty();
-        if(vg != null)
-        {
-          Item.ID? id = chest.Pop();
-          if(id != null)
-          {
-            var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
-            _items2.Insert(0, item);
-            SpawnItem(vg.Value);
-          }
-        }
-      }
-    }
   }
   Vector3 voffs = Vector3.zero;
   public void OnInputMov(TouchInputData tid)
@@ -335,8 +320,11 @@ public class Level : MonoBehaviour
     }
 
     _grid.hovers(false);
-    var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
-    tileHit?.Hover(true);
+    if(_itemSelected)
+    {
+      var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
+      tileHit?.Hover(true);
+    }
   }
   public void OnInputEnd(TouchInputData tid)
   {
@@ -350,6 +338,33 @@ public class Level : MonoBehaviour
       _itemSelected.MoveBack();
     }
     _itemSelected = null;
+  }
+  public void OnInputTapped(TouchInputData tid)
+  {
+    var chest = tid.GetClosestCollider(0.5f, RewardChest.layerMask)?.GetComponent<RewardChest>();
+    if(chest)
+    {
+      Vector2? vg = _grid.getEmpty();
+      if(vg != null)
+      {
+        Item.ID? id = chest.Pop();
+        if(id != null)
+        {
+          var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
+          _items2.Insert(0, item);
+          SpawnItem(vg.Value);
+        }
+      }
+    }
+    else
+    {
+      var item = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>();
+      if(item && item.id.IsSpecial)
+      {
+        GameState.Econo.AddRes(item.id);
+        DestroyItem(item);    
+      }
+    }
   }
 
   bool IsItemHit(TouchInputData tid)

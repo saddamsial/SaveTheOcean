@@ -19,6 +19,7 @@ public class Game : MonoBehaviour
   {
     TouchInputData.onTap += OnInputTapped;
     TouchInputData.onInputStarted += OnInputBeg;
+    TouchInputData.onInputMoveStarted += OnInputStart;
     TouchInputData.onInputUpdated += OnInputMov;
     TouchInputData.onInputEnded += OnInputEnd;
 
@@ -31,6 +32,7 @@ public class Game : MonoBehaviour
   {
     TouchInputData.onTap -= OnInputTapped;
     TouchInputData.onInputStarted -= OnInputBeg;
+    TouchInputData.onInputMoveStarted -= OnInputStart;
     TouchInputData.onInputUpdated -= OnInputMov;
     TouchInputData.onInputEnded -= OnInputEnd;
 
@@ -45,12 +47,15 @@ public class Game : MonoBehaviour
 
   void OnInputTapped(TouchInputData tid)
   {
-    //_level?.OnInputTapped(tid);
+    _level?.OnInputTapped(tid);
   }
   void OnInputBeg(TouchInputData tid)
   {
-    _level?.OnInputBeg(tid);
     _earth?.OnInputBeg(tid);
+  }
+  void OnInputStart(TouchInputData tid)
+  {
+    _level?.OnInputBeg(tid);
   }
   void OnInputMov(TouchInputData tid)
   {
@@ -139,7 +144,7 @@ public class Game : MonoBehaviour
   void Update()
   {
     GameState.Process();
-    
+
 #if UNITY_EDITOR
     if(Input.GetKeyDown(KeyCode.Z))
     {

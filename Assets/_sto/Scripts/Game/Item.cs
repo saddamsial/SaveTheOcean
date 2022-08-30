@@ -49,7 +49,9 @@ public class Item : MonoBehaviour
     public int type {get => _type; set => _type = value;}
     public int lvl {get => _lvl; set => _lvl = value;}
     public Kind kind {get => _kind; set => _kind = value;}
+    public bool IsSpecial => _kind != Kind.Garbage;
     public static bool Eq(ID id0, ID id1) => id0.type == id1.type && id0.lvl == id1.lvl;
+
   }
 
   ID         _id = new ID();

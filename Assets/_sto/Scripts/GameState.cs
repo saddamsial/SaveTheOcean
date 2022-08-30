@@ -280,6 +280,16 @@ public class GameState : SavableScriptableObject
       
       return perc;
     }
+    public static void AddRes(Item.ID id)
+    {
+      int amount = (int)((1 << id.lvl) * 1.5f);
+      if(id.kind == Item.Kind.Stamina)
+        stamina += amount;
+      else if(id.kind == Item.Kind.Coin)
+        coins += amount;
+      else if(id.kind == Item.Kind.Gem)
+        gems += amount;    
+    }
 
     public static void Process()
     {
