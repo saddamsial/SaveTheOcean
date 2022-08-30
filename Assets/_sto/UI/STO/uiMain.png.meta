@@ -125,6 +125,27 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: activeTab
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 832
+        width: 128
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 64, y: 0, z: 64, w: 184}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dd9e042000000000800000000000000
+      internalID: 604937689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: windowBase
       rect:
         serializedVersion: 2
@@ -245,6 +266,7 @@ TextureImporter:
       windowBase: -667370155
       round_256: -1001253769
       rect_96: -597952514557367733
+      activeTab: 604937689
       round_160: 2580913069511842827
       round_96: 1365894209
       round_192: -446718634

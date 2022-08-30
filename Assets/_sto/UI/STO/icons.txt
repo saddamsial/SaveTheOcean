@@ -1,3 +1,6 @@
+icoStickers,768,768,256,256
+icoAnimals,512,768,256,256
+icoBlimp,256,768,256,256
 icoGlobe,0,768,256,256
 icoComingSoon,640,0,384,384
 icoRecycle,0,512,256,256

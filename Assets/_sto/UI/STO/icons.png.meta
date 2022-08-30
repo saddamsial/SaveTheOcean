@@ -3,14 +3,23 @@ guid: b77c184743093a246b31bde45756685e
 TextureImporter:
   internalIDToNameTable:
   - first:
+      213: 6502331425119105489
+    second: icoStickers
+  - first:
+      213: -7215683535647559631
+    second: icoAnimals
+  - first:
+      213: -2933059342163425260
+    second: icoBlimp
+  - first:
+      213: 4066367421695183551
+    second: icoGlobe
+  - first:
       213: -1232334675095031906
     second: icoComingSoon
   - first:
       213: -8255553990200284353
     second: icoRecycle
-  - first:
-      213: 4066367421695183551
-    second: icoGlobe
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -89,6 +98,69 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
+      name: icoStickers
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d17516fafbec3a50800000000000000
+      internalID: 6502331425119105489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icoAnimals
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 130b71efd0ebcdb90800000000000000
+      internalID: -7215683535647559631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icoBlimp
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 768
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 418453d711eab47d0800000000000000
+      internalID: -2933059342163425260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: icoGlobe
       rect:
         serializedVersion: 2
@@ -164,7 +236,10 @@ TextureImporter:
     nameFileIdTable:
       icoGlobe: 4066367421695183551
       icoRecycle: -8255553990200284353
+      icoStickers: 6502331425119105489
       icoComingSoon: -1232334675095031906
+      icoBlimp: -2933059342163425260
+      icoAnimals: -7215683535647559631
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
