@@ -67,10 +67,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <sprite name="icoSad">A
+  m_text: Info Label
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 02d306a36d792f649b8dde09405c2024, type: 2}
-  m_sharedMaterial: {fileID: 796101178411701626, guid: 02d306a36d792f649b8dde09405c2024, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4a3672f9347d108459507139351a0d9b, type: 2}
+  m_sharedMaterial: {fileID: 6192141425101575685, guid: 4a3672f9347d108459507139351a0d9b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -94,8 +94,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 128
-  m_fontSizeBase: 128
+  m_fontSize: 96
+  m_fontSizeBase: 96
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
