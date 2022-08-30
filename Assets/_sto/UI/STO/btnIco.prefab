@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 621867643225030463}
   - component: {fileID: 2289519392665839373}
   - component: {fileID: 1940083923298755152}
+  - component: {fileID: 7730447804266639062}
+  - component: {fileID: 5143797732153969253}
   m_Layer: 0
   m_Name: btnIco
   m_TagString: Untagged
@@ -70,7 +72,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: -2389091874211348730, guid: 3f08060d236802e4186ae6f3dd375a48, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -142,3 +144,32 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!225 &7730447804266639062
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7491877642971654061}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &5143797732153969253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7491877642971654061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5acdec3a07fa93545b374f8d017912ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  registerAnimator: 1
+  initialDelay: 0
+  activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
+  deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
+  affectedTransform: {fileID: 0}
