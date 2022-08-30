@@ -136,9 +136,11 @@ public class Game : MonoBehaviour
     _camCtrl.SwitchTo(0);    
   }
 
-#if UNITY_EDITOR
   void Update()
   {
+    GameState.Process();
+    
+#if UNITY_EDITOR
     if(Input.GetKeyDown(KeyCode.Z))
     {
       Level.onFinished?.Invoke(_level);
@@ -154,6 +156,6 @@ public class Game : MonoBehaviour
       Level.onFinished?.Invoke(_level);
       RestartLevel();
     }
+#endif    
   }
-#endif
 }

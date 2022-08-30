@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9882444}
   - component: {fileID: 9882445}
+  - component: {fileID: 9882446}
   m_Layer: 0
   m_Name: _main
   m_TagString: Untagged
@@ -176,6 +177,23 @@ MonoBehaviour:
   gameState: {fileID: 11400000, guid: 2f0aab7a3829ee44bb03dbb32fde791f, type: 2}
   gameData: {fileID: 11400000, guid: aa9510eb6be27ad41a4490d243c9eb8f, type: 2}
   framerate: 60
+--- !u!114 &9882446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9882443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e1573d4a816d74e88236a42b843c2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  days: 0
+  hours: 0
+  mins: 0
+  secs: 0
+  str_time: 
 --- !u!1 &322664730
 GameObject:
   m_ObjectHideFlags: 0

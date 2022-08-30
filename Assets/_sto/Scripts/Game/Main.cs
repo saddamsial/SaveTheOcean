@@ -30,10 +30,10 @@ public class Main : MonoBehaviour
     DataManager.SaveAllData();
   }
 
-  #if UNITY_EDITOR
+#if UNITY_EDITOR
   void Update()
   {
     Application.targetFrameRate = framerate;
   }
-  #endif
+#endif
 }

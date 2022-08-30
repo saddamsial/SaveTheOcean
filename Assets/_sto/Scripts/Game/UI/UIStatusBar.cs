@@ -46,5 +46,11 @@ public class UIStatusBar : MonoBehaviour
   void OnStaminaChanged(int val) => UpdateRes();
   void OnGemsChanged(int val) => UpdateRes();
   void OnCoinsChanged(int val) => UpdateRes();
+
+  void Update()
+  {
+    float perc = GameState.Econo.GetStaminaRefillPerc();
+    _stamina.progressVal = perc;
+  }
 }
 

@@ -27,11 +27,13 @@ public class DebugTimeOffset : MonoBehaviour
       return new System.TimeSpan();  
   }
 
+#if UNITY_EDITOR
   void Update()
   {
     if(Time.frameCount % 60 == 0)
       str_time = CTime.get().ToString();
   }
+#endif
 }
 
 static public class CTime

@@ -10,6 +10,13 @@ public class UIInfoBox : MonoBehaviour
   [SerializeField] Slider _slider;
   [SerializeField] Item.Kind _resKind;
 
+  void Awake()
+  {
+    _slider.minValue = 0;
+    _slider.maxValue = 100;
+    _slider.value = 0;
+  }
+
   public int resValue 
   {
     set => _info.text = _resKind switch
@@ -20,4 +27,5 @@ public class UIInfoBox : MonoBehaviour
       _ => value.ToString()
     };
   }
+  public float progressVal {set => _slider.value = value;}
 }

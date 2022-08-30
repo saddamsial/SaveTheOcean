@@ -14,7 +14,11 @@ public class GameState : SavableScriptableObject
   {
     _static_this = this;
   }
-
+  public static void Process()
+  {
+    //get()?.economy?.Process();
+    GameState.Econo.Process();
+  }
 
   [System.Serializable]
   class LevelState
@@ -90,6 +94,7 @@ public class GameState : SavableScriptableObject
     public int    gems = 0;
     public float  rewardPoints = 0;
     public int    rewardLevel = 0;
+    public long   lastStamina = 0;
     [System.Serializable]
     public class ChestState
     {
@@ -132,6 +137,8 @@ public class GameState : SavableScriptableObject
   public static void Init()
   {
     get().progress.UnlockLevel(0);
+    if(get().economy.lastStamina == 0)
+      get().economy.lastStamina = CTime.get().ToBinary();
 
   #if UNITY_EDITOR
     for(int  q = 0; q < GameData.Levels.LevelsCnt; ++q)
@@ -191,8 +198,8 @@ public class GameState : SavableScriptableObject
       set 
       {
         var _prev_val = get().economy.stamina;
-        get().economy.stamina = value;
-        if(_prev_val != value)
+        get().economy.stamina = Mathf.Clamp(value, 0, GameData.Econo.staminaMax);
+        if(_prev_val != get().economy.stamina)
           onStaminaChanged?.Invoke(value);
       } 
     }
@@ -263,14 +270,29 @@ public class GameState : SavableScriptableObject
       {
         get().economy.chestState.AddReward(GameData.Econo.GetRewards());
       }
-
-      // public static void AddStamina(Item.ID id) => get().economy.chestState.listStamina.Add(id);
-      // public static void AddCoins(Item.ID id) => get().economy.chestState.listCoins.Add(id);
-      // public static void AddGems(Item.ID id) => get().economy.chestState.listGems.Add(id);
+    }
+    public static float GetStaminaRefillPerc()
+    {
+      var now = CTime.get();
+      var last = DateTime.FromBinary(get().economy.lastStamina);
+      var timeDiff = now - last;
+      float perc = 100*(float)((now - last).TotalSeconds / GameData.Econo.staminaRefillTime);
       
-      // public static void RemoveSamina(Item.ID id) => get().economy.chestState.listStamina.Add(id);
-      // public static void RemoveCoins(Item.ID id) => get().economy.chestState.listCoins.Add(id);
-      // public static void RemoveGems(Item.ID id) => get().economy.chestState.listGems.Add(id);
+      return perc;
+    }
+
+    public static void Process()
+    {
+      var eco = get().economy;
+      var now = CTime.get();
+      var last = DateTime.FromBinary(eco.lastStamina);
+      var timeDiff = now - last;
+      if(timeDiff.TotalSeconds > GameData.Econo.staminaRefillTime)
+      {
+        int staminaToAdd = (int)(timeDiff.TotalSeconds / GameData.Econo.staminaRefillTime);
+        stamina += staminaToAdd;
+        eco.lastStamina = last.AddSeconds((double)staminaToAdd * GameData.Econo.staminaRefillTime).ToBinary();
+      }
     }
   }
   public static class Settings
