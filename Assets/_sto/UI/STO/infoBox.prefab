@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.49803925, b: 0.7490196, a: 1}
+  m_Color: {r: 0.25, g: 0.7486913, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -113,7 +113,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 44}
-  m_SizeDelta: {x: -160, y: 8}
+  m_SizeDelta: {x: -160, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1062829320867261623
 MonoBehaviour:
@@ -199,10 +199,10 @@ RectTransform:
   m_Father: {fileID: 4309862987483439586}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -8}
-  m_SizeDelta: {x: -80, y: 96}
+  m_SizeDelta: {x: -80, y: -72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4309862986188545786
 CanvasRenderer:
@@ -337,7 +337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -48}
+  m_AnchoredPosition: {x: 0, y: -52}
   m_SizeDelta: {x: -96, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4309862987340023900
@@ -377,8 +377,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2160033536
-  m_fontColor: {r: 0, g: 0.49804688, b: 0.75, a: 0.5019608}
+    rgba: 1505726256
+  m_fontColor: {r: 0.1872549, g: 0.5607845, b: 0.7490196, a: 0.34901962}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -395,8 +395,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16
-  m_fontSizeBase: 16
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -556,9 +556,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IgnoreLayout: 0
   m_MinWidth: 240
-  m_MinHeight: 160
+  m_MinHeight: 168
   m_PreferredWidth: 272
-  m_PreferredHeight: 160
+  m_PreferredHeight: 168
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
@@ -649,7 +649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _info: {fileID: 4309862986188545785}
   _slider: {fileID: 1062829320867261623}
-  _resIco: <sprite name="
+  _resKind: 0
 --- !u!1 &4487051267685832957
 GameObject:
   m_ObjectHideFlags: 0
