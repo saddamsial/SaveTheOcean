@@ -15,19 +15,17 @@ public class DevOptions : MonoBehaviour
   // {
   //   FindObjectOfType<Game>(true).FinishLevel();
   // }
-  public void on_btn_prev()
+  public void on_btn_00()
   {
-    var level = FindObjectOfType<Level>(true);
-    if(level)
-      Level.onFinished?.Invoke(level);    
-    FindObjectOfType<Game>(true).PrevLevel();
+    GameState.Econo.stamina += 5;
   }
-  public void on_btn_next()
+  public void on_btn_01()
   {
-    var level = FindObjectOfType<Level>(true);
-    if(level)
-      Level.onFinished?.Invoke(level);
-    FindObjectOfType<Game>(true).NextLevel();
+    GameState.Econo.coins += 5;
+  }
+  public void btn_btn_02()
+  {
+    GameState.Econo.gems += 5;
   }
   public void on_btn_reset_progress()
   {
@@ -37,11 +35,6 @@ public class DevOptions : MonoBehaviour
   {
     FindObjectOfType<GameLib.UI.UIColorThemeManager>().ApplyThemeColorToAllSubComponents(colorThemes[(int)Mathf.Repeat(++colorTheme, colorThemes.Length)]);
   }
-  public void on_btn_wasser()
-  {
-
-  }
-  
   [SerializeField] GameLib.UI.UIColorTheme[] colorThemes = new GameLib.UI.UIColorTheme[]{};
   [SerializeField] int colorTheme = 0;
 
