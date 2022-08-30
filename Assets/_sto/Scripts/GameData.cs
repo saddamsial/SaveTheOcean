@@ -90,7 +90,17 @@ public class GameData : ScriptableObject
       item.enabled = false;
       return item;
     }
-    public static int ItemLevelsCnt(int item_type) => get()._items[item_type].Count;
+    public  static int ItemLevelsCnt(int item_type)
+    {
+      int levels = 0;
+      levels = get()._items[item_type].Count;
+
+      return levels;
+    }
+    public static int ItemTypeFromKind(Item.Kind kind)
+    {
+      return Array.FindIndex(get()._items, (item) => item.kind == kind);
+    }
     public static int ItemTypesCnt => get()._items.Length;
 
     public static Location CreateLocation(Transform parent) => Instantiate(get()._locationPrefab, parent);

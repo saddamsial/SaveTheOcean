@@ -35,12 +35,12 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: cb33df14898c48a4eabe5a4f7f2aab6c, type: 3}
     - {fileID: 6445466529311080229, guid: 50711a15f337764448da281baf1bc051, type: 3}
     - {fileID: 6445466529311080229, guid: 461c3825513b78342a843269dae8a34a, type: 3}
-  - _kind: 3
-    _items:
-    - {fileID: 6158104306688602383, guid: 2543f320fe2c1ee4c801ad3e20b5fcab, type: 3}
   - _kind: 2
     _items:
     - {fileID: 6158104306688602383, guid: 90f7560f046a8bf48bf9c4a81f24b856, type: 3}
+  - _kind: 3
+    _items:
+    - {fileID: 6158104306688602383, guid: 2543f320fe2c1ee4c801ad3e20b5fcab, type: 3}
   - _kind: 4
     _items:
     - {fileID: 6158104306688602383, guid: 9c7fce1f71dcf6042b1f402f1c02e7f9, type: 3}

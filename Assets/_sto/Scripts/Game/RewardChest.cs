@@ -15,12 +15,15 @@ public class RewardChest : MonoBehaviour
   [SerializeField] TMPLbl lblGems;
 
   float _rewardPointsMov = 0;
+  public static int layerMask = 0;
 
   void Awake()
   {
     GameState.Econo.onRewardProgressChanged += OnRewardChanged;
     _rewardPointsMov = GameState.Econo.rewards;
     OnRewardChanged(_rewardPointsMov);
+
+    layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
   }
   void OnDestroy()
   {
@@ -59,6 +62,13 @@ public class RewardChest : MonoBehaviour
         UpdateInfo();
       }, 0.25f);
     }
+  }
+
+  public Item.ID? Pop()
+  {
+    var id = GameState.Econo.Chest.PopRes();
+    UpdateInfo();
+    return id;  
   }
 
   void Update()

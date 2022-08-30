@@ -17,15 +17,23 @@ MonoBehaviour:
   version: 0
   progress:
     _level: 0
-    _levels: []
+    _levels:
+    - _idx: 0
+      _state: 1
   economy:
-    stamina: 50
-    cash: 0
+    stamina: 5
+    coins: 15
     gems: 0
-    rewardPoints: 0
-    rewardLevel: 0
+    rewardPoints: 25
+    rewardLevel: 4
     chestState:
-      listStamina: []
+      listStamina:
+      - _type: 3
+        _lvl: 0
+        _kind: 2
+      - _type: 3
+        _lvl: 0
+        _kind: 2
       listCoins: []
       listGems: []
   splitMachine:

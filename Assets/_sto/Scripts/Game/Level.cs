@@ -100,7 +100,7 @@ public class Level : MonoBehaviour
     public static Vector2 a2g(Vector2Int va, Vector2Int _dim)
     {
       Vector2 v = Vector2.zero;
-      v.y = -((-_dim.y + 1) * 0.5f + va.y);
+      v.y = ((-_dim.y + 1) * 0.5f + va.y);
       v.x = (-_dim.x + 1) * 0.5f + va.x;
       return v;
     }
@@ -139,7 +139,7 @@ public class Level : MonoBehaviour
       {
         for(int x = 0; x < _dim.x; ++x)
         {
-          if(_grid[y,x] == 0)
+          if(_grid[y, x] == 0)
             vps.Add(a2g(new Vector2Int(x, y), _dim));
         }
       }
@@ -288,6 +288,25 @@ public class Level : MonoBehaviour
     _itemSelected = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
     _itemSelected?.Select(true);
     voffs = Vector3.zero;
+    
+    if(_itemSelected == null)
+    {
+      var chest = tid.GetClosestCollider(0.5f, RewardChest.layerMask)?.GetComponent<RewardChest>();
+      if(chest)
+      {
+        Vector2? vg = _grid.getEmpty();
+        if(vg != null)
+        {
+          Item.ID? id = chest.Pop();
+          if(id != null)
+          {
+            var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
+            _items2.Insert(0, item);
+            SpawnItem(vg.Value);
+          }
+        }
+      }
+    }
   }
   Vector3 voffs = Vector3.zero;
   public void OnInputMov(TouchInputData tid)

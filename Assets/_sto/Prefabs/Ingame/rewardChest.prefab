@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5936824663574775105}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: stamina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,8 @@ GameObject:
   m_Component:
   - component: {fileID: 254796793352037322}
   - component: {fileID: 7484981345368360146}
-  m_Layer: 8
+  - component: {fileID: 5890950965672029708}
+  m_Layer: 11
   m_Name: rewardChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,6 +91,19 @@ MonoBehaviour:
   lblStamina: {fileID: 1150668266811913568}
   lblCoins: {fileID: 3809541752829074975}
   lblGems: {fileID: 8580361775460532129}
+--- !u!65 &5890950965672029708
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2563882264396765624}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3157311124560177765
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +113,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6194766574164186739}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: coins
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +152,7 @@ GameObject:
   - component: {fileID: 8225611061810610393}
   - component: {fileID: 2795417207642921464}
   - component: {fileID: 8580361775460532129}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -271,7 +285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4095132981737195921}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 265124451401802378}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: gems
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +357,7 @@ GameObject:
   - component: {fileID: 8109522696239226539}
   - component: {fileID: 6630136255897572148}
   - component: {fileID: 6949182189189610795}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +462,7 @@ GameObject:
   - component: {fileID: 1247436467968700329}
   - component: {fileID: 8135126741186782374}
   - component: {fileID: 3809541752829074975}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +597,7 @@ GameObject:
   - component: {fileID: 4742453828353038543}
   - component: {fileID: 2863555042957790916}
   - component: {fileID: 1150668266811913568}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -719,7 +733,7 @@ GameObject:
   - component: {fileID: 5733943831832151480}
   - component: {fileID: 2951544628188106267}
   - component: {fileID: 2327315636045187148}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: ui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,6 +1009,10 @@ PrefabInstance:
     - target: {fileID: 7114563255017448932, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_Name
       value: scoreSlider
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114563255017448932, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7979445396645249961, guid: 0824513be70dffa4e9b97f6e7820ba03, type: 3}
       propertyPath: m_IsActive

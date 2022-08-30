@@ -99,7 +99,7 @@ public class GameState : SavableScriptableObject
 
       public void AddReward(GameData.Rewards.Reward rew)
       {
-        listStamina.Add(new Item.ID(0, 0, Item.Kind.Stamina));
+        listStamina.Add(new Item.ID(0 , 0, Item.Kind.Stamina));
         listCoins.Add(new Item.ID(0, 0, Item.Kind.Coin));
         listGems.Add(new Item.ID(0, 0, Item.Kind.Gem));
       }
@@ -235,10 +235,30 @@ public class GameState : SavableScriptableObject
     }
     public static class Chest
     {
-      public static int   rewardLevel {get => get().economy.rewardLevel; set => get().economy.rewardLevel = value;}
-      public static int   staminaCnt => get().economy.chestState.listStamina.Count;
-      public static int   coinsCnt =>   get().economy.chestState.listCoins.Count;
-      public static int   gemsCnt =>    get().economy.chestState.listGems.Count;
+      public static int      rewardLevel {get => get().economy.rewardLevel; set => get().economy.rewardLevel = value;}
+      public static int      staminaCnt => get().economy.chestState.listStamina.Count;
+      public static int      coinsCnt =>   get().economy.chestState.listCoins.Count;
+      public static int      gemsCnt =>    get().economy.chestState.listGems.Count;
+      public static Item.ID? PopRes() 
+      {
+        Item.ID? id = null;
+        if(staminaCnt > 0)
+        {
+          id = get().economy.chestState.listStamina.last();
+          get().economy.chestState.listStamina.RemoveAt(get().economy.chestState.listStamina.last_idx());
+        }
+        else if(coinsCnt > 0)
+        {
+          id = get().economy.chestState.listCoins.last();
+          get().economy.chestState.listCoins.RemoveAt(get().economy.chestState.listCoins.last_idx());
+        }
+        else if(gemsCnt > 0)
+        {
+          id = get().economy.chestState.listGems.last();
+          get().economy.chestState.listGems.RemoveAt(get().economy.chestState.listGems.last_idx());          
+        }
+        return id;
+      }
       public static void  AddRewards()
       {
         get().economy.chestState.AddReward(GameData.Econo.GetRewards());

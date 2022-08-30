@@ -42,11 +42,10 @@ public class Item : MonoBehaviour
 
     public ID(int item_type, int item_lvl, Kind item_kind)
     {
-      _type = item_type;
+      _type = (item_kind == Kind.Garbage)? item_type : GameData.Prefabs.ItemTypeFromKind(item_kind);
       _lvl = item_lvl;
       _kind = item_kind;
     }
-
     public int type {get => _type; set => _type = value;}
     public int lvl {get => _lvl; set => _lvl = value;}
     public Kind kind {get => _kind; set => _kind = value;}
@@ -123,13 +122,22 @@ public class Item : MonoBehaviour
     Item new_item = null;
     if(item.IsUpgradable)
     {
-      item.incLvl();
-      new_item = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
-      item.Hide();
-      new_item.Init(item.vgrid);
+      if(item.id.kind == Item.Kind.Garbage)
+      {
+        item.incLvl();
+        new_item = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
+        item.Hide();
+        new_item.Init(item.vgrid);
 
-      _items.Remove(item);
-      _items.Add(new_item);
+        _items.Remove(item);
+        _items.Add(new_item);
+      }
+      else
+      {
+        new_item = item;
+        item.incLvl();
+        item.SetModel(item.id.lvl);
+      }
     }
     return new_item;
   }
@@ -144,7 +152,7 @@ public class Item : MonoBehaviour
   static public int layerMask = 0;
 
   public ID         id { get => _id; set { _id = value; } }
-  public GameObject mdl => _models[0];
+  public GameObject mdl {get; private set;} // => _models[0];
   public Vector3    vdim => _vdim;
   public Vector3    vbtmExtent => _vbtmExtent;
   public Vector2    vgrid {get => _grid; set => _grid = value;}
@@ -153,18 +161,18 @@ public class Item : MonoBehaviour
   public Vector3    vwpos { get => transform.position; set => transform.position = value;}
   public Vector3?   vdstPos {get=> _vdstPos; set => _vdstPos = value;}
   public Vector3    gridPos => Item.ToPos(vgrid);
-  public bool       IsMaxLevel => id.lvl + 1 == GameData.Prefabs.ItemLevelsCnt(id.type);
-  public bool       IsUpgradable => id.lvl + 1 < GameData.Prefabs.ItemLevelsCnt(id.type);
+  public bool       IsMaxLevel => id.lvl + 1 == levelsCnt;
+  public bool       IsUpgradable => id.lvl + 1 < levelsCnt;
   public bool       IsSplitable => id.lvl > 0;
   public bool       IsSelected {get; set;}
   public bool       IsInMachine {get => _inMachine; set => _inMachine = value;}
   public void       incLvl(){_id.lvl++;}
   public void       decLvl(){if(_id.lvl > 0) _id.lvl--;}
   public MergeType  mergeType = MergeType.Ok;
+  public int        levelsCnt {get; private set;}
 
   void Awake()
   {
-    //_mrs = _modelContainer.GetComponentsInChildren<MeshRenderer>();
     layer = gameObject.layer;
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(layer));
 
@@ -174,6 +182,8 @@ public class Item : MonoBehaviour
     _phaseOffs = Random.Range(0, 90);
     _amplSpeed *= Random.Range(0.95f, 1.05f);
     _fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs) * _ampl, 0);
+
+    levelsCnt = (id.kind == Kind.Garbage)? GameData.Prefabs.ItemLevelsCnt(id.type) : _models.Count;
   }
   public void SetAsStatic()
   {
@@ -187,15 +197,26 @@ public class Item : MonoBehaviour
     vgrid = grid;
     vlpos = Item.ToPos(vgrid);
     GetComponent<BoxCollider>().enabled = false;
-    SetModel(0);//_models.get_random_idx());
+    if(id.kind == Kind.Garbage)
+      SetModel(0);
+    else  
+      SetModel(id.lvl);
   }
   void SetModel(int model_idx)
   {
     for(int q = 0; q < _models.Count; ++q)
-      _models[q].SetActive(q == model_idx);
+    {
+      if(q == model_idx)
+      {
+        mdl = _models[q];
+        _models[q].SetActive(true);
+      }
+      else
+        _models[q].SetActive(false);
+    }
 
     _vdim = Vector3.zero;
-    Renderer[] renderers = GetComponentsInChildren<Renderer>();
+    Renderer[] renderers = mdl.GetComponentsInChildren<Renderer>();
     var _center = Vector3.zero;
     System.Array.ForEach(renderers, (rend) => 
     {
