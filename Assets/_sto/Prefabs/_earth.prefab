@@ -5188,7 +5188,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9074711829546719383, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: speed
+      value: -64
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074711829546719383, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: axis.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9074711829546719383, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: axis.z
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
