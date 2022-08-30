@@ -106,8 +106,10 @@ public class Item : MonoBehaviour
       new_items = new Item[2];
       new_items[0] = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
       new_items[0]._inMachine = true;
+      new_items[0].Init(Vector2.zero);
       new_items[1] = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
       new_items[1]._inMachine = true;
+      new_items[1].Init(Vector2.zero);
       //item.Hide();
 
       _items.Remove(item);
@@ -182,20 +184,20 @@ public class Item : MonoBehaviour
     _phaseOffs = Random.Range(0, 90);
     _amplSpeed *= Random.Range(0.95f, 1.05f);
     _fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs) * _ampl, 0);
-
-    levelsCnt = (id.kind == Kind.Garbage)? GameData.Prefabs.ItemLevelsCnt(id.type) : _models.Count;
   }
   public void SetAsStatic()
   {
     _activatable.ActivateObject();
     GetComponent<BoxCollider>().enabled = false;
     System.Array.ForEach(GetComponentsInChildren<ObjectRandomizeTransform>(), (ort) => ort.transform.reset());
+    mdl = _models[0];
     SetModel(0);
   }
   public void Init(Vector2 grid)
   {
     vgrid = grid;
     vlpos = Item.ToPos(vgrid);
+    levelsCnt = (id.kind == Kind.Garbage) ? GameData.Prefabs.ItemLevelsCnt(id.type) : _models.Count;
     GetComponent<BoxCollider>().enabled = false;
     if(id.kind == Kind.Garbage)
       SetModel(0);
