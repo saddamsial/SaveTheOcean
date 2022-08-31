@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: lifebuoy
     second: {fileID: 2100000, guid: 0083ad505bcc5e947b79105a55dd1d7d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pixelGrid
+    second: {fileID: 2100000, guid: 0083ad505bcc5e947b79105a55dd1d7d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 1
