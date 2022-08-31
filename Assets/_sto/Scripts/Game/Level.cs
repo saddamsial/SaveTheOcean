@@ -265,12 +265,12 @@ public class Level : MonoBehaviour
       _grid.set(item.vgrid, 1);
     }
   }
-  void DestroyItem(Item item)
-  {
-    _items.Remove(item);
-    _grid.set(item.vgrid, 0);
-    item.Hide();
-  }
+  // void DestroyItem(Item item)
+  // {
+  //   _items.Remove(item);
+  //   _grid.set(item.vgrid, 0);
+  //   item.Hide();
+  // }
 
   void  UpdatePollution()
   {
@@ -362,7 +362,10 @@ public class Level : MonoBehaviour
       if(item && item.id.IsSpecial)
       {
         GameState.Econo.AddRes(item.id);
-        DestroyItem(item);    
+        int amount = GameState.Econo.AddRes(item.id);
+        _items.Remove(item);
+        _grid.set(item.vgrid, 0);
+        FindObjectOfType<UIStatusBar>().MoveCollected(item, amount);
       }
     }
   }

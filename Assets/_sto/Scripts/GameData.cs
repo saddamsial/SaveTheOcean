@@ -63,6 +63,8 @@ public class GameData : ScriptableObject
   [SerializeField] int       _staminaMax = 99;
   [SerializeField] int       _staminaPlayCost = 5;
   [SerializeField] float     _staminaRefillTime = 60.0f;
+  [SerializeField] int       _coinsMax = 999;
+  [SerializeField] int       _gemsMax = 999;
   [SerializeField] Rewards[] _rewards;
 
 
@@ -91,6 +93,18 @@ public class GameData : ScriptableObject
       item.SetAsStatic();
       item.enabled = false;
       return item;
+    }
+    public static GameObject[] CreateStaticItemModels(Item.ID id, Transform parent, int count)
+    {
+      id.lvl = 0;
+      Item item = CreateItem(id, parent);
+      item.Init(Vector2.zero);
+      GameObject[] models = new GameObject[count];
+      for(int q = 0; q < count; ++q)
+        models[q] = Instantiate(item.mdl, parent);
+      Destroy(item.gameObject);
+
+      return models;
     }
     public  static int ItemLevelsCnt(int item_type)
     {
@@ -129,6 +143,8 @@ public class GameData : ScriptableObject
     public static int   staminaCost => get()._staminaPlayCost;
     public static float staminaRefillTime => get()._staminaRefillTime;
     public static int   staminaMax => get()._staminaMax;
+    public static int   coinsMax => get()._coinsMax;
+    public static int   gemsMax => get()._gemsMax;
     public struct RewardProgress
     {
       public int    lvl;

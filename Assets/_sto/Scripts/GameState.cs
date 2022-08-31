@@ -201,7 +201,7 @@ public class GameState : SavableScriptableObject
         get().economy.stamina = Mathf.Clamp(value, 0, GameData.Econo.staminaMax);
         if(_prev_val != get().economy.stamina)
           onStaminaChanged?.Invoke(value);
-      } 
+      }
     }
     public static int coins 
     { 
@@ -280,15 +280,17 @@ public class GameState : SavableScriptableObject
       
       return perc;
     }
-    public static void AddRes(Item.ID id)
+    public static int AddRes(Item.ID id) //without event
     {
       int amount = (int)((1 << id.lvl) * 1.5f);
       if(id.kind == Item.Kind.Stamina)
-        stamina += amount;
+        get().economy.stamina = Mathf.Clamp(get().economy.stamina + amount, 0, GameData.Econo.staminaMax);
       else if(id.kind == Item.Kind.Coin)
-        coins += amount;
+        get().economy.coins = Mathf.Clamp(get().economy.coins + amount, 0, GameData.Econo.coinsMax);
       else if(id.kind == Item.Kind.Gem)
-        gems += amount;    
+        get().economy.gems = Mathf.Clamp(get().economy.gems + amount, 0, GameData.Econo.gemsMax);
+
+      return amount;  
     }
 
     public static void Process()
