@@ -182,7 +182,7 @@ PrefabInstance:
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[1]._animal
       value: 
-      objectReference: {fileID: 1727722430390729767, guid: 94ce4c41681695d448e90beefa618940, type: 3}
+      objectReference: {fileID: 1727722430390729767, guid: 78c2820665cc3a84ab2cb908fd6ac75f, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[2]._animal
       value: 
