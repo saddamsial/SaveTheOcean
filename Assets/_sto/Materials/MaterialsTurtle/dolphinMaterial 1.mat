@@ -128,7 +128,7 @@ Material:
     - _ReceiveShadows: 1
     - _SecondaryWaveAmplitude: 0.1
     - _Shininess: 0
-    - _Smoothness: 0.97
+    - _Smoothness: 1
     - _SmoothnessSource: 0
     - _SmoothnessTextureChannel: 0
     - _SpecSource: 0
@@ -150,8 +150,8 @@ Material:
     - _waveScale: 4
     - _waveSpeed: 0.1
     m_Colors:
-    - _BaseColor: {r: 0.14012992, g: 0.34155634, b: 0.6320754, a: 1}
-    - _Color: {r: 0.14012992, g: 0.34155634, b: 0.6320754, a: 1}
+    - _BaseColor: {r: 0.6313726, g: 0.32439435, b: 0.14117646, a: 1}
+    - _Color: {r: 0.6313726, g: 0.32439435, b: 0.14117646, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Mapping: {r: 3, g: 0.25, b: 0, a: 0}
     - _SandColor: {r: 1, g: 0.7316375, b: 0.36320752, a: 0}
