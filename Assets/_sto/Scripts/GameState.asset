@@ -19,167 +19,72 @@ MonoBehaviour:
     _level: 0
     _levels:
     - _idx: 0
+      _state: 3
+    - _idx: 1
+      _state: 3
+    - _idx: 2
       _state: 1
   economy:
-    stamina: 95
-    coins: 402
+    stamina: 86
+    coins: 426
     gems: 12
-    rewardPoints: 129
+    rewardPoints: 231
     rewardLevel: 4
-    lastStamina: -8585396614066480643
+    lastStamina: -8585396550466480643
     chestState:
-      listStamina:
-      - _type: 3
+      listStamina: []
+      listCoins:
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
+        _kind: 3
+      - _type: 4
         _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      - _type: 3
-        _lvl: 0
-        _kind: 2
-      listCoins: []
+        _kind: 3
       listGems: []
   splitMachine:
     _capacity: 1

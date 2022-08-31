@@ -84,7 +84,7 @@ public class UIStatusBar : MonoBehaviour
     };
 
     float dist = Mathf.Abs(Camera.main.transform.position.z - vdstPos.z);
-    move.vdst = Camera.main.ScreenToWorldPoint(new Vector3(vdstPos.x, vdstPos.y, -Camera.main.nearClipPlane + dist));
+    move.vdst = Camera.main.ScreenToWorldPoint(new Vector3(vdstPos.x, vdstPos.y, dist));// -Camera.main.nearClipPlane + dist + 32));
     move.objects = new List<GameObject>();
     move.delays = new List<float>();
     move.objects.AddRange(GameData.Prefabs.CreateStaticItemModels(item.id, _movesContainer, amount));

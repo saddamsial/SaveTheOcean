@@ -172,7 +172,7 @@ public class Item : MonoBehaviour
   public bool       IsInMachine {get => _inMachine; set => _inMachine = value;}
   public void       incLvl(){_id.lvl++;}
   public void       decLvl(){if(_id.lvl > 0) _id.lvl--;}
-  public MergeType  mergeType = MergeType.Ok;
+  public MergeType  mergeType {get; set;} = MergeType.Ok;
   public int        levelsCnt {get; private set;}
 
   void Awake()
