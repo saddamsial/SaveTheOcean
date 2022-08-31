@@ -106,11 +106,13 @@ public class GameData : ScriptableObject
 
       return models;
     }
-    public  static int ItemLevelsCnt(int item_type)
+    public  static int ItemLevelsCnt(Item.ID id)
     {
       int levels = 0;
-      levels = get()._items[item_type].Count;
-
+      if(id.kind == Item.Kind.Garbage || id.kind == Item.Kind.Food)
+        levels = get()._items[id.type].Count;
+      else
+        levels = get()._items[id.type].Get(0).modelContainer.childCount;
       return levels;
     }
     public static int ItemTypeFromKind(Item.Kind kind)

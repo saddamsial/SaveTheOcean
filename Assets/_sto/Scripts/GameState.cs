@@ -251,17 +251,17 @@ public class GameState : SavableScriptableObject
         Item.ID? id = null;
         if(staminaCnt > 0)
         {
-          id = get().economy.chestState.listStamina.last();
+          id = get().economy.chestState.listStamina.last().Validate(true);
           get().economy.chestState.listStamina.RemoveAt(get().economy.chestState.listStamina.last_idx());
         }
         else if(coinsCnt > 0)
         {
-          id = get().economy.chestState.listCoins.last();
+          id = get().economy.chestState.listCoins.last().Validate(true);
           get().economy.chestState.listCoins.RemoveAt(get().economy.chestState.listCoins.last_idx());
         }
         else if(gemsCnt > 0)
         {
-          id = get().economy.chestState.listGems.last();
+          id = get().economy.chestState.listGems.last().Validate(true);
           get().economy.chestState.listGems.RemoveAt(get().economy.chestState.listGems.last_idx());          
         }
         return id;

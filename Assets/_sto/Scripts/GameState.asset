@@ -25,64 +25,40 @@ MonoBehaviour:
     - _idx: 2
       _state: 1
   economy:
-    stamina: 86
-    coins: 426
+    stamina: 54
+    coins: 462
     gems: 12
-    rewardPoints: 231
+    rewardPoints: 248
     rewardLevel: 4
-    lastStamina: -8585396550466480643
+    lastStamina: -8585396518666480643
     chestState:
       listStamina: []
       listCoins:
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
-      - _type: 4
-        _lvl: 0
-        _kind: 3
-      - _type: 4
-        _lvl: 0
-        _kind: 3
-      - _type: 4
-        _lvl: 0
-        _kind: 3
-      - _type: 4
-        _lvl: 0
-        _kind: 3
-      - _type: 4
-        _lvl: 0
-        _kind: 3
-      - _type: 4
-        _lvl: 0
-        _kind: 3
-      - _type: 4
-        _lvl: 0
-        _kind: 3
-      - _type: 4
-        _lvl: 0
-        _kind: 3
-      - _type: 4
+      - _type: 0
         _lvl: 0
         _kind: 3
       listGems: []

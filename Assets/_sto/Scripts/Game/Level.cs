@@ -32,7 +32,6 @@ public class Level : MonoBehaviour
   [SerializeField] Color      _waterColor;  
   [Header("LvlDesc")]
   [SerializeField] LvlDesc[]  _lvlDescs;
-  [SerializeField] LvlDesc[]  _lvlDescsAlt;
 
   public enum State
   {
@@ -65,7 +64,7 @@ public class Level : MonoBehaviour
 
   UISummary    _uiSummary = null;
   UIStatusBar  _uiStatusBar = null;
-  Transform    _cameraContainer = null;
+  //Transform    _cameraContainer = null;
   List<Animal> _animals = new List<Animal>();
   MaterialPropertyBlock _mpb = null;
 
@@ -78,6 +77,8 @@ public class Level : MonoBehaviour
 
   float       _pollutionRate = 1.0f;
   float       _pollutionDest = 1.0f;
+
+  bool        IsFeedingMode = false;
 
   public class Grid
   {
@@ -106,7 +107,7 @@ public class Level : MonoBehaviour
       v.x = (-_dim.x + 1) * 0.5f + va.x;
       return v;
     }
-    public void set(Vector2 vgrid, int val, Item.Kind kind)
+    public void set(Vector2 vgrid, int val, Item.Kind kind = Item.Kind.None)
     {
       var va = g2a(vgrid, _dim);
       _grid[va.y, va.x] = val;
@@ -164,8 +165,7 @@ public class Level : MonoBehaviour
   void Awake()
   {
     Item.gridSpace = _gridSpace;
-    _cameraContainer = GameObject.Find("_cameraContainer").transform;
-    _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
+    //_cameraContainer = GameObject.Find("_cameraContainer").transform;
     _uiSummary = FindObjectOfType<UISummary>(true);
     _uiStatusBar = FindObjectOfType<UIStatusBar>(true); 
 
@@ -173,7 +173,10 @@ public class Level : MonoBehaviour
     _mpb.SetColor("_BaseColor", _waterColor);
     _waterRenderer.SetPropertyBlock(_mpb);
 
+    IsFeedingMode = GameState.Progress.Levels.IsLevelFinished(levelIdx);
     _splitMachine.Init(_items);
+    if(IsFeedingMode)
+      _splitMachine.gameObject.SetActive(false);
 
     onCreate?.Invoke(this);
   }
@@ -226,10 +229,19 @@ public class Level : MonoBehaviour
       _requestCnt += lvlDesc.items.Length;
       for(int i = 0; i < lvlDesc.items.Length; ++i)
       {
-        var garb = _lvlDescs[q].items[i];
-        id.type = garb.id.type;
-        id.kind = garb.id.kind;
-        for(int d = 0; d < 1<<garb.id.lvl; ++d)
+        var item = _lvlDescs[q].items[i];
+        int itemLevel = item.id.lvl;
+        if(!IsFeedingMode)
+        {
+          id.type = item.id.type;
+          id.kind = item.id.kind;
+        }
+        else
+        {
+          id = new Item.ID(0, 0, Item.Kind.Food, true);
+          itemLevel = Mathf.Min(Item.LevelsCnt(id)-1, item.id.lvl);
+        }
+        for(int d = 0; d < 1<<itemLevel; ++d)
         {
           id.lvl = 0;
           ids.Add(id);
@@ -316,7 +328,8 @@ public class Level : MonoBehaviour
       if(_nearestAnimal && _animalSelected == null)
       {
         _animalSelected = _nearestAnimal;
-        _animalSelected.AnimTalk();
+        if(!IsFeedingMode)
+          _animalSelected.AnimTalk();
       }
       else
         _animalSelected = null;
@@ -374,10 +387,9 @@ public class Level : MonoBehaviour
         if(Time.timeAsDouble - tapTime < 0.5f)
         {
           tapTime = 0;
-          GameState.Econo.AddRes(item.id);
           int amount = GameState.Econo.AddRes(item.id);
           _items.Remove(item);
-          _grid.set(item.vgrid, 0, Item.Kind.None);
+          _grid.set(item.vgrid, 0);
           _uiStatusBar.MoveCollected(item, amount);
           item.Hide();
         }
@@ -399,7 +411,7 @@ public class Level : MonoBehaviour
       var newItem = Item.Merge(_itemSelected, itemHit, _items);
       if(newItem)
       {
-        _grid.set(_itemSelected.vgrid, 0, Item.Kind.None);
+        _grid.set(_itemSelected.vgrid, 0);
         _splitMachine.RemoveFromSplitSlot(_itemSelected);
         newItem.Show();
         SpawnItem(_itemSelected.vgrid);
@@ -423,12 +435,11 @@ public class Level : MonoBehaviour
       if(animalHit.CanPut(_itemSelected))
       {
         Item.onPut?.Invoke(_itemSelected);
-        animalHit.Put(_itemSelected);
-        _grid.set(_itemSelected.vgrid, 0, Item.Kind.None);
+        animalHit.Put(_itemSelected, IsFeedingMode);
+        _grid.set(_itemSelected.vgrid, 0);
         if(_itemSelected.IsInMachine)
           _splitMachine.RemoveFromSplitSlot(_itemSelected);
 
-        //_pipes.PollutionRate(RequestRate());
         _pollutionDest = PollutionRate();
         onGarbageOut?.Invoke(this);
         SpawnItem(_itemSelected.vgrid);
@@ -459,7 +470,7 @@ public class Level : MonoBehaviour
           if(itemFromSplitMachine)
             _splitMachine.RemoveFromSplitSlot(_itemSelected);
           _splitMachine.DropDone();
-          _grid.set(_itemSelected.vgrid, 0, Item.Kind.None);
+          _grid.set(_itemSelected.vgrid, 0);
           _splitMachine.AddToDropSlot(_itemSelected);
           is_hit = true;
         }
@@ -481,7 +492,7 @@ public class Level : MonoBehaviour
       var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
       if(tileHit && _grid.get(tileHit.vgrid) == 0)
       {
-        _grid.set(_itemSelected.vgrid, 0, Item.Kind.None);
+        _grid.set(_itemSelected.vgrid, 0);
         _itemSelected.vgrid = tileHit.vgrid;
         _grid.set(_itemSelected.vgrid, 1, _itemSelected.id.kind);
         _itemSelected.Select(false);

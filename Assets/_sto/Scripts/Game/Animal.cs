@@ -37,34 +37,16 @@ public class Animal : MonoBehaviour
     isReady = true;
     _garbageInfo.Show(garbages);
   }
-  // IEnumerator WaitForAnimState(string anim, System.Action action = null)
-  // {
-  //   yield return null;
-  //   while(!_animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
-  //   {
-  //     yield return null;
-  //   }
-  //   yield return null;
-
-  //   action?.Invoke();
-  // }
-  // IEnumerator WaitForAnimStateEnd(string anim, System.Action<T> action = null)
-  // {
-  //   yield return null;
-  //   while(_animator.GetCurrentAnimatorStateInfo(0).IsName(anim))
-  //   {
-  //     yield return null;
-  //   }
-  //   yield return null;
-
-  //   action?.Invoke<T>(T);    
-  // }
   public void Init(Item[] items_prefab)
   {
     _garbages = new List<Item.ID>();
+    bool isFeedingMode = GameState.Progress.Levels.IsLevelFinished(GameState.Progress.levelIdx);
     foreach(var item in items_prefab)
     {
-      _garbages.Add(item.id);
+      if(!isFeedingMode)
+        _garbages.Add(item.id);
+      else
+        _garbages.Add(new Item.ID(item.id.type, item.id.lvl, Item.Kind.Food, true));
     }
     foreach(var id in _garbages)
     {
@@ -99,7 +81,7 @@ public class Animal : MonoBehaviour
   }
   public bool CanPut(Item item) => isReady && garbages.Find((garbage)=> Item.EqType(item, garbage)) != null;
   public bool IsReq(Item item) => garbages.Find((garbage) => Item.EqType(item, garbage)) != null;
-  public void Put(Item item)
+  public void Put(Item item, bool feedingMode)
   {
     if(isReady)
     {
@@ -115,21 +97,37 @@ public class Animal : MonoBehaviour
         garbages.Remove(it);
         item.gameObject.SetActive(false);
         model.SetActive(true);
-        if(garbages.Count > 0)
+        if(!feedingMode)
         {
-          AnimThrow();
-          isReady = false;
-          StartCoroutine(_animator.InvokeForAnimStateEnd("itemPush", ()=> 
+          if(garbages.Count > 0)
           {
-            isReady = true;
-            model.SetActive(false);
-          })
-          );
+            AnimThrow();
+            isReady = false;
+            StartCoroutine(_animator.InvokeForAnimStateEnd("itemPush", ()=> 
+            {
+              isReady = true;
+              model.SetActive(false);
+            }));
+          }
+          else
+          {
+            isReady = false;
+            Deactivate();
+          }
         }
         else
         {
-          isReady = false;
-          Deactivate();
+          model.SetActive(false);
+          if(garbages.Count > 0)
+          {
+            isReady = true;
+            AnimTalk();
+          }
+          else
+          {
+            isReady = false;
+            Deactivate();  
+          }
         }
       }
     }

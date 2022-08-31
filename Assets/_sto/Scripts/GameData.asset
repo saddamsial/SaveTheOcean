@@ -46,6 +46,10 @@ MonoBehaviour:
   - _kind: 4
     _items:
     - {fileID: 6158104306688602383, guid: 9c7fce1f71dcf6042b1f402f1c02e7f9, type: 3}
+  - _kind: 5
+    _items:
+    - {fileID: 6445466529311080229, guid: eb45cb77219e3c04c94bfe12d3f010d2, type: 3}
+    - {fileID: 6445466529311080229, guid: d01a7b5d13f9dad49940a63b4dee8e7b, type: 3}
   _gridTile: {fileID: 8178171026830446907, guid: 764369db777a63a4d9a3efac1f67b645, type: 3}
   _locationPrefab: {fileID: 4694188858287188799, guid: 7e2dc7caea333c54a97c83e5d2ddcc26, type: 3}
   _listLevels:
@@ -59,7 +63,11 @@ MonoBehaviour:
   - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
   - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
   - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
-  _playLevelStaminaCost: 5
+  _staminaMax: 99
+  _staminaPlayCost: 5
+  _staminaRefillTime: 60
+  _coinsMax: 999
+  _gemsMax: 999
   _rewards:
   - points2Chest: 0
     _reward:

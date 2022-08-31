@@ -24,6 +24,7 @@ public class Item : MonoBehaviour
     Stamina,
     Coin,
     Gem,
+    Food,
   }
   public enum MergeType
   {
@@ -40,18 +41,21 @@ public class Item : MonoBehaviour
     [SerializeField] int   _lvl;
     [SerializeField] Kind _kind;
 
-    public ID(int item_type, int item_lvl, Kind item_kind)
+    public ID(int item_type, int item_lvl, Kind item_kind, bool clampLevel = false)
     {
       _type = (item_kind == Kind.Garbage)? item_type : GameData.Prefabs.ItemTypeFromKind(item_kind);
       _lvl = item_lvl;
       _kind = item_kind;
+      if(clampLevel)
+        _lvl = Mathf.Min(item_lvl, Item.LevelsCnt(this) - 1);
     }
+    public ID Validate(bool clampLevel) => new ID(_type, _lvl, _kind, clampLevel);
     public int type {get => _type; set => _type = value;}
     public int lvl {get => _lvl; set => _lvl = value;}
     public Kind kind {get => _kind; set => _kind = value;}
-    public bool IsSpecial => _kind != Kind.Garbage;
+    public bool IsSpecial => _kind == Kind.Stamina || _kind == Kind.Coin || _kind == Kind.Gem;
     public static bool Eq(ID id0, ID id1) => id0.type == id1.type && id0.lvl == id1.lvl;
-
+    public int LevelsCnt => Item.LevelsCnt(this);
   }
 
   ID         _id = new ID();
@@ -126,7 +130,7 @@ public class Item : MonoBehaviour
     Item new_item = null;
     if(item.IsUpgradable)
     {
-      if(item.id.kind == Item.Kind.Garbage)
+      if(item.id.kind == Item.Kind.Garbage || item.id.kind == Item.Kind.Food)
       {
         item.incLvl();
         new_item = GameData.Prefabs.CreateItem(item.id, item.transform.parent);
@@ -150,7 +154,7 @@ public class Item : MonoBehaviour
   {
     return item0 != null && item1 != null && ID.Eq(item0.id, item1.id);
   }
-  //public static Vector3 itemsOffset = new Vector3(0,0,0);
+  public static int     LevelsCnt(Item.ID id) => GameData.Prefabs.ItemLevelsCnt(id);
 
   static public int layer = 0;
   static public int layerMask = 0;
@@ -174,6 +178,10 @@ public class Item : MonoBehaviour
   public void       decLvl(){if(_id.lvl > 0) _id.lvl--;}
   public MergeType  mergeType {get; set;} = MergeType.Ok;
   public int        levelsCnt {get; private set;}
+  public Transform  modelContainer => _modelContainer.transform;
+  
+  bool  levelsAsModels => id.IsSpecial;
+  
 
   void Awake()
   {
@@ -182,7 +190,7 @@ public class Item : MonoBehaviour
 
     for(int q = 0; q < _modelContainer.transform.childCount; ++q)
       _models.Add(_modelContainer.transform.GetChild(q).gameObject);
-
+    
     _phaseOffs = Random.Range(0, 90);
     _amplSpeed *= Random.Range(0.95f, 1.05f);
     _fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs) * _ampl, 0);
@@ -199,12 +207,12 @@ public class Item : MonoBehaviour
   {
     vgrid = grid;
     vlpos = Item.ToPos(vgrid);
-    levelsCnt = (id.kind == Kind.Garbage) ? GameData.Prefabs.ItemLevelsCnt(id.type) : _models.Count;
     GetComponent<BoxCollider>().enabled = false;
-    if(id.kind == Kind.Garbage)
-      SetModel(0);
-    else  
+    levelsCnt = Item.LevelsCnt(id);
+    if(levelsAsModels) //id.kind == Kind.Garbage || id.kind == Kind.Food)
       SetModel(id.lvl);
+    else
+      SetModel(0);
   }
   void SetModel(int model_idx)
   {

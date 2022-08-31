@@ -64,8 +64,8 @@ public class UIStatusBar : MonoBehaviour
   void UpdateResDisp()
   {
     _stamina.resValue = _staminaDisp; //GameState.Econo.stamina;
-    _gems.resValue = _gemsDisp; //GameState.Econo.gems;
     _coins.resValue = _coinsDisp; //GameState.Econo.coins;
+    _gems.resValue = _gemsDisp; //GameState.Econo.gems;
   }
 
   void OnStaminaChanged(int val) => SetupRes();
@@ -120,10 +120,7 @@ public class UIStatusBar : MonoBehaviour
       if(move.objects.Count > 0)
         moves[q] = move;
       else
-      {
-        moves.RemoveAt(q);
-        --q;
-      }
+        moves.RemoveAt(q--);
       ++q;
     }
   }
