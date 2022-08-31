@@ -32,6 +32,7 @@ public class Level : MonoBehaviour
   [SerializeField] Color      _waterColor;  
   [Header("LvlDesc")]
   [SerializeField] LvlDesc[]  _lvlDescs;
+  [SerializeField] LvlDesc[]  _lvlDescsAlt;
 
   public enum State
   {
@@ -63,6 +64,7 @@ public class Level : MonoBehaviour
   public Vector2Int Dim => _dim;
 
   UISummary    _uiSummary = null;
+  UIStatusBar  _uiStatusBar = null;
   Transform    _cameraContainer = null;
   List<Animal> _animals = new List<Animal>();
   MaterialPropertyBlock _mpb = null;
@@ -104,11 +106,11 @@ public class Level : MonoBehaviour
       v.x = (-_dim.x + 1) * 0.5f + va.x;
       return v;
     }
-    public void set(Vector2 vgrid, int val)
+    public void set(Vector2 vgrid, int val, Item.Kind kind)
     {
       var va = g2a(vgrid, _dim);
       _grid[va.y, va.x] = val;
-      _tiles[va.y, va.x].Set((val!=0)? true : false);
+      _tiles[va.y, va.x].Set((val!=0)? true : false, kind == Item.Kind.Garbage);
     }
     public int get(Vector2 vgrid)
     {
@@ -165,6 +167,7 @@ public class Level : MonoBehaviour
     _cameraContainer = GameObject.Find("_cameraContainer").transform;
     _items = _itemsContainer.GetComponentsInChildren<Item>().ToList();
     _uiSummary = FindObjectOfType<UISummary>(true);
+    _uiStatusBar = FindObjectOfType<UIStatusBar>(true); 
 
     _mpb = new MaterialPropertyBlock();
     _mpb.SetColor("_BaseColor", _waterColor);
@@ -243,7 +246,7 @@ public class Level : MonoBehaviour
         item.Init(vs.first());
         vs.RemoveAt(0);
         item.Spawn(item.vgrid, null, Random.Range(0.5f, 1.5f));
-        _grid.set(item.vgrid, 1);
+        _grid.set(item.vgrid, 1, item.id.kind);
         _items.Add(item);
       }
       else
@@ -262,7 +265,7 @@ public class Level : MonoBehaviour
       _items2.RemoveAt(0);
       int pipe_idx = (vgrid.x < 0)? 0 : 1;
       item.Spawn(vgrid, null);//_pipes.GetPath(pipe_idx));
-      _grid.set(item.vgrid, 1);
+      _grid.set(item.vgrid, 1, item.id.kind);
     }
   }
   // void DestroyItem(Item item)
@@ -339,35 +342,50 @@ public class Level : MonoBehaviour
     }
     _itemSelected = null;
   }
+  double tapTime = 0;
   public void OnInputTapped(TouchInputData tid)
   {
     var chest = tid.GetClosestCollider(0.5f, RewardChest.layerMask)?.GetComponent<RewardChest>();
     if(chest)
     {
-      Vector2? vg = _grid.getEmpty();
-      if(vg != null)
+      if(Time.timeAsDouble - tapTime < 1.0f)
       {
-        Item.ID? id = chest.Pop();
-        if(id != null)
+        tapTime = 0;
+        Vector2? vg = _grid.getEmpty();
+        if(vg != null)
         {
-          var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
-          _items2.Insert(0, item);
-          SpawnItem(vg.Value);
+          Item.ID? id = chest.Pop();
+          if(id != null)
+          {
+            var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
+            _items2.Insert(0, item);
+            SpawnItem(vg.Value);
+          }
         }
       }
+      else
+        tapTime = Time.timeAsDouble;
     }
     else
     {
       var item = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>();
       if(item && item.id.IsSpecial)
       {
-        GameState.Econo.AddRes(item.id);
-        int amount = GameState.Econo.AddRes(item.id);
-        _items.Remove(item);
-        _grid.set(item.vgrid, 0);
-        FindObjectOfType<UIStatusBar>().MoveCollected(item, amount);
+        if(Time.timeAsDouble - tapTime < 0.5f)
+        {
+          tapTime = 0;
+          GameState.Econo.AddRes(item.id);
+          int amount = GameState.Econo.AddRes(item.id);
+          _items.Remove(item);
+          _grid.set(item.vgrid, 0, Item.Kind.None);
+          _uiStatusBar.MoveCollected(item, amount);
+          item.Hide();
+        }
+        else
+          tapTime = Time.timeAsDouble;
       }
     }
+
   }
 
   bool IsItemHit(TouchInputData tid)
@@ -381,7 +399,7 @@ public class Level : MonoBehaviour
       var newItem = Item.Merge(_itemSelected, itemHit, _items);
       if(newItem)
       {
-        _grid.set(_itemSelected.vgrid, 0);
+        _grid.set(_itemSelected.vgrid, 0, Item.Kind.None);
         _splitMachine.RemoveFromSplitSlot(_itemSelected);
         newItem.Show();
         SpawnItem(_itemSelected.vgrid);
@@ -406,7 +424,7 @@ public class Level : MonoBehaviour
       {
         Item.onPut?.Invoke(_itemSelected);
         animalHit.Put(_itemSelected);
-        _grid.set(_itemSelected.vgrid, 0);
+        _grid.set(_itemSelected.vgrid, 0, Item.Kind.None);
         if(_itemSelected.IsInMachine)
           _splitMachine.RemoveFromSplitSlot(_itemSelected);
 
@@ -441,7 +459,7 @@ public class Level : MonoBehaviour
           if(itemFromSplitMachine)
             _splitMachine.RemoveFromSplitSlot(_itemSelected);
           _splitMachine.DropDone();
-          _grid.set(_itemSelected.vgrid, 0);
+          _grid.set(_itemSelected.vgrid, 0, Item.Kind.None);
           _splitMachine.AddToDropSlot(_itemSelected);
           is_hit = true;
         }
@@ -463,9 +481,9 @@ public class Level : MonoBehaviour
       var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
       if(tileHit && _grid.get(tileHit.vgrid) == 0)
       {
-        _grid.set(_itemSelected.vgrid, 0);
+        _grid.set(_itemSelected.vgrid, 0, Item.Kind.None);
         _itemSelected.vgrid = tileHit.vgrid;
-        _grid.set(_itemSelected.vgrid, 1);
+        _grid.set(_itemSelected.vgrid, 1, _itemSelected.id.kind);
         _itemSelected.Select(false);
         _splitMachine.RemoveFromSplitSlot(_itemSelected);
         _itemSelected.MoveToGrid();

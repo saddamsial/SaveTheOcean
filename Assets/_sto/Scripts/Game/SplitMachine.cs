@@ -53,7 +53,7 @@ public class SplitMachine : MonoBehaviour
       if(new_items != null)
       {
         AddToSplitSlots(new_items);
-        _dropSlots[0].Deactivate();//Hide();
+        _dropSlots[0].Hide();
         _dropSlots.RemoveAt(0);
       }
     }

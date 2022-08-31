@@ -263,8 +263,9 @@ MonoBehaviour:
   _stamina: {fileID: 1651323134641451401}
   _coins: {fileID: 3253032872351555705}
   _gems: {fileID: 3253032871009006555}
-  _moveContainer: {fileID: 2547885000533052596}
+  _movesContainer: {fileID: 2547885000533052596}
   _moveSpeed: 5
+  _moveDelay: 0.05
 --- !u!1 &7118822520052914720
 GameObject:
   m_ObjectHideFlags: 0

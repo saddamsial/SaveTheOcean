@@ -32,17 +32,22 @@ public class GridTile : MonoBehaviour
     Item.onSelect -= OnItemSelection;
   }
 
-  public void Set(bool act)
+  public void Set(bool act, bool garbage = true)
   {
     _dirty.SetActive(act);
     _clear.SetActive(!act);
     if(act)
     {
-      this.Invoke(() => 
+      if(garbage)
       {
-        if(_dirty.activeInHierarchy)
-          this._ps.Play();
-      }, 1);
+        this.Invoke(() => 
+        {
+          if(_dirty.activeInHierarchy)
+            _ps.Play();
+        }, 1);
+      }
+      else
+        _ps.Stop();  
     }
     else
     {
