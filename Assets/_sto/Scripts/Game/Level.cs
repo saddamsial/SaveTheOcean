@@ -430,10 +430,13 @@ public class Level : MonoBehaviour
     bool is_split_machine = _splitMachine?.IsDropSlot(splitMachineHit) ?? false;
     if(is_split_machine)
     {
-      if(_splitMachine.IsReady)
+      bool itemFromSplitMachine = _itemSelected.IsInMachine && _splitMachine.capacity == 1;
+      if(_splitMachine.IsReady || itemFromSplitMachine)
       {
         if(_itemSelected.IsSplitable)
         {
+          if(itemFromSplitMachine)
+            _splitMachine.RemoveFromSplitSlot(_itemSelected);
           _splitMachine.DropDone();
           _grid.set(_itemSelected.vgrid, 0);
           _splitMachine.AddToDropSlot(_itemSelected);
