@@ -12,6 +12,7 @@ public class Earth : MonoBehaviour
   [SerializeField] Transform    _locationsContainer;
   [SerializeField] Location[]   _locations;
   [SerializeField] Transform    _fx;
+  [SerializeField] Transform    _extras;
 
   [Header("Earth fx")]
   [SerializeField] EarthFx      _earthFx;
@@ -26,16 +27,17 @@ public class Earth : MonoBehaviour
   [SerializeField] float _rotateDamping = 0;
   [SerializeField] float _rotateVertRange = 30;
 
-
   public static System.Action<int> onShow;
   public static System.Action onHide;
   public static System.Action<int> onLevelStart, onLevelSelected;
 
-  int         _selectedLocation = 0;
-  float       _rotateSpeed = 0;
-  Vector2?    _vdragBeg = null;
-  Vector2     _vdragPrev;
-  bool        _move2location = false;
+  int           _selectedLocation = 0;
+  float         _rotateSpeed = 0;
+  Vector2?      _vdragBeg = null;
+  Vector2       _vdragPrev;
+  bool          _move2location = false;
+
+  public Transform zoom => _extras;
 
   void Awake()
   {
@@ -71,8 +73,8 @@ public class Earth : MonoBehaviour
   public void Show(int indexLocation, bool show_next)
   {
     SelectLocation(indexLocation);
-    _earthPrefab.SetActive(true);
-    _vessel.gameObject.SetActive(true);
+    _fx.gameObject.SetActive(true);
+    _extras.gameObject.SetActive(true);
 
     UpdateLevelsStates();
     int location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;      
@@ -89,8 +91,10 @@ public class Earth : MonoBehaviour
   public void Hide()
   {
     onHide?.Invoke();
-    _earthPrefab.SetActive(false);
-    _vessel.gameObject.SetActive(false);
+    //_earthPrefab.SetActive(false);
+    //_vessel.gameObject.SetActive(false);
+    _fx.gameObject.SetActive(false);
+    _extras.gameObject.SetActive(false);
   }
   
   public void OnInputBeg(TouchInputData tid)

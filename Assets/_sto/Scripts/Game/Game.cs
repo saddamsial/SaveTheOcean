@@ -114,16 +114,15 @@ public class Game : MonoBehaviour
   }
   private IEnumerator coShowEarth(bool show_next)
   {
-    yield return new WaitForSeconds(0.5f);
     _level.Hide();
-    _uiFade.FadeIn();
+    _uiFade.FadeIn(_camCtrl.zoomSpeed * 2.0f);
     yield return new WaitForSeconds(0.5f);
-    _camCtrl.SetTo(2);
     DestroyLevel();
     _earth.Show(GameState.Progress.levelIdx, show_next);
-    yield return new WaitForSeconds(0.5f);
-    _uiFade.FadeOut();
     _camCtrl.SwitchTo(1);
+    yield return new WaitForSeconds(1.0f);
+    _uiFade.FadeOut(_camCtrl.zoomSpeed * 1.5f);
+    _camCtrl.ZoomOut();
   }
   public void ShowLevel(int levelIdx)
   {
@@ -132,13 +131,15 @@ public class Game : MonoBehaviour
   }
   IEnumerator coShowLevel(int levelIdx)
   {
-    _camCtrl.SwitchTo(2);
-    _uiFade.FadeIn();
-    yield return new WaitForSeconds(0.5f);
+    _camCtrl.ZoomIn();
+    yield return new WaitForSeconds(0.25f);
+    _uiFade.FadeIn(_camCtrl.zoomSpeed * 1.5f);
+    yield return new WaitForSeconds(0.75f);
     _earth.Hide();
     CreateLevel(levelIdx);
-    _uiFade.FadeOut();
-    _camCtrl.SwitchTo(0);    
+    _camCtrl.SwitchTo(0);
+    yield return new WaitForSeconds(0.4f);
+    _uiFade.FadeOut(_camCtrl.zoomSpeed * 2);
   }
 
   void Update()

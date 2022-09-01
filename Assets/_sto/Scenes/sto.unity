@@ -1340,6 +1340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec4c7ff08d3ac0448c6c9415726704c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _zoomMin: 0.25
+  _zoomMax: 1
+  _zoomSpeed: 4
 --- !u!1001 &1309126050
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1459,13 +1462,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9882444}
     m_Modifications:
+    - target: {fileID: 375043684, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: _minDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1396117862, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: transitionTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3969958582868310480, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_Name
       value: _cameraContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 7332099661852838530, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8491482513625605612, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_LocalPosition.z
       value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8491482514105513082, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: near clip plane
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8786551797539272230, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_RootOrder
@@ -1510,6 +1529,10 @@ PrefabInstance:
     - target: {fileID: 8786551797539272230, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9061245956309145750, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+      propertyPath: virtualCameraNearClipPlane
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
