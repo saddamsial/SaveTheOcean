@@ -138,7 +138,7 @@ public class Game : MonoBehaviour
     _earth.Hide();
     CreateLevel(levelIdx);
     _camCtrl.SwitchTo(0);
-    yield return new WaitForSeconds(0.4f);
+    yield return new WaitForSeconds(0.5f);
     _uiFade.FadeOut(_camCtrl.zoomSpeed * 2);
   }
 

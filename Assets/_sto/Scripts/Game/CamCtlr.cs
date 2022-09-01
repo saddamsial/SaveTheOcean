@@ -26,15 +26,17 @@ public class CamCtlr : MonoBehaviour
 
   public void SwitchTo(int camRigIdx)
   {
+    _camRigs[camRigIdx].GetComponent<CameraAutoTracker>().RecalculateCamera();
     _virtualCamRig.SwitchRig(_camRigs[camRigIdx]);
-    _camRigs[1-camRigIdx].GetComponent<CameraAutoTracker>().enabled = false;
-    _camRigs[camRigIdx].GetComponent<CameraAutoTracker>().enabled = true;
+    //_camRigs[1-camRigIdx].GetComponent<CameraAutoTracker>().enabled = false;
+    //_camRigs[camRigIdx].GetComponent<CameraAutoTracker>().enabled = true;
   }
   public void SetTo(int camRigIdx)
   {
+    _camRigs[camRigIdx].GetComponent<CameraAutoTracker>().RecalculateCamera();
     _virtualCamRig.SetRig(_camRigs[camRigIdx]);
-    _camRigs[1 - camRigIdx].GetComponent<CameraAutoTracker>().enabled = false;
-    _camRigs[camRigIdx].GetComponent<CameraAutoTracker>().enabled = true;    
+    //_camRigs[1-camRigIdx].GetComponent<CameraAutoTracker>().enabled = false;
+    //_camRigs[camRigIdx].GetComponent<CameraAutoTracker>().enabled = true;
   }
   public void  ZoomIn() => _zoomTo = _zoomMin;
   public void  ZoomOut() => _zoomTo = _zoomMax;

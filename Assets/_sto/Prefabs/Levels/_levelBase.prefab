@@ -261,7 +261,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2798057249106894002}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 0, z: 20}
+  m_LocalPosition: {x: 4.5, y: 0, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -374,7 +374,6 @@ Transform:
   m_Children:
   - {fileID: 4653423949962063888}
   - {fileID: 5070238716286955155}
-  - {fileID: 7079923550577576835}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -390,7 +389,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 099b207c5f01cf24c93f559e9616b6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _content: {fileID: 5007030670280906191}
   _itemsContainer: {fileID: 610259900746943541}
   _tilesContainer: {fileID: 6848804485864095692}
   _animalsContainer: {fileID: 1278421171504114904}
@@ -507,6 +505,7 @@ Transform:
   - {fileID: 1278421171504114904}
   - {fileID: 7355777049710017288}
   - {fileID: 6438251173982364698}
+  - {fileID: 7079923550577576835}
   m_Father: {fileID: 2424569502049627348}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -736,15 +735,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6343574222771429121}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6573505519713832768}
   - {fileID: 886560633590373059}
-  m_Father: {fileID: 2424569502049627348}
-  m_RootOrder: 2
+  m_Father: {fileID: 4653423949962063888}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7776719939728878358
 GameObject:
