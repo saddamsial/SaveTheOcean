@@ -86,7 +86,7 @@ public class Earth : MonoBehaviour
         MoveVesselToLocation(location_idx);
 
       onShow?.Invoke(location_idx);
-    }, 1.0f);
+    }, 2.0f);
   }
   public void Hide()
   {
