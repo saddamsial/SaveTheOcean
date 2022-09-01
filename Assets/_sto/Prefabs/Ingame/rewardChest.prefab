@@ -1632,22 +1632,6 @@ PrefabInstance:
       value: lifebuoy
       objectReference: {fileID: 0}
     - target: {fileID: 9221541129448921761, guid: 69ea2030c6a4d7a44a74d401036d97ef, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.81915224
-      objectReference: {fileID: 0}
-    - target: {fileID: 9221541129448921761, guid: 69ea2030c6a4d7a44a74d401036d97ef, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.57357615
-      objectReference: {fileID: 0}
-    - target: {fileID: 9221541129448921761, guid: 69ea2030c6a4d7a44a74d401036d97ef, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.000000084168256
-      objectReference: {fileID: 0}
-    - target: {fileID: 9221541129448921761, guid: 69ea2030c6a4d7a44a74d401036d97ef, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.000000021711452
-      objectReference: {fileID: 0}
-    - target: {fileID: 9221541129448921761, guid: 69ea2030c6a4d7a44a74d401036d97ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 70
       objectReference: {fileID: 0}
