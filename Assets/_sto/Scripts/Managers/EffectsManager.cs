@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using GameLib.Utilities;
 using GameLib.UI;
 
 public class EffectsManager : MonoBehaviour
 {
+  public static System.Action onPlayConfetti;
+
+  [ContextMenu("Test Confetti")] void TestConfetti() => onPlayConfetti?.Invoke();
+  Camera mainCamera = null;
+  ObjectShake cameraShakeContainer;
+  UIInfoLabelManager infoLblMan,infoLblManDown;
+
   [Header("CamFX")]
     [SerializeField] ObjectShakePreset objShakePreset;
     [SerializeField] ObjectShakePreset objShakePresetLo;
@@ -22,7 +30,6 @@ public class EffectsManager : MonoBehaviour
     //[SerializeField] int ballFracturesSubEmitCnt = 1;
     [SerializeField] ParticleSystem fxHit = null;
     //[SerializeField] int fxBombDestroyEmitCnt = 5;
-    [SerializeField] ParticleSystem fxPainter = null;
 
     [Header("FX string")]
     [SerializeField] string _strNoMergeMaxed;
@@ -31,21 +38,14 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] string _strNoCapacity;
     [SerializeField] string _strNoSplittableItem;
 
-
-    ParticleSystem fxConfetti;
-    ParticleSystem[] fxPainterSubs;
-
-    ObjectShake cameraShakeContainer;
-    UIInfoLabelManager infoLblMan,infoLblManDown;
-
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
     private void Awake() 
     {
+      mainCamera = Camera.main;
       cameraShakeContainer = Camera.main.GetComponentInParent<ObjectShake>();
       infoLblMan = FindObjectOfType<UIInfoLabelManager>(true);
       //infoLblManDown = GameObject.Find("infoCanvas2").GetComponent<UIInfoLabelManager>();
-      fxPainterSubs = fxPainter.GetComponentsInChildren<ParticleSystem>();
     }
     private void OnEnable() 
     {
@@ -213,7 +213,7 @@ public class EffectsManager : MonoBehaviour
     void OnLevelDone(Level lvl)
     {
       if(lvl.succeed)
-        fxConfettiLevel.Play();
+        onPlayConfetti?.Invoke();
     }
     void OnLevelFinished(Level lvl) 
     {
