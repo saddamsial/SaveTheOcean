@@ -182,6 +182,27 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: icoReward
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 256
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00000000000000000800000000000000
+      internalID: 0
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: icoComingSoon
       rect:
         serializedVersion: 2
@@ -234,6 +255,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      icoReward: 0
       icoGlobe: 4066367421695183551
       icoRecycle: -8255553990200284353
       icoStickers: 6502331425119105489

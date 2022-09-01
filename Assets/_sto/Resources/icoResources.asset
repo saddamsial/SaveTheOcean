@@ -57,20 +57,26 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: icoGem
     m_HashCode: -69822454
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 3
+    m_Scale: 1
+    m_Name: icoKeys
+    m_HashCode: 1991248929
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
-      m_Width: 88
+      m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 104
-      m_HorizontalAdvance: 80
+      m_HorizontalBearingY: 96
+      m_HorizontalAdvance: 104
     m_GlyphRect:
-      m_X: 20
-      m_Y: 128
-      m_Width: 88
+      m_X: 0
+      m_Y: 384
+      m_Width: 128
       m_Height: 128
-    m_Scale: 1.25
+    m_Scale: 1.35
     m_AtlasIndex: 0
     sprite: {fileID: 5752150419394179550, guid: 8ebc520ab0bc68f47a692ed028709197, type: 3}
   - m_Index: 1
@@ -78,14 +84,14 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 112
-      m_HorizontalAdvance: 128
+      m_HorizontalBearingY: 96
+      m_HorizontalAdvance: 120
     m_GlyphRect:
       m_X: 128
-      m_Y: 128
+      m_Y: 384
       m_Width: 128
       m_Height: 128
-    m_Scale: 1
+    m_Scale: 1.35
     m_AtlasIndex: 0
     sprite: {fileID: 3141900230587812362, guid: 8ebc520ab0bc68f47a692ed028709197, type: 3}
   - m_Index: 2
@@ -93,16 +99,31 @@ MonoBehaviour:
       m_Width: 128
       m_Height: 128
       m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 112
-      m_HorizontalAdvance: 128
+      m_HorizontalBearingY: 96
+      m_HorizontalAdvance: 120
     m_GlyphRect:
       m_X: 0
-      m_Y: 0
+      m_Y: 256
       m_Width: 128
       m_Height: 128
-    m_Scale: 1
+    m_Scale: 1.35
     m_AtlasIndex: 0
     sprite: {fileID: 7002831698968604569, guid: 8ebc520ab0bc68f47a692ed028709197, type: 3}
+  - m_Index: 3
+    m_Metrics:
+      m_Width: 128
+      m_Height: 128
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 96
+      m_HorizontalAdvance: 120
+    m_GlyphRect:
+      m_X: 128
+      m_Y: 256
+      m_Width: 128
+      m_Height: 128
+    m_Scale: 1.35
+    m_AtlasIndex: 0
+    sprite: {fileID: 0, guid: 8ebc520ab0bc68f47a692ed028709197, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
 --- !u!21 &2683555527620788241
