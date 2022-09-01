@@ -482,6 +482,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: btnOptions
       objectReference: {fileID: 0}
+    - target: {fileID: 7491877642971654061, guid: 6022dbd4793b2a74ba11da92b717bd27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6022dbd4793b2a74ba11da92b717bd27, type: 3}
 --- !u!224 &1488720254564623625 stripped
@@ -627,6 +631,10 @@ PrefabInstance:
     - target: {fileID: 7491877642971654061, guid: 6022dbd4793b2a74ba11da92b717bd27, type: 3}
       propertyPath: m_Name
       value: btnShop
+      objectReference: {fileID: 0}
+    - target: {fileID: 7491877642971654061, guid: 6022dbd4793b2a74ba11da92b717bd27, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6022dbd4793b2a74ba11da92b717bd27, type: 3}
