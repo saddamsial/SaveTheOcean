@@ -56,7 +56,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8786551797539272230}
-  - component: {fileID: 1057109850387628728}
   - component: {fileID: 1396117862}
   m_Layer: 0
   m_Name: _cameraContainer
@@ -83,30 +82,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1057109850387628728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3969958582868310480}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b788f24583b9133418e58f2585dffae0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _mainCamera: {fileID: 8491482514105513082}
-  _positionContainer: {fileID: 8491482513625605612}
-  _dollyContainer: {fileID: 8491482514433418373}
-  _dollyAxis: {x: 0, y: 0, z: -1}
-  _minDistance: 64
-  _maxDistance: 1024
-  _autoUpdateTrackedPOI: 1
-  _autoFit: 1
-  _uniformFit: 0
-  _margin: 0
-  _positionSmoothing: 0.3
-  _dollyDistanceSmoothing: 0.3
 --- !u!114 &1396117862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 735826870562403886}
   - component: {fileID: 9061245956309145750}
+  - component: {fileID: 375043684}
   m_Layer: 0
   m_Name: _cameraRig_globe
   m_TagString: Untagged
@@ -231,6 +207,30 @@ MonoBehaviour:
   virtualCameraFOV: 30
   virtualCameraNearClipPlane: 4
   virtualCameraFarClipPlane: 24
+--- !u!114 &375043684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956432583224115687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b788f24583b9133418e58f2585dffae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 0}
+  _positionContainer: {fileID: 735826870562403886}
+  _dollyContainer: {fileID: 3178214313265458537}
+  _dollyAxis: {x: 0, y: 0, z: -1}
+  _minDistance: 4
+  _maxDistance: 32
+  _autoUpdateTrackedPOI: 1
+  _autoFit: 1
+  _uniformFit: 0
+  _margin: 0
+  _positionSmoothing: 0.3
+  _dollyDistanceSmoothing: 0.3
 --- !u!1 &7332099661852838530
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,6 +390,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8491482513625605612}
   - component: {fileID: 4940067801083143685}
+  - component: {fileID: 1676745067}
   m_Layer: 0
   m_Name: _cameraRig_ingame
   m_TagString: Untagged
@@ -405,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8491482513625605615}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7}
+  m_LocalPosition: {x: 0, y: 0, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -431,8 +432,32 @@ MonoBehaviour:
   dollyAxis: {x: 0, y: 0, z: -1}
   _cameraContainer: {fileID: 1937245267151987178}
   virtualCameraFOV: 10
-  virtualCameraNearClipPlane: 32
-  virtualCameraFarClipPlane: 128
+  virtualCameraNearClipPlane: 64
+  virtualCameraFarClipPlane: 224
+--- !u!114 &1676745067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8491482513625605615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b788f24583b9133418e58f2585dffae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 0}
+  _positionContainer: {fileID: 8491482513625605612}
+  _dollyContainer: {fileID: 8491482514433418373}
+  _dollyAxis: {x: 0, y: 0, z: -1}
+  _minDistance: 32
+  _maxDistance: 192
+  _autoUpdateTrackedPOI: 1
+  _autoFit: 1
+  _uniformFit: 0
+  _margin: 0
+  _positionSmoothing: 0.3
+  _dollyDistanceSmoothing: 0.3
 --- !u!1 &8491482514022058378
 GameObject:
   m_ObjectHideFlags: 0
