@@ -347,7 +347,7 @@ public class Level : MonoBehaviour
     if(!_itemSelected)
       return;
 
-    bool is_hit = IsItemHit(tid) || IsAnimalHit(tid) || IsSplitMachineHit(tid) || IsTileHit(tid);
+    bool is_hit = IsItemHit(tid) || IsAnimalHit(tid) || IsTileHit(tid) || IsSplitMachineHit(tid) || IsStorageHit(tid);
     if(!is_hit)
     {
       _itemSelected.Select(false);
@@ -358,8 +358,8 @@ public class Level : MonoBehaviour
   double tapTime = 0;
   public void OnInputTapped(TouchInputData tid)
   {
-    var chest = tid.GetClosestCollider(0.5f, RewardChest.layerMask)?.GetComponent<RewardChest>();
-    if(chest)
+    var chestbox = tid.GetClosestCollider(0.5f, RewardChest.layerMask | StorageBox.layerMask);//?.GetComponent<RewardChest>();
+    if(chestbox)
     {
       if(Time.timeAsDouble - tapTime < 1.0f)
       {
@@ -367,7 +367,17 @@ public class Level : MonoBehaviour
         Vector2? vg = _grid.getEmpty();
         if(vg != null)
         {
-          Item.ID? id = chest.Pop();
+          var chest = chestbox.GetComponent<RewardChest>();
+          
+          Item.ID? id = null;
+          if(chest)
+            id = chest.Pop();
+          else
+          {
+            var storage = chestbox.GetComponent<StorageBox>();
+            if(storage)
+              id = storage.Pop();
+          }
           if(id != null)
           {
             var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
@@ -458,7 +468,7 @@ public class Level : MonoBehaviour
   bool IsSplitMachineHit(TouchInputData tid)
   {
     bool is_hit = false;
-    var splitMachineHit = tid.GetClosestCollider(0.5f, 1);
+    var splitMachineHit = tid.GetClosestCollider(0.5f);
     bool is_split_machine = _splitMachine?.IsDropSlot(splitMachineHit) ?? false;
     if(is_split_machine)
     {
@@ -502,6 +512,21 @@ public class Level : MonoBehaviour
         _grid.hovers(false);
       }
     }
+    return is_hit;
+  }
+  bool IsStorageHit(TouchInputData tid)
+  {
+    bool is_hit = false;
+    var storage = tid.GetClosestObjectInRange<StorageBox>(0.5f, StorageBox.layerMask);
+    if(storage && _itemSelected.id.IsSpecial)
+    {
+      storage.Push(_itemSelected.id);
+      _items.Remove(_itemSelected);
+      _grid.set(_itemSelected.vgrid, 0);
+      _itemSelected.Hide();
+      is_hit = true;
+    }
+
     return is_hit;
   }
 

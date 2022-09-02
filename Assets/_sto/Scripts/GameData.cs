@@ -170,7 +170,7 @@ public class GameData : ScriptableObject
     public static RewardProgress GetRewardProgress(float rewardPoints)
     {
       int rewardIdx = Array.FindLastIndex(get()._rewards, (Rewards rewards) => rewardPoints >= rewards.points2Chest);
-      var rp = new RewardProgress(Mathf.Max(rewardIdx, GameState.Econo.Chest.rewardLevel));
+      var rp = new RewardProgress(Mathf.Max(rewardIdx, GameState.Chest.rewardLevel));
       rp.progress_range_lo = RewardChestValue(rp.lvl);
       rp.progress_range_hi = RewardChestValue(rp.lvl +1);
       rp.progress_points = rewardPoints;
@@ -179,7 +179,7 @@ public class GameData : ScriptableObject
     }
     public static Rewards.Reward GetRewards()
     {
-      return GetRewards(GameState.Econo.Chest.rewardLevel);
+      return GetRewards(GameState.Chest.rewardLevel);
     }
     public static Rewards.Reward GetRewards(int chestLvl)
     {

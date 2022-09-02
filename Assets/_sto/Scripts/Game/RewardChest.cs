@@ -30,7 +30,7 @@ public class RewardChest : MonoBehaviour
     GameState.Econo.onRewardProgressChanged -= OnRewardChanged;
   }
 
-  int _resCnt => GameState.Econo.Chest.staminaCnt + GameState.Econo.Chest.coinsCnt + GameState.Econo.Chest.gemsCnt;
+  int _resCnt => GameState.Chest.staminaCnt + GameState.Chest.coinsCnt + GameState.Chest.gemsCnt;
 
   void SetupSlider()
   {
@@ -38,7 +38,7 @@ public class RewardChest : MonoBehaviour
   }
   void UpdateInfo()
   {
-    _lblResCnt.text = $"{_resCnt}";
+    _lblResCnt.text = $"x{_resCnt}";
     _infoContainer.gameObject.SetActive(_resCnt > 0);
   }
   void UpdateSlider()
@@ -60,12 +60,12 @@ public class RewardChest : MonoBehaviour
     UpdateInfo();
     
     var rewardProgress = GameData.Econo.GetRewardProgress(rewardPoints);
-    if(rewardProgress.lvl > GameState.Econo.Chest.rewardLevel)
+    if(rewardProgress.lvl > GameState.Chest.rewardLevel)
     {
       this.Invoke(()=>
       {
-        GameState.Econo.Chest.rewardLevel = rewardProgress.lvl;
-        GameState.Econo.Chest.AddRewards();
+        GameState.Chest.rewardLevel = rewardProgress.lvl;
+        GameState.Chest.AddRewards();
         UpdateInfo();
       }, 0.25f);
     }
@@ -73,7 +73,7 @@ public class RewardChest : MonoBehaviour
 
   public Item.ID? Pop()
   {
-    var id = GameState.Econo.Chest.PopRes();
+    var id = GameState.Chest.PopRes();
     UpdateInfo();
     return id;  
   }

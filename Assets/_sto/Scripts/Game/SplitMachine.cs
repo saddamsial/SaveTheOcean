@@ -22,6 +22,13 @@ public class SplitMachine : MonoBehaviour
   }
   DropResult _dropResult = DropResult.Ok;
 
+  public static int layerMask = -1;
+
+  void Awake()
+  {
+    layerMask = LayerMask.GetMask(LayerMask.LayerToName(_dropCollider.gameObject.layer));
+  }
+
   public static Action<SplitMachine> onDropped, onSplitted;
   public  void Init(List<Item> _items) =>_itemsRef = _items;
   public  bool IsDropSlot(Collider coll) => coll == _dropCollider;

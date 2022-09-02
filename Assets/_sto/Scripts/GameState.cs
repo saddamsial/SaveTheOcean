@@ -95,23 +95,33 @@ public class GameState : SavableScriptableObject
     public float  rewardPoints = 0;
     public int    rewardLevel = 0;
     public long   lastStamina = 0;
-    [System.Serializable]
-    public class ChestState
-    {
-      public List<Item.ID> listStamina = new List<Item.ID>();
-      public List<Item.ID> listCoins = new List<Item.ID>();
-      public List<Item.ID> listGems = new List<Item.ID>();
-
-      public void AddReward(GameData.Rewards.Reward rew)
-      {
-        listStamina.Add(new Item.ID(0 , 0, Item.Kind.Stamina));
-        listCoins.Add(new Item.ID(0, 0, Item.Kind.Coin));
-        listGems.Add(new Item.ID(0, 0, Item.Kind.Gem));
-      }
-    }
-    public ChestState chestState = new ChestState();
   }
   [SerializeField] EconomyState economy;
+
+  [System.Serializable]
+  class ChestState
+  {
+    public List<Item.ID> listStamina = new List<Item.ID>();
+    public List<Item.ID> listCoins = new List<Item.ID>();
+    public List<Item.ID> listGems = new List<Item.ID>();
+
+    public void AddReward(GameData.Rewards.Reward rew)
+    {
+      listStamina.Add(new Item.ID(0, 0, Item.Kind.Stamina));
+      listCoins.Add(new Item.ID(0, 0, Item.Kind.Coin));
+      listGems.Add(new Item.ID(0, 0, Item.Kind.Gem));
+    }
+  }
+  [SerializeField] ChestState chest;
+
+
+  [System.Serializable]
+  class StorageState
+  {
+    public List<Item.ID> listItems;
+  };
+  [SerializeField] StorageState storage;
+
 
   [System.Serializable]
   class SplitMachineState
@@ -240,37 +250,6 @@ public class GameState : SavableScriptableObject
     {
       return stamina >= stamina_cost;
     }
-    public static class Chest
-    {
-      public static int      rewardLevel {get => get().economy.rewardLevel; set => get().economy.rewardLevel = value;}
-      public static int      staminaCnt => get().economy.chestState.listStamina.Count;
-      public static int      coinsCnt =>   get().economy.chestState.listCoins.Count;
-      public static int      gemsCnt =>    get().economy.chestState.listGems.Count;
-      public static Item.ID? PopRes() 
-      {
-        Item.ID? id = null;
-        if(staminaCnt > 0)
-        {
-          id = get().economy.chestState.listStamina.last().Validate(true);
-          get().economy.chestState.listStamina.RemoveAt(get().economy.chestState.listStamina.last_idx());
-        }
-        else if(coinsCnt > 0)
-        {
-          id = get().economy.chestState.listCoins.last().Validate(true);
-          get().economy.chestState.listCoins.RemoveAt(get().economy.chestState.listCoins.last_idx());
-        }
-        else if(gemsCnt > 0)
-        {
-          id = get().economy.chestState.listGems.last().Validate(true);
-          get().economy.chestState.listGems.RemoveAt(get().economy.chestState.listGems.last_idx());          
-        }
-        return id;
-      }
-      public static void  AddRewards()
-      {
-        get().economy.chestState.AddReward(GameData.Econo.GetRewards());
-      }
-    }
     public static float GetStaminaRefillPerc()
     {
       var now = CTime.get();
@@ -314,6 +293,62 @@ public class GameState : SavableScriptableObject
   public static class SplitMachine
   {
     public static int capacity {get => get().splitMachine.capacity; set => get().splitMachine.capacity = value;}
+  }
+  public static class Chest
+  {
+    public static int rewardLevel { get => get().economy.rewardLevel; set => get().economy.rewardLevel = value; }
+    public static int staminaCnt => get().chest.listStamina.Count;
+    public static int coinsCnt => get().chest.listCoins.Count;
+    public static int gemsCnt => get().chest.listGems.Count;
+    public static Item.ID? PopRes()
+    {
+      Item.ID? id = null;
+      if(staminaCnt > 0)
+      {
+        id = get().chest.listStamina.last().Validate(true);
+        get().chest.listStamina.RemoveAt(get().chest.listStamina.last_idx());
+      }
+      else if(coinsCnt > 0)
+      {
+        id = get().chest.listCoins.last().Validate(true);
+        get().chest.listCoins.RemoveAt(get().chest.listCoins.last_idx());
+      }
+      else if(gemsCnt > 0)
+      {
+        id = get().chest.listGems.last().Validate(true);
+        get().chest.listGems.RemoveAt(get().chest.listGems.last_idx());
+      }
+      return id;
+    }
+    public static void AddRewards()
+    {
+      get().chest.AddReward(GameData.Econo.GetRewards());
+    }
+  }
+  public static class StorageBox
+  {
+    public static void PushItem(Item.ID id)
+    {
+      get().storage.listItems.Add(id);
+    }
+    public static Item.ID TopItem()
+    {
+      Item.ID id = new Item.ID(0, 0, Item.Kind.None);
+      if(get().storage.listItems.Count > 0)
+        id = get().storage.listItems[get().storage.listItems.last_idx()];
+      return id;
+    }
+    public static Item.ID PopItem()
+    {
+      Item.ID id = new Item.ID(0, 0, Item.Kind.None);
+      if(get().storage.listItems.Count > 0)
+      {
+        id = TopItem();
+        get().storage.listItems.RemoveAt(get().storage.listItems.last_idx());
+      }
+      return id;
+    }
+    public static int ItemsCnt() => get().storage.listItems.Count;
   }
 
   [Header("Customization")]
