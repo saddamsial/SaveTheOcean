@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameLib;
 using GameLib.InputSystem;
+using Cinemachine;
 
 public class Game : MonoBehaviour
 {
   [SerializeField] Transform levelsContainer;
-  [SerializeField] CamCtlr _camCtrl = null;
+  //[SerializeField] CamCtlr _camCtrl = null;
 
   public static System.Action<Level> onLevelRestart;
 
@@ -115,14 +116,14 @@ public class Game : MonoBehaviour
   private IEnumerator coShowEarth(bool show_next)
   {
     _level.Hide();
-    _uiFade.FadeIn(_camCtrl.zoomSpeed * 2.5f);
+    //_uiFade.FadeIn(_camCtrl.zoomSpeed * 2.5f);
     yield return new WaitForSeconds(1);
     DestroyLevel();
     _earth.Show(GameState.Progress.levelIdx, show_next);
-    _camCtrl.SwitchTo(1);
+    //_camCtrl.SwitchTo(1);
     yield return new WaitForSeconds(0.75f);
-    _uiFade.FadeOut(_camCtrl.zoomSpeed * 2f);
-    _camCtrl.ZoomOut();
+    // _uiFade.FadeOut(_camCtrl.zoomSpeed * 2f);
+    // _camCtrl.ZoomOut();
   }
   public void ShowLevel(int levelIdx)
   {
@@ -131,15 +132,15 @@ public class Game : MonoBehaviour
   }
   IEnumerator coShowLevel(int levelIdx)
   {
-    _camCtrl.ZoomIn();
-    yield return new WaitForSeconds(0.5f);
-    _uiFade.FadeIn(_camCtrl.zoomSpeed * 2.0f);
+    //_camCtrl.ZoomIn();
+    //yield return new WaitForSeconds(0.5f);
+    //_uiFade.FadeIn(_camCtrl.zoomSpeed * 2.0f);
     yield return new WaitForSeconds(0.75f);
     _earth.Hide();
     CreateLevel(levelIdx);
-    _camCtrl.SwitchTo(0);
+    //_camCtrl.SwitchTo(0);
     yield return new WaitForSeconds(1.0f);
-    _uiFade.FadeOut(_camCtrl.zoomSpeed * 2);
+    //_uiFade.FadeOut(_camCtrl.zoomSpeed * 2);
   }
 
   void Update()

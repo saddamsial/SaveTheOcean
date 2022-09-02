@@ -1175,7 +1175,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1301126275}
   - component: {fileID: 1301126276}
-  - component: {fileID: 1301126277}
   m_Layer: 0
   m_Name: _game
   m_TagString: Untagged
@@ -1214,22 +1213,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsContainer: {fileID: 1401569532}
-  _camCtrl: {fileID: 1301126277}
---- !u!114 &1301126277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1301126274}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bec4c7ff08d3ac0448c6c9415726704c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _zoomMin: 0.3
-  _zoomMax: 1
-  _zoomSpeed: 2
 --- !u!1001 &1309126050
 PrefabInstance:
   m_ObjectHideFlags: 0
