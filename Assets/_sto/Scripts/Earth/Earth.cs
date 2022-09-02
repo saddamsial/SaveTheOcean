@@ -7,12 +7,11 @@ using GameLib.InputSystem;
 public class Earth : MonoBehaviour
 {
   [Header("Refs")]
-  [SerializeField] GameObject   _earthPrefab;
-  [SerializeField] Transform    _levelsContainer;
-  [SerializeField] Transform    _locationsContainer;
-  [SerializeField] Location[]   _locations;
-  [SerializeField] Transform    _fx;
-  [SerializeField] Transform    _extras;
+  [SerializeField] GameObject     _earthPrefab;
+  [SerializeField] Transform      _levelsContainer;
+  [SerializeField] Transform      _locationsContainer;
+  [SerializeField] Transform      _fx;
+  [SerializeField] Transform      _extras;
 
   [Header("Earth fx")]
   [SerializeField] EarthFx      _earthFx;
@@ -31,11 +30,12 @@ public class Earth : MonoBehaviour
   public static System.Action onHide;
   public static System.Action<int> onLevelStart, onLevelSelected;
 
-  int           _selectedLocation = 0;
-  float         _rotateSpeed = 0;
-  Vector2?      _vdragBeg = null;
-  Vector2       _vdragPrev;
-  bool          _move2location = false;
+  int            _selectedLocation = 0;
+  float          _rotateSpeed = 0;
+  Vector2?       _vdragBeg = null;
+  Vector2        _vdragPrev;
+  bool           _move2location = false;
+  Location[]     _locations;
 
   public Transform zoom => _extras;
 
@@ -51,13 +51,19 @@ public class Earth : MonoBehaviour
 
   private void InitLocations()
   {
-    _locations = new Location[_levelsContainer.childCount];
+    List<Location> listLocations = new List<Location>();
     for(int q = 0; q < _levelsContainer.childCount; ++q)
     {
       var levelTransf = _levelsContainer.GetChild(q);
-      _locations[q] = GameData.Prefabs.CreateLocation(_locationsContainer);
-      _locations[q].Init(q, levelTransf, _rotateVertRange, GameState.Progress.Levels.GetLevelState(q));
+      if(levelTransf.gameObject.activeSelf)
+      {
+        var loc = GameData.Prefabs.CreateLocation(_locationsContainer);
+        loc.Init(q, levelTransf, _rotateVertRange, GameState.Progress.Levels.GetLevelState(listLocations.Count));
+        listLocations.Add(loc);
+      }
     }
+    _locations = new Location[_levelsContainer.childCount];
+    Array.Copy(listLocations.ToArray(), _locations, _locations.Length);
   }
 
   public void Setup()

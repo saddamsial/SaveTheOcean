@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPLbl = TMPro.TextMeshProUGUI;
+using GameLib;
 
 public class StorageBox : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class StorageBox : MonoBehaviour
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
 
     UpdateInfo();
+
+    this.Invoke(() => GetComponent<ActivatableObject>().ActivateObject(), 1.0f);
   }
 
   void UpdateInfo()

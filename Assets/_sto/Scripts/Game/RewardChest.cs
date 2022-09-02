@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPLbl = TMPro.TextMeshProUGUI;
+using GameLib;
 
 public class RewardChest : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class RewardChest : MonoBehaviour
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
 
     _lidAngle = (_resCnt == 0) ? 0 : 90;
+
+    this.Invoke(()=> GetComponent<ActivatableObject>().ActivateObject(), 1.0f);
   }
   void OnDestroy()
   {

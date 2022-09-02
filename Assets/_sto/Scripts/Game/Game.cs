@@ -8,7 +8,7 @@ using Cinemachine;
 public class Game : MonoBehaviour
 {
   [SerializeField] Transform levelsContainer;
-  //[SerializeField] CamCtlr _camCtrl = null;
+  [SerializeField] CamCtlr _camCtrl = null;
 
   public static System.Action<Level> onLevelRestart;
 
@@ -88,6 +88,8 @@ public class Game : MonoBehaviour
   }
   public void RestartLevel()
   {
+    if(_level)
+      _level.End();
     onLevelRestart?.Invoke(_level);
     CreateLevel();
   }
@@ -106,7 +108,10 @@ public class Game : MonoBehaviour
   public void DestroyLevel()
   {
     if(_level)
+    {
+      _level.End();
       Destroy(_level.gameObject);
+    }
     _level = null;
   }
   public void ShowEarth(bool show_next)
@@ -115,15 +120,15 @@ public class Game : MonoBehaviour
   }
   private IEnumerator coShowEarth(bool show_next)
   {
-    _level.Hide();
-    //_uiFade.FadeIn(_camCtrl.zoomSpeed * 2.5f);
-    yield return new WaitForSeconds(1);
+    _level?.Hide();
+    _uiFade.FadeIn(_camCtrl.zoomSpeed * 2.0f);
+    yield return new WaitForSeconds(0.5f);
     DestroyLevel();
     _earth.Show(GameState.Progress.levelIdx, show_next);
-    //_camCtrl.SwitchTo(1);
-    yield return new WaitForSeconds(0.75f);
-    // _uiFade.FadeOut(_camCtrl.zoomSpeed * 2f);
-    // _camCtrl.ZoomOut();
+    _camCtrl.SwitchToGlobe();
+    yield return new WaitForSeconds(1.0f);
+    _uiFade.FadeOut(_camCtrl.zoomSpeed * 2f);
+    _camCtrl.ZoomOut();
   }
   public void ShowLevel(int levelIdx)
   {
@@ -132,15 +137,15 @@ public class Game : MonoBehaviour
   }
   IEnumerator coShowLevel(int levelIdx)
   {
-    //_camCtrl.ZoomIn();
-    //yield return new WaitForSeconds(0.5f);
-    //_uiFade.FadeIn(_camCtrl.zoomSpeed * 2.0f);
+    _camCtrl.ZoomIn();
+    yield return new WaitForSeconds(0.5f);
+    _uiFade.FadeIn(_camCtrl.zoomSpeed * 2.0f);
     yield return new WaitForSeconds(0.75f);
     _earth.Hide();
     CreateLevel(levelIdx);
-    //_camCtrl.SwitchTo(0);
+    _camCtrl.SwitchToIngame();
     yield return new WaitForSeconds(1.0f);
-    //_uiFade.FadeOut(_camCtrl.zoomSpeed * 2);
+    _uiFade.FadeOut(_camCtrl.zoomSpeed * 2);
   }
 
   void Update()

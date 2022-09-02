@@ -327,6 +327,8 @@ public class GameState : SavableScriptableObject
   }
   public static class StorageBox
   {
+    public static Action onItemsCntChanged;
+    
     public static void PushItem(Item.ID id)
     {
       get().storage.listItems.Add(id);

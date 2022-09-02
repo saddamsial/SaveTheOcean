@@ -59,12 +59,10 @@ public class Level : MonoBehaviour
   public int    stars {get; set;}
   public int    itemsCount => _items.Count + _items2.Count;
   public int    initialItemsCnt => _initialItemsCnt;
-  //public bool   InTransiton => _actObj?.InTransition ?? false;
   public Vector2Int Dim => _dim;
 
   UISummary    _uiSummary = null;
   UIStatusBar  _uiStatusBar = null;
-  //Transform    _cameraContainer = null;
   List<Animal> _animals = new List<Animal>();
   MaterialPropertyBlock _mpb = null;
 
@@ -79,6 +77,8 @@ public class Level : MonoBehaviour
   float       _pollutionDest = 1.0f;
 
   bool        IsFeedingMode = false;
+
+  StorageBox _storageBox;
 
   public class Grid
   {
@@ -177,6 +177,8 @@ public class Level : MonoBehaviour
     _splitMachine.Init(_items);
     if(IsFeedingMode)
       _splitMachine.gameObject.SetActive(false);
+
+    _storageBox = GetComponentInChildren<StorageBox>();
 
     onCreate?.Invoke(this);
   }
@@ -277,15 +279,16 @@ public class Level : MonoBehaviour
       _items2.RemoveAt(0);
       int pipe_idx = (vgrid.x < 0)? 0 : 1;
       item.Spawn(vgrid, null);//_pipes.GetPath(pipe_idx));
+      _items.Add(item);
       _grid.set(item.vgrid, 1, item.id.kind);
     }
   }
-  // void DestroyItem(Item item)
-  // {
-  //   _items.Remove(item);
-  //   _grid.set(item.vgrid, 0);
-  //   item.Hide();
-  // }
+  void  DestroyItem(Item item)
+  {
+    _items.Remove(item);
+    _grid.set(item.vgrid, 0);
+    item.Hide();
+  }
 
   void  UpdatePollution()
   {
@@ -381,7 +384,7 @@ public class Level : MonoBehaviour
           if(id != null)
           {
             var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
-            _items2.Insert(0, item);
+            _items2.Add(item); //Insert(0, item);
             SpawnItem(vg.Value);
           }
         }
@@ -529,10 +532,18 @@ public class Level : MonoBehaviour
 
     return is_hit;
   }
+  public void End()
+  {
+    Item[] itms = _items.FindAll((Item item) => item.id.IsSpecial).ToArray();
+    foreach(var itm in itms)
+    {
+      _storageBox.Push(itm.id);
+      DestroyItem(itm);
+    }
+  }
 
   IEnumerator coEnd()
   {
-    //_pipes.PollutionRate(0);
     yield return new WaitForSeconds(3.0f);
     succeed = true;
     onFinished?.Invoke(this);
@@ -547,6 +558,7 @@ public class Level : MonoBehaviour
     if(!finished && activeAnimals == 0)
     {
       finished = true;
+      End();
       StartCoroutine(coEnd());
     }
   }
