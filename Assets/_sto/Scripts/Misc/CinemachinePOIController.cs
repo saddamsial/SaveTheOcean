@@ -5,6 +5,7 @@ using GameLib.CameraSystem;
 using Cinemachine;
 
 [RequireComponent(typeof(CinemachineTargetGroup))]
+[DefaultExecutionOrder(-10)]
 public class CinemachinePOIController : MonoBehaviour
 {
     CinemachineTargetGroup targetGroup = null;

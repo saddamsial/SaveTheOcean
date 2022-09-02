@@ -33,6 +33,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AO:
+        m_Texture: {fileID: 2800000, guid: b1010f6624c353d4c9ae522dd3ded1eb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -91,6 +95,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AOIntensity: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -102,9 +107,9 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EdgeBrightness: 2
-    - _EdgeExponent: 0.5
-    - _EdgeIntensity: 0.05
-    - _Emission: 0.15
+    - _EdgeExponent: 1
+    - _EdgeIntensity: 0.25
+    - _Emission: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -115,7 +120,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimExponent: 4
+    - _RimExponent: 1
     - _RimIntensity: 0.25
     - _Smoothness: 0.4
     - _SmoothnessTextureChannel: 0
@@ -128,10 +133,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.115877524, g: 0.46467102, b: 0.7924528, a: 1}
+    - _BaseColor: {r: 0, g: 0.30134898, b: 0.589, a: 1}
     - _Color: {r: 0, g: 0.35191226, b: 0.6320754, a: 1}
-    - _DeepColor: {r: 0.08223567, g: 0.74186563, b: 0.8301887, a: 1}
-    - _EdgeColor: {r: 0, g: 1, b: 0.3333335, a: 1}
+    - _DeepColor: {r: 0, g: 0.5911952, b: 0.8867924, a: 1}
+    - _EdgeColor: {r: 0.5, g: 1, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0.16666663, b: 0.25, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
