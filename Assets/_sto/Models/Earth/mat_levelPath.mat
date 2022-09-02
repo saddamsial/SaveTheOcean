@@ -126,10 +126,10 @@ Material:
     - _Speed: -0.05
     - _SrcBlend: 5
     - _Surface: 1
-    - _WaveHeight: 0.1
-    - _WaveRepeat: 2
+    - _WaveHeight: 0.2
+    - _WaveRepeat: 12
     - _WaveSmootness: 16
-    - _WaveSpeed: -0.25
+    - _WaveSpeed: -0.1
     - _Width: 1
     - _WorkflowMode: 1
     - _ZWrite: 0
