@@ -95,7 +95,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AOIntensity: 1
+    - _AOIntensity: 2
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -108,7 +108,7 @@ Material:
     - _DstBlend: 0
     - _EdgeBrightness: 2
     - _EdgeExponent: 1
-    - _EdgeIntensity: 0.25
+    - _EdgeIntensity: 2
     - _Emission: 1
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -121,7 +121,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _RimExponent: 1
-    - _RimIntensity: 0.25
+    - _RimIntensity: 0.3
     - _Smoothness: 0.4
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -133,9 +133,9 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0, g: 0.30134898, b: 0.589, a: 1}
+    - _BaseColor: {r: 0.025231415, g: 0.40454346, b: 0.764151, a: 1}
     - _Color: {r: 0, g: 0.35191226, b: 0.6320754, a: 1}
-    - _DeepColor: {r: 0, g: 0.5911952, b: 0.8867924, a: 1}
+    - _DeepColor: {r: 0.41037738, g: 0.8043289, b: 1, a: 1}
     - _EdgeColor: {r: 0.5, g: 1, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0.16666663, b: 0.25, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
