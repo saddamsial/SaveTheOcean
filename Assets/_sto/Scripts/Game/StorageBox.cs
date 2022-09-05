@@ -33,10 +33,10 @@ public class StorageBox : MonoBehaviour
     GameState.StorageBox.PushItem(id);
     UpdateInfo();
   }
-  public Item.ID Pop()
+  public Item.ID? Pop()
   {
     var id = GameState.StorageBox.PopItem();
     UpdateInfo();
-    return id;  
+    return id;
   }
 }

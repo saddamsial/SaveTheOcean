@@ -340,9 +340,9 @@ public class GameState : SavableScriptableObject
         id = get().storage.listItems[get().storage.listItems.last_idx()];
       return id;
     }
-    public static Item.ID PopItem()
+    public static Item.ID? PopItem()
     {
-      Item.ID id = new Item.ID(0, 0, Item.Kind.None);
+      Item.ID? id = null;
       if(get().storage.listItems.Count > 0)
       {
         id = TopItem();

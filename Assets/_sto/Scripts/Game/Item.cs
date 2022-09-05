@@ -65,11 +65,14 @@ public class Item : MonoBehaviour
   Vector3[]  _path = new Vector3[4];
   Vector3?   _vdstPos = null;
   Vector3    _vdim = Vector3.one;
+  Vector3    _vextent = Vector3.zero;
   Vector3    _vbtmExtent = Vector3.zero;
   Vector3    _vmin = Vector3.zero;
   Vector3    _vmax = Vector3.zero;
   float      _phaseOffs = 0;
   bool       _inMachine = false;
+  float      _sinkTimer = 0;
+  bool       _ready = false;
 
   public static float gridSpace = 1.0f;
   public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged, onSelect;
@@ -181,7 +184,6 @@ public class Item : MonoBehaviour
   public Transform  modelContainer => _modelContainer.transform;
   
   bool  levelsAsModels => id.IsSpecial;
-  
 
   void Awake()
   {
@@ -191,9 +193,9 @@ public class Item : MonoBehaviour
     for(int q = 0; q < _modelContainer.transform.childCount; ++q)
       _models.Add(_modelContainer.transform.GetChild(q).gameObject);
     
-    _phaseOffs = Random.Range(0, 90);
+    //_phaseOffs = Random.Range(0, 90);
     _amplSpeed *= Random.Range(0.95f, 1.05f);
-    _fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs) * _ampl, 0);
+    //_fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs) * _ampl, 0);
   }
   public void SetAsStatic()
   {
@@ -228,25 +230,26 @@ public class Item : MonoBehaviour
     }
 
     _vdim = Vector3.zero;
-    Renderer[] renderers = mdl.GetComponentsInChildren<Renderer>();
+    Renderer[] renderers = mdl.GetComponentsInChildren<Renderer>(true);
     var _center = Vector3.zero;
     System.Array.ForEach(renderers, (rend) => 
     {
       _center = rend.bounds.center;
       _vdim = Vector3.Max(_vdim, rend.bounds.size);
       _vmin = Vector3.Min(_vmin, rend.bounds.min);
-      _vmax = Vector3.Min(_vmax, rend.bounds.max);
+      _vmax = Vector3.Max(_vmax, rend.bounds.max);
+      _vextent = Vector3.Max(_vextent, rend.bounds.extents);
     });
     _vbtmExtent.y = -(_center.y - _vdim.y * 0.5f);
   }
-  public bool IsReady => !_activatable.InTransition && _lifetime > 0.125f;
+  public bool IsReady => _ready; //!_activatable.InTransition && _lifetime > 0.125f;
   public void Show()
   {
     _activatable.ActivateObject();
     this.Invoke(()=> GetComponent<Collider>().enabled = true, 0.5f);
     onShow?.Invoke(this);
   }
-  public void Spawn(Vector2 vgrid, Vector3[] vpath, float speed = 1)
+  public void Spawn(Vector2 vgrid, Vector3[] vpath, float touch, float speed)
   {
     Init(vgrid);
     gameObject.SetActive(true);
@@ -256,7 +259,6 @@ public class Item : MonoBehaviour
     {
       System.Array.Copy(vpath, _path, 3);
       _path[3] = ToPos(vgrid);
-      //_path[3] += itemsOffset;      
     }
     else
     {
@@ -264,7 +266,6 @@ public class Item : MonoBehaviour
       _path[0] = ToPos(vgrid);
       _path[0].y = immers;
       _path[3] = ToPos(vgrid);
-      //_path[3] += itemsOffset;
 
       _path[1] = Vector3.Lerp(_path[0], _path[3], 0.25f);
       _path[2] = Vector3.Lerp(_path[0], _path[3], 0.75f);
@@ -272,9 +273,9 @@ public class Item : MonoBehaviour
 
     vwpos = _path[0];
     onShow?.Invoke(this);
-    StartCoroutine(MovePath(speed));
+    StartCoroutine(MovePath(speed, touch));
   }
-  IEnumerator MovePath(float speed)
+  IEnumerator MovePath(float speed, float touch)
   {
     float t = 0.0f;
     while(t <= 1)
@@ -288,30 +289,19 @@ public class Item : MonoBehaviour
       yield return null;
     }
     
-    _sm.Touch(15f);
+    _sm.Touch(touch);
     _path = null;
+    _ready = true;
     GetComponent<Collider>().enabled = true;
   }
   public void Hide(bool silent = false)
   {
     gameObject.SetActive(false);
     onHide?.Invoke(this);
-    // if(!silent)
-    //   onHide?.Invoke(this);
-    // StartCoroutine(WaitForEnd());
   }
   public void Deactivate()
   {
     _activatable.DeactivateObject();
-  }
-  IEnumerator WaitForEnd()
-  {
-    yield return null;
-    while(_activatable.InTransition)
-    {
-      yield return null;
-    }
-    gameObject.SetActive(false);
   }
   Vector3   _vBackPos = Vector3.zero;
   Coroutine _coMoveHandle = null;
@@ -363,11 +353,27 @@ public class Item : MonoBehaviour
     if(act)
       _sm.Touch(-0.25f);
   }
+  public void Throw(Vector3 item_vbeg, Vector2 item_vgrid)
+  {
+    vwpos = item_vbeg;
+    vgrid = item_vgrid;
+    Vector3[] vcps = new Vector3[4];
+    vcps[0] = item_vbeg;
+    vcps[3] = Item.ToPos(vgrid);
+    vcps[1] = Vector3.Lerp(vcps[0], vcps[3], 0.45f) + new Vector3(0, 5, 0);
+    vcps[2] = Vector3.Lerp(vcps[0], vcps[3], 0.55f) + new Vector3(0, 5, 0);
+    Spawn(item_vgrid, vcps, -40.0f, 2);
+  }
 
+  Vector3 _vsink = Vector3.zero;
   void Update()
   {
     _lifetime += Time.deltaTime;
-    if(IsReady && !IsSelected)
-      _fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs + _lifetime) * _ampl, 0);
+    if(IsReady && !IsSelected && _sm.IsIdle)
+    {
+      _sinkTimer += Time.deltaTime;
+      _vsink.y = Mathf.Sin(_sinkTimer) * Mathf.Min(_vextent.y * 0.25f, _ampl);
+      _fx.transform.localPosition = _vsink;
+    }
   }
 }

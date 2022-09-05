@@ -31,6 +31,7 @@ public class SpringMove : MonoBehaviour
     _vvel += new Vector3(0, vvely, 0);
     _vvel = _vvel.clamp(_vminLimit * _velLimitFactor, _vmaxLimit * _velLimitFactor);
   }
+  public bool IsIdle => _vvel.sqrMagnitude < 0.0001f * 0.0001f;
 
   void Update()
   {

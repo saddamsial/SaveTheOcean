@@ -258,7 +258,7 @@ public class Level : MonoBehaviour
       {
         item.Init(vs.first());
         vs.RemoveAt(0);
-        item.Spawn(item.vgrid, null, Random.Range(0.5f, 1.5f));
+        item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
         _grid.set(item.vgrid, 1, item.id.kind);
         _items.Add(item);
       }
@@ -277,7 +277,7 @@ public class Level : MonoBehaviour
       var item = _items2.first();
       _items2.RemoveAt(0);
       int pipe_idx = (vgrid.x < 0)? 0 : 1;
-      item.Spawn(vgrid, null);//_pipes.GetPath(pipe_idx));
+      item.Spawn(vgrid, null, 15, 1);
       _items.Add(item);
       _grid.set(item.vgrid, 1, item.id.kind);
     }
@@ -360,24 +360,32 @@ public class Level : MonoBehaviour
       {
         tapTime = 0;
         Vector2? vg = _grid.getEmpty();
+        Vector3  vbeg = Vector3.zero;
         if(vg != null)
         {
           var chest = chestbox.GetComponent<RewardChest>();
-          
           Item.ID? id = null;
           if(chest)
+          {
             id = chest.Pop();
+            vbeg = chest.transform.position;
+          }
           else
           {
             var storage = chestbox.GetComponent<StorageBox>();
             if(storage)
+            {
               id = storage.Pop();
+              vbeg = storage.transform.position;
+            }
           }
           if(id != null)
           {
             var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
-            _items2.Add(item); //Insert(0, item);
-            SpawnItem(vg.Value);
+            item.vgrid = vg.Value;
+            _items.Add(item);
+            _grid.set(item.vgrid, 1, item.id.kind);
+            item.Throw(vbeg, item.vgrid);
           }
         }
       }
@@ -529,7 +537,7 @@ public class Level : MonoBehaviour
     Item[] itms = _items.FindAll((Item item) => item.id.IsSpecial).ToArray();
     foreach(var itm in itms)
     {
-      _storageBox.Push(itm.id);
+      _storageBox.Push(itm.id.Validate(true));
       DestroyItem(itm);
     }
   }
