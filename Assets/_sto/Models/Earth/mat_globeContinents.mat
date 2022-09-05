@@ -95,7 +95,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AOIntensity: 2
+    - _AOIntensity: 2.5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -108,7 +108,7 @@ Material:
     - _DstBlend: 0
     - _EmisionHueShift: 0.9
     - _EmisionHueSift: 0
-    - _Emission: 0.1
+    - _Emission: 0.25
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
