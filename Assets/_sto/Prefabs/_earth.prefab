@@ -5233,6 +5233,18 @@ PrefabInstance:
       propertyPath: m_Value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6512351281039990603, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512351281039990603, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 6512351281039990603, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.99
+      objectReference: {fileID: 0}
     - target: {fileID: 6867972952358816946, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_text
       value: Max Angular Velocity:0
@@ -5300,18 +5312,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5743060865689004575, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
   m_PrefabInstance: {fileID: 292211211431944804}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6686801536249195533 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6395795495333318249, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+--- !u!4 &7186966284304345571 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7472350624800230279, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
   m_PrefabInstance: {fileID: 292211211431944804}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4610363271425856973
+--- !u!1 &7283968677678298276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6997466168225142464, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+  m_PrefabInstance: {fileID: 292211211431944804}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1839516268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6686801536249195533}
+  m_GameObject: {fileID: 7283968677678298276}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ddbd64eee165884bace9e878b928693, type: 3}
@@ -5320,12 +5337,7 @@ MonoBehaviour:
   effectMultiplier: 1
   useRandomPhaseOffset: 1
   axis: {x: 0, y: 1, z: 0}
-  speed: 1
---- !u!4 &7186966284304345571 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7472350624800230279, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-  m_PrefabInstance: {fileID: 292211211431944804}
-  m_PrefabAsset: {fileID: 0}
+  speed: 4
 --- !u!1 &7652834317622405338 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7942784929363184318, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
