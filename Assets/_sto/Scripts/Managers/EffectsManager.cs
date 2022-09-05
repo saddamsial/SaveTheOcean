@@ -217,6 +217,8 @@ public class EffectsManager : MonoBehaviour
     }
     void OnLevelFinished(Level lvl) 
     {
+      if(lvl.succeed)
+        onPlayConfetti?.Invoke();
       // if(lvl.Succeed)
       //   fxConfettiLevel.Play();
       //cameraShakeContainer.Shake(objShakePresetHi);
