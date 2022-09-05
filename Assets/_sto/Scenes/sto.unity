@@ -1240,6 +1240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camGlobe: {fileID: 1006107345}
   _camIngame: {fileID: 1513359708}
+  _camTransit: {fileID: 1396117861}
   _zoomMin: 0.3
   _zoomMax: 1
   _zoomSpeed: 2
@@ -1417,6 +1418,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8786551797539272230, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
   m_PrefabInstance: {fileID: 1396117859}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1396117861 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7137339737200262344, guid: 44dab6fda00a3554d89f3e3933cedca2, type: 3}
+  m_PrefabInstance: {fileID: 1396117859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1401569531
 GameObject:
   m_ObjectHideFlags: 0

@@ -183,7 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193f46466a377ef45bc5f1d67bf5b08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 5850198402477404819}
+  <rb>k__BackingField: {fileID: 0}
+  <animator>k__BackingField: {fileID: 5850198402477404819}
 --- !u!1 &4981947356274711598
 GameObject:
   m_ObjectHideFlags: 0

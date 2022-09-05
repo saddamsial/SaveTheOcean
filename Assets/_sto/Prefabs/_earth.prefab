@@ -4873,7 +4873,6 @@ GameObject:
   - component: {fileID: 292211211678103440}
   - component: {fileID: 292211211678103441}
   - component: {fileID: 8373776387233828538}
-  - component: {fileID: 1068210245288150388}
   m_Layer: 0
   m_Name: _earth
   m_TagString: Untagged
@@ -4937,20 +4936,6 @@ MonoBehaviour:
   _globeRenderer: {fileID: 8037140112630612770}
   _globeRotator: {fileID: 292211209855933576}
   _roto2SwayFactor: 3
---- !u!114 &1068210245288150388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 292211211678103455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac57d4e767ff96f4693395a14abb5cf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weight: 1
-  _radius: 1.4
 --- !u!1 &1937536856907820308
 GameObject:
   m_ObjectHideFlags: 0
@@ -5296,6 +5281,20 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4126757476705115914, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
   m_PrefabInstance: {fileID: 292211211431944804}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &978169803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4416646416499981678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac57d4e767ff96f4693395a14abb5cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weight: 1
+  _radius: 1.1
 --- !u!4 &5457614949840750715 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5743060865689004575, guid: d3452a28e342bab41a52c04675e4dced, type: 3}

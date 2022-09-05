@@ -8,6 +8,7 @@ public class CamCtlr : MonoBehaviour
 {
   [SerializeField] CinemachineVirtualCamera _camGlobe;
   [SerializeField] CinemachineVirtualCamera _camIngame;
+  [SerializeField] CinemachineVirtualCamera _camTransit;
 
   [SerializeField] float _zoomMin  = 1.0f;
   [SerializeField] float _zoomMax = 3.0f;
@@ -19,17 +20,28 @@ public class CamCtlr : MonoBehaviour
 
   void Awake()
   {
-    _camIngame.enabled = false;
-    _camGlobe.enabled = true;
+    //_camIngame.enabled = true;
+    //_camGlobe.enabled = true;
     _defFov = _camGlobe.m_Lens.FieldOfView;
   }
   public void SwitchToGlobe()
   {
-    _camIngame.enabled = false;
+    _camIngame.Priority = 10;
+    _camTransit.Priority = 20;
+    _camGlobe.Priority = 30;
+  }
+  public void SwitchToTransit()
+  {
+    _camIngame.Priority = 10;
+    _camGlobe.Priority = 20;
+    _camTransit.Priority = 30;    
   }
   public void SwitchToIngame()
   {
-    _camIngame.enabled = true;
+    //_camIngame.enabled = true;
+    _camIngame.Priority = 30;
+    _camTransit.Priority = 20;
+    _camGlobe.Priority = 10;
   }
 
   public void  ZoomIn() => _zoomTo = _zoomMin;
@@ -38,7 +50,7 @@ public class CamCtlr : MonoBehaviour
 
   void Update()
   {
-    _zoom = Mathf.Lerp(_zoom, _zoomTo, Time.deltaTime * _zoomSpeed);
-    _camGlobe.m_Lens.FieldOfView = _defFov * _zoom;
+    //_zoom = Mathf.Lerp(_zoom, _zoomTo, Time.deltaTime * _zoomSpeed);
+    //_camGlobe.m_Lens.FieldOfView = _defFov * _zoom;
   }
 }

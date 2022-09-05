@@ -165,7 +165,6 @@ public class Level : MonoBehaviour
   void Awake()
   {
     Item.gridSpace = _gridSpace;
-    //_cameraContainer = GameObject.Find("_cameraContainer").transform;
     _uiSummary = FindObjectOfType<UISummary>(true);
     _uiStatusBar = FindObjectOfType<UIStatusBar>(true); 
 
@@ -290,13 +289,6 @@ public class Level : MonoBehaviour
     item.Hide();
   }
 
-  void  UpdatePollution()
-  {
-    // _pollutionRate = Mathf.Lerp(_pollutionRate, _pollutionDest, Time.deltaTime * 2);
-    // _waterRenderer.GetPropertyBlock(_mpb);
-    // _mpb.SetFloat("_HeigthWaveOpacity", _pollutionRate);
-    // _waterRenderer.SetPropertyBlock(_mpb);
-  }
   public float PollutionRate()
   {
     int requests = 0;
@@ -573,7 +565,6 @@ public class Level : MonoBehaviour
   void Update()
   {
     Process();
-    UpdatePollution();
 
   #if UNITY_EDITOR
     if(Input.GetKeyDown(KeyCode.E))
