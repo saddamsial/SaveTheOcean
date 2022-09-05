@@ -48,6 +48,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: mat_moon
+    second: {fileID: 2100000, guid: 839e0d1131c138e4c831a5f42d15a751, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: mat_spaceDome
     second: {fileID: 2100000, guid: dbffdcaf1d3f8154ababf1cd5202ab5b, type: 2}
   - first:
