@@ -4,26 +4,24 @@ using UnityEngine;
 
 public class GridTile : MonoBehaviour
 {
-  [SerializeField] GameObject _dirty;
-  [SerializeField] GameObject _clear;
+  [SerializeField] SpriteRenderer _sr;
   [SerializeField] ParticleSystem _ps;
   [SerializeField] Color _hoverColor;
-
-  SpriteRenderer _sp;
+  [SerializeField] Color _dirtyColor;
+  [SerializeField] Color _clearColor;
 
   Vector2 _vgrid = Vector2.zero;
 
   public Vector2 vgrid{get => _vgrid; set => _vgrid = value;}
 
-  Color _baseClearColor;
-  Color _destClearColor;
+  Color _destColor;
   bool  _hit = false;
+  bool  _dirty = false;
 
   void Awake()
   {
-    _sp = _clear.GetComponent<SpriteRenderer>();
-    _baseClearColor = _clear.GetComponent<SpriteRenderer>().color;
-    _destClearColor = _baseClearColor;
+    _sr.color = _clearColor;
+    _destColor = _clearColor;
 
     Item.onSelect += OnItemSelection;
   }
@@ -32,17 +30,17 @@ public class GridTile : MonoBehaviour
     Item.onSelect -= OnItemSelection;
   }
 
-  public void Set(bool act, bool garbage = true)
+  public void Set(bool occupied, bool garbage = true)
   {
-    _dirty.SetActive(act);
-    _clear.SetActive(!act);
-    if(act)
+    _dirty = occupied;
+    _destColor = (occupied)? _dirtyColor : _clearColor;
+    if(occupied)
     {
       if(garbage)
       {
         this.Invoke(() => 
         {
-          if(_dirty.activeInHierarchy)
+          if(_dirty)
             _ps.Play();
         }, 1);
       }
@@ -51,17 +49,19 @@ public class GridTile : MonoBehaviour
     }
     else
     {
-      _destClearColor = _baseClearColor;
       _ps.Stop();
     }
   }
   public void Hover(bool hov)
   {
-    _destClearColor = (hov)? _hoverColor : _baseClearColor;
+    if(hov)
+      _destColor = _hoverColor;
+    else
+      _destColor = (_dirty)? _dirtyColor : _clearColor;
   }
   void OnItemSelection(Item sender)
   {
-    if(_dirty.activeInHierarchy && !sender.IsInMachine && Vector3.Distance(sender.vgrid, vgrid) < 0.01f)
+    if(_dirty && !sender.IsInMachine && Vector3.Distance(sender.vgrid, vgrid) < 0.01f)
     {
       if(sender.IsSelected)
         _ps.Stop();
@@ -70,7 +70,7 @@ public class GridTile : MonoBehaviour
 
   void Update()
   {
-    if(_clear.activeInHierarchy)
-      _sp.color = Color.Lerp(_sp.color, _destClearColor, Time.deltaTime * 5);
+    //if(_clear.activeInHierarchy)
+      _sr.color = Color.Lerp(_sr.color, _destColor, Time.deltaTime * 5);
   }
 }

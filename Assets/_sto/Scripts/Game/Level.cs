@@ -349,6 +349,7 @@ public class Level : MonoBehaviour
       _itemSelected.MoveBack();
     }
     _itemSelected = null;
+    _grid.hovers(false);
   }
   double tapTime = 0;
   public void OnInputTapped(TouchInputData tid)
