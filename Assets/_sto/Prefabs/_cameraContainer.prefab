@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1360818154}
   - component: {fileID: 8313907708440033892}
-  - component: {fileID: 1559322197452555063}
+  - component: {fileID: 8924529039444055055}
   m_Layer: 0
   m_Name: framingTarget
   m_TagString: Untagged
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_RotationMode: 1
   m_UpdateMethod: 2
   m_Targets: []
---- !u!114 &1559322197452555063
+--- !u!114 &8924529039444055055
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1360818153}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dd7d1300a798364aad6d298c8fca796, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e441bacdbb756d46b95238f84026fc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1272509323725305744

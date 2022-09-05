@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameLib.Haptics;
 
-public class HapticManager : GameLib.Haptics.HapticsManager //MonoBehaviour
-{
-  [SerializeField] HapticsPreset presetLow;
-  [SerializeField] HapticsPreset presetMed;
-  [SerializeField] HapticsPreset presetHi;
-  
+public class HapticManager : MonoBehaviour
+{ 
   void OnEnable()
   {
     Level.onStart += VibMed;
@@ -32,14 +28,14 @@ public class HapticManager : GameLib.Haptics.HapticsManager //MonoBehaviour
 
   void VibLo(object sender)
   {
-    HapticsSystem.Vibrate(presetLow);
+    HapticsSystem.Vibrate(HapticsSystem.HapticFeedback.Tick);
   }
   void VibMed(object sender)
   {
-    HapticsSystem.Vibrate(presetMed);
+    HapticsSystem.Vibrate(HapticsSystem.HapticFeedback.Medium);
   }
   void VibHi(object sender)
   {
-    HapticsSystem.Vibrate(presetHi);
+    HapticsSystem.Vibrate(HapticsSystem.HapticFeedback.High);
   }
 }

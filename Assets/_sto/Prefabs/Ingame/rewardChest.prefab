@@ -154,7 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193f46466a377ef45bc5f1d67bf5b08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 8567253920463621412}
+  <rb>k__BackingField: {fileID: 0}
+  <animator>k__BackingField: {fileID: 8567253920463621412}
 --- !u!95 &8567253920463621412
 Animator:
   serializedVersion: 4
@@ -991,7 +992,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0, guid: 8ebc520ab0bc68f47a692ed028709197, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

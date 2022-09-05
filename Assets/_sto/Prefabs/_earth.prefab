@@ -1,93 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &70133440
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 70133441}
-  - component: {fileID: 70133442}
-  m_Layer: 0
-  m_Name: _cameraPOI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &70133441
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70133440}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.25, y: 1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 7503817021261626774}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &70133442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 70133440}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0a71975d7d98654c8a8f651c022a624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1800686175
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1800686176}
-  - component: {fileID: 1800686177}
-  m_Layer: 0
-  m_Name: _cameraPOI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1800686176
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800686175}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.25, y: -1.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 7503817021261626774}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1800686177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800686175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a0a71975d7d98654c8a8f651c022a624, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1958313578
 GameObject:
   m_ObjectHideFlags: 0
@@ -4961,6 +4873,7 @@ GameObject:
   - component: {fileID: 292211211678103440}
   - component: {fileID: 292211211678103441}
   - component: {fileID: 8373776387233828538}
+  - component: {fileID: 1068210245288150388}
   m_Layer: 0
   m_Name: _earth
   m_TagString: Untagged
@@ -5000,7 +4913,6 @@ MonoBehaviour:
   _earthPrefab: {fileID: 4416646416499981678}
   _levelsContainer: {fileID: 5457614949840750715}
   _locationsContainer: {fileID: 7186966284304345571}
-  _locations: []
   _fx: {fileID: 292211209855933576}
   _extras: {fileID: 7503817021261626774}
   _earthFx: {fileID: 8373776387233828538}
@@ -5025,6 +4937,20 @@ MonoBehaviour:
   _globeRenderer: {fileID: 8037140112630612770}
   _globeRotator: {fileID: 292211209855933576}
   _roto2SwayFactor: 3
+--- !u!114 &1068210245288150388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292211211678103455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac57d4e767ff96f4693395a14abb5cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weight: 1
+  _radius: 1.4
 --- !u!1 &1937536856907820308
 GameObject:
   m_ObjectHideFlags: 0
@@ -5085,8 +5011,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1800686176}
-  - {fileID: 70133441}
   - {fileID: 380740100357462550}
   m_Father: {fileID: 292211211678103440}
   m_RootOrder: 1
@@ -5122,7 +5046,7 @@ Transform:
   - {fileID: 3773116458347824800}
   - {fileID: 3878713214517792834}
   m_Father: {fileID: 7503817021261626774}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &204588004489758418
 PrefabInstance:

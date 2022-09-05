@@ -167,7 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193f46466a377ef45bc5f1d67bf5b08e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 3153182826125854873}
+  <rb>k__BackingField: {fileID: 0}
+  <animator>k__BackingField: {fileID: 3153182826125854873}
 --- !u!114 &2079218385271069147
 MonoBehaviour:
   m_ObjectHideFlags: 0
