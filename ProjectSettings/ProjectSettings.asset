@@ -731,7 +731,7 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: 
+    Android: BYTE_BREW_SDK;FACEBOOK_SDK
     iPhone: LK_HAS_LION_ANALYTICS;gameanalytics_max_enabled
   additionalCompilerArguments: {}
   platformArchitecture: {}
