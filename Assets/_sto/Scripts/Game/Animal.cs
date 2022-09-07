@@ -40,7 +40,7 @@ public class Animal : MonoBehaviour
   public void Init(Item[] items_prefab)
   {
     _garbages = new List<Item.ID>();
-    bool isFeedingMode = GameState.Progress.Levels.IsLevelFinished(GameState.Progress.levelIdx);
+    bool isFeedingMode = GameState.Progress.Locations.IsLocationFinished(GameState.Progress.locationIdx);
     foreach(var item in items_prefab)
     {
       if(!isFeedingMode)

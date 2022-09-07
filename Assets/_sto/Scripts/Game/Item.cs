@@ -86,7 +86,8 @@ public class Item : MonoBehaviour
     {
       if(item1.IsUpgradable)
       {
-        GameState.Econo.rewards += 1;
+        if(!item1.id.IsSpecial)
+          GameState.Econo.rewards += 1;
         item0.Hide();
         _items.Remove(item0);
         onMerged?.Invoke(item1);
@@ -193,9 +194,7 @@ public class Item : MonoBehaviour
     for(int q = 0; q < _modelContainer.transform.childCount; ++q)
       _models.Add(_modelContainer.transform.GetChild(q).gameObject);
     
-    //_phaseOffs = Random.Range(0, 90);
     _amplSpeed *= Random.Range(0.95f, 1.05f);
-    //_fx.transform.localPosition = new Vector3(0, Mathf.Sin(_phaseOffs) * _ampl, 0);
   }
   public void SetAsStatic()
   {
@@ -284,7 +283,7 @@ public class Item : MonoBehaviour
       t += Time.deltaTime * speed;
       float tc = Mathf.Clamp01(t);
       vwpos = Vector3Ex.bezier(_path, tc);
-      if(prev_t < 0.8f && t >= 0.8f)
+      if(prev_t < 0.95f && t >= 0.95f)
         onShown?.Invoke(this);
       yield return null;
     }

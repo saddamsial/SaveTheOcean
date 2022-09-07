@@ -57,7 +57,8 @@ public class GameData : ScriptableObject
   [SerializeField] Items[] _items;
   [SerializeField] GridTile _gridTile;
   [SerializeField] Location _locationPrefab;
-  [Header("Levels")]
+  [SerializeField] Earth    _earthPrefab;
+  //[Header("Levels")]
   [SerializeField] List<Level> _listLevels;
   [Header("Econo")]
   [SerializeField] int       _staminaMax = 99;
@@ -130,16 +131,19 @@ public class GameData : ScriptableObject
     {
       return Instantiate(get()._listLevels[idx], levelsContainer);
     }
-    static public int   PrevLevel(int lvl_idx)
-    {
-      return (int)Mathf.Repeat(lvl_idx - 1.0f, get()._listLevels.Count);
-    }
-    static public int   NextLevel(int lvl_idx)
-    {
-      return (int)Mathf.Repeat(lvl_idx + 1.0f, get()._listLevels.Count);
-    }
-    static public int   LevelsCnt => get()._listLevels.Count;
+    static public int levelsCnt => get()._listLevels.Count;
   }
+  public static class Locations
+  {
+    static public int PrevLocation(int loc_idx)
+    {
+      return Mathf.Clamp(loc_idx - 1, 0, Earth.locationsCnt - 1);
+    }
+    static public int NextLocation(int loc_idx)
+    {
+      return Mathf.Clamp(loc_idx + 1, 0, Earth.locationsCnt - 1);
+    }
+  }  
   public static class Econo
   {
     public static int   staminaCost => get()._staminaPlayCost;

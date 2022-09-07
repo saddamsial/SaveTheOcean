@@ -7,15 +7,20 @@ public class Location : MonoBehaviour
   [SerializeField] GameObject   _selectionModel;
   [SerializeField] Level.State  _state = Level.State.Locked;
 
+  [Header("IngameLevel")]
+  [SerializeField] int _level = -1;
+
   Quaternion _localDstRoto = Quaternion.identity;
   private int _idx = -1;
 
   public Quaternion localDstRoto => _localDstRoto;
   public int  idx => _idx;
+  public int  levelIdx => _level;
 
   public void Init(int idx, Transform levelTransf, float vert_roto_range, Level.State level_state)
   { 
     _idx = idx;
+    _level = Mathf.Clamp(idx, 0, GameData.Levels.levelsCnt-1);
     state = level_state;
 
     transform.localPosition = levelTransf.localPosition;
