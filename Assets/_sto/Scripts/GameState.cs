@@ -44,6 +44,8 @@ public class GameState : SavableScriptableObject
     [SerializeField] List<LocationState> _locations;
     [SerializeField] long _locationsPassedTime = 0;
 
+    public static Action onAllLocationFinished;
+
     public  int  location { get => _location; set => _location = value; }
     public  long locationsPassTime { get => _locationsPassedTime; set => _locationsPassedTime = value;}
     public  List<LocationState> levels { get => _locations; }
@@ -87,6 +89,7 @@ public class GameState : SavableScriptableObject
           var time = CTime.get().ToBinary();
           _locations.ForEach((loca) => loca.date = time);
           _locationsPassedTime = time;
+          onAllLocationFinished?.Invoke();
         }
       }
     }

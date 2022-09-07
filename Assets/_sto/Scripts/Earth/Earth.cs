@@ -59,7 +59,7 @@ public class Earth : MonoBehaviour
       if(levelTransf.gameObject.activeSelf)
       {
         var loc = GameData.Prefabs.CreateLocation(_locationsContainer);
-        loc.Init(q, levelTransf, _rotateVertRange, GameState.Progress.Locations.GetLocationState(listLocations.Count));
+        loc.Init(listLocations.Count, levelTransf, _rotateVertRange, GameState.Progress.Locations.GetLocationState(listLocations.Count));
         listLocations.Add(loc);
       }
     }

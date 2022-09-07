@@ -16,20 +16,89 @@ MonoBehaviour:
   dataPath: Data
   version: 0
   progress:
-    _location: 0
-    _locations: []
-    _locationsPassedTime: 0
+    _location: 13
+    _locations:
+    - _idx: 0
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 1
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 2
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 3
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 4
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 5
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 6
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 7
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 8
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 9
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 10
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 11
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 12
+      _state: 3
+      _datetime: -8585390465166156568
+    - _idx: 13
+      _state: 1
+      _datetime: 0
+    _locationsPassedTime: -8585390465166156568
   economy:
-    stamina: 50
+    stamina: 19
     coins: 0
     gems: 0
-    rewardPoints: 0
-    rewardLevel: 0
-    lastStamina: 0
+    rewardPoints: 16
+    rewardLevel: 3
+    lastStamina: -8585390463048522309
   chest:
-    listStamina: []
-    listCoins: []
-    listGems: []
+    listStamina:
+    - _type: 3
+      _lvl: 0
+      _kind: 2
+    - _type: 3
+      _lvl: 0
+      _kind: 2
+    - _type: 3
+      _lvl: 0
+      _kind: 2
+    listCoins:
+    - _type: 4
+      _lvl: 0
+      _kind: 3
+    - _type: 4
+      _lvl: 0
+      _kind: 3
+    - _type: 4
+      _lvl: 0
+      _kind: 3
+    listGems:
+    - _type: 5
+      _lvl: 0
+      _kind: 4
+    - _type: 5
+      _lvl: 0
+      _kind: 4
+    - _type: 5
+      _lvl: 0
+      _kind: 4
   storage:
     listItems: []
   splitMachine:
