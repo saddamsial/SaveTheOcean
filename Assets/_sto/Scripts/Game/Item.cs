@@ -283,7 +283,7 @@ public class Item : MonoBehaviour
       t += Time.deltaTime * speed;
       float tc = Mathf.Clamp01(t);
       vwpos = Vector3Ex.bezier(_path, tc);
-      if(prev_t < 0.8f && t >= 0.8f)
+      if(prev_t < 0.95f && t >= 0.95f)
         onShown?.Invoke(this);
       yield return null;
     }
