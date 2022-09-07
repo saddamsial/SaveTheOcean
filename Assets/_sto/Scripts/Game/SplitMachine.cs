@@ -11,6 +11,7 @@ public class SplitMachine : MonoBehaviour
 
   [SerializeField] List<Item> _dropSlots = new List<Item>();
   [SerializeField] Item[]     _splitSlots = new Item[2]{null, null};
+  
 
   List<Item> _itemsRef = null;
 
@@ -38,9 +39,9 @@ public class SplitMachine : MonoBehaviour
 
   public  DropResult dropResult => _dropResult;
   public  Vector3 dropPosition => _dropCollider.transform.position;
-  public  void DropDone() => _dropResult = DropResult.Ok;
-  public  void DropNoCapacity() => _dropResult = DropResult.NoCapacity;
-  public  void DropNoSplittable() => _dropResult = DropResult.NoSplittableItem;
+  public  void    DropDone() => _dropResult = DropResult.Ok;
+  public  void    DropNoCapacity() => _dropResult = DropResult.NoCapacity;
+  public  void    DropNoSplittable() => _dropResult = DropResult.NoSplittableItem;
 
   public  void AddToDropSlot(Item item)
   {
@@ -89,6 +90,7 @@ public class SplitMachine : MonoBehaviour
 
     return vpos;
   }
+  public Vector3  GetSplitSlotPos(int idx) => _splitsContainers[idx].position;
   public void     AddToSplitSlots(Item[] items)
   {
     for(int q=0; q < items.Length; ++q)
