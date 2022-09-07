@@ -26,24 +26,24 @@ public class BBSDK : MonoBehaviour
   void OnLevelStart(Level level)
   {
   #if UNITY_EDITOR
-    Debug.Log("BB OnStart:"  + LevelStr(level.levelIdx));
+    Debug.Log("BB OnStart:"  + LevelStr(level.locationIdx));
   #endif
-    ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Started, LevelStr(level.levelIdx), "", level.levelIdx);
+    ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Started, LevelStr(level.locationIdx), "", level.locationIdx);
   }
   void OnLevelFinished(Level level) => OnLevelSuccess(level);
   void OnLevelSuccess(Level level)
   {
   #if UNITY_EDITOR
-    Debug.Log("BB OnSuccess:" + LevelStr(level.levelIdx));
+    Debug.Log("BB OnSuccess:" + LevelStr(level.locationIdx));
   #endif
-    ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Completed, LevelStr(level.levelIdx),"", level.levelIdx);
+    ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Completed, LevelStr(level.locationIdx),"", level.locationIdx);
   }
   void OnLevelFail(Level level)
   {
   #if UNITY_EDITOR
-    Debug.Log("BB OnFail:" + LevelStr(level.levelIdx));
+    Debug.Log("BB OnFail:" + LevelStr(level.locationIdx));
   #endif
-    ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Failed, LevelStr(level.levelIdx), "", level.levelIdx);
+    ByteBrew.NewProgressionEvent(ByteBrewProgressionTypes.Failed, LevelStr(level.locationIdx), "", level.locationIdx);
   }
 }
 #endif
