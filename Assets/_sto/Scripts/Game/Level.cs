@@ -52,7 +52,7 @@ public class Level : MonoBehaviour
     public Item[]  items => _reqItems;
   }
 
-  public int    levelIdx => GameState.Progress.levelIdx;
+  public int    locationIdx {get; private set;} = -1;
   public bool   succeed {get; private set;}
   public bool   finished {get; private set;}
   public int    points {get; set;} = 0;
@@ -164,6 +164,8 @@ public class Level : MonoBehaviour
 
   void Awake()
   {
+    locationIdx = GameState.Progress.locationIdx;
+
     Item.gridSpace = _gridSpace;
     _uiSummary = FindObjectOfType<UISummary>(true);
     _uiStatusBar = FindObjectOfType<UIStatusBar>(true); 
@@ -172,7 +174,7 @@ public class Level : MonoBehaviour
     _mpb.SetColor("_BaseColor", _waterColor);
     _waterRenderer.SetPropertyBlock(_mpb);
 
-    IsFeedingMode = GameState.Progress.Levels.IsLevelFinished(levelIdx);
+    IsFeedingMode = GameState.Progress.Locations.IsLocationFinished(GameState.Progress.locationIdx);
     _splitMachine.Init(_items);
     if(IsFeedingMode)
       _splitMachine.gameObject.SetActive(false);
@@ -266,6 +268,7 @@ public class Level : MonoBehaviour
       {
         item.Init(Vector2.zero);
         _items2.Add(item);
+        item.gameObject.SetActive(false);
       }
     }
     _initialItemsCnt = itemsCount;
@@ -548,8 +551,8 @@ public class Level : MonoBehaviour
     yield return new WaitForSeconds(3.0f);
     succeed = true;
     onFinished?.Invoke(this);
-    GameState.Progress.Levels.SetLevelFinished();
-    GameState.Progress.Levels.UnlockNextLevel();
+    GameState.Progress.Locations.SetLocationFinished();
+    GameState.Progress.Locations.UnlockNextLocation();
     yield return new WaitForSeconds(0.5f);
     _uiSummary.Show(this);
   }

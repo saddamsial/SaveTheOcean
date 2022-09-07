@@ -16,72 +16,84 @@ public class GameState : SavableScriptableObject
   }
   public static void Process()
   {
-    //get()?.economy?.Process();
     GameState.Econo.Process();
+    GameState.Progress.Locations.Process();
   }
 
   [System.Serializable]
-  class LevelState
+  class LocationState
   {
     [SerializeField] int _idx = 0;
-    [SerializeField] Level.State _state;
-    //other level states data
+    [SerializeField] Level.State _state = Level.State.Locked;
+    [SerializeField] long _datetime = 0;
 
-    public LevelState(int lvl_idx, Level.State st = Level.State.Unlocked)
+    public LocationState(int loc_idx, Level.State st = Level.State.Locked)
     {
-      _idx = lvl_idx;
+      _idx = loc_idx;
       _state = st;
     }
     public int idx => _idx;
-    public Level.State state { get => _state; set { _state = value; } }
+    public Level.State state { get => _state; set => _state = value;}
+    public long date {get => _datetime; set => _datetime = value;}
   }
 
   [System.Serializable]
   class ProgressState
   {
-    [SerializeField] int _level = 0;
-    [SerializeField] List<LevelState> _levels;
+    [SerializeField] int _location = 0;
+    [SerializeField] List<LocationState> _locations;
+    [SerializeField] long _locationsPassedTime = 0;
 
-
-    public  int level { get => _level; set { _level = value; }}
-    public  List<LevelState> levels { get => _levels; }
-    public  LevelState       FindLevel(int lvl_idx)
+    public  int  location { get => _location; set => _location = value; }
+    public  long locationsPassTime { get => _locationsPassedTime; set => _locationsPassedTime = value;}
+    public  List<LocationState> levels { get => _locations; }
+    public  LocationState  FindLocation(int loc_idx)
     {
-      return _levels.Find((lvl) => lvl.idx == lvl_idx);
+      return _locations.Find((loc) => loc.idx == loc_idx);
     }
-    public  bool        IsLevelUnlocked(int lvl_idx)
+    public  bool        IsLocationUnlocked(int loc_idx)
     {
-      var lvl = FindLevel(lvl_idx);
-      return (lvl != null)? lvl.state >= Level.State.Unlocked : false;
+      var loc = FindLocation(loc_idx);
+      return (loc != null)? loc.state >= Level.State.Unlocked : false;
     }
-    public  bool        IsLevelPassed(int lvl_idx)
+    public  bool        IsLocationPassed(int loc_idx)
     {
-      var lvl = FindLevel(lvl_idx);
-      return (lvl != null) ? lvl.state == Level.State.Finished : false;
+      var loc = FindLocation(loc_idx);
+      return (loc != null) ? loc.state == Level.State.Finished : false;
     }
-    public  void        UnlockLevel(int lvl_idx)
+    public  void        UnlockLocation(int loc_idx)
     {
-      var lvl = FindLevel(lvl_idx);
-      if(lvl == null)
-        _levels.Add(new LevelState(lvl_idx, Level.State.Unlocked));
+      var loc = FindLocation(loc_idx);
+      if(loc == null)
+        _locations.Add(new LocationState(loc_idx, Level.State.Unlocked));
       else
       {
-        if(lvl.state == Level.State.Locked)
-          lvl.state = Level.State.Unlocked;
+        if(loc.state == Level.State.Locked)
+          loc.state = Level.State.Unlocked;
       }
     }
-    public void         PassLevel(int lvl_idx)
+    public void         PassLocation(int loc_idx)
     {
-      var lvl = FindLevel(lvl_idx);
-      if(lvl == null)
-        _levels.Add(new LevelState(lvl_idx, Level.State.Finished));
+      var loc = FindLocation(loc_idx);
+      if(loc == null)
+        _locations.Add(new LocationState(loc_idx, Level.State.Finished));
       else
-        lvl.state = Level.State.Finished;
+        loc.state = Level.State.Finished;
+
+      if(_locations.Count == Earth.locationsCnt)
+      {
+        if(_locationsPassedTime == 0)
+        {
+          var time = CTime.get().ToBinary();
+          _locations.ForEach((loca) => loca.date = time);
+          _locationsPassedTime = time;
+        }
+      }
     }
-    public Level.State  GetLevelState(int lvl_idx)
+    public Level.State  GetLocationState(int loc_idx)
     {
-      var lvl = FindLevel(lvl_idx);
-      return (lvl != null) ? lvl.state : Level.State.Locked;
+      var loc = FindLocation(loc_idx);
+      return (loc != null) ? loc.state : Level.State.Locked;
     }
   }
   [SerializeField] ProgressState progress;
@@ -146,53 +158,51 @@ public class GameState : SavableScriptableObject
 
   public static void Init()
   {
-    get().progress.UnlockLevel(0);
+    get().progress.UnlockLocation(0);
     if(get().economy.lastStamina == 0)
       get().economy.lastStamina = CTime.get().ToBinary();
-
-  #if UNITY_EDITOR
-    for(int  q = 0; q < GameData.Levels.LevelsCnt; ++q)
-    {
-      Debug.Log(string.Format("lvl:{0:D2} => {1}", q, GameState.Progress.Levels.GetLevelState(q)));
-    }
-  #endif
   }
 
   public static class Progress
   {
-    public static int levelIdx
+    public static int locationIdx {get => get().progress.location; set => get().progress.location = value;}
+    public static class Locations
     {
-      get => get().progress.level; 
-      set
-      {
-        get().progress.level = value; 
-      }
-    }
-    public static class Levels
-    {
-      public static Level.State   GetLevelState(int lvl_idx) => get().progress.GetLevelState(lvl_idx);
-      //public static void        SetLevelState(int lvl_idx, Level.State state) => get().progress.SetLevelState(lvl_idx, state);
-      public static bool          IsLevelUnlocked(int lvl_idx) => get().progress.IsLevelUnlocked(lvl_idx);
-      public static bool          IsLevelFinished(int lvl_idx) => get().progress.IsLevelPassed(lvl_idx);
-      public static void          SetLevelFinished(int lvl_idx) => get().progress.PassLevel(lvl_idx);
-      public static void          SetLevelFinished() => SetLevelFinished(levelIdx);
-      public static void          UnlockNextLevel(int lvl_idx) => get().progress.UnlockLevel(GameData.Levels.NextLevel(lvl_idx));
-      public static void          UnlockNextLevel() => UnlockNextLevel(levelIdx);
+      public static Level.State   GetLocationState(int loc_idx) => get().progress.GetLocationState(loc_idx);
+      //public static void        SetLocationState(int loc_idx, Location.State state) => get().progress.SetLocationState(loc_idx, state);
+      public static bool          IsLocationUnlocked(int loc_idx) => get().progress.IsLocationUnlocked(loc_idx);
+      public static bool          IsLocationFinished(int loc_idx) => get().progress.IsLocationPassed(loc_idx);
+      public static void          SetLocationFinished(int loc_idx) => get().progress.PassLocation(loc_idx);
+      public static void          SetLocationFinished() => SetLocationFinished(locationIdx);
+      //public static void          UnlockNextLocation(int loc_idx) => get().progress.UnlockLocation(GameData.Levels.NextLocation(loc_idx));
+      public static void          UnlockNextLocation(int loc_idx) => get().progress.UnlockLocation(GameData.Locations.NextLocation(loc_idx));
+      public static void          UnlockNextLocation() => UnlockNextLocation(locationIdx);
       public static Level.State[] GetStates()
       {
-        var states = new Level.State[GameData.Levels.LevelsCnt];
+        var states = new Level.State[Earth.locationsCnt];
         for(int q = 0; q < states.Length; q++)
-          states[q] = GetLevelState(q);
+          states[q] = GetLocationState(q);
 
-        return states;  
+        return states;
+      }
+      public static bool          AllStateFinished() => GetStates().All((state) => state >= Level.State.Finished);
+      public static bool          AllStateFinished(Level.State[] states) => states.All((state) => state >= Level.State.Finished);
+
+      public static void Process()
+      {
+        var states = GetStates();
+        if(AllStateFinished(states))
+        {
+
+        }
       }
     }
 
     public static float GetCompletionRate()
     {
-      Level.State[] states = Levels.GetStates();
+      Level.State[] states = Locations.GetStates();
       float finishedCnt = states.Where((state) => state == Level.State.Finished).Count();
-      return finishedCnt / GameData.Levels.LevelsCnt;
+      return finishedCnt / Earth.locationsCnt;
     }
   }
   public static class Econo

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameLib.InputSystem;
 
+[DefaultExecutionOrder(-1)]
 public class Earth : MonoBehaviour
 {
   [Header("Refs")]
@@ -37,7 +38,7 @@ public class Earth : MonoBehaviour
   bool           _move2location = false;
   Location[]     _locations;
 
-  public Transform zoom => _extras;
+  public static int locationsCnt {get; private set;}
 
   void Awake()
   {
@@ -58,17 +59,16 @@ public class Earth : MonoBehaviour
       if(levelTransf.gameObject.activeSelf)
       {
         var loc = GameData.Prefabs.CreateLocation(_locationsContainer);
-        loc.Init(q, levelTransf, _rotateVertRange, GameState.Progress.Levels.GetLevelState(listLocations.Count));
+        loc.Init(q, levelTransf, _rotateVertRange, GameState.Progress.Locations.GetLocationState(listLocations.Count));
         listLocations.Add(loc);
       }
     }
-    _locations = new Location[_levelsContainer.childCount];
-    Array.Copy(listLocations.ToArray(), _locations, _locations.Length);
+    _locations = listLocations.ToArray();
+    locationsCnt = _locations.Length;
   }
-
   public void Setup()
   {
-    _selectedLocation = GameState.Progress.levelIdx;
+    _selectedLocation = GameState.Progress.locationIdx;
     SelectLocation(_selectedLocation);
     _vessel.Init(_locations[_selectedLocation].transform.localPosition);
     _earthPrefab.SetActive(true);
@@ -102,10 +102,11 @@ public class Earth : MonoBehaviour
     _fx.gameObject.SetActive(false);
     _extras.gameObject.SetActive(false);
   }
-  
+  public int GetLevel(int locationIdx) => _locations[locationIdx].levelIdx;
+
   public void OnInputBeg(TouchInputData tid)
   {
-    if(!_earthPrefab.activeSelf)
+    if(!_earthPrefab.activeInHierarchy)
       return;
 
     _vdragBeg = tid.InputPosition;
@@ -115,7 +116,7 @@ public class Earth : MonoBehaviour
   }
   public void OnInputMov(TouchInputData tid)
   {
-    if(!_earthPrefab.activeSelf)
+    if(!_earthPrefab.activeInHierarchy)
       return;
 
     if(_vdragBeg != null)
@@ -127,7 +128,7 @@ public class Earth : MonoBehaviour
   }  
   public void OnInputEnd(TouchInputData tid)
   {
-    if(!_earthPrefab.activeSelf)
+    if(!_earthPrefab.activeInHierarchy)
       return;
 
     if(tid.HoveredCollider && Mathf.Abs(tid.InputPosition.x - _vdragBeg.Value.x) < 0.05f)
@@ -153,7 +154,7 @@ public class Earth : MonoBehaviour
   void UpdateLevelsStates()
   {
     for(int q = 0; q < _locations.Length; ++q)
-      _locations[q].state = GameState.Progress.Levels.GetLevelState(q);
+      _locations[q].state = GameState.Progress.Locations.GetLocationState(q);
   }
 
   void SelectLocation(Location location) => SelectLocation(location.idx);
@@ -163,7 +164,7 @@ public class Earth : MonoBehaviour
       _locations[_selectedLocation].Select(false);
     _locations[location].Select(true);
     _selectedLocation = location;
-    GameState.Progress.levelIdx = location;
+    GameState.Progress.locationIdx = location;
     onLevelSelected?.Invoke(location);
   }
   void MoveVesselToLocation(int location)

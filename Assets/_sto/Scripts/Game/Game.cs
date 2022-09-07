@@ -69,13 +69,13 @@ public class Game : MonoBehaviour
     _earth?.OnInputEnd(tid);
   }
 
-  public void CreateLevel(int levelIdx)
+  public void CreateLevel(int locationIdx)
   {
     _earth.Hide();
     if(_level)
       Destroy(_level.gameObject);
     _level = null;
-    GameState.Progress.levelIdx = levelIdx;
+    GameState.Progress.locationIdx = locationIdx;
     CreateLevel();
   }
   public void CreateLevel()
@@ -84,7 +84,7 @@ public class Game : MonoBehaviour
       Destroy(_level.gameObject);
     _level = null;  
 
-    _level = GameData.Levels.CreateLevel(GameState.Progress.levelIdx, levelsContainer);
+    _level = GameData.Levels.CreateLevel(_earth.GetLevel(GameState.Progress.locationIdx), levelsContainer);
   }
   public void RestartLevel()
   {
@@ -93,15 +93,15 @@ public class Game : MonoBehaviour
     onLevelRestart?.Invoke(_level);
     CreateLevel();
   }
-  public void PrevLevel(bool create = true)
+  public void PrevLocation(bool create = true)
   {
-    GameState.Progress.levelIdx = GameData.Levels.PrevLevel(GameState.Progress.levelIdx);
+    GameState.Progress.locationIdx = GameData.Locations.PrevLocation(GameState.Progress.locationIdx);
     if(create)
       CreateLevel();
   }
-  public void NextLevel(bool create = true)
+  public void NextLocation(bool create = true)
   {
-    GameState.Progress.levelIdx = GameData.Levels.NextLevel(GameState.Progress.levelIdx);
+    GameState.Progress.locationIdx = GameData.Locations.NextLocation(GameState.Progress.locationIdx);
     if(create)
       CreateLevel();
   }
@@ -124,25 +124,25 @@ public class Game : MonoBehaviour
     _uiFade.FadeIn(_camCtrl.zoomSpeed * 3.0f);
     yield return new WaitForSeconds(0.5f);
     DestroyLevel();
-    _earth.Show(GameState.Progress.levelIdx, show_next);
+    _earth.Show(GameState.Progress.locationIdx, show_next);
     _camCtrl.SwitchToTransit();
     yield return new WaitForSeconds(0.5f);
     _uiFade.FadeOut(_camCtrl.zoomSpeed * 2f);
     _camCtrl.SwitchToGlobe();
   }
-  public void ShowLevel(int levelIdx)
+  public void ShowLevel(int locationIdx)
   {
-    GameState.Progress.levelIdx = levelIdx;
-    StartCoroutine(coShowLevel(levelIdx));
+    GameState.Progress.locationIdx = locationIdx;
+    StartCoroutine(coShowLevel(locationIdx));
   }
-  IEnumerator coShowLevel(int levelIdx)
+  IEnumerator coShowLevel(int locationIdx)
   {
     _camCtrl.SwitchToTransit();
     yield return new WaitForSeconds(0.125f);
     _uiFade.FadeIn(_camCtrl.zoomSpeed * 4.0f);
     yield return new WaitForSeconds(0.5f);
     _earth.Hide();
-    CreateLevel(levelIdx);
+    CreateLevel(locationIdx);
     _camCtrl.SwitchToIngame();
     yield return new WaitForSeconds(1.0f);
     _uiFade.FadeOut(_camCtrl.zoomSpeed * 2);
@@ -156,12 +156,12 @@ public class Game : MonoBehaviour
     if(Input.GetKeyDown(KeyCode.Z))
     {
       Level.onFinished?.Invoke(_level);
-      PrevLevel();
+      PrevLocation();
     }
     else if(Input.GetKeyDown(KeyCode.X))
     {
       Level.onFinished?.Invoke(_level);
-      NextLevel();
+      NextLocation();
     }
     else if(Input.GetKeyDown(KeyCode.R))
     {
