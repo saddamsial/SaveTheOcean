@@ -59,6 +59,7 @@ public class EffectsManager : MonoBehaviour
       Item.onNoMerged += OnItemNoMerged;
       Item.onPut += OnItemPut;
       Item.onNoPut += OnItemNoPut;
+      Item.onDropped += OnItemDropped;
 
       SplitMachine.onSplitted += OnSplitMachineSplitted;
       SplitMachine.onDropped += OnSplitMachineDrop;
@@ -75,6 +76,7 @@ public class EffectsManager : MonoBehaviour
       Item.onNoMerged -= OnItemNoMerged;
       Item.onPut -= OnItemPut;
       Item.onNoPut -= OnItemNoPut;
+      Item.onDropped -= OnItemDropped;
 
       SplitMachine.onSplitted -= OnSplitMachineSplitted;
       SplitMachine.onDropped -= OnSplitMachineDrop;
@@ -137,6 +139,13 @@ public class EffectsManager : MonoBehaviour
     void OnItemNoPut(Item sender)
     {
       infoLblMan.ShowTextPopup(sender.vwpos, _strAnimalWrongItem);
+    }
+    void OnItemDropped(Item sender)
+    {
+      if(!sender.IsInMachine)
+        PlayFXAtPosition(fxPaintSplat, sender.gridPos, 0, false);
+      else
+        PlayFXAtPosition(fxPaintSplat, sender.vwpos, 0, false);
     }
     void OnSplitMachineDrop(SplitMachine sm)
     {

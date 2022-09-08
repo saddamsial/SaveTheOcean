@@ -486,7 +486,7 @@ public class Level : MonoBehaviour
       bool itemFromSplitMachine = _itemSelected.IsInMachine && _splitMachine.capacity == 1;
       if(_splitMachine.IsReady || itemFromSplitMachine)
       {
-        if(_itemSelected.IsSplitable)
+        if(_itemSelected.IsSplitable && !_itemSelected.id.IsSpecial)
         {
           if(itemFromSplitMachine)
             _splitMachine.RemoveFromSplitSlot(_itemSelected);

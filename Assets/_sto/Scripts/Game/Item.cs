@@ -75,7 +75,7 @@ public class Item : MonoBehaviour
   bool       _ready = false;
 
   public static float gridSpace = 1.0f;
-  public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged, onSelect;
+  public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged, onSelect, onDropped;
   public static Item Merge(Item item0, Item item1, List<Item> _items)
   {
     Item newItem = null;
@@ -325,12 +325,16 @@ public class Item : MonoBehaviour
   IEnumerator coMoveToGrid()
   {
     var vdst = Item.ToPos(vgrid);
+    float speed = Time.deltaTime * 16;
     while(Vector3.Distance(vlpos, vdst) > 0.01f)
     {
-      vlpos = Vector3.Lerp(vlpos, vdst, Time.deltaTime * 8);
+      vlpos = vlpos = Vector3.MoveTowards(vlpos, vdst, speed); //Vector3.Lerp(vlpos, vdst, Time.deltaTime * 8);
+      speed *= 1 + Time.deltaTime * 4;
       yield return null;
     }
     vlpos = vdst;
+    _coMoveHandle = null;
+    onDropped?.Invoke(this);
   }
   public void MoveBack()
   {
@@ -339,13 +343,16 @@ public class Item : MonoBehaviour
   IEnumerator coMoveBack()
   {
     var vdst = (IsInMachine)? _vBackPos : Item.ToPos(vgrid);
+    float speed = Time.deltaTime * 16;
     while(Vector3.Distance(vlpos, vdst) > 0.01f)
     {
-      vlpos = Vector3.Lerp(vlpos, vdst, Time.deltaTime * 8);
+      vlpos = Vector3.MoveTowards(vlpos, vdst, speed); //Vector3.Lerp(vlpos, vdst, Time.deltaTime * 8);
+      speed *= 1 + Time.deltaTime * 4;
       yield return null;
     }
     vlpos = vdst;
     _coMoveHandle = null;
+    onDropped?.Invoke(this);
   } 
   public void Hover(bool act)
   {
