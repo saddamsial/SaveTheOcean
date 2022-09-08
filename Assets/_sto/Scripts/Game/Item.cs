@@ -73,6 +73,7 @@ public class Item : MonoBehaviour
   bool       _inMachine = false;
   float      _sinkTimer = 0;
   bool       _ready = false;
+  Quaternion _qinitial;
 
   public static float gridSpace = 1.0f;
   public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged, onSelect, onDropped;
@@ -240,6 +241,8 @@ public class Item : MonoBehaviour
       _vextent = Vector3.Max(_vextent, rend.bounds.extents);
     });
     _vbtmExtent.y = -(_center.y - _vdim.y * 0.5f);
+
+    _qinitial = mdl.transform.localRotation;
   }
   public bool IsReady => _ready; //!_activatable.InTransition && _lifetime > 0.125f;
   public void Show()
@@ -325,11 +328,11 @@ public class Item : MonoBehaviour
   IEnumerator coMoveToGrid()
   {
     var vdst = Item.ToPos(vgrid);
-    float speed = Time.deltaTime * 16;
+    float speed = Time.deltaTime * 20;
     while(Vector3.Distance(vlpos, vdst) > 0.01f)
     {
       vlpos = vlpos = Vector3.MoveTowards(vlpos, vdst, speed); //Vector3.Lerp(vlpos, vdst, Time.deltaTime * 8);
-      speed *= 1 + Time.deltaTime * 4;
+      speed *= 1 + Time.deltaTime * 6;
       yield return null;
     }
     vlpos = vdst;
@@ -343,11 +346,11 @@ public class Item : MonoBehaviour
   IEnumerator coMoveBack()
   {
     var vdst = (IsInMachine)? _vBackPos : Item.ToPos(vgrid);
-    float speed = Time.deltaTime * 16;
+    float speed = Time.deltaTime * 20;
     while(Vector3.Distance(vlpos, vdst) > 0.01f)
     {
       vlpos = Vector3.MoveTowards(vlpos, vdst, speed); //Vector3.Lerp(vlpos, vdst, Time.deltaTime * 8);
-      speed *= 1 + Time.deltaTime * 4;
+      speed *= 1 + Time.deltaTime * 6;
       yield return null;
     }
     vlpos = vdst;
@@ -380,6 +383,13 @@ public class Item : MonoBehaviour
       _sinkTimer += Time.deltaTime;
       _vsink.y = Mathf.Sin(_sinkTimer) * Mathf.Min(_vextent.y * 0.25f, _ampl);
       _fx.transform.localPosition = _vsink;
+    }
+    if(mdl)
+    {
+      if(IsSelected)
+        mdl.transform.localRotation = Quaternion.Lerp(mdl.transform.localRotation, Quaternion.AngleAxis(180,Vector3.up), Time.deltaTime * 8);
+      else
+        mdl.transform.localRotation = Quaternion.Lerp(mdl.transform.localRotation, _qinitial, Time.deltaTime * 8);
     }
   }
 }

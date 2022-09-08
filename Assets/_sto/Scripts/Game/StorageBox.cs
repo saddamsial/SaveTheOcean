@@ -11,6 +11,9 @@ public class StorageBox : MonoBehaviour
   [SerializeField] TMPLbl     _lblCnt;
   [SerializeField] Collider   _collider;
 
+
+  public static System.Action<StorageBox> onPushed, onPoped, onNotPoped;
+
   public static int layerMask = 1;
 
   void Awake()
@@ -32,11 +35,17 @@ public class StorageBox : MonoBehaviour
   {
     GameState.StorageBox.PushItem(id);
     UpdateInfo();
+    onPushed?.Invoke(this);
   }
   public Item.ID? Pop()
   {
     var id = GameState.StorageBox.PopItem();
     UpdateInfo();
+    if(id!=null)
+      onPoped?.Invoke(this);
+    else
+      onNotPoped?.Invoke(this);
+      
     return id;
   }
 }

@@ -11,7 +11,7 @@ using TMPLbl = TMPro.TextMeshPro;
 
 public class Level : MonoBehaviour
 {
-  public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut;
+  public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut, onNoRoomOnGrid;
   public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
 
   [Header("Refs")]
@@ -352,8 +352,7 @@ public class Level : MonoBehaviour
     bool is_hit = IsItemHit(tid) || IsAnimalHit(tid) || IsTileHit(tid) || IsSplitMachineHit(tid) || IsStorageHit(tid);
     if(!is_hit)
     {
-      _itemSelected.Select(false);
-      _itemSelected.MoveBack();
+      MoveItemBack(_itemSelected);
     }
     _itemSelected = null;
     _grid.hovers(false);
@@ -396,6 +395,8 @@ public class Level : MonoBehaviour
             item.Throw(vbeg, item.vgrid);
           }
         }
+        else
+          onNoRoomOnGrid?.Invoke(this);
       }
       else
         tapTime = Time.timeAsDouble;
@@ -420,7 +421,12 @@ public class Level : MonoBehaviour
     }
 
   }
-
+  void MoveItemBack(Item item)
+  {
+    item.Select(false);
+    item.MoveBack();
+    _grid.set(item.vgrid, 1, item.id.kind);
+  }
   bool IsItemHit(TouchInputData tid)
   {
     bool is_hit = false;
@@ -441,8 +447,7 @@ public class Level : MonoBehaviour
     }
     if(is_hit && !is_merged)
     {
-      _itemSelected.Select(false);
-      _itemSelected.MoveBack();
+      MoveItemBack(_itemSelected);
     }
 
     return is_hit;

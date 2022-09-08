@@ -37,6 +37,8 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] string _strAnimalWrongItem;
     [SerializeField] string _strNoCapacity;
     [SerializeField] string _strNoSplittableItem;
+    [SerializeField] string _strNoRoomOnGrid = "no room on grid";
+    [SerializeField] string _strEmpty = "empty";
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
@@ -52,6 +54,7 @@ public class EffectsManager : MonoBehaviour
       Level.onStart += OnLevelStart;
       //Level.onDone += OnLevelDone;
       Level.onFinished += OnLevelFinished;
+      Level.onNoRoomOnGrid += OnLevelNoGridRoom;
 
       Item.onShown += OnItemShown;
       Item.onHide += OnItemHide;
@@ -63,12 +66,18 @@ public class EffectsManager : MonoBehaviour
 
       SplitMachine.onSplitted += OnSplitMachineSplitted;
       SplitMachine.onDropped += OnSplitMachineDrop;
+
+      RewardChest.onPoped += OnItemPoped;
+      RewardChest.onNotPoped += OnItemNotPoped;
+      StorageBox.onPoped += OnItemPoped;
+      StorageBox.onNotPoped += OnItemNotPoped;
     }
     private void OnDisable()
     {
       Level.onStart -= OnLevelStart;
       //Level.onDone -= OnLevelDone;
       Level.onFinished -= OnLevelFinished;
+      Level.onNoRoomOnGrid -= OnLevelNoGridRoom;
 
       Item.onShown -= OnItemShown;
       Item.onHide -= OnItemHide;
@@ -80,6 +89,11 @@ public class EffectsManager : MonoBehaviour
 
       SplitMachine.onSplitted -= OnSplitMachineSplitted;
       SplitMachine.onDropped -= OnSplitMachineDrop;
+
+      RewardChest.onPoped += OnItemPoped;
+      RewardChest.onNotPoped += OnItemNotPoped;
+      StorageBox.onPoped += OnItemPoped;
+      StorageBox.onNotPoped += OnItemNotPoped;
     }
 
     Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -161,6 +175,18 @@ public class EffectsManager : MonoBehaviour
       PlayFXAtPosition(fxHit, sm.dropPosition, 50, false);
       PlayFXAtPosition(fxHit, sm.GetSplitSlotPos(0), 50, false);
       PlayFXAtPosition(fxHit, sm.GetSplitSlotPos(1), 50, false);
+    }
+    void OnItemPoped(MonoBehaviour sender)
+    {
+      PlayFXAtPosition(fxHit, sender.transform.position + new Vector3(0, 1.0f, 0), 50, false);
+    }
+    void OnItemNotPoped(MonoBehaviour sender)
+    {
+      infoLblMan.ShowTextPopup(sender.transform.position + new Vector3(0, 1.0f, 0), _strEmpty);
+    }
+    void OnLevelNoGridRoom(Level sender)
+    {
+      infoLblMan.ShowTextPopup(Vector3.zero, _strNoRoomOnGrid);
     }
 
     void OnItemDestroy(Item sender)

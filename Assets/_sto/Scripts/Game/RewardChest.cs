@@ -12,6 +12,8 @@ public class RewardChest : MonoBehaviour
   [SerializeField] GameObject _infoContainer;
   [SerializeField] Transform _chestLid;
 
+  public static System.Action<RewardChest> onPoped, onNotPoped;
+
   float _rewardPointsMov = 0;
   float _lidAngle = 0;
   public static int layerMask = 0;
@@ -78,6 +80,10 @@ public class RewardChest : MonoBehaviour
   {
     var id = GameState.Chest.PopRes();
     UpdateInfo();
+    if(id != null)
+      onPoped?.Invoke(this);
+    else
+      onNotPoped?.Invoke(this);  
     return id;  
   }
   void Update()
