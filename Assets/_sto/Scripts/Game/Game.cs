@@ -50,23 +50,36 @@ public class Game : MonoBehaviour
   {
     _level?.OnInputTapped(tid);
   }
+  int _inputID = -1;
   void OnInputBeg(TouchInputData tid)
   {
-    _earth?.OnInputBeg(tid);
+    if(_inputID < 0)
+    {
+      _inputID = tid.inputId;
+      _earth?.OnInputBeg(tid);
+    }
   }
   void OnInputStart(TouchInputData tid)
   {
-    _level?.OnInputBeg(tid);
+    if(tid.inputId == _inputID)
+      _level?.OnInputBeg(tid);
   }
   void OnInputMov(TouchInputData tid)
   {
-    _level?.OnInputMov(tid);
-    _earth?.OnInputMov(tid);
+    if(tid.inputId == _inputID)
+    {
+      _level?.OnInputMov(tid);
+      _earth?.OnInputMov(tid);
+    }
   }
   void OnInputEnd(TouchInputData tid)
   {
-    _level?.OnInputEnd(tid);
-    _earth?.OnInputEnd(tid);
+    if(tid.inputId == _inputID)
+    {
+      _level?.OnInputEnd(tid);
+      _earth?.OnInputEnd(tid);
+      _inputID = -1;
+    }
   }
 
   public void CreateLevel(int locationIdx)

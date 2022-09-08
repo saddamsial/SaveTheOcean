@@ -14,6 +14,9 @@ public class GarbageInfo : MonoBehaviour
   [SerializeField] RectTransform _popupRect;
   [SerializeField] ActivatableObject _actObj;
 
+  [SerializeField] float _itemSpacing = 1.25f;
+  [SerializeField] float _itemScale = 1.0f;
+
   public static int layer { get; private set; } = 0;
   public static int layerMask { get; private set; } = 0;
 
@@ -49,9 +52,11 @@ public class GarbageInfo : MonoBehaviour
     for(int q = 0; q < _requestedItems.Count; ++q)
     {
       float x = (-_requestedItems.Count + 1) * 0.5f + q;
-      _requestedItems[q].transform.localPosition = new Vector3(x * 1.25f, 0, 0);
+      _requestedItems[q].transform.localPosition = new Vector3(x * _itemSpacing, 0, 0);
     }
-    _popupRect.sizeDelta = new Vector2(88 + _requestedItems.Count * 80, _popupRect.sizeDelta.y);
+    _popupRect.sizeDelta = new Vector2(88 + (_requestedItems.Count * 80 * _itemSpacing), _popupRect.sizeDelta.y);
+
+    _requestedItems.ForEach((Item item) => item.transform.localScale = Vector3.one * _itemScale);
   }
   public void Hide()
   {
