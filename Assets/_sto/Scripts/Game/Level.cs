@@ -120,6 +120,11 @@ public class Level : MonoBehaviour
       var va = g2a(vgrid, _dim);
       return _grid[va.y, va.x];
     }
+    public GridTile getTile(Vector2 vgrid)
+    {
+      var va = g2a(vgrid, _dim);
+      return _tiles[va.y, va.x];
+    }
     public void tile(GridTile gt, Vector2 vgrid)
     {
       var va = g2a(vgrid, _dim);
@@ -315,6 +320,7 @@ public class Level : MonoBehaviour
   {
     if(finished)
       return;
+    Item nearestItem = null;  
     if(_itemSelected && tid.RaycastData.HasValue)
     {
       var vpt = tid.RaycastData.Value.point;
@@ -325,7 +331,8 @@ public class Level : MonoBehaviour
       _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + _itemSelected.vbtmExtent, Time.deltaTime * 20);
 
       var _nearestHit = tid.GetClosestCollider(0.5f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
-      _nearestHit?.GetComponent<Item>()?.Hover(true);
+      nearestItem = _nearestHit?.GetComponent<Item>();
+      nearestItem?.Hover(true);
       var _nearestAnimal = _nearestHit?.GetComponent<Animal>();
       if(_nearestAnimal && _animalSelected == null)
       {
@@ -340,8 +347,13 @@ public class Level : MonoBehaviour
     _grid.hovers(false);
     if(_itemSelected)
     {
-      var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
-      tileHit?.Hover(true);
+      if(nearestItem)
+        _grid.getTile(nearestItem.vgrid).Hover(true);
+      else  
+      {
+        var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
+        tileHit?.Hover(true);
+      }
     }
   }
   public void OnInputEnd(TouchInputData tid)
