@@ -210,8 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2238382564477020698}
-  - component: {fileID: 7593547202597334189}
-  - component: {fileID: 8978952786102899182}
+  - component: {fileID: 1100282025538741173}
   m_Layer: 0
   m_Name: model
   m_TagString: Untagged
@@ -234,47 +233,20 @@ Transform:
   m_Father: {fileID: 4509933857829436113}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7593547202597334189
+--- !u!114 &1100282025538741173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5137363068744547674}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ffd2c858a81874e81444505cc8c7f4, type: 3}
+  m_Script: {fileID: 11500000, guid: d6b52b5f161781b4797a023af9695f84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomizePosition: 0
-  positionSnap: 0.1
-  positionRange: {x: 1, y: 1, z: 1}
-  randomizeRotation: 1
-  axis: {x: 1, y: 0, z: 1}
-  rotationSnap: 5
-  rotationRange: 10
-  randomizeScale: 0
-  scaleSnap: 0.01
-  scaleRange: {x: 0.8, y: 1.2}
---- !u!114 &8978952786102899182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5137363068744547674}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2ffd2c858a81874e81444505cc8c7f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randomizePosition: 0
-  positionSnap: 0.1
-  positionRange: {x: 0.75, y: 0.5, z: 0.75}
-  randomizeRotation: 1
+  effectMultiplier: 1
+  useRandomPhaseOffset: 1
   axis: {x: 0, y: 1, z: 0}
-  rotationSnap: 5
-  rotationRange: 45
-  randomizeScale: 0
-  scaleSnap: 0.01
-  scaleRange: {x: 0.8, y: 1.2}
+  speed: 0.25
+  maxAngle: 20
