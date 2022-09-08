@@ -126,7 +126,7 @@ Material:
     - _Speed: -0.05
     - _SrcBlend: 5
     - _Surface: 1
-    - _WaveHeight: 0.2
+    - _WaveHeight: 0.15
     - _WaveRepeat: 12
     - _WaveSmootness: 16
     - _WaveSpeed: -0.1
