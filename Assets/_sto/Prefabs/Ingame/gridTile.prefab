@@ -133,9 +133,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sr: {fileID: 2505825782534111833}
   _ps: {fileID: 5034446534644560158}
-  _hoverColor: {r: 1, g: 0.9863347, b: 0, a: 0.9019608}
-  _dirtyColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 0.2}
-  _clearColor: {r: 1, g: 1, b: 1, a: 0.29803923}
+  _hoverColor: {r: 0.16, g: 0.8, b: 0.16, a: 1}
+  _dirtyColor: {r: 0.2509804, g: 0.4176471, b: 0.5019608, a: 0.2509804}
+  _clearColor: {r: 1, g: 1, b: 1, a: 0.5019608}
 --- !u!65 &6953636392454261750
 BoxCollider:
   m_ObjectHideFlags: 0

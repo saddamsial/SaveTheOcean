@@ -919,7 +919,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5642068630134190268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -936,7 +936,6 @@ MonoBehaviour:
   _splitsContainers:
   - {fileID: 1238165753121940222}
   - {fileID: 1392475342211405351}
-  _splitSlotsTr: []
   _dropSlots: []
   _splitSlots:
   - {fileID: 0}
