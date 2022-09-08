@@ -55,6 +55,8 @@ public class Level : MonoBehaviour
   public int    locationIdx {get; private set;} = -1;
   public bool   succeed {get; private set;}
   public bool   finished {get; private set;}
+  public bool   wasPolluted {get; private set;} = false;
+  public bool   wasFeeding => _isFeedingMode;
   public int    points {get; set;} = 0;
   public int    stars {get; set;}
   public int    itemsCount => _items.Count + _items2.Count;
@@ -76,7 +78,7 @@ public class Level : MonoBehaviour
   float       _pollutionRate = 1.0f;
   float       _pollutionDest = 1.0f;
 
-  bool        IsFeedingMode = false;
+  bool        _isFeedingMode = false;
 
   StorageBox _storageBox;
 
@@ -174,9 +176,11 @@ public class Level : MonoBehaviour
     _mpb.SetColor("_BaseColor", _waterColor);
     _waterRenderer.SetPropertyBlock(_mpb);
 
-    IsFeedingMode = GameState.Progress.Locations.IsLocationFinished(GameState.Progress.locationIdx);
+    _isFeedingMode = GameState.Progress.Locations.IsLocationFinished(locationIdx);
+    wasPolluted = GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Warning;
+
     _splitMachine.Init(_items);
-    if(IsFeedingMode)
+    if(_isFeedingMode)
       _splitMachine.gameObject.SetActive(false);
 
     _storageBox = GetComponentInChildren<StorageBox>();
@@ -234,7 +238,7 @@ public class Level : MonoBehaviour
       {
         var item = _lvlDescs[q].items[i];
         int itemLevel = item.id.lvl;
-        if(!IsFeedingMode)
+        if(!_isFeedingMode)
         {
           id.type = item.id.type;
           id.kind = item.id.kind;
@@ -326,7 +330,7 @@ public class Level : MonoBehaviour
       if(_nearestAnimal && _animalSelected == null)
       {
         _animalSelected = _nearestAnimal;
-        if(!IsFeedingMode)
+        if(!_isFeedingMode)
           _animalSelected.AnimTalk();
       }
       else
@@ -452,7 +456,7 @@ public class Level : MonoBehaviour
       if(animalHit.CanPut(_itemSelected))
       {
         Item.onPut?.Invoke(_itemSelected);
-        animalHit.Put(_itemSelected, IsFeedingMode);
+        animalHit.Put(_itemSelected, _isFeedingMode);
         _grid.set(_itemSelected.vgrid, 0);
         if(_itemSelected.IsInMachine)
           _splitMachine.RemoveFromSplitSlot(_itemSelected);

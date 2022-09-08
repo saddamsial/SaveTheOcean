@@ -43,11 +43,13 @@ public class Earth : MonoBehaviour
   void Awake()
   {
     InitLocations();
+    GameState.Progress.Locations.onLocationPolluted += OnLocationPolluted;
     UIEarth.onBtnPlay += OnBtnPlay;
   }
   void OnDestroy()
   {
     UIEarth.onBtnPlay -= OnBtnPlay;
+    GameState.Progress.Locations.onLocationPolluted -= OnLocationPolluted;
   }
 
   private void InitLocations()
@@ -150,7 +152,10 @@ public class Earth : MonoBehaviour
   {
     onLevelStart?.Invoke(_selectedLocation);
   }
-
+  void OnLocationPolluted(int locationIdx)
+  {
+    _locations[locationIdx].state = GameState.Progress.Locations.GetLocationState(locationIdx);
+  }  
   void UpdateLevelsStates()
   {
     for(int q = 0; q < _locations.Length; ++q)
@@ -171,7 +176,7 @@ public class Earth : MonoBehaviour
   {
     _vessel.FlyTo(_locations[location].transform.localPosition);
   }
-  int GetNextLocation(int location)
+  int  GetNextLocation(int location)
   {
     return Mathf.Clamp(location + 1, 0, _locations.Length - 1);
   }

@@ -9,15 +9,11 @@ public class UISummary : MonoBehaviour
 {
   public static System.Action onShow, onBtnPlay;
 
-  //[SerializeField] UIPanel _winContainer;
-  //[SerializeField] TMPLbl  _levelInfo;
-
+  bool _moveToNextLoc = false;
   public void Show(Level level)
   {
-    //_levelInfo.text = "Level " + (level.levelIdx + 1);
+    _moveToNextLoc = !level.wasPolluted && !level.wasFeeding;
     onShow?.Invoke();
-
-    //_winContainer.gameObject.SetActive(level.succeed);
     GetComponent<UIPanel>().ActivatePanel();
   }
   void Hide()
@@ -33,6 +29,6 @@ public class UISummary : MonoBehaviour
   {
     Hide();
     onBtnPlay?.Invoke();
-    FindObjectOfType<Game>().ShowEarth(true);
+    FindObjectOfType<Game>().ShowEarth(_moveToNextLoc);
   }
 }

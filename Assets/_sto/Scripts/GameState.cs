@@ -25,7 +25,7 @@ public class GameState : SavableScriptableObject
   {
     [SerializeField] int _idx = 0;
     [SerializeField] Level.State _state = Level.State.Locked;
-    [SerializeField] long _datetime = 0;
+    [SerializeField] long _date = 0;
 
     public LocationState(int loc_idx, Level.State st = Level.State.Locked)
     {
@@ -34,7 +34,7 @@ public class GameState : SavableScriptableObject
     }
     public int idx => _idx;
     public Level.State state { get => _state; set => _state = value;}
-    public long date {get => _datetime; set => _datetime = value;}
+    public long date {get => _date; set => _date = value;}
   }
 
   [System.Serializable]
@@ -48,7 +48,7 @@ public class GameState : SavableScriptableObject
 
     public  int  location { get => _location; set => _location = value; }
     public  long locationsPassTime { get => _locationsPassedTime; set => _locationsPassedTime = value;}
-    public  List<LocationState> levels { get => _locations; }
+    public  List<LocationState> locations { get => _locations; }
     public  LocationState  FindLocation(int loc_idx)
     {
       return _locations.Find((loc) => loc.idx == loc_idx);
@@ -80,15 +80,20 @@ public class GameState : SavableScriptableObject
       if(loc == null)
         _locations.Add(new LocationState(loc_idx, Level.State.Finished));
       else
+      {
+        if(loc.state == Level.State.Warning)
+          loc.date = GameData.Locations.GetRandNextPollutionTime();
         loc.state = Level.State.Finished;
+      }
 
       if(_locations.Count == Earth.locationsCnt)
       {
         if(_locationsPassedTime == 0)
         {
-          var time = CTime.get().ToBinary();
-          _locations.ForEach((loca) => loca.date = time);
-          _locationsPassedTime = time;
+          _locationsPassedTime = CTime.get().ToBinary();
+          foreach(var loca in _locations)
+            loca.date = GameData.Locations.GetRandNextPollutionTime();
+
           onAllLocationFinished?.Invoke();
         }
       }
@@ -147,17 +152,6 @@ public class GameState : SavableScriptableObject
   }
   [SerializeField] SplitMachineState splitMachine;
   
-  [System.Serializable]
-  class SettingsState
-  {
-    [SerializeField] bool _sounds;
-    [SerializeField] bool _haptics;
-
-    public bool sounds {get => _sounds; set{_sounds = value;}}
-    public bool haptics {get => _haptics; set { _haptics = value; } }
-  }
-  [SerializeField] SettingsState settings;
-
 
   public static void Init()
   {
@@ -171,6 +165,8 @@ public class GameState : SavableScriptableObject
     public static int locationIdx {get => get().progress.location; set => get().progress.location = value;}
     public static class Locations
     {
+      public static Action<int>   onLocationPolluted;  
+
       public static Level.State   GetLocationState(int loc_idx) => get().progress.GetLocationState(loc_idx);
       //public static void        SetLocationState(int loc_idx, Location.State state) => get().progress.SetLocationState(loc_idx, state);
       public static bool          IsLocationUnlocked(int loc_idx) => get().progress.IsLocationUnlocked(loc_idx);
@@ -191,12 +187,26 @@ public class GameState : SavableScriptableObject
       public static bool          AllStateFinished() => GetStates().All((state) => state >= Level.State.Finished);
       public static bool          AllStateFinished(Level.State[] states) => states.All((state) => state >= Level.State.Finished);
 
+      static int _timer = 0;
       public static void Process()
       {
-        var states = GetStates();
-        if(AllStateFinished(states))
+        if(_timer++ % 60 == 0)
         {
-
+          var states = GetStates();
+          if(AllStateFinished(states) && get().progress.locationsPassTime != 0)
+          {
+            foreach(var location in get().progress.locations)
+            {
+              if(location.state == Level.State.Finished && location.date != 0)
+              {
+                if(CTime.get() > DateTime.FromBinary(location.date))
+                {
+                  location.state = Level.State.Warning;
+                  onLocationPolluted?.Invoke(location.idx);
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -298,10 +308,6 @@ public class GameState : SavableScriptableObject
         eco.lastStamina = last.AddSeconds((double)staminaToAdd * GameData.Econo.staminaRefillTime).ToBinary();
       }
     }
-  }
-  public static class Settings
-  {
-    public static bool IsMuted {get => !get().settings.sounds; set{get().settings.sounds = !value;}}
   }
   public static class SplitMachine
   {

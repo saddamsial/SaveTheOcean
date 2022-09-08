@@ -20,54 +20,54 @@ MonoBehaviour:
     _locations:
     - _idx: 0
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389718763118526
     - _idx: 1
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389718505478526
     - _idx: 2
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389717196128526
     - _idx: 3
-      _state: 3
-      _datetime: -8585390465166156568
+      _state: 4
+      _date: -8585389719446438526
     - _idx: 4
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389718100498526
     - _idx: 5
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389719193338526
     - _idx: 6
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389718878658526
     - _idx: 7
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389717863088526
     - _idx: 8
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389717577538526
     - _idx: 9
-      _state: 3
-      _datetime: -8585390465166156568
+      _state: 4
+      _date: -8585389719371148526
     - _idx: 10
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389717884308526
     - _idx: 11
       _state: 3
-      _datetime: -8585390465166156568
+      _date: -8585389719102868526
     - _idx: 12
-      _state: 3
-      _datetime: -8585390465166156568
+      _state: 4
+      _date: -8585389719438328526
     - _idx: 13
-      _state: 1
-      _datetime: 0
-    _locationsPassedTime: -8585390465166156568
+      _state: 3
+      _date: -8585389718472048526
+    _locationsPassedTime: -8585389720113078526
   economy:
-    stamina: 19
+    stamina: 71
     coins: 0
     gems: 0
     rewardPoints: 16
     rewardLevel: 3
-    lastStamina: -8585390463048522309
+    lastStamina: -8585389719648522309
   chest:
     listStamina:
     - _type: 3

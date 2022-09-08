@@ -67,6 +67,9 @@ public class GameData : ScriptableObject
   [SerializeField] int       _coinsMax = 999;
   [SerializeField] int       _gemsMax = 999;
   [SerializeField] Rewards[] _rewards;
+  [Header("Settings")]
+  [SerializeField] float     _locationPolutionMinDelay = 60;
+  [SerializeField] float     _locationPolutionMaxDelay = 300;
 
 
   [SerializeField] Color[]    themeColors;
@@ -143,6 +146,8 @@ public class GameData : ScriptableObject
     {
       return Mathf.Clamp(loc_idx + 1, 0, Earth.locationsCnt - 1);
     }
+    static private float GetRandPollutionDelay() => UnityEngine.Random.Range(get()._locationPolutionMinDelay, get()._locationPolutionMaxDelay);
+    static public  long  GetRandNextPollutionTime() => CTime.get().AddSeconds(GetRandPollutionDelay()).ToBinary();
   }  
   public static class Econo
   {
