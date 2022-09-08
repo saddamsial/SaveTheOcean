@@ -1,0 +1,1 @@
+dialogBubble,0,0,256,128
