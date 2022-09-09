@@ -365,7 +365,7 @@ public class Level : MonoBehaviour
     else if(nearestItem != null && Item.Mergeable(_itemSelected, nearestItem))
       onMagnetBeg?.Invoke(nearestItem.transform.position);
     else
-      onMagnetEnd?.Invoke(true);
+      onMagnetEnd?.Invoke(false);
   }
   public void OnInputEnd(TouchInputData tid)
   {
@@ -379,7 +379,7 @@ public class Level : MonoBehaviour
     }
     _itemSelected = null;
     _grid.hovers(false);
-    onMagnetEnd?.Invoke(true);
+    onMagnetEnd?.Invoke(false);
   }
   double tapTime = 0;
   public void OnInputTapped(TouchInputData tid)
