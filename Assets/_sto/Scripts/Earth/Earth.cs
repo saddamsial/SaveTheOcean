@@ -72,16 +72,28 @@ public class Earth : MonoBehaviour
     // var delay = SystemNotificationBasicEx.GetDisplayDelay();
     // if((CTime.get() - DateTime.FromBinary(GameState.GameInfo.appQuitTime)).TotalHours > delay)
     // {
-
+    //   //GameState.Progress.Locations.GetRandomLocation
     // }
   }
   public void Setup()
   {
     _selectedLocation = GameState.Progress.locationIdx;
-    SelectLocation(_selectedLocation);
-    _vessel.Init(_locations[_selectedLocation].transform.localPosition);
+    //SelectLocation(_selectedLocation);
+    if(_selectedLocation < 0)
+    {
+      SelectLocation(0);
+      _vessel.Init(Vector3.up);
+      _vessel.transform.localRotation = Quaternion.AngleAxis(0, _vessel.vpos - _earthPrefab.transform.position);
+      _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
+      this.Invoke(()=>MoveVesselToLocation(_selectedLocation), 0.5f);
+    }
+    else
+    {
+      SelectLocation(_selectedLocation);
+      _vessel.Init(_locations[_selectedLocation].transform.localPosition);
+      _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
+    }
     _earthPrefab.SetActive(true);
-    _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
     UpdateLevelsStates();
     onShow?.Invoke(_selectedLocation);
   }

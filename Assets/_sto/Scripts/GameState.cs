@@ -192,27 +192,27 @@ public class GameState : SavableScriptableObject
       public static bool          AllStateFinished() => GetStates().All((state) => state >= Level.State.Finished);
       public static bool          AllStateFinished(Level.State[] states) => states.All((state) => state >= Level.State.Finished);
 
-      static int _timer = 0;
+      // static int _timer = 0;
       public static void Process()
       {
-        if(_timer++ % 60 == 0)
-        {
-          var states = GetStates();
-          if(AllStateFinished(states) && get().progress.locationsPassTime != 0)
-          {
-            foreach(var location in get().progress.locations)
-            {
-              if(location.state == Level.State.Finished && location.date != 0)
-              {
-                if(CTime.get() > DateTime.FromBinary(location.date))
-                {
-                  location.state = Level.State.Warning;
-                  onLocationPolluted?.Invoke(location.idx);
-                }
-              }
-            }
-          }
-        }
+      //   if(_timer++ % 60 == 0)
+      //   {
+      //     var states = GetStates();
+      //     if(AllStateFinished(states) && get().progress.locationsPassTime != 0)
+      //     {
+      //       foreach(var location in get().progress.locations)
+      //       {
+      //         if(location.state == Level.State.Finished && location.date != 0)
+      //         {
+      //           if(CTime.get() > DateTime.FromBinary(location.date))
+      //           {
+      //             location.state = Level.State.Warning;
+      //             onLocationPolluted?.Invoke(location.idx);
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
       }
     }
 

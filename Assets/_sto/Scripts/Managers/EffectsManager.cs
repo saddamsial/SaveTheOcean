@@ -71,6 +71,7 @@ public class EffectsManager : MonoBehaviour
       RewardChest.onNotPoped += OnItemNotPoped;
       StorageBox.onPoped += OnItemPoped;
       StorageBox.onNotPoped += OnItemNotPoped;
+      StorageBox.onPushed += OnItemPushed;
     }
     private void OnDisable()
     {
@@ -90,10 +91,11 @@ public class EffectsManager : MonoBehaviour
       SplitMachine.onSplitted -= OnSplitMachineSplitted;
       SplitMachine.onDropped -= OnSplitMachineDrop;
 
-      RewardChest.onPoped += OnItemPoped;
-      RewardChest.onNotPoped += OnItemNotPoped;
-      StorageBox.onPoped += OnItemPoped;
-      StorageBox.onNotPoped += OnItemNotPoped;
+      RewardChest.onPoped -= OnItemPoped;
+      RewardChest.onNotPoped -= OnItemNotPoped;
+      StorageBox.onPoped -= OnItemPoped;
+      StorageBox.onNotPoped -= OnItemNotPoped;
+      StorageBox.onPushed -= OnItemPushed;
     }
 
     Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -183,6 +185,10 @@ public class EffectsManager : MonoBehaviour
     void OnItemNotPoped(MonoBehaviour sender)
     {
       infoLblMan.ShowTextPopup(sender.transform.position + new Vector3(0, 1.0f, 0), _strEmpty);
+    }
+    void OnItemPushed(MonoBehaviour sender)
+    {
+      PlayFXAtPosition(fxHit, sender.transform.position + new Vector3(0, 1.0f, 0), 50, false);
     }
     void OnLevelNoGridRoom(Level sender)
     {

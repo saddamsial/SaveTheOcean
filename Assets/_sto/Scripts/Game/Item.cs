@@ -387,7 +387,7 @@ public class Item : MonoBehaviour
     if(mdl)
     {
       if(IsSelected)
-        mdl.transform.localRotation = Quaternion.Lerp(mdl.transform.localRotation, Quaternion.AngleAxis(180,Vector3.up), Time.deltaTime * 8);
+        mdl.transform.localRotation = Quaternion.Lerp(mdl.transform.localRotation, Quaternion.identity, Time.deltaTime * 8);
       else
         mdl.transform.localRotation = Quaternion.Lerp(mdl.transform.localRotation, _qinitial, Time.deltaTime * 8);
     }
