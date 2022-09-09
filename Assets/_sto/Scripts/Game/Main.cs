@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +16,6 @@ public class Main : MonoBehaviour
   
   void Awake()
   {
-    Application.targetFrameRate = 60;
     DataManager.LoadAllData();
     GameData.Init();
     GameState.Init();
@@ -23,10 +23,14 @@ public class Main : MonoBehaviour
   void OnApplicationPause(bool paused)
   {
     if(paused)
+    {
+      GameState.GameInfo.appQuitTime = CTime.get().ToBinary();
       DataManager.SaveAllData();
+    }
   }
   void OnApplicationQuit()
   {
+    GameState.GameInfo.appQuitTime = CTime.get().ToBinary();
     DataManager.SaveAllData();
   }
 

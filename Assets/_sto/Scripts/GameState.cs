@@ -134,7 +134,6 @@ public class GameState : SavableScriptableObject
   }
   [SerializeField] ChestState chest;
 
-
   [System.Serializable]
   class StorageState
   {
@@ -152,6 +151,12 @@ public class GameState : SavableScriptableObject
   }
   [SerializeField] SplitMachineState splitMachine;
   
+  [System.Serializable]
+  class GameInfoState
+  {
+    public long appQuitTime;
+  }
+  [SerializeField] GameInfoState gameInfo;
 
   public static void Init()
   {
@@ -370,6 +375,10 @@ public class GameState : SavableScriptableObject
       return id;
     }
     public static int ItemsCnt() => get().storage.listItems.Count;
+  }
+  public static class GameInfo
+  {
+    public static long appQuitTime {get => get().gameInfo.appQuitTime; set => get().gameInfo.appQuitTime = value;}
   }
 
   [Header("Customization")]

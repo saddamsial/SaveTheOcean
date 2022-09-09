@@ -67,6 +67,13 @@ public class Earth : MonoBehaviour
     }
     _locations = listLocations.ToArray();
     locationsCnt = _locations.Length;
+
+
+    // var delay = SystemNotificationBasicEx.GetDisplayDelay();
+    // if((CTime.get() - DateTime.FromBinary(GameState.GameInfo.appQuitTime)).TotalHours > delay)
+    // {
+
+    // }
   }
   public void Setup()
   {
