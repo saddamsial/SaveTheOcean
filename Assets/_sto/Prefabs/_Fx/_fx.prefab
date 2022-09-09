@@ -58,6 +58,7 @@ MonoBehaviour:
   fxConfettiLevel: {fileID: 0}
   fxPaintSplat: {fileID: 7477516348104327770}
   fxHit: {fileID: 676225068606840202}
+  fxMagnet: {fileID: 973462670153670735}
   _strNoMergeMaxed: maxed
   _strNoMergeWrongType: not mergeable
   _strAnimalWrongItem: no need that
@@ -137,6 +138,11 @@ PrefabInstance:
 --- !u!4 &973462670153670733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 494785399947823485, guid: 2c8ce3d862983784b85653bd3ceb3bd7, type: 3}
+  m_PrefabInstance: {fileID: 819579915281918256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &973462670153670735 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 494785399947823487, guid: 2c8ce3d862983784b85653bd3ceb3bd7, type: 3}
   m_PrefabInstance: {fileID: 819579915281918256}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1437339348277111192

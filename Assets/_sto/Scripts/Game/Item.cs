@@ -108,6 +108,10 @@ public class Item : MonoBehaviour
 
     return newItem;
   }
+  public static bool Mergeable(Item item0, Item item1)
+  {
+    return EqType(item0, item1) && item1.IsUpgradable;
+  }
   public static Item[] Split(Item item, List<Item> _items)
   {
     Item[] new_items = null;
@@ -130,7 +134,7 @@ public class Item : MonoBehaviour
 
     return new_items;
   } 
-  public static Item Upgrade(Item item, List<Item> _items)
+  public static Item   Upgrade(Item item, List<Item> _items)
   {
     Item new_item = null;
     if(item.IsUpgradable)

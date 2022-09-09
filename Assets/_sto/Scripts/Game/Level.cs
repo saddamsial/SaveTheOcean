@@ -13,6 +13,8 @@ public class Level : MonoBehaviour
 {
   public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut, onNoRoomOnGrid;
   public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
+  public static System.Action<Vector3> onMagnetBeg;
+  public static System.Action<bool>    onMagnetEnd;
 
   [Header("Refs")]
   [SerializeField] Transform    _itemsContainer;
@@ -320,7 +322,8 @@ public class Level : MonoBehaviour
   {
     if(finished)
       return;
-    Item nearestItem = null;  
+    Item nearestItem = null;
+    Animal nearestAnimal = null;
     if(_itemSelected && tid.RaycastData.HasValue)
     {
       var vpt = tid.RaycastData.Value.point;
@@ -333,10 +336,10 @@ public class Level : MonoBehaviour
       var _nearestHit = tid.GetClosestCollider(0.5f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
       nearestItem = _nearestHit?.GetComponent<Item>();
       nearestItem?.Hover(true);
-      var _nearestAnimal = _nearestHit?.GetComponent<Animal>();
-      if(_nearestAnimal && _animalSelected == null)
+      nearestAnimal = _nearestHit?.GetComponent<Animal>();
+      if(nearestAnimal && _animalSelected == null)
       {
-        _animalSelected = _nearestAnimal;
+        _animalSelected = nearestAnimal;
         if(!_isFeedingMode)
           _animalSelected.AnimTalk();
       }
@@ -348,13 +351,21 @@ public class Level : MonoBehaviour
     if(_itemSelected)
     {
       if(nearestItem)
+      {
         _grid.getTile(nearestItem.vgrid).Hover(true);
+      }
       else  
       {
         var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
         tileHit?.Hover(true);
       }
     }
+    if(nearestAnimal && nearestAnimal.CanPut(_itemSelected))
+      onMagnetBeg?.Invoke(nearestAnimal.transform.position);
+    else if(nearestItem != null && Item.Mergeable(_itemSelected, nearestItem))
+      onMagnetBeg?.Invoke(nearestItem.transform.position);
+    else
+      onMagnetEnd?.Invoke(true);
   }
   public void OnInputEnd(TouchInputData tid)
   {
@@ -368,6 +379,7 @@ public class Level : MonoBehaviour
     }
     _itemSelected = null;
     _grid.hovers(false);
+    onMagnetEnd?.Invoke(true);
   }
   double tapTime = 0;
   public void OnInputTapped(TouchInputData tid)

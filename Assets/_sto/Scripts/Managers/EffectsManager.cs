@@ -30,6 +30,7 @@ public class EffectsManager : MonoBehaviour
     //[SerializeField] int ballFracturesSubEmitCnt = 1;
     [SerializeField] ParticleSystem fxHit = null;
     //[SerializeField] int fxBombDestroyEmitCnt = 5;
+    [SerializeField] ParticleSystem fxMagnet = null;
 
     [Header("FX string")]
     [SerializeField] string _strNoMergeMaxed;
@@ -55,6 +56,8 @@ public class EffectsManager : MonoBehaviour
       //Level.onDone += OnLevelDone;
       Level.onFinished += OnLevelFinished;
       Level.onNoRoomOnGrid += OnLevelNoGridRoom;
+      Level.onMagnetBeg += OnMagnetBeg;
+      Level.onMagnetEnd += OnMagnetEnd;
 
       Item.onShown += OnItemShown;
       Item.onHide += OnItemHide;
@@ -79,6 +82,8 @@ public class EffectsManager : MonoBehaviour
       //Level.onDone -= OnLevelDone;
       Level.onFinished -= OnLevelFinished;
       Level.onNoRoomOnGrid -= OnLevelNoGridRoom;
+      Level.onMagnetBeg -= OnMagnetBeg;
+      Level.onMagnetEnd -= OnMagnetEnd;
 
       Item.onShown -= OnItemShown;
       Item.onHide -= OnItemHide;
@@ -198,6 +203,18 @@ public class EffectsManager : MonoBehaviour
     void OnItemDestroy(Item sender)
     {
 
+    }
+    void OnMagnetBeg(Vector3 vpos)
+    {
+      fxMagnet.transform.position = vpos;
+      if(fxMagnet.isStopped)
+        PlayFXAtPosition(fxMagnet, vpos, 0, false);
+    }
+    void OnMagnetEnd(bool clear)
+    {
+      fxMagnet.Stop();
+      if(clear)
+        fxMagnet.Clear();
     }
     void OnLevelFinished(Level lvl) 
     {
