@@ -24,7 +24,7 @@ public class EffectsManager : MonoBehaviour
     //[SerializeField] ParticleSystem fxItemCompleted = null;
     //[SerializeField] ParticleSystem fxConfettiIngame = null;
     [SerializeField] ParticleSystem fxConfettiLevel = null;
-    [SerializeField] ParticleSystem fxPaintSplat = null;
+    [SerializeField] ParticleSystem fxWaterSplash = null;
 //    [SerializeField] int ballFracturesEmitCnt = 1;
     //[SerializeField] ParticleSystem fxBallFracturesSub = null;
     //[SerializeField] int ballFracturesSubEmitCnt = 1;
@@ -136,7 +136,7 @@ public class EffectsManager : MonoBehaviour
     void OnItemMerged(Item sender)
     {
       //PlayFXAtPosition(fxHit, sender.transform.position);
-      PlayFXAtPosition(fxPaintSplat, sender.transform.position, 0);
+      PlayFXAtPosition(fxWaterSplash, sender.transform.position, 0, false);
     }
     void OnItemNoMerged(Item sender)
     {
@@ -147,7 +147,7 @@ public class EffectsManager : MonoBehaviour
     }    
     void OnItemShown(Item sender)
     {
-      PlayFXAtPosition(fxPaintSplat, sender.gridPos, 0, false);
+      PlayFXAtPosition(fxWaterSplash, sender.gridPos, 0, false);
     }
     void OnItemHide(Item sender)
     {
@@ -164,9 +164,9 @@ public class EffectsManager : MonoBehaviour
     void OnItemDropped(Item sender)
     {
       if(!sender.IsInMachine)
-        PlayFXAtPosition(fxPaintSplat, sender.gridPos, 0, false);
+        PlayFXAtPosition(fxWaterSplash, sender.gridPos, 0, false);
       else
-        PlayFXAtPosition(fxPaintSplat, sender.vwpos, 0, false);
+        PlayFXAtPosition(fxWaterSplash, sender.vwpos, 0, false);
     }
     void OnSplitMachineDrop(SplitMachine sm)
     {
