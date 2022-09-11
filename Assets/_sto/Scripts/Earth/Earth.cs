@@ -25,14 +25,15 @@ public class Earth : MonoBehaviour
   [SerializeField] float _rotateMax = 720;
   [SerializeField] float _rotateToLocationSpeed = 5.0f;
   [SerializeField] float _rotateDamping = 0;
-  [SerializeField] float _rotateVertRange = 30;
+  [SerializeField] float _rotateXRange = 45;
 
   public static System.Action<int> onShow;
   public static System.Action onHide;
   public static System.Action<int> onLevelStart, onLevelSelected;
 
   int            _selectedLocation = 0;
-  float          _rotateSpeed = 0;
+  //float          _rotateSpeed = 0;
+  Vector2        _vrotateSpeed = Vector2.zero;
   Vector2?       _vdragBeg = null;
   Vector2        _vdragPrev;
   bool           _move2location = false;
@@ -61,7 +62,7 @@ public class Earth : MonoBehaviour
       if(levelTransf.gameObject.activeSelf)
       {
         var loc = GameData.Prefabs.CreateLocation(_locationsContainer);
-        loc.Init(listLocations.Count, levelTransf, _rotateVertRange, GameState.Progress.Locations.GetLocationState(listLocations.Count));
+        loc.Init(listLocations.Count, levelTransf, _rotateXRange, GameState.Progress.Locations.GetLocationState(listLocations.Count));
         listLocations.Add(loc);
       }
     }
@@ -132,7 +133,7 @@ public class Earth : MonoBehaviour
 
     _vdragBeg = tid.InputPosition;
     _vdragPrev = _vdragBeg.Value;
-    _rotateSpeed = 0;
+    _vrotateSpeed = Vector2.zero;
     _move2location = false;
   }
   public void OnInputMov(TouchInputData tid)
@@ -142,8 +143,9 @@ public class Earth : MonoBehaviour
 
     if(_vdragBeg != null)
     {
-      float moveDist = tid.InputPosition.x - _vdragPrev.x;
-      _rotateSpeed = Mathf.Clamp(moveDist * _rotateDragDegrees, -_rotateMax, _rotateMax);
+      var moveDist = tid.InputPosition - _vdragPrev;
+      _vrotateSpeed.x = Mathf.Clamp(moveDist.x * _rotateDragDegrees, -_rotateMax, _rotateMax);
+      _vrotateSpeed.y = Mathf.Clamp(moveDist.y * _rotateDragDegrees, -_rotateMax, _rotateMax);
       _vdragPrev = tid.InputPosition;
     }
   }  
@@ -207,19 +209,36 @@ public class Earth : MonoBehaviour
   {
     if(_move2location)
     {
-      _rotateSpeed = 0;
+      _vrotateSpeed = Vector2.zero;
       var rotDest = _locations[_selectedLocation].localDstRoto;
       _fx.transform.localRotation = Quaternion.Lerp(_fx.transform.localRotation, rotDest, _rotateToLocationSpeed * Time.deltaTime);
       if(Mathf.Abs(Quaternion.Angle(_fx.transform.localRotation, rotDest)) < 0.1f)
         _move2location = false;
     }
   }
+  void RotateFree()
+  {
+    _vrotateSpeed *= Mathf.Pow(_rotateDamping, TimeEx.deltaTimeFrame);
+    float angle = Vector3.SignedAngle(Vector3.ProjectOnPlane(_fx.transform.localRotation * Vector3.up, Vector3.right), Vector3.up, Vector3.right);
+    if(angle <= -_rotateXRange)
+    {
+      if(_vrotateSpeed.y >= 0)
+        _vrotateSpeed.y = -0.1f;
+    }
+    else if(angle >= _rotateXRange)
+    {
+      if(_vrotateSpeed.y <= 0)
+        _vrotateSpeed.y = 0.1f;
+    }
+    _fx.transform.localRotation = Quaternion.AngleAxis(_vrotateSpeed.y, Vector3.right) * _fx.transform.localRotation; 
+    _fx.transform.localRotation *= Quaternion.AngleAxis(-_vrotateSpeed.x, Vector3.up);
+
+    _earthFx?.RotoSpeed(_vrotateSpeed.x);
+  }
 
   void Update()
   {
     RotateToLocation();
-    _rotateSpeed *= Mathf.Pow(_rotateDamping, TimeEx.deltaTimeFrame);
-    _fx.transform.localRotation *= Quaternion.AngleAxis(-_rotateSpeed, Vector3.up);
-    _earthFx?.RotoSpeed(_rotateSpeed);
+    RotateFree();
   }
 }
