@@ -141,6 +141,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 504601582027461788, guid: 59488d06ba276944a81f6c946f1d847c, type: 3}
   m_PrefabInstance: {fileID: 6396011715451360589}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &6988064637012796583 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -5171921244048920086, guid: 59488d06ba276944a81f6c946f1d847c, type: 3}
+  m_PrefabInstance: {fileID: 6396011715451360589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7176365723557189049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4275218271942033652, guid: 59488d06ba276944a81f6c946f1d847c, type: 3}
@@ -151,3 +156,76 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2338749975732089297, guid: 59488d06ba276944a81f6c946f1d847c, type: 3}
   m_PrefabInstance: {fileID: 6396011715451360589}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6572541723484502910
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6988064637012796583}
+    m_Modifications:
+    - target: {fileID: 66154836325665485, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_Name
+      value: fxSmog
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
