@@ -211,8 +211,8 @@ public class Earth : MonoBehaviour
     {
       _vrotateSpeed = Vector2.zero;
       var rotDest = _locations[_selectedLocation].localDstRoto;
-      _fx.transform.localRotation = Quaternion.Lerp(_fx.transform.localRotation, rotDest, _rotateToLocationSpeed * Time.deltaTime);
-      if(Mathf.Abs(Quaternion.Angle(_fx.transform.localRotation, rotDest)) < 0.1f)
+      _fx.transform.localRotation = Quaternion.Slerp(_fx.transform.localRotation, rotDest, _rotateToLocationSpeed * Time.deltaTime);
+      if(Mathf.Abs(Quaternion.Angle(_fx.transform.localRotation, rotDest)) < 0.01f)
         _move2location = false;
     }
   }
@@ -230,10 +230,12 @@ public class Earth : MonoBehaviour
       if(_vrotateSpeed.y <= 0)
         _vrotateSpeed.y = 0.1f;
     }
-    _fx.transform.localRotation = Quaternion.AngleAxis(_vrotateSpeed.y, Vector3.right) * _fx.transform.localRotation; 
+    var qpreR = _fx.transform.localRotation;
+    _fx.transform.localRotation = Quaternion.AngleAxis(_vrotateSpeed.y, Vector3.right) * _fx.transform.localRotation;
     _fx.transform.localRotation *= Quaternion.AngleAxis(-_vrotateSpeed.x, Vector3.up);
 
     _earthFx?.RotoSpeed(_vrotateSpeed.x);
+    //_earthFx.RotoParams(_fx.transform.localRotation, _vrotateSpeed.magnitude);
   }
 
   void Update()

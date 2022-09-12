@@ -72,7 +72,7 @@ public class Level : MonoBehaviour
 
   Item        _itemSelected;
   Animal      _animalSelected;
-  List<Item>  _items = new List<Item>();
+  public List<Item>  _items = new List<Item>();
   List<Item>  _items2 = new List<Item>();
   int         _requestCnt = 0;
   int         _initialItemsCnt = 0;
@@ -212,6 +212,7 @@ public class Level : MonoBehaviour
     }
 
     onStart?.Invoke(this);
+    CheckMatchingItems();
   }
   public void Hide()
   {
@@ -379,6 +380,7 @@ public class Level : MonoBehaviour
     }
     _itemSelected = null;
     _grid.hovers(false);
+    CheckMatchingItems();
     onMagnetEnd?.Invoke(false);
   }
   double tapTime = 0;
@@ -487,6 +489,7 @@ public class Level : MonoBehaviour
         Item.onPut?.Invoke(_itemSelected);
         animalHit.Put(_itemSelected, _isFeedingMode);
         _grid.set(_itemSelected.vgrid, 0);
+        _items.Remove(_itemSelected);
         if(_itemSelected.IsInMachine)
           _splitMachine.RemoveFromSplitSlot(_itemSelected);
 
@@ -578,7 +581,6 @@ public class Level : MonoBehaviour
       DestroyItem(itm);
     }
   }
-
   IEnumerator coEnd()
   {
     yield return new WaitForSeconds(3.0f);
@@ -598,6 +600,13 @@ public class Level : MonoBehaviour
       End();
       StartCoroutine(coEnd());
     }
+  }
+  void CheckMatchingItems()
+  {
+    List<Item> req_items = new List<Item>();
+    _animals.ForEach((anim) => req_items.AddRange(anim.garbages));
+    //_items.ForEach((item) => item.tickIco = req_items.Any((it) => Item.EqType(it, item)));
+    req_items.ForEach((reqit) => reqit.tickIco = _items.Any((it) => Item.EqType(it, reqit)));
   }
   void Process()
   {

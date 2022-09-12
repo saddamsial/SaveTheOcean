@@ -23,13 +23,15 @@ public class Location : MonoBehaviour
     _level = Mathf.Clamp(idx, 0, GameData.Levels.levelsCnt-1);
     state = level_state;
 
+    vert_roto_range -= 5;
+
     transform.localPosition = levelTransf.localPosition;
     transform.localRotation = Quaternion.LookRotation(-levelTransf.localPosition) * Quaternion.AngleAxis(-90, Vector3.right);
-    var posxz = transform.localPosition;
-    posxz.y = 0;
+    var posxz = Vector3.ProjectOnPlane(transform.localPosition, Vector3.up);
+    //posxz.y = 0;
     _localDstRoto = Quaternion.AngleAxis(Vector3.SignedAngle(posxz, -Vector3.forward, Vector3.up), Vector3.up);
-    var posyz = transform.localPosition;
-    posyz.x = 0;
+    var posyz = Vector3.ProjectOnPlane(transform.localPosition, Vector3.right);
+    //posyz.x = 0;
     _localDstRoto = Quaternion.AngleAxis(Mathf.Clamp(Vector3.SignedAngle(posyz, -Vector3.forward, Vector3.right), -vert_roto_range, vert_roto_range), Vector3.right) * _localDstRoto;
 
     Select(false);

@@ -481,6 +481,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4898539885594301749, guid: 2eed929617f2f5b479e1a8295b8931d4, type: 3}
   m_PrefabInstance: {fileID: 679447184}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &679447187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679447185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd2b1dec6b77ba4dbb566224a4c39f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <SendNotification>k__BackingField: 1
+  id: 422287347
+  <SmallIconID>k__BackingField: icon_0
+  <LargeIconID>k__BackingField: 
+  <Title>k__BackingField: Hello!
+  <NotificationText>k__BackingField:
+  - It's time to play!
+  repeatInterval: 24
+  showTime: 20
 --- !u!114 &679447188
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,18 +511,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 679447185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c049bc26fddd4bf428a55b7ceb18a182, type: 3}
+  m_Script: {fileID: 11500000, guid: dbd2b1dec6b77ba4dbb566224a4c39f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sendNotification: 1
-  id: -1640920914
-  smallIconID: icon_0
-  largeIconID: 
-  title: Hello!
-  text:
+  <SendNotification>k__BackingField: 1
+  id: 422287346
+  <SmallIconID>k__BackingField: icon_0
+  <LargeIconID>k__BackingField: 
+  <Title>k__BackingField: Hello!
+  <NotificationText>k__BackingField:
   - It's time to play!
   repeatInterval: 24
-  displayDelay: 4
+  showTime: 16
+--- !u!114 &679447189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679447185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd2b1dec6b77ba4dbb566224a4c39f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <SendNotification>k__BackingField: 1
+  id: 422287345
+  <SmallIconID>k__BackingField: icon_0
+  <LargeIconID>k__BackingField: 
+  <Title>k__BackingField: Hello!
+  <NotificationText>k__BackingField:
+  - It's time to play!
+  repeatInterval: 24
+  showTime: 12
 --- !u!1 &932860206
 GameObject:
   m_ObjectHideFlags: 0

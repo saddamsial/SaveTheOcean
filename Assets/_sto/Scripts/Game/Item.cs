@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
   [SerializeField] ActivatableObject  _activatable;
   [SerializeField] SpringMove         _sm;
   [SerializeField] Transform          _fx;
+  [SerializeField] GameObject         _tickIco;
   [Header("Settings")]
   [SerializeField] float              _ampl = 0;
   [SerializeField] float              _amplSpeed = 3;
@@ -73,6 +74,7 @@ public class Item : MonoBehaviour
   bool       _inMachine = false;
   float      _sinkTimer = 0;
   bool       _ready = false;
+  bool       _staticItem = false;
   Quaternion _qinitial;
 
   public static float gridSpace = 1.0f;
@@ -169,7 +171,7 @@ public class Item : MonoBehaviour
   static public int layerMask = 0;
 
   public ID         id { get => _id; set { _id = value; } }
-  public GameObject mdl {get; private set;} // => _models[0];
+  public GameObject mdl {get; private set;}
   public Vector3    vdim => _vdim;
   public Vector3    vbtmExtent => _vbtmExtent;
   public Vector2    vgrid {get => _grid; set => _grid = value;}
@@ -188,7 +190,14 @@ public class Item : MonoBehaviour
   public MergeType  mergeType {get; set;} = MergeType.Ok;
   public int        levelsCnt {get; private set;}
   public Transform  modelContainer => _modelContainer.transform;
-  
+  public bool       tickIco 
+  {
+    get => _tickIco.activeInHierarchy; 
+    set
+    {
+      _tickIco.SetActive(value);
+    }
+  }
   bool  levelsAsModels => id.IsSpecial;
 
   void Awake()
@@ -200,6 +209,7 @@ public class Item : MonoBehaviour
       _models.Add(_modelContainer.transform.GetChild(q).gameObject);
     
     _amplSpeed *= Random.Range(0.95f, 1.05f);
+    _tickIco.SetActive(false);
   }
   public void SetAsStatic()
   {
@@ -207,6 +217,7 @@ public class Item : MonoBehaviour
     GetComponent<BoxCollider>().enabled = false;
     System.Array.ForEach(GetComponentsInChildren<ObjectRandomizeTransform>(), (ort) => ort.transform.reset());
     mdl = _models[0];
+    _staticItem = true;
     SetModel(0);
   }
   public void Init(Vector2 grid)
