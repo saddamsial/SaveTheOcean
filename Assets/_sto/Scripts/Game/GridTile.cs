@@ -15,7 +15,7 @@ public class GridTile : MonoBehaviour
   public Vector2 vgrid{get => _vgrid; set => _vgrid = value;}
 
   Color _destColor;
-  bool  _hit = false;
+  //bool  _hit = false;
   bool  _dirty = false;
 
   void Awake()

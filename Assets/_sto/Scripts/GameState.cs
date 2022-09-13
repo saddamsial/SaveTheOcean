@@ -77,23 +77,17 @@ public class GameState : SavableScriptableObject
     public void         PassLocation(int loc_idx)
     {
       var loc = FindLocation(loc_idx);
+      loc.date = CTime.get().ToBinary();
       if(loc == null)
         _locations.Add(new LocationState(loc_idx, Level.State.Finished));
       else
-      {
-        if(loc.state == Level.State.Warning)
-          loc.date = GameData.Locations.GetRandNextPollutionTime();
         loc.state = Level.State.Finished;
-      }
 
       if(_locations.Count == Earth.locationsCnt)
       {
         if(_locationsPassedTime == 0)
         {
           _locationsPassedTime = CTime.get().ToBinary();
-          foreach(var loca in _locations)
-            loca.date = GameData.Locations.GetRandNextPollutionTime();
-
           onAllLocationFinished?.Invoke();
         }
       }
@@ -140,7 +134,6 @@ public class GameState : SavableScriptableObject
     public List<Item.ID> listItems;
   };
   [SerializeField] StorageState storage;
-
 
   [System.Serializable]
   class SplitMachineState
@@ -192,27 +185,29 @@ public class GameState : SavableScriptableObject
       public static bool          AllStateFinished() => GetStates().All((state) => state >= Level.State.Finished);
       public static bool          AllStateFinished(Level.State[] states) => states.All((state) => state >= Level.State.Finished);
 
-      // static int _timer = 0;
+      static int _timer = 0;
+      static DateTime prevTime;
       public static void Process()
       {
-      //   if(_timer++ % 60 == 0)
-      //   {
-      //     var states = GetStates();
-      //     if(AllStateFinished(states) && get().progress.locationsPassTime != 0)
-      //     {
-      //       foreach(var location in get().progress.locations)
-      //       {
-      //         if(location.state == Level.State.Finished && location.date != 0)
-      //         {
-      //           if(CTime.get() > DateTime.FromBinary(location.date))
-      //           {
-      //             location.state = Level.State.Warning;
-      //             onLocationPolluted?.Invoke(location.idx);
-      //           }
-      //         }
-      //       }
-      //     }
-      //   }
+        if(get().progress.locationsPassTime != 0 && ++_timer % 60 == 0)
+        {
+          if(DateTime.FromBinary(GameInfo.appQuitTime) > prevTime)
+            prevTime = DateTime.FromBinary(GameInfo.appQuitTime);
+
+          var locs = get().progress.locations.FindAll((loc) => loc.state == Level.State.Finished);
+          locs.shuffle(100);
+          locs.Reverse();
+          for(int q = 0; q < SystemNotificationOnTimeEx.dateTimes.Count && locs.Count > 0; ++q)
+          {
+            if(prevTime < SystemNotificationOnTimeEx.dateTimes[q] && CTime.get() > SystemNotificationOnTimeEx.dateTimes[q])
+            {
+              locs.first().state = Level.State.Warning;
+              onLocationPolluted?.Invoke(locs.first().idx);
+              locs.RemoveAt(0);
+            }
+          }
+          prevTime = CTime.get();
+        }
       }
     }
 

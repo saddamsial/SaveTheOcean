@@ -70,11 +70,11 @@ public class Item : MonoBehaviour
   Vector3    _vbtmExtent = Vector3.zero;
   Vector3    _vmin = Vector3.zero;
   Vector3    _vmax = Vector3.zero;
-  float      _phaseOffs = 0;
+  //float      _phaseOffs = 0;
   bool       _inMachine = false;
   float      _sinkTimer = 0;
   bool       _ready = false;
-  bool       _staticItem = false;
+  //bool       _staticItem = false;
   Quaternion _qinitial;
 
   public static float gridSpace = 1.0f;
@@ -217,7 +217,6 @@ public class Item : MonoBehaviour
     GetComponent<BoxCollider>().enabled = false;
     System.Array.ForEach(GetComponentsInChildren<ObjectRandomizeTransform>(), (ort) => ort.transform.reset());
     mdl = _models[0];
-    _staticItem = true;
     SetModel(0);
   }
   public void Init(Vector2 grid)

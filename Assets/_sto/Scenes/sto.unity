@@ -1650,8 +1650,6 @@ MonoBehaviour:
   _camGlobe: {fileID: 1006107345}
   _camIngame: {fileID: 1513359708}
   _camTransit: {fileID: 1396117861}
-  _zoomMin: 0.3
-  _zoomMax: 1
   _zoomSpeed: 2
 --- !u!1001 &1309126050
 PrefabInstance:

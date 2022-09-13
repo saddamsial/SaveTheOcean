@@ -10,12 +10,11 @@ public class UIFade : MonoBehaviour
   [SerializeField] Color _fadeOut = new Color(1, 1, 1, 0);
 
   Color _colorDst = new Color(1,1,1,0);
-  float _t = 0;
   float _fadeSpeed = 3;
 
-  public void BlendTo(Color color){ _t = 0; _colorDst = color;}
-  public void FadeIn(float speed) {_fadeSpeed = speed; _t = 0; _colorDst = _fadeIn;}
-  public void FadeOut(float speed) {_fadeSpeed = speed; _t = 0; _colorDst = _fadeOut;}
+  public void BlendTo(Color color) { _colorDst = color;}
+  public void FadeIn(float speed) {_fadeSpeed = speed; _colorDst = _fadeIn;}
+  public void FadeOut(float speed) {_fadeSpeed = speed; _colorDst = _fadeOut;}
   void Awake()
   {
     _image.color = _fadeIn;
