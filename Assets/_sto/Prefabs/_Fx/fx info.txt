@@ -1,4 +1,0 @@
-fxConfetti- konfetti pod kamerę/ win
-fxBonusApear- efekt pojawienia się bonuswej kulki
-fxBonusExplode- wybuch bomby
-fxBallTrail- ślad lotu wszystkich kulek

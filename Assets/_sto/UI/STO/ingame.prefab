@@ -408,8 +408,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registerPanel: 1
+  <rectTransform>k__BackingField: {fileID: 3165067142807253230}
+  <canvasGroup>k__BackingField: {fileID: 1277101661403432459}
   contentContainer: {fileID: 3165067144614853876}
+  registerPanel: 1
   activateOnTop: 0
   activationDelay: 0
 --- !u!114 &4361085978692511885
@@ -435,7 +437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3165067144614853877}
   m_Layer: 0
-  m_Name: content
+  m_Name: _contentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,11 +548,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acdec3a07fa93545b374f8d017912ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <rectTransform>k__BackingField: {fileID: 4345620262114167984}
+  <canvasGroup>k__BackingField: {fileID: 2317715606691161526}
   registerAnimator: 1
   initialDelay: 0
   activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
-  affectedTransform: {fileID: 0}
 --- !u!1 &4781591326835041387
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,11 +677,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acdec3a07fa93545b374f8d017912ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <rectTransform>k__BackingField: {fileID: 5890671884431083386}
+  <canvasGroup>k__BackingField: {fileID: 9217019172504179307}
   registerAnimator: 1
   initialDelay: 0
   activateAnimationPreset: {fileID: 11400000, guid: fcc6c277b48cee24bae1a3fc77687365, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: 6f026fdf47cc1054db36b8213e2ce2a1, type: 2}
-  affectedTransform: {fileID: 0}
 --- !u!1 &4823471188520542818
 GameObject:
   m_ObjectHideFlags: 0

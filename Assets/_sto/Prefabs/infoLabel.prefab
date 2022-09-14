@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6749633061429044358}
   - component: {fileID: 6749633061429044355}
+  - component: {fileID: 4340476219662381197}
   - component: {fileID: 6749633061429044356}
   - component: {fileID: 6749633061429044357}
   m_Layer: 5
@@ -47,6 +48,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6749633061429044359}
   m_CullTransparentMesh: 1
+--- !u!225 &4340476219662381197
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749633061429044359}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &6749633061429044356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +161,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c9969461af6d44cbf91889154fd495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <rectTransform>k__BackingField: {fileID: 6749633061429044358}
+  <canvasGroup>k__BackingField: {fileID: 4340476219662381197}
   textField: {fileID: 6749633061429044356}
   effectTime: 1.5
   positionAnimationAxis: {x: 0, y: 128, z: 0}

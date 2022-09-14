@@ -123,8 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acdec3a07fa93545b374f8d017912ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <rectTransform>k__BackingField: {fileID: 1675389588841901002}
+  <canvasGroup>k__BackingField: {fileID: 3559508337096986721}
   registerAnimator: 1
   initialDelay: 0
   activateAnimationPreset: {fileID: 11400000, guid: fcc6c277b48cee24bae1a3fc77687365, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: 6f026fdf47cc1054db36b8213e2ce2a1, type: 2}
-  affectedTransform: {fileID: 0}

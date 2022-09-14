@@ -169,11 +169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acdec3a07fa93545b374f8d017912ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <rectTransform>k__BackingField: {fileID: 441244738358833276}
+  <canvasGroup>k__BackingField: {fileID: 3503801406960109029}
   registerAnimator: 1
   initialDelay: 0
   activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
-  affectedTransform: {fileID: 0}
 --- !u!1 &6407125524787486503
 GameObject:
   m_ObjectHideFlags: 0

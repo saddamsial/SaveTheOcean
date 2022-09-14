@@ -205,12 +205,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7296307429601475552}
   m_Layer: 0
-  m_Name: content
+  m_Name: _contentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7296307429601475552
 RectTransform:
   m_ObjectHideFlags: 0
@@ -420,11 +420,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5acdec3a07fa93545b374f8d017912ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <rectTransform>k__BackingField: {fileID: 7296307430510220543}
+  <canvasGroup>k__BackingField: {fileID: 5481507865851393973}
   registerAnimator: 1
   initialDelay: 0
   activateAnimationPreset: {fileID: 11400000, guid: fcc6c277b48cee24bae1a3fc77687365, type: 2}
   deactivateAnimationPreset: {fileID: 11400000, guid: 6f026fdf47cc1054db36b8213e2ce2a1, type: 2}
-  affectedTransform: {fileID: 0}
 --- !u!1 &7296307430545398530
 GameObject:
   m_ObjectHideFlags: 0
@@ -505,8 +506,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  registerPanel: 1
+  <rectTransform>k__BackingField: {fileID: 7296307430545398531}
+  <canvasGroup>k__BackingField: {fileID: 7296307430545398542}
   contentContainer: {fileID: 7296307429601475555}
+  registerPanel: 1
   activateOnTop: 0
   activationDelay: 0
 --- !u!1001 &658696259894647477
