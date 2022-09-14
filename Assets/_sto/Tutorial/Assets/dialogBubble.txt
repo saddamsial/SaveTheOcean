@@ -1,0 +1,2 @@
+dialogBubble,0,760,384,264
+icoTutMerge,384,864,512,160
