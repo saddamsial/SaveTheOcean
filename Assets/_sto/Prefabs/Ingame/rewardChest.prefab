@@ -186,8 +186,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6849373578930631483}
   - component: {fileID: 4470925969954943807}
-  - component: {fileID: 4714462857215323453}
-  - component: {fileID: 5056323769764127777}
   m_Layer: 0
   m_Name: chestProgress
   m_TagString: Untagged
@@ -270,36 +268,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!225 &4714462857215323453
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3757414504517831161}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &5056323769764127777
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3757414504517831161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5acdec3a07fa93545b374f8d017912ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <rectTransform>k__BackingField: {fileID: 6849373578930631483}
-  <canvasGroup>k__BackingField: {fileID: 4714462857215323453}
-  registerAnimator: 1
-  initialDelay: 0
-  activateAnimationPreset: {fileID: 11400000, guid: fcc6c277b48cee24bae1a3fc77687365, type: 2}
-  deactivateAnimationPreset: {fileID: 11400000, guid: 6f026fdf47cc1054db36b8213e2ce2a1, type: 2}
 --- !u!1 &4230092328382922867
 GameObject:
   m_ObjectHideFlags: 0
