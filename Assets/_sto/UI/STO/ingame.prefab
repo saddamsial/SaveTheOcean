@@ -410,7 +410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <rectTransform>k__BackingField: {fileID: 3165067142807253230}
   <canvasGroup>k__BackingField: {fileID: 1277101661403432459}
-  contentContainer: {fileID: 3165067144614853876}
+  <ContentContainer>k__BackingField: {fileID: 3165067144614853877}
   animationController: {fileID: 2378723945750129583}
   activateOnAwake: 0
   activateOnTop: 0

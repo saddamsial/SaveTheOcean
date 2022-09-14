@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <rectTransform>k__BackingField: {fileID: 9150938382051912244}
   <canvasGroup>k__BackingField: {fileID: 9150938382051912247}
-  contentContainer: {fileID: 9150938383623177190}
+  <ContentContainer>k__BackingField: {fileID: 9150938383623177191}
   animationController: {fileID: 9150938382051912246}
   activateOnAwake: 0
   activateOnTop: 0
@@ -993,7 +993,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <rectTransform>k__BackingField: {fileID: 9150938383234393359}
   <canvasGroup>k__BackingField: {fileID: 9002989592558157494}
-  contentContainer: {fileID: 9150938383259846399}
+  <ContentContainer>k__BackingField: {fileID: 9150938383259846392}
   animationController: {fileID: 1783856007}
   activateOnAwake: 0
   activateOnTop: 0
@@ -1010,7 +1010,7 @@ GameObject:
   - component: {fileID: 9150938383259846393}
   - component: {fileID: 9150938383259846394}
   m_Layer: 0
-  m_Name: tabSelector
+  m_Name: _tabSelector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1179,7 +1179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <rectTransform>k__BackingField: {fileID: 9150938383322897755}
   <canvasGroup>k__BackingField: {fileID: 9150938383322897750}
-  contentContainer: {fileID: 9150938382289828535}
+  <ContentContainer>k__BackingField: {fileID: 9150938382289828528}
   animationController: {fileID: 9150938383322897749}
   activateOnAwake: 0
   activateOnTop: 0

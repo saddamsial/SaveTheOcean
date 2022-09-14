@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 6437267415468996295}
   - component: {fileID: 8108220170357531612}
   m_Layer: 0
-  m_Name: construtionSign
+  m_Name: constructionSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
