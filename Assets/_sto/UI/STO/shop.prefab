@@ -509,7 +509,8 @@ MonoBehaviour:
   <rectTransform>k__BackingField: {fileID: 7296307430545398531}
   <canvasGroup>k__BackingField: {fileID: 7296307430545398542}
   contentContainer: {fileID: 7296307429601475555}
-  registerPanel: 1
+  animationController: {fileID: 7296307430545398529}
+  activateOnAwake: 0
   activateOnTop: 0
   activationDelay: 0
 --- !u!1001 &658696259894647477

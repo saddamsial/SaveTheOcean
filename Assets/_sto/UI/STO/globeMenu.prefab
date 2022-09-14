@@ -83,7 +83,8 @@ MonoBehaviour:
   <rectTransform>k__BackingField: {fileID: 9150938382051912244}
   <canvasGroup>k__BackingField: {fileID: 9150938382051912247}
   contentContainer: {fileID: 9150938383623177190}
-  registerPanel: 1
+  animationController: {fileID: 9150938382051912246}
+  activateOnAwake: 0
   activateOnTop: 0
   activationDelay: 0
 --- !u!1 &9150938382289828535
@@ -891,8 +892,8 @@ GameObject:
   - component: {fileID: 1783856008}
   - component: {fileID: 7152201146561806830}
   - component: {fileID: 9002989592558157494}
-  - component: {fileID: 1783856006}
   - component: {fileID: 1783856007}
+  - component: {fileID: 1783856006}
   m_Layer: 0
   m_Name: globeMenu
   m_TagString: Untagged
@@ -962,24 +963,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1783856006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9150938383234393358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <rectTransform>k__BackingField: {fileID: 9150938383234393359}
-  <canvasGroup>k__BackingField: {fileID: 9002989592558157494}
-  contentContainer: {fileID: 9150938383259846399}
-  registerPanel: 1
-  activateOnTop: 0
-  activationDelay: 0
 --- !u!114 &1783856007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,6 +979,25 @@ MonoBehaviour:
   autoRefreshValidAnimatorsList: 0
   activationDelay: 0.05
   deactivationDelay: 0.02
+--- !u!114 &1783856006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9150938383234393358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697f5e0982c14ee4ea5855c49882ab94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <rectTransform>k__BackingField: {fileID: 9150938383234393359}
+  <canvasGroup>k__BackingField: {fileID: 9002989592558157494}
+  contentContainer: {fileID: 9150938383259846399}
+  animationController: {fileID: 1783856007}
+  activateOnAwake: 0
+  activateOnTop: 0
+  activationDelay: 0
 --- !u!1 &9150938383259846399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,7 +1180,8 @@ MonoBehaviour:
   <rectTransform>k__BackingField: {fileID: 9150938383322897755}
   <canvasGroup>k__BackingField: {fileID: 9150938383322897750}
   contentContainer: {fileID: 9150938382289828535}
-  registerPanel: 1
+  animationController: {fileID: 9150938383322897749}
+  activateOnAwake: 0
   activateOnTop: 0
   activationDelay: 0
 --- !u!1 &9150938383330376093
