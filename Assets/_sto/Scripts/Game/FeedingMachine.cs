@@ -7,6 +7,13 @@ public class FeedingMachine : MonoBehaviour
 {
   public static Action<FeedingMachine> onPoped, onNotPoped;
 
+  public static int layerMask = 1;
+
+  void Awake()
+  {
+    layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
+  }
+
   public Item.ID? Pop()
   {
     Item.ID? id = null;

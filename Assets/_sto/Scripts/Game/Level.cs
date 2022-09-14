@@ -394,7 +394,7 @@ public class Level : MonoBehaviour
   double tapTime = 0;
   public void OnInputTapped(TouchInputData tid)
   {
-    var box = tid.GetClosestCollider(0.5f, RewardChest.layerMask | StorageBox.layerMask | LayerMask.GetMask("Default"));
+    var box = tid.GetClosestCollider(0.5f, RewardChest.layerMask | StorageBox.layerMask | FeedingMachine.layerMask);
     if(box)
     {
       if(Time.timeAsDouble - tapTime < 1.0f)

@@ -26,12 +26,12 @@ MonoBehaviour:
       _date: 0
     _locationsPassedTime: 0
   economy:
-    stamina: 37
+    stamina: 10
     coins: 13
     gems: 0
     rewardPoints: 4
     rewardLevel: 0
-    lastStamina: -8585384476660859338
+    lastStamina: -8585384392660859338
   chest:
     listStamina: []
     listCoins: []
@@ -78,5 +78,5 @@ MonoBehaviour:
         _kind: 5
       _vgrid: {x: -1, y: 1.5}
   gameInfo:
-    appQuitTime: -8585384476085854150
+    appQuitTime: -8585384392359919139
   selectedTheme: 0

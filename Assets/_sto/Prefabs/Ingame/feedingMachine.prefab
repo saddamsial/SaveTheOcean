@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3504626665792579165}
   - component: {fileID: 3996911616523999083}
   - component: {fileID: 7671240156914590746}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1029024542347307555}
   - component: {fileID: 5749018766651654385}
   - component: {fileID: 7849195888385437505}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: feedingMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1362699813574151385}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
