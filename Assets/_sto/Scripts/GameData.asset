@@ -66,6 +66,7 @@ MonoBehaviour:
   - {fileID: 2229698086017596401, guid: 7432c63a0628fd14f907e9254a41adec, type: 3}
   _staminaMax: 99
   _staminaPlayCost: 5
+  _staminaAdReward: 15
   _staminaRefillTime: 60
   _coinFeedCost: 1
   _coinsMax: 999
@@ -79,23 +80,58 @@ MonoBehaviour:
   - points2Chest: 5
     _reward:
       stamina: 1
-      coins: 1
+      coins: 5
       gems: 1
   - points2Chest: 10
     _reward:
-      stamina: 1
-      coins: 1
+      stamina: 2
+      coins: 5
       gems: 1
   - points2Chest: 15
     _reward:
-      stamina: 2
-      coins: 2
+      stamina: 4
+      coins: 8
       gems: 2
   - points2Chest: 20
     _reward:
-      stamina: 2
-      coins: 2
+      stamina: 5
+      coins: 10
       gems: 2
+  - points2Chest: 30
+    _reward:
+      stamina: 6
+      coins: 12
+      gems: 3
+  - points2Chest: 50
+    _reward:
+      stamina: 7
+      coins: 15
+      gems: 3
+  - points2Chest: 70
+    _reward:
+      stamina: 8
+      coins: 17
+      gems: 4
+  - points2Chest: 100
+    _reward:
+      stamina: 10
+      coins: 20
+      gems: 5
+  - points2Chest: 140
+    _reward:
+      stamina: 12
+      coins: 24
+      gems: 6
+  - points2Chest: 190
+    _reward:
+      stamina: 14
+      coins: 28
+      gems: 8
+  - points2Chest: 250
+    _reward:
+      stamina: 15
+      coins: 30
+      gems: 10
   _feedingBoardDim: {x: 5, y: 6}
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}

@@ -55,7 +55,7 @@ public class UIEarth : MonoBehaviour
 
   void UpdateLevelInfo(int level)
   {
-    _btnPlay.interactable = GameState.Progress.Locations.GetLocationState(level) != Level.State.Locked;
+    //_btnPlay.interactable = GameState.Progress.Locations.GetLocationState(level) != Level.State.Locked;
     _lblLevelInfo.text = "LEVEL " + (level + 1);
   }
 
@@ -66,8 +66,8 @@ public class UIEarth : MonoBehaviour
       GameState.Econo.stamina -= GameData.Econo.staminaCost;
       onBtnPlay?.Invoke();
     }
-    //else
-    //show stamina info;
+    else
+      FindObjectOfType<UIPopupStamina>(true)?.Show();
   }
 
   void UpdateSlider()

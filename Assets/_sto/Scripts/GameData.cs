@@ -57,12 +57,13 @@ public class GameData : ScriptableObject
   [SerializeField] Items[] _items;
   [SerializeField] GridTile _gridTile;
   [SerializeField] Location _locationPrefab;
-  [SerializeField] Earth    _earthPrefab;
+  //[SerializeField] Earth    _earthPrefab;
   //[Header("Levels")]
   [SerializeField] List<Level> _listLevels;
   [Header("Econo")]
   [SerializeField] int       _staminaMax = 99;
   [SerializeField] int       _staminaPlayCost = 5;
+  [SerializeField] int       _staminaAdReward = 15;
   [SerializeField] float     _staminaRefillTime = 60.0f;
   [SerializeField] int       _coinFeedCost = 1;
   [SerializeField] int       _coinsMax = 999;
@@ -148,6 +149,7 @@ public class GameData : ScriptableObject
   public static class Econo
   {
     public static int   staminaCost => get()._staminaPlayCost;
+    public static int   staminaAdReward => get()._staminaAdReward;
     public static float staminaRefillTime => get()._staminaRefillTime;
     public static int   staminaMax => get()._staminaMax;
     public static int   coinsMax => get()._coinsMax;
