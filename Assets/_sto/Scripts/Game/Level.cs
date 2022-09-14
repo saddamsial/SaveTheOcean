@@ -17,12 +17,13 @@ public class Level : MonoBehaviour
   public static System.Action<bool>    onMagnetEnd;
 
   [Header("Refs")]
-  [SerializeField] Transform    _itemsContainer;
-  [SerializeField] Transform    _tilesContainer;
-  [SerializeField] Transform    _animalsContainer;
-  [SerializeField] Transform[]  _animalContainers;
-  [SerializeField] Renderer     _waterRenderer;
-  [SerializeField] SplitMachine _splitMachine;
+  [SerializeField] Transform      _itemsContainer;
+  [SerializeField] Transform      _tilesContainer;
+  [SerializeField] Transform      _animalsContainer;
+  [SerializeField] Transform[]    _animalContainers;
+  [SerializeField] Renderer       _waterRenderer;
+  [SerializeField] SplitMachine   _splitMachine;
+  [SerializeField] FeedingMachine _feedingMachine;
   
   //[SerializeField] Transform[] _paths;
   //[SerializeField] Transform _poiLT;
@@ -188,7 +189,10 @@ public class Level : MonoBehaviour
 
     _splitMachine.Init(_items);
     if(_isFeedingMode)
+    {
       _splitMachine.gameObject.SetActive(false);
+      _feedingMachine.gameObject.SetActive(true);
+    }
 
     _storageBox = GetComponentInChildren<StorageBox>();
 
@@ -236,52 +240,59 @@ public class Level : MonoBehaviour
         _grid.tile(tile, v);
       }
     }
-    Item.ID id = new Item.ID();
-    List<Item.ID> ids = new List<Item.ID>();
-    for(int q = 0; q < _lvlDescs.Length; ++q)
+    if(!_isFeedingMode)
     {
-      var lvlDesc = _lvlDescs[q];
-      _requestCnt += lvlDesc.items.Length;
-      for(int i = 0; i < lvlDesc.items.Length; ++i)
+      Item.ID id = new Item.ID();
+      List<Item.ID> ids = new List<Item.ID>();
+      for(int q = 0; q < _lvlDescs.Length; ++q)
       {
-        var item = _lvlDescs[q].items[i];
-        int itemLevel = item.id.lvl;
-        if(!_isFeedingMode)
+        var lvlDesc = _lvlDescs[q];
+        _requestCnt += lvlDesc.items.Length;
+        for(int i = 0; i < lvlDesc.items.Length; ++i)
         {
-          id.type = item.id.type;
-          id.kind = item.id.kind;
+          var item = _lvlDescs[q].items[i];
+          int itemLevel = item.id.lvl;
+          if(!_isFeedingMode)
+          {
+            id.type = item.id.type;
+            id.kind = item.id.kind;
+          }
+          // else
+          // {
+          //   id = new Item.ID(0, 0, Item.Kind.Food, true);
+          //   itemLevel = Mathf.Min(Item.LevelsCnt(id)-1, item.id.lvl);
+          // }
+          for(int d = 0; d < 1<<itemLevel; ++d)
+          {
+            id.lvl = 0;
+            ids.Add(id);
+          }
+        }
+      }
+      vs.shuffle(1000);
+      vs.Reverse();
+      for(int q = 0; q < ids.Count; ++q)
+      {
+        var item = GameData.Prefabs.CreateItem(ids[q], _itemsContainer);
+        if(vs.Count > 0)
+        {
+          item.Init(vs.first());
+          vs.RemoveAt(0);
+          item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
+          _grid.set(item.vgrid, 1, item.id.kind);
+          _items.Add(item);
         }
         else
         {
-          id = new Item.ID(0, 0, Item.Kind.Food, true);
-          itemLevel = Mathf.Min(Item.LevelsCnt(id)-1, item.id.lvl);
-        }
-        for(int d = 0; d < 1<<itemLevel; ++d)
-        {
-          id.lvl = 0;
-          ids.Add(id);
+          item.Init(Vector2.zero);
+          _items2.Add(item);
+          item.gameObject.SetActive(false);
         }
       }
     }
-    vs.shuffle(1000);
-    vs.Reverse();
-    for(int q = 0; q < ids.Count; ++q)
+    else
     {
-      var item = GameData.Prefabs.CreateItem(ids[q], _itemsContainer);
-      if(vs.Count > 0)
-      {
-        item.Init(vs.first());
-        vs.RemoveAt(0);
-        item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
-        _grid.set(item.vgrid, 1, item.id.kind);
-        _items.Add(item);
-      }
-      else
-      {
-        item.Init(Vector2.zero);
-        _items2.Add(item);
-        item.gameObject.SetActive(false);
-      }
+      
     }
     _initialItemsCnt = itemsCount;
   }
@@ -386,8 +397,8 @@ public class Level : MonoBehaviour
   double tapTime = 0;
   public void OnInputTapped(TouchInputData tid)
   {
-    var chestbox = tid.GetClosestCollider(0.5f, RewardChest.layerMask | StorageBox.layerMask);//?.GetComponent<RewardChest>();
-    if(chestbox)
+    var box = tid.GetClosestCollider(0.5f, RewardChest.layerMask | StorageBox.layerMask | LayerMask.GetMask("Default"));
+    if(box)
     {
       if(Time.timeAsDouble - tapTime < 1.0f)
       {
@@ -396,7 +407,7 @@ public class Level : MonoBehaviour
         Vector3  vbeg = Vector3.zero;
         if(vg != null)
         {
-          var chest = chestbox.GetComponent<RewardChest>();
+          var chest = box.GetComponent<RewardChest>();
           Item.ID? id = null;
           if(chest)
           {
@@ -405,11 +416,20 @@ public class Level : MonoBehaviour
           }
           else
           {
-            var storage = chestbox.GetComponent<StorageBox>();
+            var storage = box.GetComponent<StorageBox>();
             if(storage)
             {
               id = storage.Pop();
               vbeg = storage.transform.position;
+            }
+            else
+            {
+              var feeding = box.GetComponent<FeedingMachine>();
+              if(feeding)
+              {
+                id = feeding.Pop();
+                vbeg = feeding.vpos;
+              }
             }
           }
           if(id != null)
@@ -432,7 +452,7 @@ public class Level : MonoBehaviour
       var item = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>();
       if(item && item.id.IsSpecial)
       {
-        if(Time.timeAsDouble - tapTime < 0.5f)
+        if(Time.timeAsDouble - tapTime < 1.0f)
         {
           tapTime = 0;
           int amount = GameState.Econo.AddRes(item.id);
@@ -445,7 +465,6 @@ public class Level : MonoBehaviour
           tapTime = Time.timeAsDouble;
       }
     }
-
   }
   void MoveItemBack(Item item)
   {
@@ -572,6 +591,20 @@ public class Level : MonoBehaviour
 
     return is_hit;
   }
+  // bool IsFeedingMachineHit(TouchInputData tid)
+  // {
+  //   bool is_hit = false;
+  //   var feedingMach = tid.GetClosestObjectInRange<FeedingMachine>(0.5f);
+  //   if(feedingMach)
+  //   {
+  //     _items.Remove(_itemSelected);
+  //     _grid.set(_itemSelected.vgrid, 0);
+  //     _itemSelected.Hide();
+  //     is_hit = true;
+  //   }
+
+  //   return is_hit;    
+  // }
   public void End()
   {
     Item[] itms = _items.FindAll((Item item) => item.id.IsSpecial).ToArray();

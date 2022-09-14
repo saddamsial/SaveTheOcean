@@ -16,58 +16,25 @@ MonoBehaviour:
   dataPath: Data
   version: 0
   progress:
-    _location: 9
+    _location: 0
     _locations:
     - _idx: 0
       _state: 3
-      _date: 0
+      _date: -8585384532007189322
     - _idx: 1
       _state: 3
-      _date: 2
+      _date: -8585385291982580647
     - _idx: 2
-      _state: 3
+      _state: 1
       _date: 0
-    - _idx: 3
-      _state: 3
-      _date: 0
-    - _idx: 4
-      _state: 3
-      _date: 0
-    - _idx: 5
-      _state: 3
-      _date: 0
-    - _idx: 6
-      _state: 3
-      _date: 0
-    - _idx: 7
-      _state: 3
-      _date: 0
-    - _idx: 8
-      _state: 3
-      _date: 0
-    - _idx: 9
-      _state: 3
-      _date: 0
-    - _idx: 10
-      _state: 3
-      _date: 0
-    - _idx: 11
-      _state: 3
-      _date: 0
-    - _idx: 12
-      _state: 3
-      _date: 0
-    - _idx: 13
-      _state: 4
-      _date: 0
-    _locationsPassedTime: -8585385292697493119
+    _locationsPassedTime: 0
   economy:
-    stamina: 99
+    stamina: 71
     coins: 0
-    gems: 0
-    rewardPoints: 0
-    rewardLevel: 0
-    lastStamina: -8585385142435885415
+    gems: 6
+    rewardPoints: 48
+    rewardLevel: 4
+    lastStamina: -8585384532065349399
   chest:
     listStamina: []
     listCoins: []
@@ -77,5 +44,5 @@ MonoBehaviour:
   splitMachine:
     _capacity: 1
   gameInfo:
-    appQuitTime: -8585385315335144439
+    appQuitTime: -8585384531983523179
   selectedTheme: 0

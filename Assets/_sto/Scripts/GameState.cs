@@ -242,7 +242,7 @@ public class GameState : SavableScriptableObject
       set
       { 
         var _prev_val = get().economy.coins;
-        get().economy.coins = value;
+        get().economy.coins = Mathf.Clamp(value, 0, GameData.Econo.coinsMax);
         if(_prev_val != value)
           onCoinsChanged?.Invoke(value);
       }
@@ -253,7 +253,7 @@ public class GameState : SavableScriptableObject
       set 
       {
         var _prev_val = get().economy.gems;
-        get().economy.gems = value;
+        get().economy.gems = Mathf.Clamp(value, 0, GameData.Econo.gemsMax);
         if(_prev_val != value)
           onGemsChanged?.Invoke(value);
       }
@@ -269,10 +269,9 @@ public class GameState : SavableScriptableObject
           onRewardProgressChanged?.Invoke(value);
       }
     }
-    public static bool CanSpendStamina(int stamina_cost)
-    {
-      return stamina >= stamina_cost;
-    }
+    public static bool CanSpendStamina(int stamina_cost) => stamina >= stamina_cost;
+    public static bool CanSpendCoins(int coins_cost) => coins >= coins_cost;
+    
     public static float GetStaminaRefillPerc()
     {
       var now = CTime.get();

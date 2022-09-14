@@ -40,6 +40,7 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] string _strNoSplittableItem;
     [SerializeField] string _strNoRoomOnGrid = "no room on grid";
     [SerializeField] string _strEmpty = "empty";
+    [SerializeField] string _strFeedingNoRes = "no coins";
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
@@ -75,6 +76,8 @@ public class EffectsManager : MonoBehaviour
       StorageBox.onPoped += OnItemPoped;
       StorageBox.onNotPoped += OnItemNotPoped;
       StorageBox.onPushed += OnItemPushed;
+      FeedingMachine.onPoped += OnItemPoped;
+      FeedingMachine.onNotPoped += OnItemNotPoped;      
     }
     private void OnDisable()
     {
@@ -101,6 +104,8 @@ public class EffectsManager : MonoBehaviour
       StorageBox.onPoped -= OnItemPoped;
       StorageBox.onNotPoped -= OnItemNotPoped;
       StorageBox.onPushed -= OnItemPushed;
+      FeedingMachine.onPoped -= OnItemPoped;
+      FeedingMachine.onNotPoped -= OnItemNotPoped;
     }
 
     Vector3 GetFxPosition(Vector3 objectPosition) => objectPosition + (objectPosition - Camera.main.transform.position).normalized * -offsetToCamera;
@@ -189,7 +194,10 @@ public class EffectsManager : MonoBehaviour
     }
     void OnItemNotPoped(MonoBehaviour sender)
     {
-      infoLblMan.ShowTextPopup(sender.transform.position + new Vector3(0, 1.0f, 0), _strEmpty);
+      if(sender is FeedingMachine)
+        infoLblMan.ShowTextPopup(sender.transform.position + new Vector3(0, 1.0f, 0), _strFeedingNoRes);
+      else
+        infoLblMan.ShowTextPopup(sender.transform.position + new Vector3(0, 1.0f, 0), _strEmpty);
     }
     void OnItemPushed(MonoBehaviour sender)
     {

@@ -83,7 +83,7 @@ public class RewardChest : MonoBehaviour
     if(id != null)
       onPoped?.Invoke(this);
     else
-      onNotPoped?.Invoke(this);  
+      onNotPoped?.Invoke(this);
     return id;  
   }
   void Update()

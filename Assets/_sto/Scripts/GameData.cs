@@ -64,6 +64,7 @@ public class GameData : ScriptableObject
   [SerializeField] int       _staminaMax = 99;
   [SerializeField] int       _staminaPlayCost = 5;
   [SerializeField] float     _staminaRefillTime = 60.0f;
+  [SerializeField] int       _coinFeedCost = 1;
   [SerializeField] int       _coinsMax = 999;
   [SerializeField] int       _gemsMax = 999;
   [SerializeField] Rewards[] _rewards;
@@ -155,6 +156,7 @@ public class GameData : ScriptableObject
     public static float staminaRefillTime => get()._staminaRefillTime;
     public static int   staminaMax => get()._staminaMax;
     public static int   coinsMax => get()._coinsMax;
+    public static int   coinFeedCost => get()._coinFeedCost;
     public static int   gemsMax => get()._gemsMax;
     public struct RewardProgress
     {
