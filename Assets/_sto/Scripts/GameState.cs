@@ -143,7 +143,25 @@ public class GameState : SavableScriptableObject
     public int capacity {get => _capacity ; set => _capacity = value;}
   }
   [SerializeField] SplitMachineState splitMachine;
-  
+
+  [System.Serializable]
+  class FeedingState
+  {
+    [System.Serializable]
+    public struct Food
+    {
+      public Item.ID _id;
+      public Vector2 _vgrid;
+      public Food(Item item)
+      {
+        _id = item.id;
+        _vgrid = item.vgrid;
+      }
+    }
+    public List<Food> foods = new List<Food>();
+  }
+  [SerializeField] FeedingState feeding;
+
   [System.Serializable]
   class GameInfoState
   {
@@ -369,6 +387,20 @@ public class GameState : SavableScriptableObject
       return id;
     }
     public static int ItemsCnt() => get().storage.listItems.Count;
+  }
+  public static class Feeding
+  {
+    public static void Update(List<Item> items)
+    {
+      get().feeding.foods.Clear();
+      for(int q = 0; q < items.Count; ++q)
+      {
+        if(items[q].id.kind == Item.Kind.Food)
+          get().feeding.foods.Add(new FeedingState.Food(items[q]));
+      }
+    }
+    public static int   FoodCnt => get().feeding.foods.Count;
+    public static (Item.ID id, Vector2 vgrid) GetFood(int idx) => new (get().feeding.foods[idx]._id, get().feeding.foods[idx]._vgrid);
   }
   public static class GameInfo
   {

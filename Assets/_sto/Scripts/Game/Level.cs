@@ -64,7 +64,7 @@ public class Level : MonoBehaviour
   public int    stars {get; set;}
   public int    itemsCount => _items.Count + _items2.Count;
   public int    initialItemsCnt => _initialItemsCnt;
-  public Vector2Int Dim => _dim;
+  public Vector2Int dim => (_isFeedingMode)? GameData.Levels.feedingDim : _dim;
 
   UISummary    _uiSummary = null;
   UIStatusBar  _uiStatusBar = null;
@@ -158,10 +158,10 @@ public class Level : MonoBehaviour
       }
       return (vps.Count > 0)? vps.get_random() : null;
     }
+    public bool isInside(Vector2 vgrid) => Mathf.Abs(vgrid.x * 2) <= _dim.x && Mathf.Abs(vgrid.y*2) <= _dim.y;
     public bool isOverAxisZ(Vector3 vpos)
     {
       Vector2 vdim = new Vector2(_dim.x, _dim.y) * _gridSpace;
-      //return vpos.x >= -vdim.x/2 && vpos.x <= vdim.x / 2 && vpos.z >= -vdim.y / 2 && vpos.z <= vdim.y / 2;
       return vpos.z <= vdim.y / 2;
     }
     public float getMaxZ()
@@ -188,11 +188,8 @@ public class Level : MonoBehaviour
     wasPolluted = GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Warning;
 
     _splitMachine.Init(_items);
-    if(_isFeedingMode)
-    {
-      _splitMachine.gameObject.SetActive(false);
-      _feedingMachine.gameObject.SetActive(true);
-    }
+    _splitMachine.gameObject.SetActive(!_isFeedingMode);
+    _feedingMachine.gameObject.SetActive(_isFeedingMode);
 
     _storageBox = GetComponentInChildren<StorageBox>();
 
@@ -224,22 +221,24 @@ public class Level : MonoBehaviour
   }
   void  Init()
   {
-    _grid.Init(_dim, _gridSpace);
+    _grid.Init(dim, _gridSpace);
 
     List<Vector2> vs = new List<Vector2>();
     Vector2 v = Vector2.zero;
-    for(int y = 0; y < _dim.y; ++y)
+    for(int y = 0; y < dim.y; ++y)
     {
-      v.y = -((-_dim.y + 1) * 0.5f + y);
-      for(int x = 0; x < _dim.x; ++x)
+      v.y = -((-dim.y + 1) * 0.5f + y);
+      for(int x = 0; x < dim.x; ++x)
       {
-        v.x = (-_dim.x + 1) * 0.5f + x;
+        v.x = (-dim.x + 1) * 0.5f + x;
         vs.Add(v);
         var tile = GameData.Prefabs.CreateGridElem(_tilesContainer);
         tile.transform.localPosition = Item.ToPos(v);
         _grid.tile(tile, v);
       }
     }
+    vs.shuffle(100);
+    vs.Reverse();    
     if(!_isFeedingMode)
     {
       Item.ID id = new Item.ID();
@@ -252,16 +251,8 @@ public class Level : MonoBehaviour
         {
           var item = _lvlDescs[q].items[i];
           int itemLevel = item.id.lvl;
-          if(!_isFeedingMode)
-          {
-            id.type = item.id.type;
-            id.kind = item.id.kind;
-          }
-          // else
-          // {
-          //   id = new Item.ID(0, 0, Item.Kind.Food, true);
-          //   itemLevel = Mathf.Min(Item.LevelsCnt(id)-1, item.id.lvl);
-          // }
+          id.type = item.id.type;
+          id.kind = item.id.kind;
           for(int d = 0; d < 1<<itemLevel; ++d)
           {
             id.lvl = 0;
@@ -269,8 +260,6 @@ public class Level : MonoBehaviour
           }
         }
       }
-      vs.shuffle(1000);
-      vs.Reverse();
       for(int q = 0; q < ids.Count; ++q)
       {
         var item = GameData.Prefabs.CreateItem(ids[q], _itemsContainer);
@@ -290,9 +279,17 @@ public class Level : MonoBehaviour
         }
       }
     }
-    else
+    else //feeding
     {
-      
+      for(int q = 0; q < GameState.Feeding.FoodCnt; ++q)
+      {
+        var food = GameState.Feeding.GetFood(q);
+        var item = GameData.Prefabs.CreateItem(food.id, _itemsContainer);
+        item.Init(food.vgrid);
+        item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
+        _grid.set(item.vgrid, 1, item.id.kind);
+        _items.Add(item);
+      }
     }
     _initialItemsCnt = itemsCount;
   }
@@ -439,6 +436,7 @@ public class Level : MonoBehaviour
             _items.Add(item);
             _grid.set(item.vgrid, 1, item.id.kind);
             item.Throw(vbeg, item.vgrid);
+            GameState.Feeding.Update(_items);
           }
         }
         else
@@ -488,6 +486,8 @@ public class Level : MonoBehaviour
         newItem.Show();
         SpawnItem(_itemSelected.vgrid);
         is_merged = true;
+        if(_isFeedingMode)
+          GameState.Feeding.Update(_items);
       }
     }
     if(is_hit && !is_merged)
@@ -516,6 +516,8 @@ public class Level : MonoBehaviour
         onGarbageOut?.Invoke(this);
         SpawnItem(_itemSelected.vgrid);
         CheckEnd();
+        if(_isFeedingMode)
+          GameState.Feeding.Update(_items);
         is_hit = true;
       }
       else
@@ -572,6 +574,8 @@ public class Level : MonoBehaviour
         _itemSelected.MoveToGrid();
         is_hit = true;
         _grid.hovers(false);
+        if(_isFeedingMode)
+          GameState.Feeding.Update(_items);
       }
     }
     return is_hit;
@@ -591,20 +595,6 @@ public class Level : MonoBehaviour
 
     return is_hit;
   }
-  // bool IsFeedingMachineHit(TouchInputData tid)
-  // {
-  //   bool is_hit = false;
-  //   var feedingMach = tid.GetClosestObjectInRange<FeedingMachine>(0.5f);
-  //   if(feedingMach)
-  //   {
-  //     _items.Remove(_itemSelected);
-  //     _grid.set(_itemSelected.vgrid, 0);
-  //     _itemSelected.Hide();
-  //     is_hit = true;
-  //   }
-
-  //   return is_hit;    
-  // }
   public void End()
   {
     Item[] itms = _items.FindAll((Item item) => item.id.IsSpecial).ToArray();
@@ -668,8 +658,8 @@ public class Level : MonoBehaviour
   void OnDrawGizmos()
   {
     Gizmos.color = Color.red;
-    Vector3 vLB = new Vector3(-_dim.x * 0.5f, 0, -_dim.y * 0.5f);
-    Vector3 vRT = new Vector3( _dim.x * 0.5f, 0, _dim.y * 0.5f);
+    Vector3 vLB = new Vector3(-dim.x * 0.5f, 0, -dim.y * 0.5f);
+    Vector3 vRT = new Vector3( dim.x * 0.5f, 0, dim.y * 0.5f);
     var v1 = Vector3.zero;
     v1.x = vLB.x;
     v1.z = vRT.z;

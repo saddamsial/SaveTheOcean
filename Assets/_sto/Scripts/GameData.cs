@@ -69,8 +69,7 @@ public class GameData : ScriptableObject
   [SerializeField] int       _gemsMax = 999;
   [SerializeField] Rewards[] _rewards;
   [Header("Settings")]
-  [SerializeField] float     _locationPolutionMinDelay = 60;
-  [SerializeField] float     _locationPolutionMaxDelay = 300;
+  [SerializeField] Vector2Int _feedingBoardDim = new Vector2Int(6,6);
 
 
   [SerializeField] Color[]    themeColors;
@@ -131,11 +130,9 @@ public class GameData : ScriptableObject
   public static class Levels
   {
     static public Level GetPrefab(int idx) => get()._listLevels[idx];
-    static public Level CreateLevel(int idx, Transform levelsContainer)
-    {
-      return Instantiate(get()._listLevels[idx], levelsContainer);
-    }
+    static public Level CreateLevel(int idx, Transform levelsContainer) => Instantiate(get()._listLevels[idx], levelsContainer);
     static public int levelsCnt => get()._listLevels.Count;
+    static public Vector2Int feedingDim => get()._feedingBoardDim;
   }
   public static class Locations
   {
@@ -147,8 +144,6 @@ public class GameData : ScriptableObject
     {
       return Mathf.Clamp(loc_idx + 1, 0, Earth.locationsCnt - 1);
     }
-    static private float GetRandPollutionDelay() => UnityEngine.Random.Range(get()._locationPolutionMinDelay, get()._locationPolutionMaxDelay);
-    static public  long  GetRandNextPollutionTime() => CTime.get().AddSeconds(GetRandPollutionDelay()).ToBinary();
   }  
   public static class Econo
   {

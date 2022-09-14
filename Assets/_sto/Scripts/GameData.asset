@@ -52,6 +52,7 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: d01a7b5d13f9dad49940a63b4dee8e7b, type: 3}
   _gridTile: {fileID: 8178171026830446907, guid: 764369db777a63a4d9a3efac1f67b645, type: 3}
   _locationPrefab: {fileID: 4694188858287188799, guid: 7e2dc7caea333c54a97c83e5d2ddcc26, type: 3}
+  _earthPrefab: {fileID: 0}
   _listLevels:
   - {fileID: 2229698086017596401, guid: c01b6befe631c5b44bf560095e70ab39, type: 3}
   - {fileID: 2229698086017596401, guid: 26112caae72b86d46a016484bf618140, type: 3}
@@ -66,6 +67,7 @@ MonoBehaviour:
   _staminaMax: 99
   _staminaPlayCost: 5
   _staminaRefillTime: 60
+  _coinFeedCost: 1
   _coinsMax: 999
   _gemsMax: 999
   _rewards:
@@ -94,6 +96,7 @@ MonoBehaviour:
       stamina: 2
       coins: 2
       gems: 2
+  _feedingBoardDim: {x: 5, y: 6}
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}
