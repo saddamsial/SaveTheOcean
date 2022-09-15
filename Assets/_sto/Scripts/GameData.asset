@@ -76,7 +76,7 @@ MonoBehaviour:
       stamina: 0
       coins: 0
       gems: 0
-  - points2Chest: 2
+  - points2Chest: 3
     _reward:
       stamina: 1
       coins: 5

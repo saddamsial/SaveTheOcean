@@ -9,13 +9,10 @@ public class TutorialRewardChest : TutorialObject
     {
       enabled = false;
       RewardChest.onReward += OnRewardChest;
-      //RewardChest.onPoped += ProgressTutorial;
-      //RewardChest.onPoped += ProgressTutorial;
     }
     void Destroy()
     {
       RewardChest.onReward -= OnRewardChest;
-      //RewardChest.onPoped -= ProgressTutorial;
     }
     private void OnEnable() {
       RewardChest.onPoped += ProgressTutorial;
