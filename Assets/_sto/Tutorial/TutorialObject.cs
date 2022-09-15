@@ -9,27 +9,50 @@ namespace TutorialSystem
 {
     public class TutorialObject : MonoBehaviour
     {
-        [SerializeField] float initialDelay = 1f;
-        [SerializeField] TutorialPanel[] tutorialPanel = new TutorialPanel[]{};
-        [SerializeField] Queue<TutorialPanel> tutorialQueue = new Queue<TutorialPanel>();
+        [SerializeField] bool showTutorial = true;      //TODO: add static ref to game save / tutorials completed
+        [SerializeField] bool autoStart = true;
+        [SerializeField] protected float startDelay = 1;
+
+        [System.Serializable]
+        public class TutorialSegment{
+            [field: SerializeField] public TutorialPanel panel { get; private set; } = null;
+            [field: SerializeField] public Transform sender { get; private set; } = null;
+            // [field: SerializeField] public float activationDelay { get; private set; } = 0;
+            // [field: SerializeField] public float minDisplayTime { get; private set; } = 1;
+        }
+
+        [SerializeField] TutorialSegment[] tutorialSequence = new TutorialSegment[]{};
+        int tutorialProgress = 0;
         TutorialPanel tutorialInstance = null;
 
-        private void OnEnable() {
-            tutorialQueue = new Queue<TutorialPanel>(tutorialPanel);
-            this.InvokeWithDelay(() => ProgressTutorial(), initialDelay);
-            TouchInputManager.onAnyInputStarted += ProgressTutorial;
+        private void Awake() {
+            if (!showTutorial){
+                Destroy(this);
+                return;
+            }
+            if (!autoStart)
+                this.enabled = false;
         }
-        private void OnDisable() {
-            TouchInputManager.onAnyInputStarted -= ProgressTutorial;            
+        IEnumerator Start() {
+            yield return new WaitForSeconds(startDelay);
+            ProgressTutorial();
         }
-        void ProgressTutorial() {
+
+        public void ProgressTutorial(object sender) => ProgressTutorial();
+        public void ProgressTutorial() {
             tutorialInstance?.HideTutorial();
-            if(tutorialQueue.Count == 0) {
+
+            if(tutorialProgress == tutorialSequence.Length) {
                 this.enabled = false;
                 Debug.Log("Tutorial Ended!");
                 return;
-            }            
-            tutorialInstance = tutorialQueue.Dequeue().ShowTutorial(transform.transform);
+            }
+
+            var currentTutorialSegment = tutorialSequence[tutorialProgress];
+
+            tutorialInstance = currentTutorialSegment.panel.ShowTutorial(currentTutorialSegment.sender);
+
+            tutorialProgress++;
         }
     }
 }

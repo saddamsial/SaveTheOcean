@@ -8,16 +8,18 @@ namespace TutorialSystem
 {
     public class TutorialPanel : UIPanel
     {
-        public TutorialPanel ShowTutorial(Transform sender){
+        [SerializeField] RectTransform positionContainer = null;
+        public TutorialPanel ShowTutorial(Transform sender, float activationDelay  = 0f){
+            if (TutorialContainer.Instance == null) { Debug.Log("Tutorial | No Tutorial Container present on the scene | Please ad a container"); return null; }
+
             var instance = Instantiate(this, TutorialContainer.Instance.transform);
-            instance.ContentContainer.SetAnchors(UIManager.GetViewportPosition(sender.position));
-            instance.ActivatePanel();
+            instance.positionContainer.SetAnchors(UIManager.GetViewportPosition(sender.position));
+            instance.ActivatePanel(activationDelay);
             return instance;
         }
 
         public void HideTutorial(){
-            DeactivatePanel( ()=> Destroy(this.gameObject));
+            DeactivatePanel( () => Destroy(this.gameObject));
         }
-
     }
 }

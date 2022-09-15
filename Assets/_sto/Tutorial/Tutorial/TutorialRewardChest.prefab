@@ -35,6 +35,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6594426750771199994, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_text
+      value: Great Job!
+      objectReference: {fileID: 0}
     - target: {fileID: 6747210803549513794, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_Name
       value: tutorialPanel_rewardChest
@@ -146,6 +150,14 @@ PrefabInstance:
     - target: {fileID: 8171470983252514473, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_text
+      value: 'We got a reward for our hard work!
+
+
+        Tap here to see whats
+        inside!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
