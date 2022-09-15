@@ -238,7 +238,7 @@ public class Level : MonoBehaviour
       }
     }
     vs.shuffle(100);
-    vs.Reverse();    
+    vs.Reverse();
     if(!_isFeedingMode)
     {
       Item.ID id = new Item.ID();
@@ -260,14 +260,25 @@ public class Level : MonoBehaviour
           }
         }
       }
+      //level up
+      if(_2ndLevelItemsFactor > 0)
+      {
+        var set = ids.Distinct();
+        List<Item.ID> ids2 = new List<Item.ID>();
+        foreach(Item.ID iid in set)
+        {
+          List<Item.ID> vids = ids.FindAll((id) => id.type == iid.type);
+          int cnt = ((int)(vids.Count * _2ndLevelItemsFactor)) / 2 * 2;
+          vids.RemoveRange(0, cnt);
+          var id_up = iid;
+          id_up.lvl = id_up.lvl+1;
+          for(int q = 0; q < cnt/2; ++q)
+            vids.Add(id_up);
 
-      
-      // int itemsLvl = (int)(ids.Count * _2ndLevelItemsFactor);
-      // for(int q = 0; q < itemsLvl; ++q)
-      // {
-
-      // }
-
+          ids2.AddRange(vids);  
+        }
+        ids = ids2;
+      }
       if(_resItemPerItems > 0)
       {
         int resItems = ids.Count / _resItemPerItems;
@@ -297,30 +308,7 @@ public class Level : MonoBehaviour
           item.gameObject.SetActive(false);
         }
       }
-      // if(_resItemPerItems > 0)
-      // {
-      //   int resItems = itemsCount / _resItemPerItems;
-      //   List<Item.Kind> items_kinds = new List<Item.Kind>(){Item.Kind.Stamina, Item.Kind.Coin, Item.Kind.Gem};
-      //   for(int q = 0; q < resItems; ++q)
-      //   {
-      //     var spec_id = new Item.ID(0, 0, items_kinds[Random.Range(0, items_kinds.Count)]);
-      //     var item = GameData.Prefabs.CreateItem(spec_id, _itemsContainer);
-      //     if(vs.Count > 0)
-      //     {
-      //       item.Init(vs.first());
-      //       vs.RemoveAt(0);
-      //       item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
-      //       _grid.set(item.vgrid, 1, item.id.kind);
-      //       _items.Add(item);
-      //     }
-      //     else
-      //     {
-      //       item.Init(Vector2.zero);
-      //       _items2.Add(item);
-      //       item.gameObject.SetActive(false);
-      //     }
-      //   }
-      // }
+
     }
     else //feeding
     {
