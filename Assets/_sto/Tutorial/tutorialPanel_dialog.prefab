@@ -229,12 +229,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 96
-    m_Right: 96
+    m_Left: 64
+    m_Right: 64
     m_Top: 96
     m_Bottom: 96
   m_ChildAlignment: 4
-  m_Spacing: 16
+  m_Spacing: 32
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -338,7 +338,7 @@ GameObject:
   - component: {fileID: 1642729991875162775}
   - component: {fileID: 6783125341865410006}
   m_Layer: 5
-  m_Name: tutorialPanel
+  m_Name: tutorialPanel_dialog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

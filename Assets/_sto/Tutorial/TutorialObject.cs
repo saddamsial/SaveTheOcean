@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameLib;
 using GameLib.UI;
+using GameLib.InputSystem;
 
 namespace TutorialSystem
 {
@@ -16,6 +17,10 @@ namespace TutorialSystem
         private void OnEnable() {
             tutorialQueue = new Queue<TutorialPanel>(tutorialPanel);
             this.InvokeWithDelay(() => ProgressTutorial(), initialDelay);
+            TouchInputManager.onAnyInputStarted += ProgressTutorial;
+        }
+        private void OnDisable() {
+            TouchInputManager.onAnyInputStarted -= ProgressTutorial;            
         }
         void ProgressTutorial() {
             tutorialInstance?.HideTutorial();
@@ -25,9 +30,6 @@ namespace TutorialSystem
                 return;
             }            
             tutorialInstance = tutorialQueue.Dequeue().ShowTutorial(transform.transform);
-        }
-        private void Update() {
-            if (Input.GetKeyDown(KeyCode.C)) ProgressTutorial();    
         }
     }
 }

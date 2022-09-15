@@ -379,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3175207f79011b7448a41c583d597ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialDelay: 3
   tutorialPanel:
   - {fileID: 8124103945177977042, guid: 2392cfbd505f7fd4f8e08df70f55e1ea, type: 3}
   - {fileID: 8124103945177977042, guid: 816da08e4303e3b48b92e834a558b494, type: 3}
