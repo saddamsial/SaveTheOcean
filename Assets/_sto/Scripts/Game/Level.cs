@@ -59,6 +59,7 @@ public class Level : MonoBehaviour
   public bool   finished {get; private set;}
   public bool   wasPolluted {get; private set;} = false;
   public bool   wasFeeding => _isFeedingMode;
+  public bool   isFeedingMode => _isFeedingMode;
   public int    points {get; set;} = 0;
   public int    stars {get; set;}
   public int    itemsCount => _items.Count + _items2.Count;
@@ -260,7 +261,7 @@ public class Level : MonoBehaviour
         }
       }
 
-
+      
       // int itemsLvl = (int)(ids.Count * _2ndLevelItemsFactor);
       // for(int q = 0; q < itemsLvl; ++q)
       // {

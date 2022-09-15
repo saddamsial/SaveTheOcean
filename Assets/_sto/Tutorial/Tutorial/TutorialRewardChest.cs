@@ -5,10 +5,28 @@ using TutorialSystem;
 
 public class TutorialRewardChest : TutorialObject
 {
+    void Awake()
+    {
+      enabled = false;
+      RewardChest.onReward += OnRewardChest;
+      //RewardChest.onPoped += ProgressTutorial;
+      //RewardChest.onPoped += ProgressTutorial;
+    }
+    void Destroy()
+    {
+      RewardChest.onReward -= OnRewardChest;
+      //RewardChest.onPoped -= ProgressTutorial;
+    }
     private void OnEnable() {
-        RewardChest.onPoped += ProgressTutorial;
+      RewardChest.onPoped += ProgressTutorial;
     }
     private void OnDisable() {
-        RewardChest.onPoped -= ProgressTutorial;        
+      RewardChest.onPoped -= ProgressTutorial;
+    }
+
+    void OnRewardChest(RewardChest chest)
+    { 
+      if(chest.level == 0)
+        this.enabled = true;
     }
 }

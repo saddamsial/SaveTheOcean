@@ -52,7 +52,6 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: d01a7b5d13f9dad49940a63b4dee8e7b, type: 3}
   _gridTile: {fileID: 8178171026830446907, guid: 764369db777a63a4d9a3efac1f67b645, type: 3}
   _locationPrefab: {fileID: 4694188858287188799, guid: 7e2dc7caea333c54a97c83e5d2ddcc26, type: 3}
-  _earthPrefab: {fileID: 0}
   _listLevels:
   - {fileID: 2229698086017596401, guid: c01b6befe631c5b44bf560095e70ab39, type: 3}
   - {fileID: 2229698086017596401, guid: 26112caae72b86d46a016484bf618140, type: 3}
@@ -77,7 +76,7 @@ MonoBehaviour:
       stamina: 0
       coins: 0
       gems: 0
-  - points2Chest: 5
+  - points2Chest: 2
     _reward:
       stamina: 1
       coins: 5

@@ -12,11 +12,13 @@ public class RewardChest : MonoBehaviour
   [SerializeField] GameObject _infoContainer;
   [SerializeField] Transform _chestLid;
 
-  public static System.Action<RewardChest> onPoped, onNotPoped;
+  public static System.Action<RewardChest> onPoped, onNotPoped, onReward;
 
   float _rewardPointsMov = 0;
   float _lidAngle = 0;
   public static int layerMask = 0;
+
+  public int level => GameState.Chest.rewardLevel;
 
   void Awake()
   {
@@ -67,6 +69,7 @@ public class RewardChest : MonoBehaviour
     var rewardProgress = GameData.Econo.GetRewardProgress(rewardPoints);
     if(rewardProgress.lvl > GameState.Chest.rewardLevel)
     {
+      onReward?.Invoke(this);
       this.Invoke(()=>
       {
         GameState.Chest.rewardLevel = rewardProgress.lvl;
