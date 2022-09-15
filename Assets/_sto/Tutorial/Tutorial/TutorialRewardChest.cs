@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TutorialSystem;
 
-public class TutorialRewardChest : TutorialObject
+public class TutorialRewardChest : TutorialLogic
 {
-    void Awake()
-    {
-      enabled = false;
+    void Awake() {
+      this.enabled = false;
       RewardChest.onReward += OnRewardChest;
     }
-    void Destroy()
-    {
+    void Destroy() {
       RewardChest.onReward -= OnRewardChest;
     }
     private void OnEnable() {

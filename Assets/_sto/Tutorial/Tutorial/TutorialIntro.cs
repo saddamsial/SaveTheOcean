@@ -5,23 +5,17 @@ using GameLib.InputSystem;
 
 namespace TutorialSystem
 {
-    public class TutorialIntro : TutorialObject
+    public class TutorialIntro : TutorialLogic
     {
-      void Awake()
-      {
-        this.enabled = GameState.Progress.locationIdx == 0 && GameState.Progress.Locations.GetLocationState(0) <= Level.State.Unlocked;
-      }
+        void Awake() {
+            this.enabled = GameState.Progress.locationIdx == 0 && GameState.Progress.Locations.GetLocationState(0) <= Level.State.Unlocked;
+        }
         private void OnEnable() {
+            ActivateTutorial();
             TouchInputManager.onAnyInputStarted += ProgressTutorial;
-            // Level.onTutorialStart += ActivateTutorial;
         }
         private void OnDisable() {
             TouchInputManager.onAnyInputStarted -= ProgressTutorial;            
-            // Level.onTutorialStart -= ActivateTutorial;
-        }
-
-        void ActivateTutorial(object sender){
-            ProgressTutorial();
         }
     }
 }

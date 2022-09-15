@@ -78,13 +78,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 692f3aa24b819b14c9053725ab8fe90e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTutorial: 1
-  autoStart: 1
-  startDelay: 2
   tutorialSequence:
-  - <panel>k__BackingField: {fileID: 8124103945177977042, guid: 2392cfbd505f7fd4f8e08df70f55e1ea, type: 3}
+  - <stepName>k__BackingField: Welcome
+    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 2392cfbd505f7fd4f8e08df70f55e1ea, type: 3}
     <sender>k__BackingField: {fileID: 8522299307696825627}
-  - <panel>k__BackingField: {fileID: 8124103945177977042, guid: 816da08e4303e3b48b92e834a558b494, type: 3}
+  - <stepName>k__BackingField: Merge
+    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 816da08e4303e3b48b92e834a558b494, type: 3}
     <sender>k__BackingField: {fileID: 8522299307696825627}
 --- !u!114 &7537746926556728391
 MonoBehaviour:
@@ -98,11 +97,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f7d067cec791fe42ae484af302f3ae8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTutorial: 1
-  autoStart: 1
-  startDelay: 1
   tutorialSequence:
-  - <panel>k__BackingField: {fileID: 8124103945177977042, guid: 5c7aa6b041a2d8145ba27093d8950fbf, type: 3}
+  - <stepName>k__BackingField: Reward Chest - Collect rewards
+    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 5c7aa6b041a2d8145ba27093d8950fbf, type: 3}
     <sender>k__BackingField: {fileID: 3653719115743252759}
 --- !u!1 &529243477404288419
 GameObject:
