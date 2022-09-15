@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using GameLib;
-using GameLib.CameraSystem;
-using GameLib.Splines;
 using GameLib.InputSystem;
-using GameLib.Utilities;
-using TMPLbl = TMPro.TextMeshPro;
 
 public class Level : MonoBehaviour
 {
@@ -32,8 +28,11 @@ public class Level : MonoBehaviour
   [Header("Settings")]
   [SerializeField] Vector2Int _dim;
   [SerializeField] float      _gridSpace = 1.0f;
-  [SerializeField] Color      _waterColor;  
+  [SerializeField] Color      _waterColor;
   [Header("LvlDesc")]
+  [SerializeField] float      _2thLevelItemsFactor = 0.0f;
+  [SerializeField] float      _3rdLevelItemsFactor = 0.0f;
+  [SerializeField] int        _resItemPerItems = 0;
   [SerializeField] LvlDesc[]  _lvlDescs;
 
   public enum State
@@ -260,6 +259,18 @@ public class Level : MonoBehaviour
           }
         }
       }
+      if(ids.Count > 0)
+      {
+        int resItems = ids.Count / _resItemPerItems;
+        List<Item.Kind> items_kinds = new List<Item.Kind>(){Item.Kind.Stamina, Item.Kind.Coin, Item.Kind.Gem};
+        for(int q = 0; q < resItems; ++q)
+        {
+          var spec_id = new Item.ID(0, 0, items_kinds[Random.Range(0, items_kinds.Count)]);
+          ids.Add(spec_id);
+        }
+      }
+      ids.shuffle(ids.Count * 2);
+
       for(int q = 0; q < ids.Count; ++q)
       {
         var item = GameData.Prefabs.CreateItem(ids[q], _itemsContainer);
@@ -278,6 +289,30 @@ public class Level : MonoBehaviour
           item.gameObject.SetActive(false);
         }
       }
+      // if(_resItemPerItems > 0)
+      // {
+      //   int resItems = itemsCount / _resItemPerItems;
+      //   List<Item.Kind> items_kinds = new List<Item.Kind>(){Item.Kind.Stamina, Item.Kind.Coin, Item.Kind.Gem};
+      //   for(int q = 0; q < resItems; ++q)
+      //   {
+      //     var spec_id = new Item.ID(0, 0, items_kinds[Random.Range(0, items_kinds.Count)]);
+      //     var item = GameData.Prefabs.CreateItem(spec_id, _itemsContainer);
+      //     if(vs.Count > 0)
+      //     {
+      //       item.Init(vs.first());
+      //       vs.RemoveAt(0);
+      //       item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
+      //       _grid.set(item.vgrid, 1, item.id.kind);
+      //       _items.Add(item);
+      //     }
+      //     else
+      //     {
+      //       item.Init(Vector2.zero);
+      //       _items2.Add(item);
+      //       item.gameObject.SetActive(false);
+      //     }
+      //   }
+      // }
     }
     else //feeding
     {
@@ -394,7 +429,10 @@ public class Level : MonoBehaviour
   double tapTime = 0;
   public void OnInputTapped(TouchInputData tid)
   {
-    var box = tid.GetClosestCollider(0.5f, RewardChest.layerMask | StorageBox.layerMask | FeedingMachine.layerMask);
+    int layers = RewardChest.layerMask | StorageBox.layerMask;
+    if(_feedingMachine.gameObject.activeInHierarchy)
+      layers |= FeedingMachine.layerMask;
+    var box = tid.GetClosestCollider(0.5f, layers);
     if(box)
     {
       if(Time.timeAsDouble - tapTime < 1.0f)
@@ -458,6 +496,7 @@ public class Level : MonoBehaviour
           _grid.set(item.vgrid, 0);
           _uiStatusBar.MoveCollected(item, amount);
           item.Hide();
+          SpawnItem(item.vgrid);
         }
         else
           tapTime = Time.timeAsDouble;
