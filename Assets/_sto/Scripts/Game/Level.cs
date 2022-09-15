@@ -30,7 +30,7 @@ public class Level : MonoBehaviour
   [SerializeField] float      _gridSpace = 1.0f;
   [SerializeField] Color      _waterColor;
   [Header("LvlDesc")]
-  [SerializeField] float      _2thLevelItemsFactor = 0.0f;
+  [SerializeField] float      _2ndLevelItemsFactor = 0.0f;
   [SerializeField] float      _3rdLevelItemsFactor = 0.0f;
   [SerializeField] int        _resItemPerItems = 0;
   [SerializeField] LvlDesc[]  _lvlDescs;
@@ -252,14 +252,22 @@ public class Level : MonoBehaviour
           int itemLevel = item.id.lvl;
           id.type = item.id.type;
           id.kind = item.id.kind;
-          for(int d = 0; d < 1<<itemLevel; ++d)
+          for(int d = 0; d < 1 << itemLevel; ++d)
           {
             id.lvl = 0;
             ids.Add(id);
           }
         }
       }
-      if(ids.Count > 0)
+
+
+      // int itemsLvl = (int)(ids.Count * _2ndLevelItemsFactor);
+      // for(int q = 0; q < itemsLvl; ++q)
+      // {
+
+      // }
+
+      if(_resItemPerItems > 0)
       {
         int resItems = ids.Count / _resItemPerItems;
         List<Item.Kind> items_kinds = new List<Item.Kind>(){Item.Kind.Stamina, Item.Kind.Coin, Item.Kind.Gem};
@@ -269,7 +277,6 @@ public class Level : MonoBehaviour
           ids.Add(spec_id);
         }
       }
-      ids.shuffle(ids.Count * 2);
 
       for(int q = 0; q < ids.Count; ++q)
       {

@@ -160,6 +160,18 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _2ndLevelItemsFactor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _2thLevelItemsFactor
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _3rdLevelItemsFactor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -278,6 +290,14 @@ PrefabInstance:
     - target: {fileID: 5700143387440424069, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701096427300701994, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5701096427300701994, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6589174364912313539, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_AnchorMax.y
