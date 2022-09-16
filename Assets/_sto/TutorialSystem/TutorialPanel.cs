@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameLib;
 using GameLib.UI;
+using GameLib.InputSystem;
 
 namespace TutorialSystem
 {
     public class TutorialPanel : UIPanel
     {
+        [SerializeField] bool completeOnInput = true;
+        private void OnEnable() {
+            if (completeOnInput)
+                TouchInputManager.onAnyInputEnded += TutorialManger.Instance.ProgressTutorial;
+        }
+        private void OnDisable() {
+            TouchInputManager.onAnyInputEnded -= TutorialManger.Instance.ProgressTutorial;            
+        }
+
         [SerializeField] RectTransform tutorialContainer = null;
         public void PlaceTutorialOverObject(Transform transform){
             if (transform == null) return;

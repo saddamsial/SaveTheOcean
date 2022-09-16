@@ -9,6 +9,7 @@ namespace TutorialSystem
     [DefaultExecutionOrder(-10)]
     public class TutorialManger : MonoBehaviour
     {
+        public static System.Action onTutorialStepCompleted;
         public static TutorialManger Instance = null;
 
         TutorialSequence[] _activeTutorial = null;
@@ -43,6 +44,7 @@ namespace TutorialSystem
             if (_activeTutorial == null) return;
 
             _activeTutorialPanelInstance?.RemoveTutorial();
+            onTutorialStepCompleted?.Invoke();
 
             if(_activeTutorialSegment >= _activeTutorial.Length) {
                 _activeTutorial = null;

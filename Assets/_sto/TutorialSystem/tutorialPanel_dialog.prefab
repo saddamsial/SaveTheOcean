@@ -412,6 +412,7 @@ MonoBehaviour:
   activateOnAwake: 0
   activateOnTop: 0
   activationDelay: 0
+  completeOnInput: 1
   tutorialContainer: {fileID: 2570981072860930815}
 --- !u!1 &7146790041854743016
 GameObject:

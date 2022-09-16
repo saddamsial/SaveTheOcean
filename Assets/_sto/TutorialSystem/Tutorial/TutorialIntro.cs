@@ -12,10 +12,8 @@ namespace TutorialSystem
         }
         private void OnEnable() {
             ActivateTutorial();
-            TouchInputManager.onAnyInputStarted += ProgressTutorial;
         }
         private void OnDisable() {
-            TouchInputManager.onAnyInputStarted -= ProgressTutorial;            
         }
     }
 }

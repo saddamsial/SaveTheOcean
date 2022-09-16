@@ -9,8 +9,7 @@ namespace TutorialSystem
 {
     public abstract class TutorialLogic : MonoBehaviour
     {
-        public System.Action onTutorialCompleted;
-        [SerializeField] protected TutorialSequence[] tutorialSequence = new TutorialSequence[]{}; 
+        [SerializeField] protected TutorialSequence[] tutorialSequence = new TutorialSequence[]{};
 
         public void ActivateTutorial(object sender = null){
             this.enabled = true;
@@ -20,7 +19,6 @@ namespace TutorialSystem
         public void ProgressTutorial(object sender){
             TutorialManger.Instance?.ProgressTutorial();
             if (!TutorialManger.IsTutorialActive){
-                onTutorialCompleted?.Invoke();
                 this.enabled = false;
             }   
         }
