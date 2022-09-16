@@ -259,6 +259,8 @@ public class Level : MonoBehaviour
           {
             if(val >= _chanceToDowngradeItem[e])
               vi = e;
+            else
+              break;  
           }
           if(vi < itemLevel)
           {

@@ -6,9 +6,10 @@ using GameLib.UI;
 
 namespace TutorialSystem
 {
-    public class TutorialContainer : MonoBehaviour
+    [DefaultExecutionOrder(-10)]
+    public class TutorialManger : MonoBehaviour
     {
-        public static TutorialContainer Instance = null;
+        public static TutorialManger Instance = null;
 
         TutorialSequence[] _activeTutorial = null;
         public static bool IsTutorialActive => Instance._activeTutorial != null;
@@ -20,8 +21,8 @@ namespace TutorialSystem
         public float tutorialStepDelay = 1f;
 
         private void Awake() {
-            if (!ShowTutorials){ Destroy(this.gameObject); }
             Instance = this;
+            if (!ShowTutorials){ Destroy(this.gameObject); }
             //subscribe to event that deactivates game board
         }
         private void OnDestroy() {
@@ -39,10 +40,13 @@ namespace TutorialSystem
             this.InvokeWithDelay(() => ProgressTutorial(), initialTutorialDelay);
         }
         public void ProgressTutorial(){
+            if (_activeTutorial == null) return;
+
             _activeTutorialPanelInstance?.RemoveTutorial();
 
             if(_activeTutorialSegment >= _activeTutorial.Length) {
                 _activeTutorial = null;
+                _activeTutorialPanelInstance = null;
                 Debug.Log("Tutorial | Tutorial Ended!");
                 return;
             }
@@ -55,7 +59,7 @@ namespace TutorialSystem
 
             Debug.Log("Tutorial | Step " + (_activeTutorialSegment + 1) + "/" + _activeTutorial.Length + " | " + currentTutorialSegment.stepName);
 
-            _activeTutorialSegment++;    
+            _activeTutorialSegment++;   
         }
         public void ClearTutorial(){
             foreach (var tutorialPanel in GetComponentsInChildren<TutorialPanel>())
