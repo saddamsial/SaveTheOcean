@@ -30,8 +30,7 @@ public class Level : MonoBehaviour
   [SerializeField] float      _gridSpace = 1.0f;
   [SerializeField] Color      _waterColor;
   [Header("LvlDesc")]
-  [SerializeField] float      _2ndLevelItemsFactor = 0.0f;
-  [SerializeField] float      _3rdLevelItemsFactor = 0.0f;
+  [SerializeField] float[]    _chanceToDowngradeItem = new float[6];
   [SerializeField] int        _resItemPerItems = 0;
   [SerializeField] LvlDesc[]  _lvlDescs;
 
@@ -78,7 +77,7 @@ public class Level : MonoBehaviour
   int         _requestCnt = 0;
   int         _initialItemsCnt = 0;
 
-  float       _pollutionRate = 1.0f;
+  //float       _pollutionRate = 1.0f;
   float       _pollutionDest = 1.0f;
 
   bool        _isFeedingMode = false;
@@ -253,31 +252,27 @@ public class Level : MonoBehaviour
           int itemLevel = item.id.lvl;
           id.type = item.id.type;
           id.kind = item.id.kind;
-          for(int d = 0; d < 1 << itemLevel; ++d)
+          id.lvl = item.id.lvl;
+          float val = Random.Range(0.0f, 1.0f);
+          int vi = 0;
+          for(int e = 0; e < _chanceToDowngradeItem.Length; ++e)
           {
-            id.lvl = 0;
+            if(val >= _chanceToDowngradeItem[e])
+              vi = e;
+          }
+          if(vi < itemLevel)
+          {
+            for(int d = 0; d < 1 << (itemLevel-vi); ++d)
+            {
+              id.lvl = vi;
+              ids.Add(id);
+            }
+          }
+          else
+          {
             ids.Add(id);
           }
         }
-      }
-      //level up
-      if(_2ndLevelItemsFactor > 0)
-      {
-        var set = ids.Distinct();
-        List<Item.ID> ids2 = new List<Item.ID>();
-        foreach(Item.ID iid in set)
-        {
-          List<Item.ID> vids = ids.FindAll((id) => id.type == iid.type);
-          int cnt = ((int)(vids.Count * _2ndLevelItemsFactor)) / 2 * 2;
-          vids.RemoveRange(0, cnt);
-          var id_up = iid;
-          id_up.lvl = id_up.lvl+1;
-          for(int q = 0; q < cnt/2; ++q)
-            vids.Add(id_up);
-
-          ids2.AddRange(vids);  
-        }
-        ids = ids2;
       }
       if(_resItemPerItems > 0)
       {

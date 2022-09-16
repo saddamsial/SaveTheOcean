@@ -529,8 +529,13 @@ MonoBehaviour:
   _dim: {x: 4, y: 5}
   _gridSpace: 1.5
   _waterColor: {r: 0, g: 0.5647059, b: 1, a: 1}
-  _2ndLevelItemsFactor: 0
-  _3rdLevelItemsFactor: 0
+  _chanceToDowngradeItem:
+  - 0.5
+  - 0.4
+  - 0.3
+  - 0.2
+  - 0.1
+  - 0.05
   _resItemPerItems: 0
   _lvlDescs: []
   _items: []
