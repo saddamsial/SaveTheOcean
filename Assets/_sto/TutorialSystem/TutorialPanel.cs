@@ -10,6 +10,7 @@ namespace TutorialSystem
     {
         [SerializeField] RectTransform tutorialContainer = null;
         public void PlaceTutorialOverObject(Transform transform){
+            if (transform == null) return;
             tutorialContainer.SetAnchors(UIManager.GetViewportPosition(transform.position));
         }
         public void RemoveTutorial(){

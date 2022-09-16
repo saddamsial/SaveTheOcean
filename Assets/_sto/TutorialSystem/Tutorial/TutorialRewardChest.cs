@@ -6,16 +6,14 @@ using TutorialSystem;
 public class TutorialRewardChest : TutorialLogic
 {
     void Awake() {
-      this.enabled = false;
-      RewardChest.onReward += OnRewardChest;
-    }
-    void Destroy() {
-      RewardChest.onReward -= OnRewardChest;
+        // this.enabled = chest.level == 0;
     }
     private void OnEnable() {
+      RewardChest.onReward += ActivateTutorial;
       RewardChest.onPoped += ProgressTutorial;
     }
     private void OnDisable() {
+      RewardChest.onReward -= ActivateTutorial;
       RewardChest.onPoped -= ProgressTutorial;
     }
 

@@ -14,12 +14,12 @@ namespace TutorialSystem
 
         public void ActivateTutorial(object sender = null){
             this.enabled = true;
-            TutorialContainer.Instance?.RequestTutorial(tutorialSequence);
+            TutorialManger.Instance?.RequestTutorial(tutorialSequence);
         }
         public void ProgressTutorial() => ProgressTutorial(null);
         public void ProgressTutorial(object sender){
-            TutorialContainer.Instance?.ProgressTutorial();
-            if (!TutorialContainer.IsTutorialActive){
+            TutorialManger.Instance?.ProgressTutorial();
+            if (!TutorialManger.IsTutorialActive){
                 onTutorialCompleted?.Invoke();
                 this.enabled = false;
             }   

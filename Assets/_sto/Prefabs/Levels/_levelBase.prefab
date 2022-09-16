@@ -42,7 +42,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3745317107744565915}
-  - component: {fileID: 5797873241957248902}
   - component: {fileID: 7537746926556728391}
   m_Layer: 0
   m_Name: tutorials
@@ -66,25 +65,6 @@ Transform:
   m_Father: {fileID: 2424569502049627348}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5797873241957248902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513692929150132796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 692f3aa24b819b14c9053725ab8fe90e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialSequence:
-  - <stepName>k__BackingField: Welcome
-    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 2392cfbd505f7fd4f8e08df70f55e1ea, type: 3}
-    <sender>k__BackingField: {fileID: 8522299307696825627}
-  - <stepName>k__BackingField: Merge
-    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 816da08e4303e3b48b92e834a558b494, type: 3}
-    <sender>k__BackingField: {fileID: 8522299307696825627}
 --- !u!114 &7537746926556728391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -100,6 +80,9 @@ MonoBehaviour:
   tutorialSequence:
   - <stepName>k__BackingField: Reward Chest - Collect rewards
     <panel>k__BackingField: {fileID: 8124103945177977042, guid: 5c7aa6b041a2d8145ba27093d8950fbf, type: 3}
+    <sender>k__BackingField: {fileID: 8522299307696825627}
+  - <stepName>k__BackingField: Tap Indicator
+    <panel>k__BackingField: {fileID: 6783125341865410006, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
     <sender>k__BackingField: {fileID: 3653719115743252759}
 --- !u!1 &529243477404288419
 GameObject:
