@@ -5,6 +5,9 @@ using GameLib.Haptics;
 
 public class HapticManager : MonoBehaviour
 { 
+  private void Awake() {
+    if (GameLib.Haptics.HapticsSystem.Instance == null) this.enabled = false;
+  }
   void OnEnable()
   {
     Level.onStart += VibMed;
