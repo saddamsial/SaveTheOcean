@@ -79,35 +79,42 @@ public class Animal : MonoBehaviour
     if(isReady)
       _animator.Play("talk", 0);
   }
-  public bool CanPut(Item item) => isReady && garbages.Find((garbage)=> Item.EqType(item, garbage)) != null;
+  public bool CanPut(Item item) => isReady && IsReq(item);
   public bool IsReq(Item item) => garbages.Find((garbage) => Item.EqType(item, garbage)) != null;
   public void Put(Item item, bool feedingMode)
   {
-    if(isReady)
+    //if(isReady)
     {
       Item it = garbages.Find((garbage) => Item.EqType(garbage, item));
       if(it)
       {
-        var model = item.mdl;
-        model.transform.parent =  _garbageContainer;
-        model.transform.localPosition = Vector2.zero;
-
         _garbageInfo.Remove(it.id);
         _garbagesCleared.Add(it);
         garbages.Remove(it);
         item.gameObject.SetActive(false);
-        model.SetActive(true);
         if(!feedingMode)
         {
+          GameObject model = null;
+          if(isReady)
+          {
+            model = item.mdl;
+            model.transform.parent = _garbageContainer;
+            model.transform.localPosition = Vector2.zero;
+            model.SetActive(true);
+          }
+
           if(garbages.Count > 0)
           {
-            AnimThrow();
-            isReady = false;
-            StartCoroutine(_animator.InvokeForAnimStateEnd("itemPush", ()=> 
+            if(isReady)
             {
-              isReady = true;
-              model.SetActive(false);
-            }));
+              AnimThrow();
+              StartCoroutine(_animator.InvokeForAnimStateEnd("itemPush", ()=> 
+              {
+                isReady = true;
+                model.SetActive(false);
+              }));
+            }
+            isReady = false;
           }
           else
           {
@@ -117,6 +124,7 @@ public class Animal : MonoBehaviour
         }
         else
         {
+          var model = item.mdl;
           model.SetActive(false);
           if(garbages.Count > 0)
           {

@@ -41,6 +41,8 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] string _strNoRoomOnGrid = "no room on grid";
     [SerializeField] string _strEmpty = "empty";
     [SerializeField] string _strFeedingNoRes = "no coins";
+    [SerializeField] string _strNotPushedGarbage = "cannot store garbages";
+    [SerializeField] string _strNotPushedFood = "cannot store food";
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
@@ -76,6 +78,7 @@ public class EffectsManager : MonoBehaviour
       StorageBox.onPoped += OnItemPoped;
       StorageBox.onNotPoped += OnItemNotPoped;
       StorageBox.onPushed += OnItemPushed;
+      StorageBox.onNotPushed += OnItemNotPushed;
       FeedingMachine.onPoped += OnItemPoped;
       FeedingMachine.onNotPoped += OnItemNotPoped;      
     }
@@ -104,6 +107,7 @@ public class EffectsManager : MonoBehaviour
       StorageBox.onPoped -= OnItemPoped;
       StorageBox.onNotPoped -= OnItemNotPoped;
       StorageBox.onPushed -= OnItemPushed;
+      StorageBox.onNotPushed -= OnItemNotPushed;
       FeedingMachine.onPoped -= OnItemPoped;
       FeedingMachine.onNotPoped -= OnItemNotPoped;
     }
@@ -202,6 +206,19 @@ public class EffectsManager : MonoBehaviour
     void OnItemPushed(MonoBehaviour sender)
     {
       PlayFXAtPosition(fxHit, sender.transform.position + new Vector3(0, 1.0f, 0), 50, false);
+    }
+    void OnItemNotPushed(MonoBehaviour sender)
+    {
+      string _str = "";
+      if(sender is StorageBox)
+      {
+        var ps = (sender as StorageBox)?.pushState;
+        if(ps == StorageBox.PushState.Garbage)
+          _str = _strNotPushedGarbage.Replace('|', '\n');
+        else if(ps == StorageBox.PushState.Food)
+          _str = _strNotPushedFood.Replace('|', '\n');
+      }
+      infoLblMan.ShowTextPopup(sender.transform.position + new Vector3(-1, 1.0f, 0), _str);
     }
     void OnLevelNoGridRoom(Level sender)
     {

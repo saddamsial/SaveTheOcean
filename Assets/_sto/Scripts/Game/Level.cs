@@ -428,7 +428,7 @@ public class Level : MonoBehaviour
     var box = tid.GetClosestCollider(0.5f, layers);
     if(box)
     {
-      if(Time.timeAsDouble - tapTime < 1.0f)
+      //if(Time.timeAsDouble - tapTime < 1.0f)
       {
         tapTime = 0;
         Vector2? vg = _grid.getEmpty();
@@ -473,8 +473,8 @@ public class Level : MonoBehaviour
         else
           onNoRoomOnGrid?.Invoke(this);
       }
-      else
-        tapTime = Time.timeAsDouble;
+      //else
+      //  tapTime = Time.timeAsDouble;
     }
     else
     {
@@ -536,7 +536,7 @@ public class Level : MonoBehaviour
     var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
     if(animalHit)
     {
-      if(animalHit.CanPut(_itemSelected))
+      if(animalHit.IsReq(_itemSelected)) //CanPut(_itemSelected))
       {
         Item.onPut?.Invoke(_itemSelected);
         animalHit.Put(_itemSelected, _isFeedingMode);
@@ -617,15 +617,29 @@ public class Level : MonoBehaviour
   {
     bool is_hit = false;
     var storage = tid.GetClosestObjectInRange<StorageBox>(0.5f, StorageBox.layerMask);
-    if(storage && _itemSelected.id.IsSpecial)
+    if(storage)
     {
-      storage.Push(_itemSelected.id);
-      _items.Remove(_itemSelected);
-      _grid.set(_itemSelected.vgrid, 0);
-      _itemSelected.Hide();
-      is_hit = true;
+      if(_itemSelected.id.IsSpecial)
+      {
+        storage.Push(_itemSelected.id);
+        _items.Remove(_itemSelected);
+        _grid.set(_itemSelected.vgrid, 0);
+        _itemSelected.Hide();
+        is_hit = true;
+      }
+      else
+        storage.NoPush(_itemSelected.id);
     }
 
+    return is_hit;
+  }
+  bool IsChestHit(TouchInputData tid)
+  {
+    bool is_hit = false;
+    var chest = tid.GetClosestObjectInRange<RewardChest>(0.5f, RewardChest.layerMask);
+    if(chest)
+      chest.NoPush(_itemSelected.id);
+    
     return is_hit;
   }
   public void End()

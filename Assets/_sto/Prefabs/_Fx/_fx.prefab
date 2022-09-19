@@ -66,6 +66,9 @@ MonoBehaviour:
   _strNoSplittableItem: no splittable item
   _strNoRoomOnGrid: no room on grid
   _strEmpty: empty
+  _strFeedingNoRes: no coins
+  _strNotPushedGarbage: cannot store | garbages
+  _strNotPushedFood: cannot store | food
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0
