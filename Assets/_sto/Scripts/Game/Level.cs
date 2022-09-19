@@ -53,7 +53,7 @@ public class Level : MonoBehaviour
 
     public Animal  animal => _animal;
     public GarbCats[] itemsCats => _itemsCats;
-    public Item items(int idx) => GameData.Prefabs.GetItemPrefab(_itemsCats[idx]);
+    public Item items(int idx) => GameData.Prefabs.GetGarbagePrefab(_itemsCats[idx]);
   }
 
   public int    locationIdx {get; private set;} = -1;

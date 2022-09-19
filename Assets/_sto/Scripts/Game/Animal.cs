@@ -43,7 +43,7 @@ public class Animal : MonoBehaviour
     bool isFeedingMode = GameState.Progress.Locations.IsLocationFinished(GameState.Progress.locationIdx);
     foreach(var gcat in garbCats)
     {
-      var item = GameData.Prefabs.GetItemPrefab(gcat);
+      var item = GameData.Prefabs.GetGarbagePrefab(gcat);
       if(!isFeedingMode)
         _garbages.Add(item.id);
       else

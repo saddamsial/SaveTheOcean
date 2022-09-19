@@ -116,10 +116,13 @@ public class GameData : ScriptableObject
 
   public static class Prefabs
   {
-    public static Item     GetItemPrefab(GarbCats cat)
+    static List<Items> garbages = new List<Items>();
+    public static Item     GetItemPrefab(Item.ID id) => get()._items[id.type].Get(id.lvl);
+    public static Item     GetGarbagePrefab(GarbCats cat)
     {
-      Item.ID id = new Item.ID((int)cat/10, (int)cat%10, Item.Kind.Garbage, true);
-      return get()._items[id.type].Get(id.lvl);
+      var garbage_items = System.Array.FindAll(get()._items, (items_) => items_.kind == Item.Kind.Garbage);
+      int garb_type = Mathf.Clamp((int)cat / 10, 0, garbage_items.Length-1);
+      return garbage_items[garb_type].Get((int)cat % 10);
     }
     public static GridTile CreateGridElem(Transform parent) 
     { 
