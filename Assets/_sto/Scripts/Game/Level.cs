@@ -262,9 +262,10 @@ public class Level : MonoBehaviour
           for(int e = 0; e < _chanceToDowngradeItem.Length; ++e)
           {
             if(val >= _chanceToDowngradeItem[e])
+            {
               vi = e;
-            else
-              break;  
+              break;
+            }
           }
           if(vi < itemLevel)
           {
