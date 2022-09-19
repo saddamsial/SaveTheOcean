@@ -4920,7 +4920,7 @@ MonoBehaviour:
   _rotateMax: 500
   _rotateToLocationSpeed: 5
   _rotateDamping: 0.95
-  _rotateVertRange: 30
+  _rotateXRange: 45
 --- !u!114 &8373776387233828538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5119,6 +5119,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1273385399095605595, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950957426615574980, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2298499713923893828, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
