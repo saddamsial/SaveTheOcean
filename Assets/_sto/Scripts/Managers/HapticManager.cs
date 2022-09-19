@@ -12,13 +12,41 @@ public class HapticManager : MonoBehaviour
   {
     Level.onStart += VibMed;
     Level.onFinished += VibMed;
-    Item.onMerged += VibLo;
+    Level.onItemHovered += VibMed;
+    Item.onMerged += VibMed;
+    Item.onNoMerged += VibMed;
+    Item.onPut += VibMed;
+    Item.onNoPut += VibMed;
+
+    RewardChest.onPoped += VibMed;
+    RewardChest.onNotPoped += VibMed;
+    RewardChest.onNotPushed += VibMed;
+    StorageBox.onPoped += VibMed;
+    StorageBox.onNotPoped += VibMed;
+    StorageBox.onPushed += VibMed;
+    StorageBox.onNotPushed += VibMed;
+    FeedingMachine.onPoped += VibMed;
+    FeedingMachine.onNotPoped += VibMed;
   }
   void OnDisable()
   {
     Level.onStart -= VibMed;
     Level.onFinished -= VibMed;
-    Item.onMerged -= VibLo;
+    Level.onItemHovered -= VibMed;
+    Item.onMerged -= VibMed;
+    Item.onNoMerged -= VibMed;
+    Item.onPut -= VibMed;
+    Item.onNoPut -= VibMed;
+
+    RewardChest.onPoped -= VibMed;
+    RewardChest.onNotPoped -= VibMed;
+    RewardChest.onNotPushed -= VibMed;
+    StorageBox.onPoped -= VibMed;
+    StorageBox.onNotPoped -= VibMed;
+    StorageBox.onPushed -= VibMed;
+    StorageBox.onNotPushed -= VibMed;
+    FeedingMachine.onPoped -= VibMed;
+    FeedingMachine.onNotPoped -= VibMed; 
   }
 
   void VibLo0() => VibLo(null);

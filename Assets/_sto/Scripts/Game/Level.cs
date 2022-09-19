@@ -7,7 +7,7 @@ using GameLib.InputSystem;
 
 public class Level : MonoBehaviour
 {
-  public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut, onNoRoomOnGrid;
+  public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut, onNoRoomOnGrid, onItemHovered;
   public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
   public static System.Action<Vector3> onMagnetBeg;
   public static System.Action<bool>    onMagnetEnd;
@@ -71,6 +71,7 @@ public class Level : MonoBehaviour
   MaterialPropertyBlock _mpb = null;
 
   Item        _itemSelected;
+  Item        _itemHovered;
   Animal      _animalSelected;
   public List<Item>  _items = new List<Item>();
   List<Item>  _items2 = new List<Item>();
@@ -352,6 +353,7 @@ public class Level : MonoBehaviour
     _itemSelected = null;
     _itemSelected = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
     _itemSelected?.Select(true);
+    _itemHovered = null;
     voffs = Vector3.zero;
   }
   Vector3 voffs = Vector3.zero;
@@ -372,7 +374,14 @@ public class Level : MonoBehaviour
 
       var _nearestHit = tid.GetClosestCollider(0.5f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
       nearestItem = _nearestHit?.GetComponent<Item>();
-      nearestItem?.Hover(true);
+      if(nearestItem)
+      {
+        nearestItem.Hover(true);
+        if(nearestItem != _itemHovered)
+          onItemHovered?.Invoke(this);
+      }
+      _itemHovered = nearestItem;
+
       nearestAnimal = _nearestHit?.GetComponent<Animal>();
       if(nearestAnimal && _animalSelected == null)
       {
@@ -416,6 +425,7 @@ public class Level : MonoBehaviour
     }
     _itemSelected = null;
     _grid.hovers(false);
+    _itemHovered = null;
     CheckMatchingItems();
     onMagnetEnd?.Invoke(false);
   }
