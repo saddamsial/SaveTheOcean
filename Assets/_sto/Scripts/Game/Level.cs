@@ -40,7 +40,7 @@ public class Level : MonoBehaviour
     Unlocked,
     Started,
     Finished,
-    Warning,
+    Polluted,
   }
 
   [System.Serializable]
@@ -184,7 +184,7 @@ public class Level : MonoBehaviour
     _waterRenderer.SetPropertyBlock(_mpb);
 
     _isFeedingMode = GameState.Progress.Locations.IsLocationFinished(locationIdx);
-    wasPolluted = GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Warning;
+    wasPolluted = GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Polluted;
 
     _splitMachine.Init(_items);
     _splitMachine.gameObject.SetActive(!_isFeedingMode);
@@ -500,7 +500,8 @@ public class Level : MonoBehaviour
   {
     item.Select(false);
     item.MoveBack();
-    _grid.set(item.vgrid, 1, item.id.kind);
+    if(!item.IsInMachine)
+      _grid.set(item.vgrid, 1, item.id.kind);
   }
   bool IsItemHit(TouchInputData tid)
   {

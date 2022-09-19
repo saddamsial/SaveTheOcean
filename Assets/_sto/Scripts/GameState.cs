@@ -219,7 +219,7 @@ public class GameState : SavableScriptableObject
           {
             if(prevTime < SystemNotificationOnTimeEx.dateTimes[q] && CTime.get() > SystemNotificationOnTimeEx.dateTimes[q])
             {
-              locs.first().state = Level.State.Warning;
+              locs.first().state = Level.State.Polluted;
               onLocationPolluted?.Invoke(locs.first().idx);
               locs.RemoveAt(0);
             }
