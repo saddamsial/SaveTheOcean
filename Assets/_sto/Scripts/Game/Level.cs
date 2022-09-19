@@ -224,6 +224,16 @@ public class Level : MonoBehaviour
   }
   void  Init()
   {
+    List<int> levels_idx = new List<int>();
+    levels_idx.Capacity = 1000;
+    for(int q = 0; q < _chanceToDowngradeItem.Length; ++q)
+    {
+      int cnt = (int)(1000 * _chanceToDowngradeItem[q]);
+      for(int w = 0; w < cnt; ++w)
+        levels_idx.Add(q);
+    }
+    levels_idx.shuffle(2000);
+
     _grid.Init(dim, _gridSpace);
 
     List<Vector2> vs = new List<Vector2>();
@@ -257,16 +267,7 @@ public class Level : MonoBehaviour
           id.type = item.id.type;
           id.kind = item.id.kind;
           id.lvl = item.id.lvl;
-          float val = Random.Range(0.0f, 1.0f);
-          int vi = 0;
-          for(int e = 0; e < _chanceToDowngradeItem.Length; ++e)
-          {
-            if(val >= _chanceToDowngradeItem[e])
-            {
-              vi = e;
-              break;
-            }
-          }
+          int vi = levels_idx[Random.Range(0, levels_idx.Count-1)];
           if(vi < itemLevel)
           {
             for(int d = 0; d < 1 << (itemLevel-vi); ++d)
