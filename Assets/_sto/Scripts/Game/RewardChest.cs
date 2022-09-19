@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPLbl = TMPro.TextMeshProUGUI;
 using GameLib;
+using GameLib.Utilities;
 
 public class RewardChest : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class RewardChest : MonoBehaviour
   [SerializeField] TMPLbl _lblResCnt;
   [SerializeField] GameObject _infoContainer;
   [SerializeField] Transform _chestLid;
+  [SerializeField] ObjectShake _shake;
 
   public static System.Action<RewardChest> onPoped, onNotPoped, onNotPushed, onReward;
 
@@ -80,11 +82,13 @@ public class RewardChest : MonoBehaviour
   }
   public void NoPush(Item.ID id)
   {
+    _shake.Shake();
     onNotPushed?.Invoke(this);
   }
   public Item.ID? Pop()
   {
     var id = GameState.Chest.PopRes();
+    _shake.Shake();    
     UpdateInfo();
     if(id != null)
       onPoped?.Invoke(this);

@@ -16,6 +16,44 @@ public class GameData : ScriptableObject
     _static_this = this;
   }
 
+  public enum GarbCats
+  {
+    Cat_00_lvl0 = 0,
+    Cat_00_lvl1 = 1,
+    Cat_00_lvl2 = 2,
+    Cat_00_lvl3 = 3,
+    Cat_00_lvl4 = 4,
+    Cat_00_lvl5 = 5,
+
+    Cat_01_lvl0 = 10,
+    Cat_01_lvl1 = 11,
+    Cat_01_lvl2 = 12,
+    Cat_01_lvl3 = 13,
+    Cat_01_lvl4 = 14,
+    Cat_01_lvl5 = 15,
+
+    Cat_02_lvl0 = 20,
+    Cat_02_lvl1 = 21,
+    Cat_02_lvl2 = 22,
+    Cat_02_lvl3 = 23,
+    Cat_02_lvl4 = 24,
+    Cat_02_lvl5 = 25,
+
+    // Cat_03_lvl0 = 30,
+    // Cat_03_lvl1 = 31,
+    // Cat_03_lvl2 = 32,
+    // Cat_03_lvl3 = 33,
+    // Cat_03_lvl4 = 34,
+    // Cat_03_lvl5 = 35,
+
+    // Cat_04_lvl0 = 40,
+    // Cat_04_lvl1 = 41,
+    // Cat_04_lvl2 = 42,
+    // Cat_04_lvl3 = 43,
+    // Cat_04_lvl4 = 44,
+    // Cat_04_lvl5 = 43,
+  }
+
   public static void Init()
   {
     var items = get()._items;
@@ -78,6 +116,11 @@ public class GameData : ScriptableObject
 
   public static class Prefabs
   {
+    public static Item     GetItemPrefab(GarbCats cat)
+    {
+      Item.ID id = new Item.ID((int)cat/10, (int)cat%10, Item.Kind.Garbage, true);
+      return get()._items[id.type].Get(id.lvl);
+    }
     public static GridTile CreateGridElem(Transform parent) 
     { 
       return Instantiate(get()._gridTile, parent); 

@@ -5,6 +5,8 @@ using UnityEngine;
 using GameLib;
 using GameLib.InputSystem;
 
+using GarbCats = GameData.GarbCats;
+
 public class Level : MonoBehaviour
 {
   public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut, onNoRoomOnGrid, onItemHovered;
@@ -47,10 +49,11 @@ public class Level : MonoBehaviour
   public struct LvlDesc
   {
     [SerializeField] Animal _animal;
-    [SerializeField] Item[] _reqItems;
+    [SerializeField] GarbCats[] _itemsCats;
 
     public Animal  animal => _animal;
-    public Item[]  items => _reqItems;
+    public GarbCats[] itemsCats => _itemsCats;
+    public Item items(int idx) => GameData.Prefabs.GetItemPrefab(_itemsCats[idx]);
   }
 
   public int    locationIdx {get; private set;} = -1;
@@ -73,7 +76,7 @@ public class Level : MonoBehaviour
   Item        _itemSelected;
   Item        _itemHovered;
   Animal      _animalSelected;
-  public List<Item>  _items = new List<Item>();
+  List<Item>  _items = new List<Item>();
   List<Item>  _items2 = new List<Item>();
   int         _requestCnt = 0;
   int         _initialItemsCnt = 0;
@@ -207,7 +210,7 @@ public class Level : MonoBehaviour
     for(int q = 0; q < _lvlDescs.Length; ++q)
     {
       var animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
-      animal.Init(_lvlDescs[q].items);
+      animal.Init(_lvlDescs[q].itemsCats);
       animal.Activate(true);
       _animals.Add(animal);
     }
@@ -246,10 +249,10 @@ public class Level : MonoBehaviour
       for(int q = 0; q < _lvlDescs.Length; ++q)
       {
         var lvlDesc = _lvlDescs[q];
-        _requestCnt += lvlDesc.items.Length;
-        for(int i = 0; i < lvlDesc.items.Length; ++i)
+        _requestCnt += lvlDesc.itemsCats.Length;
+        for(int i = 0; i < lvlDesc.itemsCats.Length; ++i)
         {
-          var item = _lvlDescs[q].items[i];
+          var item = _lvlDescs[q].items(i);
           int itemLevel = item.id.lvl;
           id.type = item.id.type;
           id.kind = item.id.kind;
@@ -287,6 +290,7 @@ public class Level : MonoBehaviour
           ids.Add(spec_id);
         }
       }
+      ids.shuffle(100);
 
       for(int q = 0; q < ids.Count; ++q)
       {
@@ -418,7 +422,7 @@ public class Level : MonoBehaviour
     if(!_itemSelected)
       return;
 
-    bool is_hit = IsItemHit(tid) || IsAnimalHit(tid) || IsTileHit(tid) || IsSplitMachineHit(tid) || IsStorageHit(tid);
+    bool is_hit = IsItemHit(tid) || IsAnimalHit(tid) || IsTileHit(tid) || IsSplitMachineHit(tid) || IsStorageHit(tid) || IsChestHit(tid);
     if(!is_hit)
     {
       MoveItemBack(_itemSelected);

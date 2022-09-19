@@ -4,13 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPLbl = TMPro.TextMeshProUGUI;
 using GameLib;
+using GameLib.Utilities;
 
 public class StorageBox : MonoBehaviour
 {
-  [SerializeField] GameObject _infoContainer; 
-  [SerializeField] TMPLbl     _lblCnt;
-  [SerializeField] Collider   _collider;
-
+  [SerializeField] GameObject   _infoContainer; 
+  [SerializeField] TMPLbl       _lblCnt;
+  [SerializeField] Collider     _collider;
+  [SerializeField] ObjectShake  _shake;
 
   public static System.Action<StorageBox> onPushed, onPoped, onNotPoped, onNotPushed;
 
@@ -44,11 +45,13 @@ public class StorageBox : MonoBehaviour
   {
     pushState = PushState.Ok;
     GameState.StorageBox.PushItem(id);
+    _shake.Shake();
     UpdateInfo();
     onPushed?.Invoke(this);
   }
   public void NoPush(Item.ID id)
   {
+    _shake.Shake();
     if(id.kind == Item.Kind.Food)
       pushState = PushState.Food;
     else if(id.kind == Item.Kind.Garbage)
@@ -59,10 +62,16 @@ public class StorageBox : MonoBehaviour
   {
     var id = GameState.StorageBox.PopItem();
     UpdateInfo();
-    if(id!=null)
+    if(id != null)
+    {
+      _shake.Shake();
       onPoped?.Invoke(this);
+    }
     else
+    {
+      _shake.Shake();
       onNotPoped?.Invoke(this);
+    }
       
     return id;
   }
