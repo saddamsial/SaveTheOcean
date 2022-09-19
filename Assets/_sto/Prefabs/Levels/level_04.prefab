@@ -149,19 +149,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _dim.x
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _dim.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: _resItemPerItems
-      value: 12
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _listItems.Array.size
@@ -178,11 +174,11 @@ PrefabInstance:
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[0]._animal
       value: 
-      objectReference: {fileID: 1633247935003215395, guid: 859c244a32af674468eca55f556b07bd, type: 3}
+      objectReference: {fileID: 1633247935003215395, guid: c94e5ef23c44e274b89a00b17292d3e9, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[1]._animal
       value: 
-      objectReference: {fileID: 1727722430390729767, guid: 78c2820665cc3a84ab2cb908fd6ac75f, type: 3}
+      objectReference: {fileID: 1633247935003215395, guid: c94e5ef23c44e274b89a00b17292d3e9, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[2]._animal
       value: 
@@ -205,6 +201,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[3]._reqItems.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _lvlDescs.Array.data[0]._itemsCats.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
@@ -247,6 +247,10 @@ PrefabInstance:
       propertyPath: _lvlDescs.Array.data[3]._reqItems.Array.data[0]
       value: 
       objectReference: {fileID: 6445466529311080229, guid: bbaf147057b39f7488c3642937cb1d2c, type: 3}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _lvlDescs.Array.data[0]._itemsCats.Array.data[0]
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4895620254315257695, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_Layer
       value: 0
