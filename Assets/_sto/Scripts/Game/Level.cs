@@ -267,7 +267,7 @@ public class Level : MonoBehaviour
           id.type = item.id.type;
           id.kind = item.id.kind;
           id.lvl = item.id.lvl;
-          int vi = levels_idx[Random.Range(0, levels_idx.Count-1)];
+          int vi = (levels_idx.Count > 0)? levels_idx[Random.Range(0, levels_idx.Count-1)] : 0;
           if(vi < itemLevel)
           {
             for(int d = 0; d < 1 << (itemLevel-vi); ++d)
