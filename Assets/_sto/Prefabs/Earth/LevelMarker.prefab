@@ -123,22 +123,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.7490196
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
 --- !u!1001 &6396011715451360589
@@ -288,22 +272,6 @@ PrefabInstance:
     - target: {fileID: 66154836325665486, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
-      propertyPath: ShapeModule.radius.value
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
-      propertyPath: InitialModule.startSize.minScalar
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 66154836325665487, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
-      propertyPath: InitialModule.startColor.maxColor.a
-      value: 0.7490196
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b702953bc0bf8409a08d33e25cfb2c, type: 3}
