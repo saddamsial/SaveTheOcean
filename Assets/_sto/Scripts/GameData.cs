@@ -25,6 +25,8 @@ public class GameData : ScriptableObject
     Cat_00_lvl4 = 4,
     Cat_00_lvl5 = 5,
     Cat_00_lvl6 = 6,
+    Cat_00_lvl7 = 7,
+
 
     Cat_01_lvl0 = 10,
     Cat_01_lvl1 = 11,
