@@ -642,6 +642,7 @@ public class Level : MonoBehaviour
         _grid.set(_itemSelected.vgrid, 0);
         _itemSelected.Hide();
         is_hit = true;
+        SpawnItem(_itemSelected.vgrid);
       }
       else
         storage.NoPush(_itemSelected.id);
