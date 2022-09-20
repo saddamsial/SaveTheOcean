@@ -39,6 +39,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialResources_collect
       objectReference: {fileID: 0}
+    - target: {fileID: 7606076826974335938, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.3872326
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606076826974335938, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.3872326
+      objectReference: {fileID: 0}
     - target: {fileID: 8171470983252514473, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

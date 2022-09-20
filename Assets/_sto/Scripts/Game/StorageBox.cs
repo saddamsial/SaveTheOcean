@@ -8,6 +8,7 @@ using GameLib.Utilities;
 
 public class StorageBox : MonoBehaviour
 {
+  [SerializeField] GameObject   _content;
   [SerializeField] GameObject   _infoContainer; 
   [SerializeField] TMPLbl       _lblCnt;
   [SerializeField] Collider     _collider;
@@ -29,12 +30,18 @@ public class StorageBox : MonoBehaviour
   void Awake()
   {
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
-    UpdateInfo();
 
-    bool show = GameState.StorageBox.ShouldShow();
-    gameObject.SetActive(show);
-    if(show)
-      this.Invoke(() => {GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this);}, 1.0f);
+    _content.SetActive(false);
+    if(GameState.StorageBox.ShouldShow())
+      Show(1);
+  }
+  public bool visible => _content.activeSelf;
+  public void Show(float delay)
+  {
+    UpdateInfo();
+    _content.SetActive(true);
+    GameState.StorageBox.shown = true;
+    this.Invoke(() => { GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this); }, delay);
   }
 
   void UpdateInfo()

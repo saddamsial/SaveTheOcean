@@ -23,27 +23,33 @@ public class RewardChest : MonoBehaviour
 
   public int level => GameState.Chest.rewardLevel;
 
+  int _resCnt => GameState.Chest.staminaCnt + GameState.Chest.coinsCnt + GameState.Chest.gemsCnt;
+
   void Awake()
   {
+    layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
+
     GameState.Econo.onRewardProgressChanged += OnRewardChanged;
+
     _rewardPointsMov = GameState.Econo.rewards;
     OnRewardChanged(_rewardPointsMov);
 
-    layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
-
-    _lidAngle = (_resCnt == 0) ? 0 : 90;
-
-    bool show = GameState.Chest.ShouldShow();
-    gameObject.SetActive(show);
-    if(show)
-      this.Invoke(()=> {GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this);}, 1.0f);
+    _content.SetActive(false);
+    if(GameState.Chest.ShouldShow())
+      Show();
   }
   void OnDestroy()
   {
     GameState.Econo.onRewardProgressChanged -= OnRewardChanged;
   }
 
-  int _resCnt => GameState.Chest.staminaCnt + GameState.Chest.coinsCnt + GameState.Chest.gemsCnt;
+  public void Show()
+  {
+    _lidAngle = (_resCnt == 0) ? 0 : 90;
+    _content.SetActive(true);
+    GameState.Chest.shown = true;
+    this.Invoke(() => { GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this); }, 1.0f);
+  }
 
   void SetupSlider()
   {
@@ -75,6 +81,8 @@ public class RewardChest : MonoBehaviour
     var rewardProgress = GameData.Econo.GetRewardProgress(rewardPoints);
     if(rewardProgress.lvl > GameState.Chest.rewardLevel)
     {
+      if(rewardProgress.lvl == 1)
+        Show();
       onReward?.Invoke(this);
       this.Invoke(()=>
       {
@@ -102,8 +110,11 @@ public class RewardChest : MonoBehaviour
   }
   void Update()
   {
-    _rewardPointsMov = Mathf.Lerp(_rewardPointsMov, GameState.Econo.rewards, Time.deltaTime * 4);
-    UpdateSlider();
-    UpdateLid();
+    if(_content.activeSelf)  
+    {
+      _rewardPointsMov = Mathf.Lerp(_rewardPointsMov, GameState.Econo.rewards, Time.deltaTime * 4);
+      UpdateSlider();
+      UpdateLid();
+    }
   }
 }

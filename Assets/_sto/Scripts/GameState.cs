@@ -168,11 +168,23 @@ public class GameState : SavableScriptableObject
   [SerializeField] FeedingState feeding;
 
   [System.Serializable]
+  class TutorialsState
+  {
+    public bool  introDone = false;
+    public bool  premiumDone = false;
+    public bool  chestDone = false;
+    public bool  storageDone = false;
+  }
+  [SerializeField] TutorialsState tutorials;
+
+  [System.Serializable]
   class GameInfoState
   {
     public long appQuitTime;
   }
   [SerializeField] GameInfoState gameInfo;
+
+
 
   public static void Init()
   {
@@ -366,7 +378,7 @@ public class GameState : SavableScriptableObject
     }
     public static bool shown { get => get().chest.shown; set => get().chest.shown = value;}
     public static int  itemsCnt => staminaCnt + coinsCnt + gemsCnt;
-    public static bool ShouldShow() => shown || itemsCnt > 0;
+    public static bool ShouldShow() => shown;
     public static bool IsFirstShow() => !shown && itemsCnt > 0;
   }
   public static class StorageBox
@@ -396,8 +408,7 @@ public class GameState : SavableScriptableObject
     }
     public static int  itemsCnt => get().storage.listItems.Count;
     public static bool shown {get => get().storage.shown; set => get().storage.shown = value;}
-    public static bool ShouldShow() => shown || itemsCnt > 0;
-    public static bool IsFirstShow() => !shown && itemsCnt > 0;
+    public static bool ShouldShow() => shown;
   }
   public static class Feeding
   {
@@ -412,6 +423,13 @@ public class GameState : SavableScriptableObject
     }
     public static int   FoodCnt => get().feeding.foods.Count;
     public static (Item.ID id, Vector2 vgrid) GetFood(int idx) => new (get().feeding.foods[idx]._id, get().feeding.foods[idx]._vgrid);
+  }
+  public static class Tutorial
+  {
+    public static bool introDone {get => get().tutorials.introDone; set => get().tutorials.introDone = value;}
+    public static bool premiumDone { get => get().tutorials.premiumDone; set => get().tutorials.premiumDone = value; }
+    public static bool chestDone { get => get().tutorials.chestDone; set => get().tutorials.chestDone = value; }
+    public static bool storageDone { get => get().tutorials.storageDone; set => get().tutorials.storageDone = value; }
   }
   public static class GameInfo
   {

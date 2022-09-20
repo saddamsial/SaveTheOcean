@@ -13,6 +13,7 @@ public class Level : MonoBehaviour
   public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
   public static System.Action<Vector3> onMagnetBeg;
   public static System.Action<bool>    onMagnetEnd;
+  public static System.Action<Item>    onPremiumItem, onItemCollected;
 
   [Header("Refs")]
   [SerializeField] Transform      _itemsContainer;
@@ -307,7 +308,7 @@ public class Level : MonoBehaviour
           ids.Add(spec_id);
         }
       }
-      ids.shuffle(100);
+      ids.shuffle(500);
 
       for(int q = 0; q < ids.Count; ++q)
       {
@@ -317,8 +318,7 @@ public class Level : MonoBehaviour
           item.Init(vs.first());
           vs.RemoveAt(0);
           item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
-          _grid.set(item.vgrid, 1, item.id.kind);
-          _items.Add(item);
+          AddItem(item);
         }
         else
         {
@@ -337,11 +337,21 @@ public class Level : MonoBehaviour
         var item = GameData.Prefabs.CreateItem(food.id, _itemsContainer);
         item.Init(food.vgrid);
         item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
-        _grid.set(item.vgrid, 1, item.id.kind);
-        _items.Add(item);
+        AddItem(item);
       }
     }
     _initialItemsCnt = itemsCount;
+  }
+  bool  firstPremium = false;
+  void  AddItem(Item item)
+  {
+    _items.Add(item);
+    _grid.set(item.vgrid, 1, item.id.kind);
+    if(!GameState.Tutorial.premiumDone && !firstPremium && item.id.IsSpecial)
+    {
+      firstPremium = true;
+      onPremiumItem?.Invoke(item);
+    }
   }
   void  SpawnItem(Vector2 vgrid)
   {
@@ -349,12 +359,17 @@ public class Level : MonoBehaviour
     {
       var item = _items2.first();
       _items2.RemoveAt(0);
-      int pipe_idx = (vgrid.x < 0)? 0 : 1;
       item.Spawn(vgrid, null, 15, 1);
-      _items.Add(item);
-      _grid.set(item.vgrid, 1, item.id.kind);
+      AddItem(item);
     }
   }
+  void MoveItemBack(Item item)
+  {
+    item.Select(false);
+    item.MoveBack();
+    if(!item.IsInMachine)
+      _grid.set(item.vgrid, 1, item.id.kind);
+  }  
   void  DestroyItem(Item item)
   {
     _items.Remove(item);
@@ -495,8 +510,7 @@ public class Level : MonoBehaviour
           {
             var item = GameData.Prefabs.CreateItem(id.Value, _itemsContainer);
             item.vgrid = vg.Value;
-            _items.Add(item);
-            _grid.set(item.vgrid, 1, item.id.kind);
+            AddItem(item);
             item.Throw(vbeg, item.vgrid);
             GameState.Feeding.Update(_items);
           }
@@ -519,6 +533,7 @@ public class Level : MonoBehaviour
           _items.Remove(item);
           _grid.set(item.vgrid, 0);
           _uiStatusBar.MoveCollected(item, amount);
+          onItemCollected?.Invoke(item);
           item.Hide();
           SpawnItem(item.vgrid);
         }
@@ -526,13 +541,6 @@ public class Level : MonoBehaviour
           tapTime = Time.timeAsDouble;
       }
     }
-  }
-  void MoveItemBack(Item item)
-  {
-    item.Select(false);
-    item.MoveBack();
-    if(!item.IsInMachine)
-      _grid.set(item.vgrid, 1, item.id.kind);
   }
   bool IsItemHit(TouchInputData tid)
   {
@@ -683,14 +691,43 @@ public class Level : MonoBehaviour
       DestroyItem(itm);
     }
   }
+  IEnumerator coMoveToSB()
+  {
+    Vector3 vsbox = _storageBox.transform.position + new Vector3(0, 1, 0);
+    List<Item> itms = _items.FindAll((Item item) => item.id.IsSpecial).ToList();
+    while(itms.Count > 0)
+    {
+      for(int q = 0; q < itms.Count;)
+      {
+        itms[q].vwpos = Vector3.Lerp(itms[q].vwpos, vsbox, Time.deltaTime * 4);
+        if(Vector3.Distance(itms[q].vwpos, vsbox) < 0.1f)
+        {
+          _storageBox.Push(itms[q].id.Validate(true));
+          DestroyItem(itms[q]);
+          itms.RemoveAt(q);
+          --q;
+        }
+        ++q;
+      }
+      yield return null;
+    }
+  }
   IEnumerator coEnd()
   {
-    yield return new WaitForSeconds(3.0f);
+    if(!GameState.Tutorial.storageDone && _items.Any((item) => item.id.IsSpecial))
+    {
+      _storageBox.Show(0.05f);
+      yield return new WaitForSeconds(1.0f);
+    }
+    yield return StartCoroutine(coMoveToSB());
+
+    yield return new WaitForSeconds(2.5f);
     succeed = true;
     onFinished?.Invoke(this);
     GameState.Progress.Locations.SetLocationFinished();
     GameState.Progress.Locations.UnlockNextLocation();
     yield return new WaitForSeconds(0.5f);
+
     _uiSummary.Show(this);
   }
   void CheckEnd()
@@ -699,7 +736,6 @@ public class Level : MonoBehaviour
     if(!finished && activeAnimals == 0)
     {
       finished = true;
-      End();
       StartCoroutine(coEnd());
     }
   }
@@ -707,7 +743,6 @@ public class Level : MonoBehaviour
   {
     List<Item> req_items = new List<Item>();
     _animals.ForEach((anim) => req_items.AddRange(anim.garbages));
-    //_items.ForEach((item) => item.tickIco = req_items.Any((it) => Item.EqType(it, item)));
     req_items.ForEach((reqit) => reqit.tickIco = _items.Any((it) => Item.EqType(it, reqit)));
   }
   void Process()

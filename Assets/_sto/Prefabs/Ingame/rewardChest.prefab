@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99301180b1c8554d9e40a087e4296ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _content: {fileID: 789037944289348315}
   _slider: {fileID: 4470925969954943807}
   _lblResCnt: {fileID: 6216344405606870427}
   _infoContainer: {fileID: 5585167261125485739}
