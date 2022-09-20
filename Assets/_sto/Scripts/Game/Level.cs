@@ -51,9 +51,24 @@ public class Level : MonoBehaviour
     [SerializeField] Animal _animal;
     [SerializeField] GarbCats[] _itemsCats;
 
+    public int GetSolutionMoveCount() {
+      var solution = 0;
+      for (int i = 0; i <_itemsCats.Length ; i++)
+        solution += (int)Mathf.Pow(2, (int)_itemsCats[i]%10);
+      return solution;
+    } 
+
     public Animal  animal => _animal;
     public GarbCats[] itemsCats => _itemsCats;
     public Item items(int idx) => GameData.Prefabs.GetGarbagePrefab(_itemsCats[idx]);
+  }
+
+  public int GetNumberOfMovesToSolve(){
+    var solution = 0;
+    foreach (var animal in  _lvlDescs){
+        solution += animal.GetSolutionMoveCount();
+    }
+    return solution;
   }
 
   public int    locationIdx {get; private set;} = -1;
