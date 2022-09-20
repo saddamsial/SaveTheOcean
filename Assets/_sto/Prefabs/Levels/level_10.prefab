@@ -188,30 +188,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1633247935003215395, guid: 859c244a32af674468eca55f556b07bd, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: _chanceToDowngradeItem.Array.data[0]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: _chanceToDowngradeItem.Array.data[1]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: _chanceToDowngradeItem.Array.data[2]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: _chanceToDowngradeItem.Array.data[3]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: _chanceToDowngradeItem.Array.data[4]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: _chanceToDowngradeItem.Array.data[5]
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[0]._reqItems.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -289,7 +265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[1]._itemsCats.Array.data[1]
-      value: 36
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 4895620254315257695, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_Layer
