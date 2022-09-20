@@ -518,7 +518,7 @@ MonoBehaviour:
   - 0.2
   - 0.1
   - 0.05
-  _resItemPerItems: 4
+  _resItemPerItems: 3
   _lvlDescs: []
 --- !u!1 &4494250454681055070
 GameObject:
