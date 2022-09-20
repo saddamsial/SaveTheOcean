@@ -513,13 +513,13 @@ MonoBehaviour:
   _gridSpace: 1.5
   _waterColor: {r: 0, g: 0.5647059, b: 1, a: 1}
   _chanceToDowngradeItem:
-  - 0.5
-  - 0.4
-  - 0.3
-  - 0.2
-  - 0.1
-  - 0.05
-  _resItemPerItems: 3
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  <_resItemPerItems>k__BackingField: 8
   _lvlDescs: []
 --- !u!1 &4494250454681055070
 GameObject:
