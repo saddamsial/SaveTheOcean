@@ -13,7 +13,7 @@ public class StorageBox : MonoBehaviour
   [SerializeField] Collider     _collider;
   [SerializeField] ObjectShake  _shake;
 
-  public static System.Action<StorageBox> onPushed, onPoped, onNotPoped, onNotPushed;
+  public static System.Action<StorageBox> onPushed, onPoped, onNotPoped, onNotPushed, onShow;
 
   public static int layerMask = 1;
 
@@ -29,16 +29,18 @@ public class StorageBox : MonoBehaviour
   void Awake()
   {
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
-
     UpdateInfo();
 
-    this.Invoke(() => GetComponent<ActivatableObject>().ActivateObject(), 1.0f);
+    bool show = GameState.StorageBox.ShouldShow();
+    gameObject.SetActive(show);
+    if(show)
+      this.Invoke(() => {GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this);}, 1.0f);
   }
 
   void UpdateInfo()
   {
-    _infoContainer.SetActive(GameState.StorageBox.ItemsCnt() > 0);
-    _lblCnt.text = $"x{GameState.StorageBox.ItemsCnt()}";
+    _infoContainer.SetActive(GameState.StorageBox.itemsCnt > 0);
+    _lblCnt.text = $"x{GameState.StorageBox.itemsCnt}";
   }
   public bool IsStorageDrop(Collider col) => col == _collider;
   public void Push(Item.ID id)

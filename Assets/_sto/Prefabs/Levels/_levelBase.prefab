@@ -501,7 +501,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemsContainer: {fileID: 610259900746943541}
   _tilesContainer: {fileID: 6848804485864095692}
-  _animalsContainer: {fileID: 1278421171504114904}
   _animalContainers:
   - {fileID: 8522299307696825627}
   - {fileID: 8536298820559939731}

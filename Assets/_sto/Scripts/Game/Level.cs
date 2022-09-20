@@ -17,7 +17,7 @@ public class Level : MonoBehaviour
   [Header("Refs")]
   [SerializeField] Transform      _itemsContainer;
   [SerializeField] Transform      _tilesContainer;
-  [SerializeField] Transform      _animalsContainer;
+  //[SerializeField] Transform      _animalsContainer;
   [SerializeField] Transform[]    _animalContainers;
   [SerializeField] Renderer       _waterRenderer;
   [SerializeField] SplitMachine   _splitMachine;

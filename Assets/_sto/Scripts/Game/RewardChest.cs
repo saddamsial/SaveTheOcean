@@ -8,13 +8,14 @@ using GameLib.Utilities;
 
 public class RewardChest : MonoBehaviour
 {
+  [SerializeField] GameObject _content;
   [SerializeField] Slider _slider;
   [SerializeField] TMPLbl _lblResCnt;
   [SerializeField] GameObject _infoContainer;
   [SerializeField] Transform _chestLid;
   [SerializeField] ObjectShake _shake;
 
-  public static System.Action<RewardChest> onPoped, onNotPoped, onNotPushed, onReward;
+  public static System.Action<RewardChest> onPoped, onNotPoped, onNotPushed, onReward, onShow;
 
   float _rewardPointsMov = 0;
   float _lidAngle = 0;
@@ -32,7 +33,10 @@ public class RewardChest : MonoBehaviour
 
     _lidAngle = (_resCnt == 0) ? 0 : 90;
 
-    this.Invoke(()=> GetComponent<ActivatableObject>().ActivateObject(), 1.0f);
+    bool show = GameState.Chest.ShouldShow();
+    gameObject.SetActive(show);
+    if(show)
+      this.Invoke(()=> {GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this);}, 1.0f);
   }
   void OnDestroy()
   {

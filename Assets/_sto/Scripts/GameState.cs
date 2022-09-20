@@ -115,15 +115,19 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class ChestState
   {
+    public bool shown = false;
     public List<Item.ID> listStamina = new List<Item.ID>();
     public List<Item.ID> listCoins = new List<Item.ID>();
     public List<Item.ID> listGems = new List<Item.ID>();
 
     public void AddReward(GameData.Rewards.Reward rew)
     {
-      listStamina.Add(new Item.ID(0, 0, Item.Kind.Stamina));
-      listCoins.Add(new Item.ID(0, 0, Item.Kind.Coin));
-      listGems.Add(new Item.ID(0, 0, Item.Kind.Gem));
+      for(int q = 0; q < rew.stamina; ++q)
+        listStamina.Add(new Item.ID(0, 0, Item.Kind.Stamina));
+      for(int q = 0; q < rew.coins; ++q)  
+        listCoins.Add(new Item.ID(0, 0, Item.Kind.Coin));
+      for(int q = 0; q < rew.gems; ++q)  
+        listGems.Add(new Item.ID(0, 0, Item.Kind.Gem));
     }
   }
   [SerializeField] ChestState chest;
@@ -131,6 +135,7 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class StorageState
   {
+    public bool shown = false;
     public List<Item.ID> listItems;
   };
   [SerializeField] StorageState storage;
@@ -287,9 +292,8 @@ public class GameState : SavableScriptableObject
           onRewardProgressChanged?.Invoke(value);
       }
     }
-    public static bool CanSpendStamina(int stamina_cost) => stamina >= stamina_cost;
-    public static bool CanSpendCoins(int coins_cost) => coins >= coins_cost;
-    
+    public static bool  CanSpendStamina(int stamina_cost) => stamina >= stamina_cost;
+    public static bool  CanSpendCoins(int coins_cost) => coins >= coins_cost;
     public static float GetStaminaRefillPerc()
     {
       var now = CTime.get();
@@ -299,7 +303,7 @@ public class GameState : SavableScriptableObject
       
       return perc;
     }
-    public static int AddRes(Item.ID id) //without event
+    public static int   AddRes(Item.ID id) //without event
     {
       int amount = (int)((1 << id.lvl) * 1.5f);
       if(id.kind == Item.Kind.Stamina)
@@ -312,7 +316,7 @@ public class GameState : SavableScriptableObject
       return amount;  
     }
 
-    public static void Process()
+    public static void  Process()
     {
       var eco = get().economy;
       var now = CTime.get();
@@ -360,6 +364,10 @@ public class GameState : SavableScriptableObject
     {
       get().chest.AddReward(GameData.Econo.GetRewards());
     }
+    public static bool shown { get => get().chest.shown; set => get().chest.shown = value;}
+    public static int  itemsCnt => staminaCnt + coinsCnt + gemsCnt;
+    public static bool ShouldShow() => shown || itemsCnt > 0;
+    public static bool IsFirstShow() => !shown && itemsCnt > 0;
   }
   public static class StorageBox
   {
@@ -386,7 +394,10 @@ public class GameState : SavableScriptableObject
       }
       return id;
     }
-    public static int ItemsCnt() => get().storage.listItems.Count;
+    public static int  itemsCnt => get().storage.listItems.Count;
+    public static bool shown {get => get().storage.shown; set => get().storage.shown = value;}
+    public static bool ShouldShow() => shown || itemsCnt > 0;
+    public static bool IsFirstShow() => !shown && itemsCnt > 0;
   }
   public static class Feeding
   {
