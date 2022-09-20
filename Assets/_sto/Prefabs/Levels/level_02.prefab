@@ -156,6 +156,18 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _waterColor.b
+      value: 0.9056604
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _waterColor.g
+      value: 0.7251531
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+      propertyPath: _waterColor.r
+      value: 0.2691349
+      objectReference: {fileID: 0}
+    - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _resItemPerItems
       value: 4
       objectReference: {fileID: 0}
