@@ -79,7 +79,7 @@ MonoBehaviour:
   _staminaMax: 99
   _staminaPlayCost: 5
   _staminaAdReward: 15
-  _staminaRefillTime: 60
+  _staminaRefillTime: 300
   _coinFeedCost: 1
   _coinsMax: 999
   _gemsMax: 999
@@ -89,57 +89,57 @@ MonoBehaviour:
       stamina: 0
       coins: 0
       gems: 0
-  - points2Chest: 1
+  - points2Chest: 16
     _reward:
       stamina: 1
-      coins: 1
+      coins: 5
       gems: 1
-  - points2Chest: 10
+  - points2Chest: 80
     _reward:
       stamina: 2
       coins: 5
       gems: 1
-  - points2Chest: 15
+  - points2Chest: 144
     _reward:
       stamina: 4
       coins: 8
       gems: 2
-  - points2Chest: 20
+  - points2Chest: 272
     _reward:
       stamina: 5
       coins: 10
       gems: 2
-  - points2Chest: 30
+  - points2Chest: 400
     _reward:
       stamina: 6
       coins: 12
       gems: 3
-  - points2Chest: 50
+  - points2Chest: 528
     _reward:
       stamina: 7
       coins: 15
       gems: 3
-  - points2Chest: 70
+  - points2Chest: 720
     _reward:
       stamina: 8
       coins: 17
       gems: 4
-  - points2Chest: 100
+  - points2Chest: 912
     _reward:
       stamina: 10
       coins: 20
       gems: 5
-  - points2Chest: 140
+  - points2Chest: 1168
     _reward:
       stamina: 12
       coins: 24
       gems: 6
-  - points2Chest: 190
+  - points2Chest: 1424
     _reward:
       stamina: 14
       coins: 28
       gems: 8
-  - points2Chest: 250
+  - points2Chest: 1808
     _reward:
       stamina: 15
       coins: 30

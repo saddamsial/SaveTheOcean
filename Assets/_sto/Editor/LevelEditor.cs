@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(Level))]
+[CanEditMultipleObjects]
 public class LevelEditor : Editor {
+    float timePerMove = 1.5f;
+
     Level level = null;
     private void OnEnable() {
         level = (Level)target;
@@ -13,6 +16,9 @@ public class LevelEditor : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
         GUILayout.Label("Dev Info");
-        GUILayout.Label("Number of moves: " + level.GetNumberOfMovesToSolve());
-    }
+        int moves = level.GetNumberOfMovesToSolve();
+        GUILayout.Label("Moves: " + moves); 
+        GUILayout.Label("Rewards: " + (level._resItemPerItems == 0 ? "-" : Mathf.RoundToInt(moves/level._resItemPerItems))); 
+        GUILayout.Label("Anticipated time: " + System.TimeSpan.FromSeconds(moves * timePerMove).ToString(@"mm\:ss") + " | @" + timePerMove + " sec/move");
+    }   
 }

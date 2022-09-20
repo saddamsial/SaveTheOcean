@@ -34,7 +34,7 @@ public class Level : MonoBehaviour
   [SerializeField] Color      _waterColor;
   [Header("LvlDesc")]
   [SerializeField] float[]    _chanceToDowngradeItem = new float[6];
-  [SerializeField] int        _resItemPerItems = 0;
+  [field:SerializeField] public int  _resItemPerItems {get; private set;}= 0;
   [SerializeField] float      _resGemsPart = 0.1f;
   [SerializeField] float      _resCoinsPart = 0.4f;
   [SerializeField] float      _resStaminaPart = 0.5f;
