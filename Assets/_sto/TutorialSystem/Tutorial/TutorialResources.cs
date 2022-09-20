@@ -19,16 +19,15 @@ public class TutorialResources : TutorialLogic
 
     void OnItemCollected(Item item)
     {
-      ProgressTutorial();
+       ProgressTutorial();
     }
     void OnFirstPremium(Item item)
     { 
       if(!GameState.Tutorial.premiumDone)
       {
-        tutorialSequence[1].panel.PlaceTutorialOverObject(item.transform);
+        //tutorialSequence[1].panel.PlaceTutorialOverObject(item.transform);
         //tutorialSequence[1].sender = item.transform;
-
-        ActivateTutorial(item.transform);
+        ActivateTutorial();
         GameState.Tutorial.premiumDone = true;
       }
     }

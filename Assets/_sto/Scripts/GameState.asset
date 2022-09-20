@@ -30,7 +30,10 @@ MonoBehaviour:
     shown: 0
     listStamina: []
     listCoins: []
-    listGems: []
+    listGems:
+    - _type: 6
+      _lvl: 0
+      _kind: 4
   storage:
     shown: 0
     listItems: []

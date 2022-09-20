@@ -35,7 +35,11 @@ public class Level : MonoBehaviour
   [Header("LvlDesc")]
   [SerializeField] float[]    _chanceToDowngradeItem = new float[6];
   [SerializeField] int        _resItemPerItems = 0;
+  [SerializeField] float      _resGemsPart = 0.1f;
+  [SerializeField] float      _resCoinsPart = 0.4f;
+  [SerializeField] float      _resStaminaPart = 0.5f;
   [SerializeField] LvlDesc[]  _lvlDescs;
+
 
   public enum State
   {
@@ -301,11 +305,21 @@ public class Level : MonoBehaviour
       if(_resItemPerItems > 0)
       {
         int resItems = ids.Count / _resItemPerItems;
-        List<Item.Kind> items_kinds = new List<Item.Kind>(){Item.Kind.Stamina, Item.Kind.Coin, Item.Kind.Gem};
-        for(int q = 0; q < resItems; ++q)
+        var extras = new (Item.Kind kind, float weight)[]
         {
-          var spec_id = new Item.ID(0, 0, items_kinds[Random.Range(0, items_kinds.Count)]);
-          ids.Add(spec_id);
+          new (Item.Kind.Stamina, _resStaminaPart),
+          new (Item.Kind.Coin, _resCoinsPart),
+          new (Item.Kind.Gem, _resGemsPart),
+        };
+
+        for(int q = 0; q < extras.Length; ++q)
+        {
+          int cnt = Mathf.RoundToInt(resItems * extras[q].weight);
+          for(int i = 0; i < cnt ; ++i)
+          {
+            var spec_id = new Item.ID(0, 0, extras[q].kind);
+            ids.Add(spec_id);
+          } 
         }
       }
       ids.shuffle(500);
