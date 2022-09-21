@@ -10,6 +10,7 @@ public class UIEarth : MonoBehaviour
   [SerializeField] Button  _btnPlay;
   [SerializeField] TMPLbl  _lblLevelInfo;
   [SerializeField] Slider  _slider;
+  [SerializeField] TMPLbl  _btnActionInfo;
   [SerializeField] TMPLbl  _btnStaminaInfo;
 
   public static System.Action onBtnPlay;
@@ -53,10 +54,25 @@ public class UIEarth : MonoBehaviour
     _earthPanel.DeactivatePanel();
   }  
 
-  void UpdateLevelInfo(int level)
+  bool IsLocationSelectable(int location)
   {
-    //_btnPlay.interactable = GameState.Progress.Locations.GetLocationState(level) != Level.State.Locked;
-    _lblLevelInfo.text = "LEVEL " + (level + 1);
+    var state = GameState.Progress.Locations.GetLocationState(location);
+    return state != Level.State.Locked && state != Level.State.Finished;
+  }
+  void UpdateLevelInfo(int location)
+  {
+    _btnPlay.interactable = IsLocationSelectable(location);
+    _lblLevelInfo.text = "LEVEL " + (location + 1);
+    if(_btnPlay.interactable)
+    {
+      _btnActionInfo.text = "Play";
+      _btnStaminaInfo.gameObject.SetActive(true);
+    }
+    else
+    {
+      _btnActionInfo.text = "Cleared";
+      _btnStaminaInfo.gameObject.SetActive(false);
+    }
   }
 
   public void OnBtnPlay()
