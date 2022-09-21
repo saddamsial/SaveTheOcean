@@ -11,12 +11,16 @@ namespace TutorialSystem
     {
         [SerializeField] protected TutorialSequence[] tutorialSequence = new TutorialSequence[]{};
 
-        public void ActivateTutorial(object sender = null){
+        public void SetSender(Transform transform){
+            foreach (var tutorial in tutorialSequence)
+                if (tutorial.sender == null) tutorial.sender = transform;
+        }
+
+        public void ActivateTutorial(){
             this.enabled = true;
             TutorialManger.Instance?.RequestTutorial(tutorialSequence);
         }
-        public void ProgressTutorial() => ProgressTutorial(null);
-        public void ProgressTutorial(object sender){
+        public void ProgressTutorial(){
             TutorialManger.Instance?.ProgressTutorial();
             if (!TutorialManger.IsTutorialActive){
                 this.enabled = false;
