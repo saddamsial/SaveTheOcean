@@ -215,6 +215,12 @@ public class Item : MonoBehaviour
   {
     _activatable.ActivateObject();
     GetComponent<BoxCollider>().enabled = false;
+    var osir = GetComponentInChildren<ObjectSpinInRange>(true);
+    if(osir)
+    {
+      osir.transform.localRotation = Quaternion.identity;
+      osir.enabled = false;
+    }
     System.Array.ForEach(GetComponentsInChildren<ObjectRandomizeTransform>(), (ort) => ort.transform.reset());
     mdl = _models[0];
     SetModel(0);
