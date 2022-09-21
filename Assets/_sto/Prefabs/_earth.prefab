@@ -5122,10 +5122,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1950957426615574980, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2298499713923893828, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
       propertyPath: m_text
       value: Speed Rotation Transform:10
