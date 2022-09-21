@@ -361,7 +361,7 @@ public class Level : MonoBehaviour
   {
     _items.Add(item);
     _grid.set(item.vgrid, 1, item.id.kind);
-    if(!GameState.Tutorial.premiumDone && !firstPremium && item.id.IsSpecial)
+    if(!GameState.Events.Tutorials.premiumDone && !firstPremium && item.id.IsSpecial)
     {
       firstPremium = true;
       onPremiumItem?.Invoke(item);
@@ -728,11 +728,12 @@ public class Level : MonoBehaviour
   }
   IEnumerator coEnd()
   {
-    if(!GameState.Tutorial.storageDone && _items.Any((item) => item.id.IsSpecial))
+    if(!_storageBox.visible)
     {
       _storageBox.Show(0.05f);
       yield return new WaitForSeconds(1.0f);
     }
+
     yield return StartCoroutine(coMoveToSB());
 
     yield return new WaitForSeconds(2.5f);

@@ -27,11 +27,11 @@ public class TutorialResources : TutorialLogic
   }
   void OnFirstPremium(Item item)
   { 
-    if(!GameState.Tutorial.premiumDone)
+    if(!GameState.Events.Tutorials.premiumDone)
     {
-      //tutorialSequence[1].sender = item.transform;
+      SetUndefinedSenders(item.transform);
       ActivateTutorial();
-      GameState.Tutorial.premiumDone = true;
+      GameState.Events.Tutorials.premiumDone = true;
       _active = true;
     }
   }

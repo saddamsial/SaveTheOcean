@@ -9,6 +9,7 @@ public class Earth : MonoBehaviour
 {
   [Header("Refs")]
   [SerializeField] GameObject     _earthPrefab;
+  [SerializeField] GameObject     _locationsPath;
   [SerializeField] Transform      _levelsContainer;
   [SerializeField] Transform      _locationsContainer;
   [SerializeField] Transform      _fx;
@@ -68,13 +69,6 @@ public class Earth : MonoBehaviour
     }
     _locations = listLocations.ToArray();
     locationsCnt = _locations.Length;
-
-
-    // var delay = SystemNotificationBasicEx.GetDisplayDelay();
-    // if((CTime.get() - DateTime.FromBinary(GameState.GameInfo.appQuitTime)).TotalHours > delay)
-    // {
-    //   //GameState.Progress.Locations.GetRandomLocation
-    // }
   }
   public void Setup()
   {
@@ -104,8 +98,10 @@ public class Earth : MonoBehaviour
     _fx.gameObject.SetActive(true);
     _extras.gameObject.SetActive(true);
 
+    _locationsPath.SetActive(!GameState.Progress.Locations.AllStateFinished());
+
     UpdateLevelsStates();
-    int location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;      
+    int location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;
     this.Invoke(()=> 
     {
       SelectLocation(location_idx); 
@@ -119,8 +115,6 @@ public class Earth : MonoBehaviour
   public void Hide()
   {
     onHide?.Invoke();
-    //_earthPrefab.SetActive(false);
-    //_vessel.gameObject.SetActive(false);
     _fx.gameObject.SetActive(false);
     _extras.gameObject.SetActive(false);
   }

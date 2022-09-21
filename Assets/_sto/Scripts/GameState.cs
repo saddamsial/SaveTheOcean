@@ -168,14 +168,13 @@ public class GameState : SavableScriptableObject
   [SerializeField] FeedingState feeding;
 
   [System.Serializable]
-  class TutorialsState
+  class EventsState
   {
-    public bool  introDone = false;
-    public bool  premiumDone = false;
-    public bool  chestDone = false;
-    public bool  storageDone = false;
+    public bool  tutIntroDone = false;
+    public bool  tutPremiumDone = false;
+    public bool  popupAllLocFinished = false;
   }
-  [SerializeField] TutorialsState tutorials;
+  [SerializeField] EventsState events;
 
   [System.Serializable]
   class GameInfoState
@@ -424,12 +423,19 @@ public class GameState : SavableScriptableObject
     public static int   FoodCnt => get().feeding.foods.Count;
     public static (Item.ID id, Vector2 vgrid) GetFood(int idx) => new (get().feeding.foods[idx]._id, get().feeding.foods[idx]._vgrid);
   }
-  public static class Tutorial
+  public static class Events
   {
-    public static bool introDone {get => get().tutorials.introDone; set => get().tutorials.introDone = value;}
-    public static bool premiumDone { get => get().tutorials.premiumDone; set => get().tutorials.premiumDone = value; }
-    public static bool chestDone { get => get().tutorials.chestDone; set => get().tutorials.chestDone = value; }
-    public static bool storageDone { get => get().tutorials.storageDone; set => get().tutorials.storageDone = value; }
+    public static class Tutorials
+    {
+      public static bool introDone {get => get().events.tutIntroDone; set => get().events.tutIntroDone = value;}
+      public static bool premiumDone { get => get().events.tutPremiumDone; set => get().events.tutPremiumDone = value; }
+      // public static bool chestDone { get => get().tutorials.chestDone; set => get().tutorials.chestDone = value; }
+      // public static bool storageDone { get => get().tutorials.storageDone; set => get().tutorials.storageDone = value; }
+    }
+    public static class Popups
+    {
+      public static bool allLevelsFinished {get => get().events.popupAllLocFinished; set => get().events.popupAllLocFinished = value;}
+    }
   }
   public static class GameInfo
   {

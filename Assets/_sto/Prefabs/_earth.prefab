@@ -4910,6 +4910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _earthPrefab: {fileID: 4416646416499981678}
+  _locationsPath: {fileID: 3453681789835109950}
   _levelsContainer: {fileID: 5457614949840750715}
   _locationsContainer: {fileID: 7186966284304345571}
   _fx: {fileID: 292211209855933576}
@@ -5287,6 +5288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+--- !u!1 &3453681789835109950 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3162606411512464474, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
+  m_PrefabInstance: {fileID: 292211211431944804}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4416646416499981677 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4126757476705115913, guid: d3452a28e342bab41a52c04675e4dced, type: 3}
