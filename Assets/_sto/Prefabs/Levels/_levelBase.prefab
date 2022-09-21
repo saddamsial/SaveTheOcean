@@ -42,8 +42,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3745317107744565915}
-  - component: {fileID: 7537746926556728391}
-  - component: {fileID: 1559672856860758250}
   - component: {fileID: 8321294529465266783}
   m_Layer: 0
   m_Name: tutorials
@@ -67,41 +65,6 @@ Transform:
   m_Father: {fileID: 2424569502049627348}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7537746926556728391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513692929150132796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f7d067cec791fe42ae484af302f3ae8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialSequence:
-  - <stepName>k__BackingField: Reward Chest - Collect rewards
-    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 5c7aa6b041a2d8145ba27093d8950fbf, type: 3}
-    <sender>k__BackingField: {fileID: 8522299307696825627}
-  - <stepName>k__BackingField: Tap Indicator
-    <panel>k__BackingField: {fileID: 6783125341865410006, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-    <sender>k__BackingField: {fileID: 3653719115743252759}
---- !u!114 &1559672856860758250
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513692929150132796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b9ade9fcd253524a9763e5f4eb32b1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialSequence:
-  - <stepName>k__BackingField: StrageBox - first show
-    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 73ad6b78739721c49ac0e7db004d1e01, type: 3}
-    <sender>k__BackingField: {fileID: 4001453919606345800}
 --- !u!114 &8321294529465266783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,6 +519,9 @@ MonoBehaviour:
   - 0
   - 0
   <_resItemPerItems>k__BackingField: 8
+  _resGemsPart: 0.1
+  _resCoinsPart: 0.4
+  _resStaminaPart: 0.5
   _lvlDescs: []
 --- !u!1 &4494250454681055070
 GameObject:

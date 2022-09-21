@@ -6,29 +6,33 @@ using GameLib.InputSystem;
 
 public class TutorialResources : TutorialLogic
 {
-    bool active = false;
-    private void OnEnable(){
-      Level.onPremiumItem += OnFirstPremium;
-      Level.onItemCollected += OnItemCollected;
-    }
-    private void OnDisable(){
+  bool _active = false;
+  private void OnEnable(){
+    Level.onPremiumItem += OnFirstPremium;
+    Level.onItemCollected += OnItemCollected;
+  }
+  private void OnDisable(){
 
-      Level.onPremiumItem -= OnFirstPremium;
-      Level.onItemCollected -= OnItemCollected;
-    }
+    Level.onPremiumItem -= OnFirstPremium;
+    Level.onItemCollected -= OnItemCollected;
+  }
 
-    void OnItemCollected(Item item)
+  void OnItemCollected(Item item)
+  {
+    if(_active)
     {
-       ProgressTutorial();
+      ProgressTutorial();
+      _active = false;
     }
-    void OnFirstPremium(Item item)
-    { 
-      if(!GameState.Tutorial.premiumDone)
-      {
-        //tutorialSequence[1].panel.PlaceTutorialOverObject(item.transform);
-        //tutorialSequence[1].sender = item.transform;
-        ActivateTutorial();
-        GameState.Tutorial.premiumDone = true;
-      }
+  }
+  void OnFirstPremium(Item item)
+  { 
+    if(!GameState.Tutorial.premiumDone)
+    {
+      //tutorialSequence[1].sender = item.transform;
+      ActivateTutorial();
+      GameState.Tutorial.premiumDone = true;
+      _active = true;
     }
+  }
 }

@@ -20,16 +20,9 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ObjectShakePreset objShakePresetHi;
     [SerializeField] float offsetToCamera = .25f;
   [Header("FX Systems")]
-    //[SerializeField] ParticleSystem fxSparks = null;
-    //[SerializeField] ParticleSystem fxItemCompleted = null;
-    //[SerializeField] ParticleSystem fxConfettiIngame = null;
     [SerializeField] ParticleSystem fxConfettiLevel = null;
     [SerializeField] ParticleSystem fxWaterSplash = null;
-//    [SerializeField] int ballFracturesEmitCnt = 1;
-    //[SerializeField] ParticleSystem fxBallFracturesSub = null;
-    //[SerializeField] int ballFracturesSubEmitCnt = 1;
     [SerializeField] ParticleSystem fxHit = null;
-    //[SerializeField] int fxBombDestroyEmitCnt = 5;
     [SerializeField] ParticleSystem fxMagnet = null;
 
     [Header("FX string")]
@@ -43,6 +36,7 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] string _strFeedingNoRes = "no coins";
     [SerializeField] string _strNotPushedGarbage = "cannot store garbages";
     [SerializeField] string _strNotPushedFood = "cannot store food";
+    [SerializeField] string _strCollected = "+{0}";
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
@@ -61,6 +55,7 @@ public class EffectsManager : MonoBehaviour
       Level.onNoRoomOnGrid += OnLevelNoGridRoom;
       Level.onMagnetBeg += OnMagnetBeg;
       Level.onMagnetEnd += OnMagnetEnd;
+      Level.onItemCollected += OnItemCollected;
 
       Item.onShown += OnItemShown;
       Item.onHide += OnItemHide;
@@ -90,6 +85,7 @@ public class EffectsManager : MonoBehaviour
       Level.onNoRoomOnGrid -= OnLevelNoGridRoom;
       Level.onMagnetBeg -= OnMagnetBeg;
       Level.onMagnetEnd -= OnMagnetEnd;
+      Level.onItemCollected -= OnItemCollected;
 
       Item.onShown -= OnItemShown;
       Item.onHide -= OnItemHide;
@@ -220,6 +216,19 @@ public class EffectsManager : MonoBehaviour
       }
       infoLblMan.ShowTextPopup(sender.transform.position + new Vector3(-1, 1.0f, 0), _str);
     }
+    void OnItemCollected(Item item)
+    {
+      string str = "";
+      int amount = GameData.Econo.GetResCount(item.id);
+      if(item.id.kind == Item.Kind.Stamina)
+        str = UIDefaults.GetStaminaString(amount);
+      else if(item.id.kind == Item.Kind.Coin)
+        str = UIDefaults.GetCoinsString(amount);  
+      else if(item.id.kind == Item.Kind.Gem)
+        str = UIDefaults.GetGemsString(amount);
+      var s = string.Format(_strCollected, str);
+      infoLblMan.ShowTextPopup(item.transform.position + new Vector3(0, 1.0f, 0), s);
+  }
     void OnLevelNoGridRoom(Level sender)
     {
       infoLblMan.ShowTextPopup(Vector3.zero, _strNoRoomOnGrid);

@@ -37,7 +37,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6747210803549513794, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_Name
-      value: tutorialPanel_intro
+      value: TutorialIntro_welcome
+      objectReference: {fileID: 0}
+    - target: {fileID: 6783125341865410006, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: activationDelay
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_AnchorMax.y

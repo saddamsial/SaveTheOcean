@@ -211,7 +211,7 @@ public class Level : MonoBehaviour
     wasPolluted = GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Polluted;
 
     _splitMachine.Init(_items);
-    _splitMachine.gameObject.SetActive(!_isFeedingMode);
+    _splitMachine.gameObject.SetActive(!_isFeedingMode && false);
     _feedingMachine.gameObject.SetActive(_isFeedingMode);
 
     _storageBox = GetComponentInChildren<StorageBox>();

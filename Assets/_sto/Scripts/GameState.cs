@@ -317,7 +317,7 @@ public class GameState : SavableScriptableObject
     }
     public static int   AddRes(Item.ID id) //without event
     {
-      int amount = (int)((1 << id.lvl) * 1.5f);
+      int amount = GameData.Econo.GetResCount(id);
       if(id.kind == Item.Kind.Stamina)
         get().economy.stamina = Mathf.Clamp(get().economy.stamina + amount, 0, GameData.Econo.staminaMax);
       else if(id.kind == Item.Kind.Coin)
