@@ -97,16 +97,17 @@ public class GameData : ScriptableObject
     public Reward _reward;
   }
 
-  [Header("Prefabs")]
+  [Header("--Prefabs--")]
   [SerializeField] Items[] _items;
   [SerializeField] GridTile _gridTile;
   [SerializeField] Location _locationPrefab;
   //[SerializeField] Earth    _earthPrefab;
   //[Header("Levels")]
   [SerializeField] List<Level> _listLevels;
-  [Header("Econo")]
+  [Header("--Econo--")]
   [SerializeField] int       _staminaMax = 99;
   [SerializeField] int       _staminaPlayCost = 5;
+  [SerializeField] int       _staminaFeedCost = 1;
   [SerializeField] int       _staminaAdReward = 15;
   [SerializeField] float     _staminaRefillTime = 60.0f;
   [SerializeField] int       _coinFeedCost = 1;
@@ -114,8 +115,9 @@ public class GameData : ScriptableObject
   [SerializeField] int       _gemsMax = 999;
   [SerializeField] float     _resouceItemsAmountFactor = 1.5f;
   [SerializeField] Rewards[] _rewards;
-  [Header("Settings")]
+  [Header("--Settings--")]
   [SerializeField] Vector2Int _feedingBoardDim = new Vector2Int(6,6);
+  [SerializeField] int       _feedingAvailLoc = 3;
 
 
   [SerializeField] Color[]    themeColors;
@@ -185,8 +187,9 @@ public class GameData : ScriptableObject
   {
     static public Level GetPrefab(int idx) => get()._listLevels[idx];
     static public Level CreateLevel(int idx, Transform levelsContainer) => Instantiate(get()._listLevels[idx], levelsContainer);
-    static public int levelsCnt => get()._listLevels.Count;
+    static public int   levelsCnt => get()._listLevels.Count;
     static public Vector2Int feedingDim => get()._feedingBoardDim;
+    static public int   GetFeedingAvailLoc() => get()._feedingAvailLoc;
   }
   public static class Locations
   {
@@ -202,6 +205,7 @@ public class GameData : ScriptableObject
   public static class Econo
   {
     public static int   staminaCost => get()._staminaPlayCost;
+    public static int   staminaFeedCost => get()._staminaFeedCost;
     public static int   staminaAdReward => get()._staminaAdReward;
     public static float staminaRefillTime => get()._staminaRefillTime;
     public static int   staminaMax => get()._staminaMax;

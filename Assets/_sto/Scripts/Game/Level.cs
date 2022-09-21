@@ -40,6 +40,12 @@ public class Level : MonoBehaviour
   [SerializeField] float      _resStaminaPart = 0.5f;
   [SerializeField] LvlDesc[]  _lvlDescs;
 
+  public enum Mode
+  {
+    Clearing,
+    Feeding,
+  };
+  static public Mode mode {get; set;} = Mode.Clearing;
 
   public enum State
   {
@@ -80,13 +86,12 @@ public class Level : MonoBehaviour
   public bool   succeed {get; private set;}
   public bool   finished {get; private set;}
   public bool   wasPolluted {get; private set;} = false;
-  public bool   wasFeeding => _isFeedingMode;
-  public bool   isFeedingMode => _isFeedingMode;
+  public bool   isFeedingMode = false;
   public int    points {get; set;} = 0;
   public int    stars {get; set;}
   public int    itemsCount => _items.Count + _items2.Count;
   public int    initialItemsCnt => _initialItemsCnt;
-  public Vector2Int dim => (_isFeedingMode)? GameData.Levels.feedingDim : _dim;
+  public Vector2Int dim => (isFeedingMode)? GameData.Levels.feedingDim : _dim;
 
   UISummary    _uiSummary = null;
   UIStatusBar  _uiStatusBar = null;
@@ -103,8 +108,6 @@ public class Level : MonoBehaviour
 
   //float       _pollutionRate = 1.0f;
   float       _pollutionDest = 1.0f;
-
-  bool        _isFeedingMode = false;
 
   StorageBox _storageBox;
 
@@ -207,12 +210,12 @@ public class Level : MonoBehaviour
     _mpb.SetColor("_BaseColor", _waterColor);
     _waterRenderer.SetPropertyBlock(_mpb);
 
-    _isFeedingMode = GameState.Progress.Locations.IsLocationFinished(locationIdx);
+    isFeedingMode = mode == Mode.Feeding;
     wasPolluted = GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Polluted;
 
     _splitMachine.Init(_items);
-    _splitMachine.gameObject.SetActive(!_isFeedingMode && false);
-    _feedingMachine.gameObject.SetActive(_isFeedingMode);
+    _splitMachine.gameObject.SetActive(!isFeedingMode && false);
+    _feedingMachine.gameObject.SetActive(isFeedingMode);
 
     _storageBox = GetComponentInChildren<StorageBox>();
 
@@ -272,7 +275,7 @@ public class Level : MonoBehaviour
     }
     vs.shuffle(100);
     vs.Reverse();
-    if(!_isFeedingMode)
+    if(!isFeedingMode)
     {
       Item.ID id = new Item.ID();
       List<Item.ID> ids = new List<Item.ID>();
@@ -436,7 +439,7 @@ public class Level : MonoBehaviour
       if(nearestAnimal && _animalSelected == null)
       {
         _animalSelected = nearestAnimal;
-        if(!_isFeedingMode)
+        if(!isFeedingMode)
           _animalSelected.AnimTalk();
       }
       else
@@ -572,7 +575,7 @@ public class Level : MonoBehaviour
         newItem.Show();
         SpawnItem(_itemSelected.vgrid);
         is_merged = true;
-        if(_isFeedingMode)
+        if(isFeedingMode)
           GameState.Feeding.Update(_items);
       }
     }
@@ -592,7 +595,7 @@ public class Level : MonoBehaviour
       if(animalHit.IsReq(_itemSelected)) //CanPut(_itemSelected))
       {
         Item.onPut?.Invoke(_itemSelected);
-        animalHit.Put(_itemSelected, _isFeedingMode);
+        animalHit.Put(_itemSelected, isFeedingMode);
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
         if(_itemSelected.IsInMachine)
@@ -602,7 +605,7 @@ public class Level : MonoBehaviour
         onGarbageOut?.Invoke(this);
         SpawnItem(_itemSelected.vgrid);
         CheckEnd();
-        if(_isFeedingMode)
+        if(isFeedingMode)
           GameState.Feeding.Update(_items);
         is_hit = true;
       }
@@ -660,7 +663,7 @@ public class Level : MonoBehaviour
         _itemSelected.MoveToGrid();
         is_hit = true;
         _grid.hovers(false);
-        if(_isFeedingMode)
+        if(isFeedingMode)
           GameState.Feeding.Update(_items);
       }
     }
@@ -728,7 +731,7 @@ public class Level : MonoBehaviour
   }
   IEnumerator coEnd()
   {
-    if(!_storageBox.visible)
+    if(!_storageBox.visible && _items.Any((it)=>it.id.IsSpecial))
     {
       _storageBox.Show(0.05f);
       yield return new WaitForSeconds(1.0f);
@@ -739,8 +742,11 @@ public class Level : MonoBehaviour
     yield return new WaitForSeconds(2.5f);
     succeed = true;
     onFinished?.Invoke(this);
-    GameState.Progress.Locations.SetLocationFinished();
-    GameState.Progress.Locations.UnlockNextLocation();
+    if(!isFeedingMode)
+    {
+      GameState.Progress.Locations.SetLocationFinished();
+      GameState.Progress.Locations.UnlockNextLocation();
+    }
     yield return new WaitForSeconds(0.5f);
 
     _uiSummary.Show(this);

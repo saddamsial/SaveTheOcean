@@ -218,6 +218,7 @@ public class GameState : SavableScriptableObject
       }
       public static bool          AllStateFinished() => GetStates().All((state) => state >= Level.State.Finished);
       public static bool          AllStateFinished(Level.State[] states) => states.All((state) => state >= Level.State.Finished);
+      public static int           GetFinishedCnt() => GetStates().Count((state) => state >= Level.State.Finished);
 
       static int _timer = 0;
       static DateTime prevTime;

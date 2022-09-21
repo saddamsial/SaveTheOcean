@@ -12,7 +12,7 @@ public class UISummary : MonoBehaviour
   bool _moveToNextLoc = false;
   public void Show(Level level)
   {
-    _moveToNextLoc = !level.wasPolluted && !level.wasFeeding;
+    _moveToNextLoc = !level.wasPolluted && !level.isFeedingMode;
     onShow?.Invoke();
     GetComponent<UIPanel>().ActivatePanel();
   }

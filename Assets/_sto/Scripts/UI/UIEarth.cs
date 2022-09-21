@@ -8,16 +8,16 @@ using GameLib.UI;
 public class UIEarth : MonoBehaviour
 {
   [SerializeField] Button  _btnPlay;
+  [SerializeField] Button  _btnFeed;
   [SerializeField] TMPLbl  _lblLevelInfo;
   [SerializeField] Slider  _slider;
   [SerializeField] TMPLbl  _btnActionInfo;
   [SerializeField] TMPLbl  _btnStaminaInfo;
 
-  public static System.Action onBtnPlay;
+  public static System.Action onBtnPlay, onBtnFeed;
 
   UIPanel _earthPanel = null;
   float   _cleanDst = 0.0f;
-
 
   void Awake()
   {
@@ -44,6 +44,8 @@ public class UIEarth : MonoBehaviour
   private void OnEarthHide(int levelIdx) => Hide();
   public void  Show(int lvlIdx)
   {
+    _btnFeed.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
+    
     _earthPanel.ActivatePanel();
     UpdateLevelInfo(lvlIdx);
     this.Invoke(()=> _cleanDst = GameState.Progress.GetCompletionRate(), 0.25f);
@@ -81,6 +83,16 @@ public class UIEarth : MonoBehaviour
     {
       GameState.Econo.stamina -= GameData.Econo.staminaCost;
       onBtnPlay?.Invoke();
+    }
+    else
+      FindObjectOfType<UIPopupStamina>(true)?.Show();
+  }
+  public void OnBtnFeed()
+  {
+    if(GameState.Econo.CanSpendStamina(GameData.Econo.staminaFeedCost))
+    {
+      GameState.Econo.stamina -= GameData.Econo.staminaFeedCost;
+      onBtnFeed?.Invoke();
     }
     else
       FindObjectOfType<UIPopupStamina>(true)?.Show();

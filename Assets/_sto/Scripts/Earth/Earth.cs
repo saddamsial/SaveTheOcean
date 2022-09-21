@@ -47,10 +47,12 @@ public class Earth : MonoBehaviour
     InitLocations();
     GameState.Progress.Locations.onLocationPolluted += OnLocationPolluted;
     UIEarth.onBtnPlay += OnBtnPlay;
+    UIEarth.onBtnFeed += OnBtnFeed;
   }
   void OnDestroy()
   {
     UIEarth.onBtnPlay -= OnBtnPlay;
+    UIEarth.onBtnFeed -= OnBtnFeed;
     GameState.Progress.Locations.onLocationPolluted -= OnLocationPolluted;
   }
 
@@ -165,6 +167,12 @@ public class Earth : MonoBehaviour
   }
   void OnBtnPlay()
   {
+    Level.mode = Level.Mode.Clearing;
+    onLevelStart?.Invoke(_selectedLocation);
+  }
+  void OnBtnFeed()
+  {
+    Level.mode = Level.Mode.Feeding;
     onLevelStart?.Invoke(_selectedLocation);
   }
   void OnLocationPolluted(int locationIdx)
