@@ -81,11 +81,13 @@ MonoBehaviour:
   - {fileID: 2229698086017596401, guid: fd25660e8d35dcf4983c8d8262583d15, type: 3}
   _staminaMax: 99
   _staminaPlayCost: 5
-  _staminaAdReward: 15
+  _staminaFeedCost: 5
+  _staminaAdReward: 25
   _staminaRefillTime: 300
-  _coinFeedCost: 1
+  _coinFeedCost: 10
   _coinsMax: 999
   _gemsMax: 999
+  _resouceItemsAmountFactor: 1.5
   _rewards:
   - points2Chest: 0
     _reward:
@@ -94,60 +96,61 @@ MonoBehaviour:
       gems: 0
   - points2Chest: 16
     _reward:
-      stamina: 1
-      coins: 5
-      gems: 1
+      stamina: 2
+      coins: 2
+      gems: 2
   - points2Chest: 80
     _reward:
       stamina: 2
-      coins: 5
-      gems: 1
-  - points2Chest: 144
+      coins: 4
+      gems: 2
+  - points2Chest: 176
     _reward:
-      stamina: 4
+      stamina: 2
+      coins: 6
+      gems: 2
+  - points2Chest: 336
+    _reward:
+      stamina: 1
       coins: 8
-      gems: 2
-  - points2Chest: 272
+      gems: 1
+  - points2Chest: 464
     _reward:
-      stamina: 5
+      stamina: 1
       coins: 10
-      gems: 2
-  - points2Chest: 400
+      gems: 1
+  - points2Chest: 624
     _reward:
-      stamina: 6
+      stamina: 1
       coins: 12
-      gems: 3
-  - points2Chest: 528
+      gems: 1
+  - points2Chest: 816
     _reward:
-      stamina: 7
-      coins: 15
-      gems: 3
-  - points2Chest: 720
+      stamina: 1
+      coins: 14
+      gems: 1
+  - points2Chest: 1008
     _reward:
-      stamina: 8
-      coins: 17
-      gems: 4
-  - points2Chest: 912
+      stamina: 1
+      coins: 16
+      gems: 1
+  - points2Chest: 1296
     _reward:
-      stamina: 10
+      stamina: 1
+      coins: 18
+      gems: 1
+  - points2Chest: 1552
+    _reward:
+      stamina: 1
       coins: 20
-      gems: 5
-  - points2Chest: 1168
+      gems: 1
+  - points2Chest: 1936
     _reward:
-      stamina: 12
-      coins: 24
-      gems: 6
-  - points2Chest: 1424
-    _reward:
-      stamina: 14
-      coins: 28
-      gems: 8
-  - points2Chest: 1808
-    _reward:
-      stamina: 15
-      coins: 30
-      gems: 10
+      stamina: 1
+      coins: 22
+      gems: 1
   _feedingBoardDim: {x: 4, y: 5}
+  _feedingAvailLoc: 3
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}

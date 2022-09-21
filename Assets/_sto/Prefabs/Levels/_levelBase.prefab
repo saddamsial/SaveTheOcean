@@ -518,11 +518,12 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  <_resItemPerItems>k__BackingField: 8
+  <_resItemPerItems>k__BackingField: 6
   _resGemsPart: 0.1
-  _resCoinsPart: 0.4
-  _resStaminaPart: 0.5
+  _resCoinsPart: 0.3
+  _resStaminaPart: 0.6
   _lvlDescs: []
+  isFeedingMode: 0
 --- !u!1 &4494250454681055070
 GameObject:
   m_ObjectHideFlags: 0
