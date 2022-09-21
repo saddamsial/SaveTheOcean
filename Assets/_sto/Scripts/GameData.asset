@@ -57,7 +57,10 @@ MonoBehaviour:
   - _kind: 5
     _items:
     - {fileID: 6445466529311080229, guid: eb45cb77219e3c04c94bfe12d3f010d2, type: 3}
-    - {fileID: 6445466529311080229, guid: d01a7b5d13f9dad49940a63b4dee8e7b, type: 3}
+    - {fileID: 6445466529311080229, guid: 69292d99ac8da0f4da48dfd3f2e2fb39, type: 3}
+    - {fileID: 6445466529311080229, guid: 6ac63a2958d8ee140bdb326028567c55, type: 3}
+    - {fileID: 6445466529311080229, guid: fc6a570859b36a34bbf1a705c84914c7, type: 3}
+    - {fileID: 6445466529311080229, guid: b8cead9ca37539f4ea98bb56649088ec, type: 3}
   _gridTile: {fileID: 8178171026830446907, guid: 764369db777a63a4d9a3efac1f67b645, type: 3}
   _locationPrefab: {fileID: 4694188858287188799, guid: 7e2dc7caea333c54a97c83e5d2ddcc26, type: 3}
   _listLevels:
