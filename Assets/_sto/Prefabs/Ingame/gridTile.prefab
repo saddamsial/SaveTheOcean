@@ -178,14 +178,38 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
       propertyPath: InitialModule.startLifetime.minScalar
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime0
+      value: 193
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime1
+      value: 9830
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5472913082820232075, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
