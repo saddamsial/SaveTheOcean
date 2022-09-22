@@ -95,7 +95,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AOIntensity: 1
+    - _AOIntensity: 1.5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -109,7 +109,7 @@ Material:
     - _EdgeBrightness: 2
     - _EdgeExponent: 1
     - _EdgeIntensity: 2
-    - _Emission: 0.694
+    - _Emission: 0.4
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
@@ -120,9 +120,9 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimExponent: 2
+    - _RimExponent: 0.9
     - _RimIntensity: 0.5
-    - _Smoothness: 0.5
+    - _Smoothness: 0.32
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -135,8 +135,8 @@ Material:
     m_Colors:
     - _BaseColor: {r: 0.025231415, g: 0.40454346, b: 0.764151, a: 1}
     - _Color: {r: 0, g: 0.35191226, b: 0.6320754, a: 1}
-    - _DeepColor: {r: 0.063412234, g: 0.2299751, b: 0.8962264, a: 1}
-    - _EdgeColor: {r: 0.19157171, g: 0.990566, b: 0.7380762, a: 1}
+    - _DeepColor: {r: 0.06274509, g: 0.47474626, b: 0.8980392, a: 1}
+    - _EdgeColor: {r: 0.7877358, g: 0.9974181, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0.16666663, b: 0.25, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
