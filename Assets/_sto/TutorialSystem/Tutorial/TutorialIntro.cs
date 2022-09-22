@@ -12,8 +12,10 @@ namespace TutorialSystem
         }
         private void OnEnable() {
             ActivateTutorial();
+            Level.onFinished += ProgressTutorial;
         }
         private void OnDisable() {
+            Level.onFinished -= ProgressTutorial;
         }
     }
 }

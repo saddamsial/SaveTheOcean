@@ -45,7 +45,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6747210803549513794, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_Name
-      value: TutorialIntro_levelGoal
+      value: TutorialIntro_removeGarbage
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: Remove all items form the board to clear this habitat!
+      value: Just bring me this item and I'll take care of the rest!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

@@ -7,26 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1278421171504114904, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1278421171504114904, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1278421171504114904, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1278421171504114904, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360476989277000669, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1741520650582040817, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -143,10 +123,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4879981696605100708, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _dim.x
       value: 3
@@ -259,10 +235,6 @@ PrefabInstance:
       propertyPath: _lvlDescs.Array.data[0]._itemsCats.Array.data[2]
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4895620254315257695, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4988250120184445927, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -355,37 +327,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7930286490525139754, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7930286490525139754, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8370781947513321020, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8522299307696825627, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8522299307696825627, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8536298820559939731, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8536298820559939731, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4040115479685236695, guid: af94dd176a807204382d3b034b767ac9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+--- !u!4 &322523778237032055 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6438251173982364698, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+  m_PrefabInstance: {fileID: 6710529463363994221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3127148435573647222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8522299307696825627, guid: af94dd176a807204382d3b034b767ac9, type: 3}
@@ -412,6 +361,9 @@ MonoBehaviour:
   - <stepName>k__BackingField: Welcome
     <panel>k__BackingField: {fileID: 8124103945177977042, guid: 2392cfbd505f7fd4f8e08df70f55e1ea, type: 3}
     <sender>k__BackingField: {fileID: 3127148435573647222}
-  - <stepName>k__BackingField: Merge
-    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 816da08e4303e3b48b92e834a558b494, type: 3}
+  - <stepName>k__BackingField: CleearTheLevel
+    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 0fb121c8bf263494980d992ec3a21c15, type: 3}
     <sender>k__BackingField: {fileID: 3127148435573647222}
+  - <stepName>k__BackingField: onScreenHint
+    <panel>k__BackingField: {fileID: 80184091881380796, guid: eebef2bd11ec0cd46bc8877541d7827b, type: 3}
+    <sender>k__BackingField: {fileID: 322523778237032055}
