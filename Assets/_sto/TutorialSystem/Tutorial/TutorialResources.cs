@@ -10,11 +10,13 @@ public class TutorialResources : TutorialLogic
   private void OnEnable(){
     Level.onPremiumItem += OnFirstPremium;
     Level.onItemCollected += OnItemCollected;
+    Level.onFinished += ProgressTutorial;
   }
   private void OnDisable(){
 
     Level.onPremiumItem -= OnFirstPremium;
     Level.onItemCollected -= OnItemCollected;
+    Level.onFinished -= ProgressTutorial;
   }
 
   void OnItemCollected(Item item)

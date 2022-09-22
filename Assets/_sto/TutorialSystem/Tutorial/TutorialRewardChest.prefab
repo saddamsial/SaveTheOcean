@@ -37,7 +37,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6594426750771199994, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: Great Job!
+      value: A reward awaits!
       objectReference: {fileID: 0}
     - target: {fileID: 6747210803549513794, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_Name
@@ -153,10 +153,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: 'We got a reward for our hard work!
+      value: 'See that chest over there in the corner? It''s full of rewards for
+        our hard work!
 
-
-        Let''s see what we got'
+        Merge more items to open it up'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

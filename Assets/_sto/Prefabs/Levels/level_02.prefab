@@ -7,26 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1278421171504114904, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1278421171504114904, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1278421171504114904, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 1278421171504114904, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1360476989277000669, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1741520650582040817, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -143,10 +123,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4879981696605100708, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_Center.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _dim.x
       value: 4
@@ -205,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 1633247935003215395, guid: 859c244a32af674468eca55f556b07bd, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: <_resItemPerItems>k__BackingField
-      value: 0
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[0]._reqItems.Array.size
@@ -291,10 +267,6 @@ PrefabInstance:
       propertyPath: _lvlDescs.Array.data[2]._itemsCats.Array.data[1]
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 4895620254315257695, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4988250120184445927, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -379,49 +351,50 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6973830936155063468, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -15
-      objectReference: {fileID: 0}
     - target: {fileID: 7227109271038337758, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7319081136113874463, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7776719939728878358, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7930286490525139754, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7930286490525139754, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8370781947513321020, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8522299307696825627, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8522299307696825627, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8536298820559939731, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8536298820559939731, guid: af94dd176a807204382d3b034b767ac9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+--- !u!4 &322523778237032055 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6438251173982364698, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+  m_PrefabInstance: {fileID: 6710529463363994221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3127148435573647222 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8522299307696825627, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+  m_PrefabInstance: {fileID: 6710529463363994221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6485629871090638929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 513692929150132796, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+  m_PrefabInstance: {fileID: 6710529463363994221}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6966187414463281518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6485629871090638929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18b1d55e68a4ad34f967ceaf35fddea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialSequence:
+  - <stepName>k__BackingField: resources intro
+    <panel>k__BackingField: {fileID: 8124103945177977042, guid: 844ef06824b71224dae1c9c43c625e85, type: 3}
+    <sender>k__BackingField: {fileID: 3127148435573647222}
+  - <stepName>k__BackingField: resources collect
+    <panel>k__BackingField: {fileID: 5526002700576130272, guid: 25ab3cdd23fc5444d8c0fba412a14a60, type: 3}
+    <sender>k__BackingField: {fileID: 0}
+  - <stepName>k__BackingField: storage
+    <panel>k__BackingField: {fileID: 80184091881380796, guid: c68faafa5872fe444a330a319aba4311, type: 3}
+    <sender>k__BackingField: {fileID: 322523778237032055}

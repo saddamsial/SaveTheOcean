@@ -153,7 +153,7 @@ PrefabInstance:
 
 
         Let''s start
-        here ...'
+        ...'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
