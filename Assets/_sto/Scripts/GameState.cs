@@ -43,6 +43,7 @@ public class GameState : SavableScriptableObject
     [SerializeField] int _location = 0;
     [SerializeField] List<LocationState> _locations;
     [SerializeField] long _locationsPassedTime = 0;
+    [SerializeField] List<Item.ID> _itemAppears = new List<Item.ID>();
 
     public static Action onAllLocationFinished;
 
@@ -97,6 +98,12 @@ public class GameState : SavableScriptableObject
       var loc = FindLocation(loc_idx);
       return (loc != null) ? loc.state : Level.State.Locked;
     }
+    public void         ItemAppeared(Item.ID id)
+    {
+      if(!DidItemAppear(id))
+        _itemAppears.Add(id);
+    }
+    public bool         DidItemAppear(Item.ID id) => _itemAppears.Any((_id) => Item.ID.Eq(_id, id));
   }
   [SerializeField] ProgressState progress;
 
@@ -244,6 +251,12 @@ public class GameState : SavableScriptableObject
           prevTime = CTime.get();
         }
       }
+    }
+
+    public static class Items
+    {
+      public static void ItemAppears(Item.ID id) => get().progress.ItemAppeared(id);
+      public static bool DidItemAppear(Item.ID id) => get().progress.DidItemAppear(id);
     }
 
     public static float GetCompletionRate()

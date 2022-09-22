@@ -19,6 +19,7 @@ MonoBehaviour:
     _location: -1
     _locations: []
     _locationsPassedTime: 0
+    _itemAppears: []
   economy:
     stamina: 50
     coins: 25

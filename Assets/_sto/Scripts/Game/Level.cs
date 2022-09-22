@@ -364,6 +364,7 @@ public class Level : MonoBehaviour
   {
     _items.Add(item);
     _grid.set(item.vgrid, 1, item.id.kind);
+    GameState.Progress.Items.ItemAppears(item.id);
     if(!GameState.Events.Tutorials.premiumDone && !firstPremium && item.id.IsSpecial)
     {
       firstPremium = true;
@@ -558,6 +559,12 @@ public class Level : MonoBehaviour
           tapTime = Time.timeAsDouble;
       }
     }
+    if(_itemSelected == null)
+    {
+      var animal = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>();
+      if(animal)
+        FindObjectOfType<UIItemsInfo>().Show();
+    }
   }
   bool IsItemHit(TouchInputData tid)
   {
@@ -573,6 +580,7 @@ public class Level : MonoBehaviour
         _grid.set(_itemSelected.vgrid, 0);
         _splitMachine.RemoveFromSplitSlot(_itemSelected);
         newItem.Show();
+        GameState.Progress.Items.ItemAppears(newItem.id);
         SpawnItem(_itemSelected.vgrid);
         is_merged = true;
         if(isFeedingMode)
