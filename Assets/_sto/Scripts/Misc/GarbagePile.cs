@@ -9,8 +9,7 @@ public class GarbagePile : MonoBehaviour
     [SerializeField] GameObject elementPrefab = null;
     [SerializeField] Vector2 sizeRandom = Vector2.up; 
     
-    List<GameObject> _pileContent = new List<GameObject>();
-    int _lastItemIndex = 0;
+    Queue<GameObject> _pileQueue = new Queue<GameObject>();
     
     private void OnEnable() {
         Level.onStart += GeneratePile;
@@ -27,6 +26,8 @@ public class GarbagePile : MonoBehaviour
 
 
     public void GeneratePile(int quantity){
+        _pileQueue = new Queue<GameObject>();
+
         for (int i = 0; i < quantity; i++){
             var spawnOffset = Random.insideUnitSphere * pileSize.x;
             spawnOffset = new Vector3(spawnOffset.x, Mathf.Abs(spawnOffset.y * pileSize.y), spawnOffset.z);
@@ -37,14 +38,13 @@ public class GarbagePile : MonoBehaviour
                 Quaternion.LookRotation(Random.onUnitSphere),
                 this.transform);
                 newSpawn.transform.localScale = Vector3.one * Random.Range(sizeRandom.x, sizeRandom.y);
-            _pileContent.Add(newSpawn);
+            _pileQueue.Enqueue(newSpawn);
         }
-        _lastItemIndex = quantity;
     }
 
     public void PopTrash(){
-        if (_lastItemIndex < 1) return;
-        _pileContent[--_lastItemIndex].SetActive(false);
+        if (_pileQueue.TryDequeue(out GameObject lastObject))
+            lastObject.gameObject.SetActive(false);
     }
 
     private void OnDrawGizmos() {
