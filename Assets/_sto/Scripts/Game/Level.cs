@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
   public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
   public static System.Action<Vector3> onMagnetBeg;
   public static System.Action<bool>    onMagnetEnd;
-  public static System.Action<Item>    onPremiumItem, onItemCollected;
+  public static System.Action<Item>    onPremiumItem, onItemCollected, onItemCleared;
 
   [Header("Refs")]
   [SerializeField] Transform      _itemsContainer;
@@ -392,6 +392,7 @@ public class Level : MonoBehaviour
   {
     _items.Remove(item);
     _grid.set(item.vgrid, 0);
+    onItemCleared?.Invoke(item);
     item.Hide();
   }
 
@@ -579,6 +580,7 @@ public class Level : MonoBehaviour
       {
         _grid.set(_itemSelected.vgrid, 0);
         _splitMachine.RemoveFromSplitSlot(_itemSelected);
+        onItemCleared?.Invoke(_itemSelected);
         newItem.Show();
         GameState.Progress.Items.ItemAppears(newItem.id);
         SpawnItem(_itemSelected.vgrid);
@@ -604,6 +606,7 @@ public class Level : MonoBehaviour
       {
         Item.onPut?.Invoke(_itemSelected);
         animalHit.Put(_itemSelected, isFeedingMode);
+        onItemCleared?.Invoke(_itemSelected);
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
         if(_itemSelected.IsInMachine)
@@ -739,12 +742,6 @@ public class Level : MonoBehaviour
   }
   IEnumerator coEnd()
   {
-    if(!_storageBox.visible && _items.Any((it)=>it.id.IsSpecial))
-    {
-      _storageBox.Show(0.05f);
-      yield return new WaitForSeconds(1.0f);
-    }
-
     yield return StartCoroutine(coMoveToSB());
 
     yield return new WaitForSeconds(2.5f);

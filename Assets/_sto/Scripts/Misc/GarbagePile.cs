@@ -13,11 +13,11 @@ public class GarbagePile : MonoBehaviour
     
     private void OnEnable() {
         Level.onStart += GeneratePile;
-        Item.onShow += PopTrash;
+        Level.onItemCleared += PopTrash;
     }
     private void OnDisable() {
         Level.onStart -= GeneratePile;
-        Item.onShow -= PopTrash;
+        Level.onItemCleared -= PopTrash;
     }
     void GeneratePile(Level sender) {
         GeneratePile(sender.GetNumberOfMovesToSolve());

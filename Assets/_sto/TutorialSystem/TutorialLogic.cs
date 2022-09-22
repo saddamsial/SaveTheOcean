@@ -11,6 +11,10 @@ namespace TutorialSystem
     {
         [SerializeField] protected TutorialSequence[] tutorialSequence = new TutorialSequence[]{};
 
+        void OnDestroy()
+        {
+          TutorialManger.Instance.ClearTutorial();
+        }
         public void SetUndefinedSenders(Transform senderTransform){
             foreach (var tutorial in tutorialSequence)
                 if (tutorial.sender == null) tutorial.sender = senderTransform;

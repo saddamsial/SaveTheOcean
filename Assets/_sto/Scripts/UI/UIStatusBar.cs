@@ -15,6 +15,8 @@ public class UIStatusBar : MonoBehaviour
   [SerializeField] float _moveSpeed = 5.0f;
   [SerializeField] float _moveDelay = 0.05f;
 
+  Camera uiCam = null;
+
   int _staminaDisp = 0;
   int _coinsDisp = 0;
   int _gemsDisp = 0;
@@ -32,6 +34,8 @@ public class UIStatusBar : MonoBehaviour
     GameState.Econo.onStaminaChanged += OnStaminaChanged;//OnStaminaChanged;
     GameState.Econo.onCoinsChanged += OnCoinsChanged; //OnCoinsChanged;
     GameState.Econo.onGemsChanged += OnGemsChanged;// OnGemsChanged;
+
+    uiCam = GameObject.Find("uiCam").GetComponent<Camera>(); //System.Array.Find(FindObjectsOfType<Camera>(true), (cam) => cam.gameObject.tag.Equals("Untagged"));
 
     SetupRes();
   }
@@ -83,8 +87,8 @@ public class UIStatusBar : MonoBehaviour
       _ => Vector3.zero
     };
 
-    float dist = Mathf.Abs(Camera.main.transform.position.z - vdstPos.z);
-    move.vdst = Camera.main.ScreenToWorldPoint(new Vector3(vdstPos.x, vdstPos.y, dist));// -Camera.main.nearClipPlane + dist + 32));
+    float dist = Mathf.Abs(uiCam.transform.position.z - vdstPos.z);
+    move.vdst = uiCam.ScreenToWorldPoint(new Vector3(vdstPos.x, vdstPos.y, dist));// -Camera.main.nearClipPlane + dist + 32));
     move.objects = new List<GameObject>();
     move.delays = new List<float>();
     move.objects.AddRange(GameData.Prefabs.CreateStaticItemModels(item.id, _movesContainer, amount));

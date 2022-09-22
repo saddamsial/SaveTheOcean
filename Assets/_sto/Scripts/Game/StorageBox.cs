@@ -29,11 +29,16 @@ public class StorageBox : MonoBehaviour
 
   void Awake()
   {
+    Level.onItemCollected += OnItemCollected;
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
 
     _content.SetActive(false);
     if(GameState.StorageBox.ShouldShow())
       Show(1);
+  }
+  void OnDestroy()
+  {
+    Level.onItemCollected -= OnItemCollected;
   }
   public bool visible => _content.activeSelf;
   public void Show(float delay)
@@ -43,7 +48,11 @@ public class StorageBox : MonoBehaviour
     GameState.StorageBox.shown = true;
     this.Invoke(() => { GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this); }, delay);
   }
-
+  void OnItemCollected(Item item)
+  {
+    if(!visible)
+      Show(0.25f);
+  }
   void UpdateInfo()
   {
     _infoContainer.SetActive(GameState.StorageBox.itemsCnt > 0);
