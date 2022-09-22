@@ -8,26 +8,23 @@ public class GarbagePile : MonoBehaviour
     [SerializeField] Vector2 pileSize = Vector2.one;
     [SerializeField] GameObject elementPrefab = null;
     [SerializeField] Vector2 sizeRandom = Vector2.up; 
-    [SerializeField] int pileQuanti = 32;
     
     List<GameObject> _pileContent = new List<GameObject>();
     int _lastItemIndex = 0;
     
-    private void Start() {
-        GeneratePile(pileQuanti);
-    }
-
     private void OnEnable() {
-        Level.onCreate += GeneratePile;
+        Level.onStart += GeneratePile;
         Item.onShow += PopTrash;
     }
     private void OnDisable() {
-        Level.onCreate -= GeneratePile;
+        Level.onStart -= GeneratePile;
         Item.onShow -= PopTrash;
     }
-    void GeneratePile(Level sender) => GeneratePile(sender.GetNumberOfMovesToSolve());
+    void GeneratePile(Level sender) {
+        GeneratePile(sender.GetNumberOfMovesToSolve());
+    }
     void PopTrash(object sender) => PopTrash();
-    
+
 
     public void GeneratePile(int quantity){
         for (int i = 0; i < quantity; i++){
