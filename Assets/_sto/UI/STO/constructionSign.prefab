@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 523792811858172495}
   - component: {fileID: 523792811858172493}
   - component: {fileID: 523792811858172494}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: lblInfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 8450520772528534470}
   - component: {fileID: 6437267415468996295}
   - component: {fileID: 8108220170357531612}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: constructionSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 7108080219819435048}
   - component: {fileID: 5885597553954355270}
   - component: {fileID: 283893181571056426}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: constructionIco
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3843253695923749922}
   - component: {fileID: 3843253695923749948}
   - component: {fileID: 3843253695923749949}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: stateLocked
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3843253696435895969}
   - component: {fileID: 3843253696435895971}
   - component: {fileID: 3843253696435895968}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: banckground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3843253696521620204}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: contentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 3843253696639451728}
   - component: {fileID: 3843253696639451757}
   - component: {fileID: 3843253696639451730}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: storageSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 1220782746281226228}
   - component: {fileID: 1561508552280636687}
   - component: {fileID: 6068927490484819737}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: unlockCost
   m_TagString: Untagged
   m_Icon: {fileID: 0}

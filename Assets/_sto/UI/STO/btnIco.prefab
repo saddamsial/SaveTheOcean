@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1940083923298755152}
   - component: {fileID: 7730447804266639062}
   - component: {fileID: 5143797732153969253}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: btnIco
   m_TagString: Untagged
   m_Icon: {fileID: 0}

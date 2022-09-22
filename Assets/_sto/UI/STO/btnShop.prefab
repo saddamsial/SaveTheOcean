@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5523868166709492424}
   - component: {fileID: 3503801406960109029}
   - component: {fileID: 4369801499466739888}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: btnShop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 1044550144579136705}
   - component: {fileID: 1709044699836270965}
   - component: {fileID: 7024885227108167861}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: name
   m_TagString: Untagged
   m_Icon: {fileID: 0}

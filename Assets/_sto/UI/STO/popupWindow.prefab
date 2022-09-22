@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1054175682105666052}
   - component: {fileID: 9103097809239769692}
   - component: {fileID: 172063272550911583}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 69327720425599236}
   - component: {fileID: 2411733193519947200}
   - component: {fileID: 9196674757373554010}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: fade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 5374441543393798598}
   - component: {fileID: 6776707800202651082}
   - component: {fileID: 6195138511335329934}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: popupWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -419,7 +419,7 @@ GameObject:
   - component: {fileID: 7265049221035263684}
   - component: {fileID: 1615267493805838549}
   - component: {fileID: 6426524465151689998}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: lblHeader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -574,7 +574,7 @@ GameObject:
   - component: {fileID: 7099502936203987465}
   - component: {fileID: 4170866418251229823}
   - component: {fileID: 982388226615417132}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: _navBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4172250410262591297}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: _contentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ GameObject:
   - component: {fileID: 2539972076885678746}
   - component: {fileID: 4179958202288761789}
   - component: {fileID: 8652642583764784069}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: frame
   m_TagString: Untagged
   m_Icon: {fileID: 0}

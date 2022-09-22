@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5036156279119869316}
   - component: {fileID: 7782479648051418406}
   - component: {fileID: 5875640760959114807}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: packContent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 8100916850088130615}
   - component: {fileID: 2646244453730878407}
   - component: {fileID: 4170918025596288586}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: shopVCPack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 2145443638407491208}
   - component: {fileID: 7225719666516064812}
   - component: {fileID: 7248408514195454564}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: packName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 1336948763346419376}
   - component: {fileID: 1812143062833525616}
   - component: {fileID: 1392740644752484528}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6372485181869096295}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: content
   m_TagString: Untagged
   m_Icon: {fileID: 0}

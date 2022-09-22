@@ -111,10 +111,10 @@ public class UIIngame : MonoBehaviour
 
   void Update()
   {
-    if(_pollution >= _pollutionDest)
-    {
-      _pollution = Mathf.Lerp(_pollution, _pollutionDest, Time.deltaTime * 2);
-      _progress.value = Mathf.Clamp01(1-_pollution);
-    }
+    // if(_pollution >= _pollutionDest)
+    // {
+    //   _pollution = Mathf.Lerp(_pollution, _pollutionDest, Time.deltaTime * 2);
+    //   _progress.value = Mathf.Clamp01(1-_pollution);
+    // }
   }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7960055029496690046}
   - component: {fileID: 7960055029496690045}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: _tutorialCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

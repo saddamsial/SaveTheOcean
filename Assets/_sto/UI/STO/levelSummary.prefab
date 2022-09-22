@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2760719787349610101}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: layoutContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 9111016059891035168}
   - component: {fileID: 963510552751788064}
   - component: {fileID: 6899947458535897887}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: btnNext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 172905533967922940}
   - component: {fileID: 7052843014483213072}
   - component: {fileID: 7398214344433372223}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: tapContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +274,7 @@ GameObject:
   - component: {fileID: 4978977010243765468}
   - component: {fileID: 4978977010243765471}
   - component: {fileID: 953941636891509061}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: lblTap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -460,7 +460,7 @@ GameObject:
   - component: {fileID: 4978977010385930990}
   - component: {fileID: 2291067185468248744}
   - component: {fileID: 1540498044855477909}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: lblAwesome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -641,7 +641,7 @@ GameObject:
   - component: {fileID: 4978977010508676130}
   - component: {fileID: 4978977010508676133}
   - component: {fileID: 2842555324702876900}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: levelSummary
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -737,7 +737,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4978977011899992548}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: _contentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -781,7 +781,7 @@ GameObject:
   - component: {fileID: 4978977011966154099}
   - component: {fileID: 6670125718011012124}
   - component: {fileID: 946241974299147217}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,7 +909,7 @@ GameObject:
   - component: {fileID: 4978977012066205789}
   - component: {fileID: 4408325723183004698}
   - component: {fileID: 2201878911740767271}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: lblRating
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9095521908985341734}
   - component: {fileID: 7660819277994210865}
   - component: {fileID: 1440546992905174067}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: dialogWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3066826960988565141}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: _contentContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 3107357174490803090}
   - component: {fileID: 7441710317791097994}
   - component: {fileID: 8855155889036911656}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7606076826974335938}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: _pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
