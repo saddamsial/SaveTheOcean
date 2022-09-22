@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 851245609}
   m_Layer: 0
   m_Name: uiCam
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &851245610
 Transform:
   m_ObjectHideFlags: 0
@@ -671,7 +671,8 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 851245608}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
