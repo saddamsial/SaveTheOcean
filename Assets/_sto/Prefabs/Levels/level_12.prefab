@@ -257,7 +257,7 @@ PrefabInstance:
       objectReference: {fileID: 6445466529311080229, guid: bbaf147057b39f7488c3642937cb1d2c, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[0]._itemsCats.Array.data[0]
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[0]._itemsCats.Array.data[1]
@@ -289,7 +289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[2]._itemsCats.Array.data[2]
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
     - target: {fileID: 4895620254315257695, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: m_Layer

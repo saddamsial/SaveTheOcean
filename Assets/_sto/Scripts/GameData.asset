@@ -78,7 +78,6 @@ MonoBehaviour:
   - {fileID: 2229698086017596401, guid: 93525a29511690a429c79db24d386ae3, type: 3}
   - {fileID: 2229698086017596401, guid: 1cb798866eea0174c9574667ac1f9aa9, type: 3}
   - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
-  - {fileID: 2229698086017596401, guid: fd25660e8d35dcf4983c8d8262583d15, type: 3}
   _staminaMax: 99
   _staminaPlayCost: 5
   _staminaFeedCost: 5
