@@ -429,7 +429,7 @@ public class Level : MonoBehaviour
         voffs.y = Mathf.Clamp(1 + 0.20f * (vpt.z - _grid.getMaxZ()), 0, 2.0f);
       _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + _itemSelected.vbtmExtent, Time.deltaTime * 20);
 
-      var _nearestHit = tid.GetClosestCollider(0.5f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
+      var _nearestHit = tid.GetClosestCollider(0.75f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
       nearestItem = _nearestHit?.GetComponent<Item>();
       if(nearestItem)
       {

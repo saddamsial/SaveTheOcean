@@ -160,6 +160,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: dirtFx
       objectReference: {fileID: 0}
+    - target: {fileID: 1449216147977592817, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4150365307385831240, guid: af26a68c5f1fbbd449f677766d96e27f, type: 3}
       propertyPath: ShapeModule.radius.value
       value: 0.4
