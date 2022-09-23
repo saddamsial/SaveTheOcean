@@ -44,8 +44,8 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: 137b53615e08bf44f9cbb29e0d8e70af, type: 3}
     - {fileID: 6445466529311080229, guid: 72ad7446cb521714ebcd578f6727b529, type: 3}
     - {fileID: 6445466529311080229, guid: 1771413318a50c849a5bd8654a553dc5, type: 3}
+    - {fileID: 6445466529311080229, guid: 9b6f045255a179a478fbf8528b9abb11, type: 3}
     - {fileID: 6445466529311080229, guid: 50711a15f337764448da281baf1bc051, type: 3}
-    - {fileID: 6445466529311080229, guid: cb33df14898c48a4eabe5a4f7f2aab6c, type: 3}
   - _kind: 2
     _items:
     - {fileID: 6158104306688602383, guid: 90f7560f046a8bf48bf9c4a81f24b856, type: 3}
@@ -93,15 +93,15 @@ MonoBehaviour:
   - {fileID: 2229698086017596401, guid: 93525a29511690a429c79db24d386ae3, type: 3}
   - {fileID: 2229698086017596401, guid: 1cb798866eea0174c9574667ac1f9aa9, type: 3}
   - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
-  _staminaMax: 99
+  _staminaMax: 50
   _staminaPlayCost: 5
   _staminaFeedCost: 5
   _staminaAdReward: 25
-  _staminaRefillTime: 300
-  _coinFeedCost: 10
+  _staminaRefillTime: 600
+  _coinFeedCost: 2
   _coinsMax: 999
   _gemsMax: 999
-  _resouceItemsAmountFactor: 1.5
+  _resouceItemsAmountFactor: 2
   _rewards:
   - points2Chest: 0
     _reward:

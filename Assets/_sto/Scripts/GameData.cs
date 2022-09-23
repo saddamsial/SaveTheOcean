@@ -114,6 +114,7 @@ public class GameData : ScriptableObject
   [SerializeField] int       _coinsMax = 999;
   [SerializeField] int       _gemsMax = 999;
   [SerializeField] float     _resouceItemsAmountFactor = 1.5f;
+
   [SerializeField] Rewards[] _rewards;
   [Header("--Settings--")]
   [SerializeField] Vector2Int _feedingBoardDim = new Vector2Int(6,6);
@@ -213,7 +214,7 @@ public class GameData : ScriptableObject
     public static int   coinFeedCost => get()._coinFeedCost;
     public static int   gemsMax => get()._gemsMax;
 
-    public static int   GetResCount(Item.ID id) => (int)((1 << id.lvl) * get()._resouceItemsAmountFactor);
+    public static int   GetResCount(Item.ID id) => (int)Mathf.Pow(id.lvl + 1, get()._resouceItemsAmountFactor);// ((1 << id.lvl) * get()._resouceItemsAmountFactor);
     public struct RewardProgress
     {
       public int    lvl;
