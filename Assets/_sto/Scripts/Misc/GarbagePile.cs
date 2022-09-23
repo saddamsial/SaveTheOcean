@@ -50,7 +50,7 @@ public class GarbagePile : MonoBehaviour
                 newSpawn.transform.localScale = Vector3.one * Random.Range(elementSizeRandom.x, elementSizeRandom.y);
             _pileQueue.Enqueue(newSpawn);
         }
-        invisibleItemCount = Mathf.Abs(quantity - maxPileCount);
+        invisibleItemCount = quantity < maxPileCount ?  0  : quantity - maxPileCount;
     }
 
     public void PopTrash(){

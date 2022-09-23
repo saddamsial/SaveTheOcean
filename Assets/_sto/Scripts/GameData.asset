@@ -84,10 +84,10 @@ MonoBehaviour:
   _staminaFeedCost: 5
   _staminaAdReward: 25
   _staminaRefillTime: 600
-  _coinFeedCost: 5
+  _coinFeedCost: 2
   _coinsMax: 999
   _gemsMax: 999
-  _resouceItemsAmountFactor: 1.5
+  _resouceItemsAmountFactor: 2
   _rewards:
   - points2Chest: 0
     _reward:
