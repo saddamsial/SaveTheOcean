@@ -40,14 +40,14 @@ public class Animal : MonoBehaviour
   public void Init(GameData.GarbCats[] garbCats)
   {
     _garbages = new List<Item.ID>();
-    bool isFeedingMode = Level.mode == Level.Mode.Feeding; //GameState.Progress.Locations.IsLocationFinished(GameState.Progress.locationIdx);
+    bool isFeedingMode = Level.mode == Level.Mode.Feeding;
     foreach(var gcat in garbCats)
     {
       var item = GameData.Prefabs.GetGarbagePrefab(gcat);
       if(!isFeedingMode)
         _garbages.Add(item.id);
       else
-        _garbages.Add(new Item.ID(item.id.type, item.id.lvl, Item.Kind.Food, true));
+        _garbages.Add(GameData.Prefabs.GarbToFood(gcat));
     }
     foreach(var id in _garbages)
     {

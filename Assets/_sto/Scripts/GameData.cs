@@ -27,7 +27,6 @@ public class GameData : ScriptableObject
     Cat_00_lvl6 = 6,
     Cat_00_lvl7 = 7,
 
-
     Cat_01_lvl0 = 10,
     Cat_01_lvl1 = 11,
     Cat_01_lvl2 = 12,
@@ -51,13 +50,6 @@ public class GameData : ScriptableObject
     Cat_03_lvl4 = 34,
     Cat_03_lvl5 = 35,
     Cat_03_lvl6 = 36,
-
-    // Cat_04_lvl0 = 40,
-    // Cat_04_lvl1 = 41,
-    // Cat_04_lvl2 = 42,
-    // Cat_04_lvl3 = 43,
-    // Cat_04_lvl4 = 44,
-    // Cat_04_lvl5 = 43,
   }
 
   public static void Init()
@@ -115,6 +107,7 @@ public class GameData : ScriptableObject
   [SerializeField] int       _coinsMax = 999;
   [SerializeField] int       _gemsMax = 999;
   [SerializeField] float     _resouceItemsAmountFactor = 1.5f;
+  [SerializeField] float[]   _foods_chance = new float[]{0.33f, 0.33f, 0.33f};
 
   [SerializeField] Rewards[] _rewards;
   [Header("--Settings--")]
@@ -179,7 +172,19 @@ public class GameData : ScriptableObject
     {
       return Array.FindIndex(get()._items, (item) => item.kind == kind);
     }
+    public static Item.ID GarbToFood(GarbCats cat)
+    {
+      int food_idx = ItemTypeFromKind(Item.Kind.Food);
+      int garb_type = (int)cat / 10;
+      int garb_lvl = (int)cat % 10;
+      Item.ID id = new Item.ID();
+      id.type = food_idx + Mathf.Clamp(garb_type, 0, 2);
+      id.lvl = Mathf.Clamp(garb_lvl, 0, GameData.Prefabs.ItemLevelsCnt(id)-1);
+      id.kind = Item.Kind.Food;
+      return id;
+    }
     public static int ItemTypesCnt => get()._items.Length;
+
 
     public static Location CreateLocation(Transform parent) => Instantiate(get()._locationPrefab, parent);
   }
@@ -213,6 +218,7 @@ public class GameData : ScriptableObject
     public static int   coinsMax => get()._coinsMax;
     public static int   coinFeedCost => get()._coinFeedCost;
     public static int   gemsMax => get()._gemsMax;
+    public static float[] foodChances => get()._foods_chance.ToArray();
 
     public static int   GetResCount(Item.ID id) => (int)Mathf.Pow(id.lvl + 1, get()._resouceItemsAmountFactor);// ((1 << id.lvl) * get()._resouceItemsAmountFactor);
     public struct RewardProgress

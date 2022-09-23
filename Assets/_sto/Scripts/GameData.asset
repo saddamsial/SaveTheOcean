@@ -64,18 +64,21 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: b8cead9ca37539f4ea98bb56649088ec, type: 3}
   - _kind: 5
     _items:
-    - {fileID: 6445466529311080229, guid: eb45cb77219e3c04c94bfe12d3f010d2, type: 3}
-    - {fileID: 6445466529311080229, guid: 69292d99ac8da0f4da48dfd3f2e2fb39, type: 3}
-    - {fileID: 6445466529311080229, guid: 6ac63a2958d8ee140bdb326028567c55, type: 3}
-    - {fileID: 6445466529311080229, guid: fc6a570859b36a34bbf1a705c84914c7, type: 3}
-    - {fileID: 6445466529311080229, guid: b8cead9ca37539f4ea98bb56649088ec, type: 3}
+    - {fileID: 6445466529311080229, guid: f507667425a32b34dacc7196b8844e67, type: 3}
+    - {fileID: 6445466529311080229, guid: bde382c2a5e89cb4aaf80c1d9f7407e8, type: 3}
+    - {fileID: 6445466529311080229, guid: 1e537a391193cc743b04725ced56831d, type: 3}
+    - {fileID: 6445466529311080229, guid: f6da49aad9a1f634fae9c9520eea33c8, type: 3}
+    - {fileID: 6445466529311080229, guid: 23337a9516cd58e409feb4515c4ebc07, type: 3}
+    - {fileID: 6445466529311080229, guid: 461c3825513b78342a843269dae8a34a, type: 3}
+    - {fileID: 6445466529311080229, guid: a0ec4cb78817ab449a7df898d7fef19b, type: 3}
   - _kind: 5
     _items:
-    - {fileID: 6445466529311080229, guid: eb45cb77219e3c04c94bfe12d3f010d2, type: 3}
-    - {fileID: 6445466529311080229, guid: 69292d99ac8da0f4da48dfd3f2e2fb39, type: 3}
-    - {fileID: 6445466529311080229, guid: 6ac63a2958d8ee140bdb326028567c55, type: 3}
-    - {fileID: 6445466529311080229, guid: fc6a570859b36a34bbf1a705c84914c7, type: 3}
-    - {fileID: 6445466529311080229, guid: b8cead9ca37539f4ea98bb56649088ec, type: 3}
+    - {fileID: 6445466529311080229, guid: e8e1c0ce00723b94d97b32914cf307b6, type: 3}
+    - {fileID: 6445466529311080229, guid: 137b53615e08bf44f9cbb29e0d8e70af, type: 3}
+    - {fileID: 6445466529311080229, guid: 72ad7446cb521714ebcd578f6727b529, type: 3}
+    - {fileID: 6445466529311080229, guid: 1771413318a50c849a5bd8654a553dc5, type: 3}
+    - {fileID: 6445466529311080229, guid: 9b6f045255a179a478fbf8528b9abb11, type: 3}
+    - {fileID: 6445466529311080229, guid: 50711a15f337764448da281baf1bc051, type: 3}
   _gridTile: {fileID: 8178171026830446907, guid: 764369db777a63a4d9a3efac1f67b645, type: 3}
   _locationPrefab: {fileID: 4694188858287188799, guid: 7e2dc7caea333c54a97c83e5d2ddcc26, type: 3}
   _listLevels:
@@ -103,6 +106,10 @@ MonoBehaviour:
   _coinsMax: 999
   _gemsMax: 999
   _resouceItemsAmountFactor: 2
+  _foods_chance:
+  - 0.33
+  - 0.33
+  - 0.33
   _rewards:
   - points2Chest: 0
     _reward:
@@ -165,7 +172,6 @@ MonoBehaviour:
       coins: 22
       gems: 1
   _feedingAvailLoc: 3
-  _chestAppearsLoc: 3
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}

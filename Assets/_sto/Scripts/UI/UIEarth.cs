@@ -64,6 +64,11 @@ public class UIEarth : MonoBehaviour
   {
     _btnPlay.interactable = IsLocationSelectable(location);
     _lblLevelInfo.text = "LEVEL " + (location + 1);
+    var st = GameState.Progress.Locations.GetLocationState(location);
+    if(st == Level.State.Finished)
+      _btnActionInfo.text = "Feed";
+    else
+      _btnActionInfo.text = "Play";
   }
 
   public void OnBtnPlay()

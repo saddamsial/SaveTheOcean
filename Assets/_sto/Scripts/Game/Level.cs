@@ -69,7 +69,7 @@ public class Level : MonoBehaviour
       for (int i = 0; i <_itemsCats.Length ; i++)
         solution += (int)Mathf.Pow(2, (int)_itemsCats[i]%10);
       return solution;
-    } 
+    }
 
     public Animal  animal => _animal;
     public GarbCats[] itemsCats => _itemsCats;
