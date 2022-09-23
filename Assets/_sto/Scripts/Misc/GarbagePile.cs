@@ -13,14 +13,14 @@ public class GarbagePile : MonoBehaviour
     
     private void OnEnable() {
         Level.onStart += GeneratePile;
-        Level.onItemCleared += PopTrash;
+        Level.onUnderwaterSpawn += PopTrash;
     }
     private void OnDisable() {
         Level.onStart -= GeneratePile;
-        Level.onItemCleared -= PopTrash;
+        Level.onUnderwaterSpawn -= PopTrash;
     }
     void GeneratePile(Level sender) {
-        GeneratePile(sender.GetNumberOfMovesToSolve());
+        GeneratePile(sender.GetUnderwaterGarbagesCnt());
     }
     void PopTrash(object sender) => PopTrash();
 

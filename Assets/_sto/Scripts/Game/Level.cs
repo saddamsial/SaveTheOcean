@@ -13,7 +13,7 @@ public class Level : MonoBehaviour
   public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
   public static System.Action<Vector3> onMagnetBeg;
   public static System.Action<bool>    onMagnetEnd;
-  public static System.Action<Item>    onPremiumItem, onItemCollected, onItemCleared;
+  public static System.Action<Item>    onPremiumItem, onItemCollected, onItemCleared, onUnderwaterSpawn;
 
   [Header("Refs")]
   [SerializeField] Transform      _itemsContainer;
@@ -81,6 +81,7 @@ public class Level : MonoBehaviour
     }
     return solution;
   }
+  public int GetUnderwaterGarbagesCnt() => _items2.Count((item) => !item.id.IsSpecial);  
 
   public int    locationIdx {get; private set;} = -1;
   public bool   succeed {get; private set;}
@@ -377,6 +378,7 @@ public class Level : MonoBehaviour
     {
       var item = _items2.first();
       _items2.RemoveAt(0);
+      onUnderwaterSpawn?.Invoke(item);
       item.Spawn(vgrid, null, 15, 1);
       AddItem(item);
     }

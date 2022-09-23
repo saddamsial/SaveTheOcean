@@ -78,7 +78,7 @@ public class Item : MonoBehaviour
   Quaternion _qinitial;
 
   public static float gridSpace = 1.0f;
-  public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged, onSelect, onDropped;
+  public static System.Action<Item> onShow, onShown, onMerged, onPut, onNoPut, onHide, onNoMerged, onSelect, onDropped, onSpawn;
   public static Item Merge(Item item0, Item item1, List<Item> _items)
   {
     Item newItem = null;
