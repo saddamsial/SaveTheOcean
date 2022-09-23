@@ -97,7 +97,10 @@ public class Game : MonoBehaviour
       Destroy(_level.gameObject);
     _level = null;  
 
-    _level = GameData.Levels.CreateLevel(_earth.GetLevel(GameState.Progress.locationIdx), levelsContainer);
+    if(Level.mode == Level.Mode.Clearing)
+      _level = GameData.Levels.CreateLevel(_earth.GetLevel(GameState.Progress.locationIdx), levelsContainer);
+    else
+      _level = GameData.Levels.CreateFeedingLevel(levelsContainer);
   }
   public void RestartLevel()
   {

@@ -23,17 +23,21 @@ public class GarbagePile : MonoBehaviour
 
     private void OnEnable() {
         Level.onStart += GeneratePile;
-        Level.onUnderwaterSpawn += PopTrash;
+        Level.onUnderwaterSpawn += ItemSpawn;
     }
     private void OnDisable() {
         Level.onStart -= GeneratePile;
-        Level.onUnderwaterSpawn -= PopTrash;
+        Level.onUnderwaterSpawn -= ItemSpawn;
     }
     void GeneratePile(Level sender) {
         GeneratePile(sender.GetUnderwaterGarbagesCnt());
     }
+    void ItemSpawn(Item item)
+    {
+      if(!item.id.IsSpecial)
+        PopTrash();
+    }
     void PopTrash(object sender) => PopTrash();
-
 
     public void GeneratePile(int quantity){
         _pileQueue = new Queue<GameObject>();

@@ -155,7 +155,7 @@ public class Earth : MonoBehaviour
       var location = tid.HoveredCollider.GetComponentInParent<Location>();
       if(location && location.transform.position.z < 0)
       {
-        if(location.state >= Level.State.Unlocked)
+        if(location.state >= Level.State.Unlocked) // && location.state != Level.State.Finished)
         {
           SelectLocation(location);
           StartRotateToLocation(location);

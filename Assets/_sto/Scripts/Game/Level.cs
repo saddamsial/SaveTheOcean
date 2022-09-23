@@ -21,6 +21,7 @@ public class Level : MonoBehaviour
   //[SerializeField] Transform      _animalsContainer;
   [SerializeField] Transform[]    _animalContainers;
   [SerializeField] Renderer       _waterRenderer;
+  [SerializeField] RewardChest    _rewardChest;
   [SerializeField] SplitMachine   _splitMachine;
   [SerializeField] FeedingMachine _feedingMachine;
   
@@ -32,6 +33,7 @@ public class Level : MonoBehaviour
   [SerializeField] Vector2Int _dim;
   [SerializeField] float      _gridSpace = 1.0f;
   [SerializeField] Color      _waterColor;
+  [SerializeField] float      _inputRad = 0.5f;
   [Header("LvlDesc")]
   [SerializeField] float[]    _chanceToDowngradeItem = new float[6];
   [field:SerializeField] public int  _resItemPerItems {get; private set;}= 0;
@@ -92,7 +94,7 @@ public class Level : MonoBehaviour
   public int    stars {get; set;}
   public int    itemsCount => _items.Count + _items2.Count;
   public int    initialItemsCnt => _initialItemsCnt;
-  public Vector2Int dim => (isFeedingMode)? GameData.Levels.feedingDim : _dim;
+  public Vector2Int dim => _dim;
 
   UISummary    _uiSummary = null;
   UIStatusBar  _uiStatusBar = null;
@@ -240,6 +242,10 @@ public class Level : MonoBehaviour
     }
 
     onStart?.Invoke(this);
+
+    if(GetComponentInChildren<TutorialSystem.TutorialRewardChest>() != null || GameState.Chest.shown)
+      _rewardChest.Show();
+
     CheckMatchingItems();
   }
   public void Hide()
@@ -408,7 +414,7 @@ public class Level : MonoBehaviour
   public void OnInputBeg(TouchInputData tid)
   {
     _itemSelected = null;
-    _itemSelected = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
+    _itemSelected = tid.GetClosestCollider(_inputRad, Item.layerMask)?.GetComponent<Item>() ?? null;
     _itemSelected?.Select(true);
     _itemHovered = null;
     voffs = Vector3.zero;
@@ -423,13 +429,14 @@ public class Level : MonoBehaviour
     if(_itemSelected && tid.RaycastData.HasValue)
     {
       var vpt = tid.RaycastData.Value.point;
-      if(_grid.isOverAxisZ(tid.RaycastData.Value.point))
-        voffs.y = Mathf.Lerp(voffs.y, 0.6f, Time.deltaTime * 10);
-      else
-        voffs.y = Mathf.Clamp(1 + 0.20f * (vpt.z - _grid.getMaxZ()), 0, 2.0f);
+      //if(_grid.isOverAxisZ(tid.RaycastData.Value.point))
+      //voffs.y = Mathf.Lerp(voffs.y, 0.6f, Time.deltaTime * 10);
+      //else
+      //  voffs.y = Mathf.Clamp(1 + 0.20f * (vpt.z - _grid.getMaxZ()), 0, 2.0f);
+      voffs.y = Mathf.Lerp(voffs.y, 2.0f, Time.deltaTime * 10);
       _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + _itemSelected.vbtmExtent, Time.deltaTime * 20);
 
-      var _nearestHit = tid.GetClosestCollider(0.75f, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
+      var _nearestHit = tid.GetClosestCollider(_inputRad, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
       nearestItem = _nearestHit?.GetComponent<Item>();
       if(nearestItem)
       {
@@ -459,7 +466,7 @@ public class Level : MonoBehaviour
       }
       else  
       {
-        var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
+        var tileHit = tid.GetClosestObjectInRange<GridTile>(_inputRad);
         tileHit?.Hover(true);
       }
     }
@@ -492,7 +499,7 @@ public class Level : MonoBehaviour
     int layers = RewardChest.layerMask | StorageBox.layerMask;
     if(_feedingMachine.gameObject.activeInHierarchy)
       layers |= FeedingMachine.layerMask;
-    var box = tid.GetClosestCollider(0.5f, layers);
+    var box = tid.GetClosestCollider(_inputRad, layers);
     if(box)
     {
       //if(Time.timeAsDouble - tapTime < 1.0f)
@@ -544,7 +551,7 @@ public class Level : MonoBehaviour
     }
     else
     {
-      var item = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>();
+      var item = tid.GetClosestCollider(_inputRad, Item.layerMask)?.GetComponent<Item>();
       if(item && item.id.IsSpecial)
       {
         if(Time.timeAsDouble - tapTime < 1.0f)
@@ -564,7 +571,7 @@ public class Level : MonoBehaviour
     }
     if(_itemSelected == null)
     {
-      var animal = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>();
+      var animal = tid.GetClosestCollider(_inputRad, Animal.layerMask)?.GetComponent<Animal>();
       if(animal)
         FindObjectOfType<UIItemsInfo>().Show();
     }
@@ -572,7 +579,7 @@ public class Level : MonoBehaviour
   bool IsItemHit(TouchInputData tid)
   {
     bool is_hit = false;
-    var itemHit = tid.GetClosestCollider(0.5f, Item.layerMask)?.GetComponent<Item>() ?? null;
+    var itemHit = tid.GetClosestCollider(_inputRad, Item.layerMask)?.GetComponent<Item>() ?? null;
     bool is_merged = false;
     if(itemHit && itemHit != _itemSelected && !itemHit.IsInMachine)
     {
@@ -665,7 +672,7 @@ public class Level : MonoBehaviour
     bool is_hit = false;
     //if(_itemSelected.IsInMachine)
     {
-      var tileHit = tid.GetClosestObjectInRange<GridTile>(0.5f);
+      var tileHit = tid.GetClosestObjectInRange<GridTile>(_inputRad);
       if(tileHit && _grid.get(tileHit.vgrid) == 0)
       {
         _grid.set(_itemSelected.vgrid, 0);
@@ -685,7 +692,7 @@ public class Level : MonoBehaviour
   bool IsStorageHit(TouchInputData tid)
   {
     bool is_hit = false;
-    var storage = tid.GetClosestObjectInRange<StorageBox>(0.5f, StorageBox.layerMask);
+    var storage = tid.GetClosestObjectInRange<StorageBox>(_inputRad, StorageBox.layerMask);
     if(storage)
     {
       if(_itemSelected.id.IsSpecial)
@@ -706,7 +713,7 @@ public class Level : MonoBehaviour
   bool IsChestHit(TouchInputData tid)
   {
     bool is_hit = false;
-    var chest = tid.GetClosestObjectInRange<RewardChest>(0.5f, RewardChest.layerMask);
+    var chest = tid.GetClosestObjectInRange<RewardChest>(_inputRad, RewardChest.layerMask);
     if(chest)
       chest.NoPush(_itemSelected.id);
     

@@ -104,6 +104,7 @@ public class GameData : ScriptableObject
   //[SerializeField] Earth    _earthPrefab;
   //[Header("Levels")]
   [SerializeField] List<Level> _listLevels;
+  [SerializeField] Level       _levelFeeding;
   [Header("--Econo--")]
   [SerializeField] int       _staminaMax = 99;
   [SerializeField] int       _staminaPlayCost = 5;
@@ -117,16 +118,14 @@ public class GameData : ScriptableObject
 
   [SerializeField] Rewards[] _rewards;
   [Header("--Settings--")]
-  [SerializeField] Vector2Int _feedingBoardDim = new Vector2Int(6,6);
-  [SerializeField] int       _feedingAvailLoc = 3;
-
+  [SerializeField] int        _feedingAvailLoc = 3;
 
   [SerializeField] Color[]    themeColors;
   public static Color[] GetThemeColors() => get().themeColors;
 
   public static class Prefabs
   {
-    static List<Items> garbages = new List<Items>();
+    static List<Items>     garbages = new List<Items>();
     public static Item     GetItemPrefab(Item.ID id) => get()._items[id.type].Get(id.lvl);
     public static Item     GetGarbagePrefab(GarbCats cat)
     {
@@ -188,8 +187,9 @@ public class GameData : ScriptableObject
   {
     static public Level GetPrefab(int idx) => get()._listLevels[idx];
     static public Level CreateLevel(int idx, Transform levelsContainer) => Instantiate(get()._listLevels[idx], levelsContainer);
+    static public Level CreateFeedingLevel(Transform levelsContainer) => Instantiate(get()._levelFeeding, levelsContainer);
     static public int   levelsCnt => get()._listLevels.Count;
-    static public Vector2Int feedingDim => get()._feedingBoardDim;
+    //static public Vector2Int feedingDim => get()._feedingBoardDim;
     static public int   GetFeedingAvailLoc() => get()._feedingAvailLoc;
   }
   public static class Locations

@@ -89,8 +89,6 @@ public class Item : MonoBehaviour
     {
       if(item1.IsUpgradable)
       {
-        if(!item1.id.IsSpecial)
-          GameState.Econo.rewards += 1;
         item0.Hide();
         _items.Remove(item0);
         onMerged?.Invoke(item1);

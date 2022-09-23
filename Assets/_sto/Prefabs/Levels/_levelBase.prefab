@@ -390,11 +390,13 @@ MonoBehaviour:
   - {fileID: 8536298820559939731}
   - {fileID: 7930286490525139754}
   _waterRenderer: {fileID: 6418255281977202600}
+  _rewardChest: {fileID: 6260663843842504207}
   _splitMachine: {fileID: 5136744024670335667}
   _feedingMachine: {fileID: 6140517189162651774}
   _dim: {x: 4, y: 5}
   _gridSpace: 1.5
   _waterColor: {r: 0, g: 0.5647059, b: 1, a: 1}
+  _inputRad: 0.8
   _chanceToDowngradeItem:
   - 0
   - 0
@@ -1227,6 +1229,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 254796793352037322, guid: f55d13cf3e758724f9d87632db6bd97c, type: 3}
   m_PrefabInstance: {fileID: 3548175116154598109}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6260663843842504207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7484981345368360146, guid: f55d13cf3e758724f9d87632db6bd97c, type: 3}
+  m_PrefabInstance: {fileID: 3548175116154598109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99301180b1c8554d9e40a087e4296ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3747343945228825474
 PrefabInstance:
   m_ObjectHideFlags: 0

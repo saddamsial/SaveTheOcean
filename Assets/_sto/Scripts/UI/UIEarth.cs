@@ -44,7 +44,7 @@ public class UIEarth : MonoBehaviour
   private void OnEarthHide(int levelIdx) => Hide();
   public void  Show(int lvlIdx)
   {
-    _btnFeed.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
+    //_btnFeed.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
     
     _earthPanel.ActivatePanel();
     UpdateLevelInfo(lvlIdx);
@@ -52,40 +52,34 @@ public class UIEarth : MonoBehaviour
   }
   void Hide()
   {
-    //_globePanel.DeactivatePanel();
     _earthPanel.DeactivatePanel();
   }  
 
   bool IsLocationSelectable(int location)
   {
     var state = GameState.Progress.Locations.GetLocationState(location);
-    return state != Level.State.Locked && state != Level.State.Finished;
+    return state != Level.State.Locked;// && state != Level.State.Finished;
   }
   void UpdateLevelInfo(int location)
   {
     _btnPlay.interactable = IsLocationSelectable(location);
     _lblLevelInfo.text = "LEVEL " + (location + 1);
-    if(_btnPlay.interactable)
-    {
-      _btnActionInfo.text = "Play";
-      _btnStaminaInfo.gameObject.SetActive(true);
-    }
-    else
-    {
-      _btnActionInfo.text = "Cleared";
-      _btnStaminaInfo.gameObject.SetActive(false);
-    }
   }
 
   public void OnBtnPlay()
   {
-    if(GameState.Econo.CanSpendStamina(GameData.Econo.staminaCost))
+    if(GameState.Progress.Locations.GetLocationState(GameState.Progress.locationIdx) != Level.State.Finished)
     {
-      GameState.Econo.stamina -= GameData.Econo.staminaCost;
-      onBtnPlay?.Invoke();
+      if(GameState.Econo.CanSpendStamina(GameData.Econo.staminaCost))
+      {
+        GameState.Econo.stamina -= GameData.Econo.staminaCost;
+        onBtnPlay?.Invoke();
+      }
+      else
+        FindObjectOfType<UIPopupStamina>(true)?.Show();
     }
     else
-      FindObjectOfType<UIPopupStamina>(true)?.Show();
+      OnBtnFeed();
   }
   public void OnBtnFeed()
   {

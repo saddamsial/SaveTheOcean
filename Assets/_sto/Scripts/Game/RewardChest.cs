@@ -17,29 +17,30 @@ public class RewardChest : MonoBehaviour
 
   public static System.Action<RewardChest> onPoped, onNotPoped, onNotPushed, onReward, onShow;
 
-  float _rewardPointsMov = 0;
-  float _lidAngle = 0;
   public static int layerMask = 0;
 
-  public int level => GameState.Chest.rewardLevel;
+  float      _rewardPointsMov = 0;
+  float      _lidAngle = 0;
+  int        _resCnt => GameState.Chest.staminaCnt + GameState.Chest.coinsCnt + GameState.Chest.gemsCnt;
 
-  int _resCnt => GameState.Chest.staminaCnt + GameState.Chest.coinsCnt + GameState.Chest.gemsCnt;
+  public int  level => GameState.Chest.rewardLevel;
+  public bool isActive => _content.activeInHierarchy;
 
   void Awake()
   {
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
 
+    Item.onMerged += OnItemMerged;
     GameState.Econo.onRewardProgressChanged += OnRewardChanged;
 
     _rewardPointsMov = GameState.Econo.rewards;
     OnRewardChanged(_rewardPointsMov);
 
     _content.SetActive(false);
-    if(GameState.Chest.ShouldShow())
-      Show();
   }
   void OnDestroy()
   {
+    Item.onMerged -= OnItemMerged;
     GameState.Econo.onRewardProgressChanged -= OnRewardChanged;
   }
 
@@ -72,7 +73,12 @@ public class RewardChest : MonoBehaviour
     float angleTo = (_resCnt == 0) ? 0 : 90;
     _lidAngle = Mathf.Lerp(_lidAngle, angleTo, Time.deltaTime * 5);
     _chestLid.localRotation = Quaternion.AngleAxis(_lidAngle, Vector3.right);
-  }  
+  }
+  void OnItemMerged(Item item)
+  {
+    if(GameState.Chest.shown)
+      GameState.Econo.rewards += 1;
+  }
   void OnRewardChanged(float rewardPoints)
   {
     UpdateSlider();
@@ -81,8 +87,6 @@ public class RewardChest : MonoBehaviour
     var rewardProgress = GameData.Econo.GetRewardProgress(rewardPoints);
     if(rewardProgress.lvl > GameState.Chest.rewardLevel)
     {
-      if(rewardProgress.lvl == 1)
-        Show();
       onReward?.Invoke(this);
       this.Invoke(()=>
       {
