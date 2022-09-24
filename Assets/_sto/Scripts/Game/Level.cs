@@ -56,6 +56,7 @@ public class Level : MonoBehaviour
     Started,
     Finished,
     Polluted,
+    Feeding,
   }
 
   [System.Serializable]
@@ -235,7 +236,13 @@ public class Level : MonoBehaviour
 
     for(int q = 0; q < _lvlDescs.Length; ++q)
     {
-      var animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
+      if(isFeedingMode)
+      { 
+        if(!GameState.Animals.DidAnimalAppear(_lvlDescs[q].animal.type))
+          continue;
+      }
+      Animal animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
+      GameState.Animals.AnimalAppears(animal.type);
       animal.Init(_lvlDescs[q].itemsCats);
       animal.Activate(true);
       _animals.Add(animal);
@@ -614,7 +621,10 @@ public class Level : MonoBehaviour
       if(animalHit.IsReq(_itemSelected)) //CanPut(_itemSelected))
       {
         Item.onPut?.Invoke(_itemSelected);
-        animalHit.Put(_itemSelected, isFeedingMode);
+        if(!isFeedingMode)
+          animalHit.Put(_itemSelected);
+        else
+          animalHit.Feed(_itemSelected);  
         onItemCleared?.Invoke(_itemSelected);
         _grid.set(_itemSelected.vgrid, 0);
         _items.Remove(_itemSelected);
@@ -724,7 +734,7 @@ public class Level : MonoBehaviour
     Item[] itms = _items.FindAll((Item item) => item.id.IsSpecial).ToArray();
     foreach(var itm in itms)
     {
-      _storageBox.Push(itm.id.Validate(true));
+      _storageBox.Push(itm.id);
       DestroyItem(itm);
     }
   }
@@ -739,7 +749,7 @@ public class Level : MonoBehaviour
         itms[q].vwpos = Vector3.Lerp(itms[q].vwpos, vsbox, Time.deltaTime * 4);
         if(Vector3.Distance(itms[q].vwpos, vsbox) < 0.1f)
         {
-          _storageBox.Push(itms[q].id.Validate(true));
+          _storageBox.Push(itms[q].id);
           DestroyItem(itms[q]);
           itms.RemoveAt(q);
           --q;

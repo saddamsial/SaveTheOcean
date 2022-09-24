@@ -58,6 +58,7 @@ public class GameData : ScriptableObject
     for(int type = 0; type < items.Length; ++type)
     {
       var item = items[type];
+      //Debug.Log("kind: " + item.kind);
       for(int lvl = 0; lvl < item.Count; ++lvl)
       {
         item.Get(lvl).id = new Item.ID(type, lvl, items[type].kind);
@@ -88,9 +89,18 @@ public class GameData : ScriptableObject
     }
     public Reward _reward;
   }
+  
+  [System.Serializable]
+  public struct FoodDesc
+  {
+    [SerializeField] string  name;
+    
+    public float foodChance;
+    public float kcal;
+  }  
 
   [Header("--Prefabs--")]
-  [SerializeField] Items[] _items;
+  [SerializeField] Items[]  _items;
   [SerializeField] GridTile _gridTile;
   [SerializeField] Location _locationPrefab;
   //[SerializeField] Earth    _earthPrefab;
@@ -98,23 +108,25 @@ public class GameData : ScriptableObject
   [SerializeField] List<Level> _listLevels;
   [SerializeField] Level       _levelFeeding;
   [Header("--Econo--")]
-  [SerializeField] int       _staminaMax = 99;
-  [SerializeField] int       _staminaPlayCost = 5;
-  [SerializeField] int       _staminaFeedCost = 1;
-  [SerializeField] int       _staminaAdReward = 15;
-  [SerializeField] float     _staminaRefillTime = 60.0f;
-  [SerializeField] int       _coinFeedCost = 1;
-  [SerializeField] int       _coinsMax = 999;
-  [SerializeField] int       _gemsMax = 999;
-  [SerializeField] float     _resouceItemsAmountFactor = 1.5f;
-  [SerializeField] float[]   _foods_chance = new float[]{0.33f, 0.33f, 0.33f};
+  [SerializeField] int        _staminaMax = 99;
+  [SerializeField] int        _staminaPlayCost = 5;
+  [SerializeField] int        _staminaFeedCost = 1;
+  [SerializeField] int        _staminaAdReward = 15;
+  [SerializeField] float      _staminaRefillTime = 60.0f;
+  [SerializeField] int        _coinFeedCost = 1;
+  [SerializeField] int        _coinsMax = 999;
+  [SerializeField] int        _gemsMax = 999;
+  [SerializeField] float      _resouceItemsAmountFactor = 1.5f;
+  [SerializeField] FoodDesc[] _foodsDesc = null;
+  [SerializeField] float      _animalLevelFactor = 1.25f;
+  [SerializeField] Rewards[]  _rewards;
 
-  [SerializeField] Rewards[] _rewards;
   [Header("--Settings--")]
   [SerializeField] int        _feedingAvailLoc = 3;
 
   [SerializeField] Color[]    themeColors;
-  public static Color[] GetThemeColors() => get().themeColors;
+  public static Color[]       GetThemeColors() => get().themeColors;
+
 
   public static class Prefabs
   {
@@ -172,19 +184,18 @@ public class GameData : ScriptableObject
     {
       return Array.FindIndex(get()._items, (item) => item.kind == kind);
     }
-    public static Item.ID GarbToFood(GarbCats cat)
+    public static int[] ItemTypesOfKind(Item.Kind kind)
     {
-      int food_idx = ItemTypeFromKind(Item.Kind.Food);
-      int garb_type = (int)cat / 10;
-      int garb_lvl = (int)cat % 10;
-      Item.ID id = new Item.ID();
-      id.type = food_idx + Mathf.Clamp(garb_type, 0, 2);
-      id.lvl = Mathf.Clamp(garb_lvl, 0, GameData.Prefabs.ItemLevelsCnt(id)-1);
-      id.kind = Item.Kind.Food;
-      return id;
+      List<int> types = new List<int>();
+      for(int q = 0; q < ItemTypesCnt; ++q)
+      {
+        if(get()._items[q].kind == kind)
+          types.Add(q);
+      }
+
+      return types.ToArray();
     }
     public static int ItemTypesCnt => get()._items.Length;
-
 
     public static Location CreateLocation(Transform parent) => Instantiate(get()._locationPrefab, parent);
   }
@@ -218,8 +229,16 @@ public class GameData : ScriptableObject
     public static int   coinsMax => get()._coinsMax;
     public static int   coinFeedCost => get()._coinFeedCost;
     public static int   gemsMax => get()._gemsMax;
-    public static float[] foodChances => get()._foods_chance.ToArray();
+    public static FoodDesc[] foodsDesc => get()._foodsDesc;
+    public static float animalLevelFactor => get()._animalLevelFactor;
+    public static float GetFeedForLevel(int lvl) => (lvl > 0)? 100 * Mathf.Pow(GameData.Econo.animalLevelFactor,  lvl-1) : 0;
 
+    public static FoodDesc GetFoodDesc(Item.ID foodId)
+    {
+      int[] foods_type = GameData.Prefabs.ItemTypesOfKind(foodId.kind);
+      int idx = Mathf.Clamp(foodId.type - foods_type[0], 0, foods_type.Length-1);
+      return foodsDesc[idx];
+    }
     public static int   GetResCount(Item.ID id) => (int)Mathf.Pow(id.lvl + 1, get()._resouceItemsAmountFactor);// ((1 << id.lvl) * get()._resouceItemsAmountFactor);
     public struct RewardProgress
     {

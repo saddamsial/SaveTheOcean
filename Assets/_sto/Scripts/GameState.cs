@@ -43,7 +43,7 @@ public class GameState : SavableScriptableObject
     [SerializeField] int _location = 0;
     [SerializeField] List<LocationState> _locations;
     [SerializeField] long _locationsPassedTime = 0;
-    [SerializeField] List<Item.ID> _itemAppears = new List<Item.ID>();
+    [SerializeField] List<Item.ID>    _itemAppears = new List<Item.ID>();
 
     public static Action onAllLocationFinished;
 
@@ -95,15 +95,22 @@ public class GameState : SavableScriptableObject
     }
     public Level.State  GetLocationState(int loc_idx)
     {
+      if(loc_idx >= Earth.locationsCnt)
+        return Level.State.Feeding;
       var loc = FindLocation(loc_idx);
       return (loc != null) ? loc.state : Level.State.Locked;
     }
-    public void         ItemAppeared(Item.ID id)
+    public bool         ItemAppeared(Item.ID id)
     {
+      bool ret = false;
       if(!DidItemAppear(id))
+      {
+        ret = true;
         _itemAppears.Add(id);
+      }
+      return ret;
     }
-    public bool         DidItemAppear(Item.ID id) => _itemAppears.Any((_id) => Item.ID.Eq(_id, id));
+    public bool         DidItemAppear(Item.ID id) => _itemAppears.Any((iid) => Item.ID.Eq(iid, id));
   }
   [SerializeField] ProgressState progress;
 
@@ -190,7 +197,54 @@ public class GameState : SavableScriptableObject
   }
   [SerializeField] GameInfoState gameInfo;
 
+  [System.Serializable]
+  class AnimalsState
+  {
+    [System.Serializable]
+    public class AnimInfo
+    {
+      public Animal.Type type;
+      public float       kcal;
+      public int         lvl;
+      public AnimInfo(Animal.Type animType)
+      {
+        type = animType;
+        kcal = 0;
+        lvl = 0;
+      }
+      public void Feed(float kCal) => kcal += kCal;
+    }
+    public List<AnimInfo> animals = new List<AnimInfo>();
 
+    public bool AnimalAppeared(Animal.Type type)
+    {
+      bool ret = false;
+      if(!DidAnimalAppear(type))
+      {
+        ret = true;
+        animals.Add(new AnimInfo(type));
+      }
+      return ret;
+    }
+    public bool DidAnimalAppear(Animal.Type type) => animals.Any((info) => type == info.type);
+    public bool Feed(Animal.Type type, float kcal)
+    {
+      bool ret = false;  
+      var ainf = GetInfo(type);
+      if(ainf != null)
+      {
+        ainf.Feed(kcal);
+        if(ainf.kcal > GameData.Econo.GetFeedForLevel(ainf.lvl+1))
+        {
+          ainf.lvl++;
+          ret = true;
+        }
+      }
+      return ret;
+    }
+    public AnimInfo GetInfo(Animal.Type type) => animals.Find((info) => info.type == type);
+  }
+  [SerializeField] AnimalsState animals;
 
   public static void Init()
   {
@@ -225,7 +279,13 @@ public class GameState : SavableScriptableObject
       }
       public static bool          AllStateFinished() => GetStates().All((state) => state >= Level.State.Finished);
       public static bool          AllStateFinished(Level.State[] states) => states.All((state) => state >= Level.State.Finished);
-      public static int           GetFinishedCnt() => GetStates().Count((state) => state >= Level.State.Finished);
+      public static int           GetFinishedCnt() => get().progress.locations.Count((loc) => loc.state >= Level.State.Finished);
+      public static float GetCompletionRate()
+      {
+        Level.State[] states = GetStates();
+        float finishedCnt = states.Where((state) => state == Level.State.Finished).Count();
+        return finishedCnt / Earth.locationsCnt;
+      }
 
       static int _timer = 0;
       static DateTime prevTime;
@@ -255,16 +315,10 @@ public class GameState : SavableScriptableObject
 
     public static class Items
     {
-      public static void ItemAppears(Item.ID id) => get().progress.ItemAppeared(id);
+      public static bool ItemAppears(Item.ID id) => get().progress.ItemAppeared(id);
       public static bool DidItemAppear(Item.ID id) => get().progress.DidItemAppear(id);
     }
 
-    public static float GetCompletionRate()
-    {
-      Level.State[] states = Locations.GetStates();
-      float finishedCnt = states.Where((state) => state == Level.State.Finished).Count();
-      return finishedCnt / Earth.locationsCnt;
-    }
   }
   public static class Econo
   {
@@ -370,17 +424,17 @@ public class GameState : SavableScriptableObject
       Item.ID? id = null;
       if(staminaCnt > 0)
       {
-        id = get().chest.listStamina.last().Validate(true);
+        id = get().chest.listStamina.last().Validate();
         get().chest.listStamina.RemoveAt(get().chest.listStamina.last_idx());
       }
       else if(coinsCnt > 0)
       {
-        id = get().chest.listCoins.last().Validate(true);
+        id = get().chest.listCoins.last().Validate();
         get().chest.listCoins.RemoveAt(get().chest.listCoins.last_idx());
       }
       else if(gemsCnt > 0)
       {
-        id = get().chest.listGems.last().Validate(true);
+        id = get().chest.listGems.last().Validate();
         get().chest.listGems.RemoveAt(get().chest.listGems.last_idx());
       }
       return id;
@@ -436,6 +490,23 @@ public class GameState : SavableScriptableObject
     }
     public static int   FoodCnt => get().feeding.foods.Count;
     public static (Item.ID id, Vector2 vgrid) GetFood(int idx) => new (get().feeding.foods[idx]._id, get().feeding.foods[idx]._vgrid);
+  }
+  public static class Animals
+  {
+    public static bool AnimalAppears(Animal.Type type) => get().animals.AnimalAppeared(type);
+    public static bool DidAnimalAppear(Animal.Type type) => get().animals.DidAnimalAppear(type);
+    public static bool Feed(Animal.Type type, Item.ID id)
+    {
+      float kcal = GameData.Econo.GetResCount(id) * GameData.Econo.GetFoodDesc(id).kcal;
+      return get().animals.Feed(type, kcal);
+    }
+    public static (float kcal, mr.Range<int> lvlRng, int lvl) GetInfo(Animal.Type type)
+    {
+      var ainfo = get().animals.GetInfo(type);
+      var lev_beg = (int)GameData.Econo.GetFeedForLevel(ainfo.lvl);
+      var lev_end = (int)GameData.Econo.GetFeedForLevel(ainfo.lvl+1);
+      return new (ainfo.kcal, new mr.Range<int>(lev_beg, lev_end), ainfo.lvl);
+    }
   }
   public static class Events
   {

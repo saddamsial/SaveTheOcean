@@ -106,10 +106,17 @@ MonoBehaviour:
   _coinsMax: 999
   _gemsMax: 999
   _resouceItemsAmountFactor: 2
-  _foods_chance:
-  - 0.33
-  - 0.33
-  - 0.33
+  _foodsDesc:
+  - name: fishcooks
+    foodChance: 0.5
+    kcal: 1
+  - name: fishcooks1
+    foodChance: 0.4
+    kcal: 1.25
+  - name: fishcooks2
+    foodChance: 0.3
+    kcal: 1.5
+  _animalLevelFactor: 1.25
   _rewards:
   - points2Chest: 0
     _reward:

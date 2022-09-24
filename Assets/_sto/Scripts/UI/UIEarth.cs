@@ -16,6 +16,7 @@ public class UIEarth : MonoBehaviour
 
   public static System.Action onBtnPlay, onBtnFeed;
 
+  Earth   _earth = null;
   UIPanel _earthPanel = null;
   float   _cleanDst = 0.0f;
 
@@ -25,9 +26,10 @@ public class UIEarth : MonoBehaviour
     Earth.onLevelSelected += UpdateLevelInfo;
     Earth.onLevelStart += OnEarthHide;
 
+    _earth = FindObjectOfType<Earth>(true);
     _earthPanel = GetComponent<UIPanel>();
 
-    _cleanDst = GameState.Progress.GetCompletionRate();
+    _cleanDst = GameState.Progress.Locations.GetCompletionRate();
     _slider.minValue = 0;
     _slider.maxValue = 1;
     _slider.value = _cleanDst;
@@ -48,7 +50,7 @@ public class UIEarth : MonoBehaviour
     
     _earthPanel.ActivatePanel();
     UpdateLevelInfo(lvlIdx);
-    this.Invoke(()=> _cleanDst = GameState.Progress.GetCompletionRate(), 0.25f);
+    this.Invoke(()=> _cleanDst = GameState.Progress.Locations.GetCompletionRate(), 0.25f);
   }
   void Hide()
   {
@@ -58,14 +60,14 @@ public class UIEarth : MonoBehaviour
   bool IsLocationSelectable(int location)
   {
     var state = GameState.Progress.Locations.GetLocationState(location);
-    return state != Level.State.Locked;// && state != Level.State.Finished;
+    return (state != Level.State.Locked && state != Level.State.Finished);
   }
   void UpdateLevelInfo(int location)
   {
     _btnPlay.interactable = IsLocationSelectable(location);
     _lblLevelInfo.text = "LEVEL " + (location + 1);
-    var st = GameState.Progress.Locations.GetLocationState(location);
-    if(st == Level.State.Finished)
+    var state = GameState.Progress.Locations.GetLocationState(location);
+    if(state == Level.State.Feeding)
       _btnActionInfo.text = "Feed";
     else
       _btnActionInfo.text = "Play";
@@ -73,7 +75,8 @@ public class UIEarth : MonoBehaviour
 
   public void OnBtnPlay()
   {
-    if(GameState.Progress.Locations.GetLocationState(GameState.Progress.locationIdx) != Level.State.Finished)
+    var state = GameState.Progress.Locations.GetLocationState(GameState.Progress.locationIdx);
+    if(state != Level.State.Feeding)
     {
       if(GameState.Econo.CanSpendStamina(GameData.Econo.staminaCost))
       {

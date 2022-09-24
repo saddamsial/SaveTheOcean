@@ -17,11 +17,11 @@ public class FeedingMachine : MonoBehaviour
   }
   void FillFood()
   {
-    var foodChances = GameData.Econo.foodChances;
+    var foodDescs = GameData.Econo.foodsDesc;
     int food_idx = GameData.Prefabs.ItemTypeFromKind(Item.Kind.Food);
-    for(int q = 0; q < foodChances.Length; ++q)
+    for(int q = 0; q < foodDescs.Length; ++q)
     {
-      int cnt = Mathf.RoundToInt(foodChances[q] * 10);
+      int cnt = Mathf.RoundToInt(foodDescs[q].foodChance * 10);
       int type = food_idx + q;
       for(int w = 0; w < cnt; ++w)
         foods.Add(type);

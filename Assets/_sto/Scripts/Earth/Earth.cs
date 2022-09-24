@@ -39,8 +39,11 @@ public class Earth : MonoBehaviour
   Vector2        _vdragPrev;
   bool           _move2location = false;
   Location[]     _locations;
+  Location       _feedLocation => _locations.last();
 
+  public Location   location(int idx) => _locations[idx];
   public static int locationsCnt {get; private set;}
+
 
   void Awake()
   {
@@ -70,12 +73,11 @@ public class Earth : MonoBehaviour
       }
     }
     _locations = listLocations.ToArray();
-    locationsCnt = _locations.Length;
+    locationsCnt = _locations.Length-1;
   }
   public void Setup()
   {
     _selectedLocation = GameState.Progress.locationIdx;
-    //SelectLocation(_selectedLocation);
     if(_selectedLocation < 0)
     {
       SelectLocation(0);
@@ -100,6 +102,7 @@ public class Earth : MonoBehaviour
     _fx.gameObject.SetActive(true);
     _extras.gameObject.SetActive(true);
 
+    _feedLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
     _locationsPath.SetActive(!GameState.Progress.Locations.AllStateFinished());
 
     UpdateLevelsStates();
@@ -155,7 +158,7 @@ public class Earth : MonoBehaviour
       var location = tid.HoveredCollider.GetComponentInParent<Location>();
       if(location && location.transform.position.z < 0)
       {
-        if(location.state >= Level.State.Unlocked) // && location.state != Level.State.Finished)
+        if(location.IsSelectable())
         {
           SelectLocation(location);
           StartRotateToLocation(location);
@@ -184,7 +187,7 @@ public class Earth : MonoBehaviour
     for(int q = 0; q < _locations.Length; ++q)
       _locations[q].state = GameState.Progress.Locations.GetLocationState(q);
   }
-
+  int  GetNextLocation(int location) => Mathf.Clamp(location + 1, 0, locationsCnt-1);  
   void SelectLocation(Location location) => SelectLocation(location.idx);
   void SelectLocation(int location)
   {
@@ -199,10 +202,8 @@ public class Earth : MonoBehaviour
   {
     _vessel.FlyTo(_locations[location].transform.localPosition);
   }
-  int  GetNextLocation(int location)
-  {
-    return Mathf.Clamp(location + 1, 0, _locations.Length - 1);
-  }
+  
+  
   void StartRotateToLocation(Location location)
   {
     _move2location = true;

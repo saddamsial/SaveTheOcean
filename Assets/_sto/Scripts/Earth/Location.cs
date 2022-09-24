@@ -17,6 +17,12 @@ public class Location : MonoBehaviour
   public int  idx => _idx;
   public int  levelIdx => _level;
 
+  public bool IsSelectable() 
+  {
+    state = GameState.Progress.Locations.GetLocationState(idx);
+    return state >= Level.State.Unlocked && state != Level.State.Finished;
+  }
+
   public void Init(int idx, Transform levelTransf, float vert_roto_range, Level.State level_state)
   { 
     _idx = idx;
@@ -33,7 +39,6 @@ public class Location : MonoBehaviour
     var posyz = Vector3.ProjectOnPlane(transform.localPosition, Vector3.right);
     //posyz.x = 0;
     _localDstRoto = Quaternion.AngleAxis(Mathf.Clamp(Vector3.SignedAngle(posyz, -Vector3.forward, Vector3.right), -vert_roto_range, vert_roto_range), Vector3.right) * _localDstRoto;
-
     Select(false);
   }
   public Level.State state 
@@ -57,7 +62,8 @@ public class Location : MonoBehaviour
     for(int q = 0; q < _stateModels.Length; ++q)
     {
       if(_stateModels[q] != null)
-        _stateModels[q]?.SetActive(q == mi);
+        _stateModels[q]?.SetActive(false);
     }
+    _stateModels[mi].SetActive(true);
   }
 }

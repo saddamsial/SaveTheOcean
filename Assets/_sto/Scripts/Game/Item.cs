@@ -44,19 +44,31 @@ public class Item : MonoBehaviour
 
     public ID(int item_type, int item_lvl, Kind item_kind, bool clampLevel = false)
     {
-      _type = (item_kind == Kind.Garbage)? item_type : GameData.Prefabs.ItemTypeFromKind(item_kind);
+      _type = item_type;
       _lvl = item_lvl;
       _kind = item_kind;
       if(clampLevel)
         _lvl = Mathf.Min(item_lvl, Item.LevelsCnt(this) - 1);
     }
-    public ID Validate(bool clampLevel) => new ID(_type, _lvl, _kind, clampLevel);
+    public ID Validate()
+    {
+      int[] types = GameData.Prefabs.ItemTypesOfKind(_kind);
+      _type = Mathf.Clamp(_type, types.first(), types.last());
+      _lvl = Mathf.Min(_lvl, Item.LevelsCnt(this) - 1);
+      return this;
+    }
     public int type {get => _type; set => _type = value;}
     public int lvl {get => _lvl; set => _lvl = value;}
     public Kind kind {get => _kind; set => _kind = value;}
     public bool IsSpecial => _kind == Kind.Stamina || _kind == Kind.Coin || _kind == Kind.Gem;
     public static bool Eq(ID id0, ID id1) => id0.type == id1.type && id0.lvl == id1.lvl;
     public int LevelsCnt => Item.LevelsCnt(this);
+    public static ID FromKind(Item.Kind kind, int idx, int lvl = 0)
+    {
+      int[] types = GameData.Prefabs.ItemTypesOfKind(kind);
+      var id = new ID(types[idx], lvl, kind); 
+      return id.Validate();
+    } 
   }
 
   ID         _id = new ID();

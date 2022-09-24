@@ -9,20 +9,35 @@ public class Animal : MonoBehaviour
   [Header("Refs")]
   [SerializeField] Animator     _animator;
   [SerializeField] Transform    _garbageContainer;
+  [SerializeField] FeedInfo     _feedingInfo;
   [SerializeField] GarbageInfo  _garbageInfo;
 
+  [Header("Props")]
+  [SerializeField] Type _type;
+
+  public enum Type
+  {
+    None,
+    Dolphin,
+    Turtle,
+    Hammerfish,
+    Octopus,
+  }
 
   List<Item.ID>    _garbages = new List<Item.ID>();
   List<Item>       _garbagesCleared = new List<Item>();
 
+  public Type          type => _type;
   public List<Item>    garbages {get; private set;} = new List<Item>();
   public bool          isActive  {get; private set;} = false;
   public bool          isReady  {get; private set;} = false;
   public int           requests => garbages.Count;
-  public Vector3       garbagePos => _garbageContainer.transform.position;
+  //public Vector3       garbagePos => _garbageContainer.transform.position;
 
   static public int layer = 0;
   static public int layerMask = 0;
+
+  bool feedingMode = false;
 
   void Awake()
   {
@@ -30,36 +45,44 @@ public class Animal : MonoBehaviour
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(layer));
   }
 
-  IEnumerator ShowGarbageInfo()
+  IEnumerator ShowInfo()
   {
-    //yield return StartCoroutine(WaitForAnimState("_active"));
     yield return _animator.WaitForAnimState("_active");
     isReady = true;
-    _garbageInfo.Show(garbages);
+    if(!feedingMode)
+      _garbageInfo.Show(garbages);
+    else
+      _feedingInfo.Show(_type);  
   }
   public void Init(GameData.GarbCats[] garbCats)
   {
     _garbages = new List<Item.ID>();
-    bool isFeedingMode = Level.mode == Level.Mode.Feeding;
-    foreach(var gcat in garbCats)
+    feedingMode = Level.mode == Level.Mode.Feeding;
+
+    if(!feedingMode)
     {
-      var item = GameData.Prefabs.GetGarbagePrefab(gcat);
-      if(!isFeedingMode)
+      foreach(var gcat in garbCats)
+      {
+        var item = GameData.Prefabs.GetGarbagePrefab(gcat);
         _garbages.Add(item.id);
-      else
-        _garbages.Add(GameData.Prefabs.GarbToFood(gcat));
+      }
+      foreach(var id in _garbages)
+      {
+        garbages.Add(GameData.Prefabs.CreateStaticItem(id, _garbageInfo.itemContainer));
+      }
     }
-    foreach(var id in _garbages)
+    else
     {
-      garbages.Add(GameData.Prefabs.CreateStaticItem(id, _garbageInfo.itemContainer));
+      
     }
   }
-  public void Activate(bool show_garbage_info)
+  public void Activate(bool show_info)
   { 
     isActive = true;
-    _animator.SetTrigger("activate"); 
-    if(show_garbage_info)
-      StartCoroutine(ShowGarbageInfo());
+    _animator.SetTrigger("activate");
+    GetComponent<Collider>().enabled = true;
+    if(show_info)
+      StartCoroutine(ShowInfo());
   }
   public void Deactivate()
   {
@@ -69,6 +92,17 @@ public class Animal : MonoBehaviour
     _animator.SetTrigger("deactivate");
     GetComponent<Collider>().enabled = false;
     _animator.InvokeForAnimStateEnd("_deactivate", ()=> gameObject.SetActive(false));
+  }
+  public void AnimLvl()
+  {
+    isReady = false;
+    isActive = false;
+    _garbageInfo.Hide();
+    _feedingInfo.Hide();
+    _animator.SetTrigger("deactivate");
+    GetComponent<Collider>().enabled = false;
+    this.Invoke(() => this.Activate(true), 3.0f);
+    //_animator.InvokeForAnimState("_inactive", ()=> Activate(true));
   }
   public void AnimThrow()
   {
@@ -80,9 +114,32 @@ public class Animal : MonoBehaviour
     if(isReady)
       _animator.Play("talk", 0);
   }
-  public bool CanPut(Item item) => isReady && IsReq(item);
-  public bool IsReq(Item item) => garbages.Find((garbage) => Item.EqType(item, garbage)) != null;
-  public void Put(Item item, bool feedingMode)
+  public bool CanPut(Item item)
+  {
+    bool ret = false;
+    if(isReady)
+    {
+      if(!feedingMode)
+        ret = IsReq(item);
+      else  
+        ret = item.id.kind == Item.Kind.Food;
+    }
+    return ret;
+  }
+  public Item GetReq(Item item) => garbages.Find((garbage) => Item.EqType(item, garbage));
+  public bool IsReq(Item item) => (!feedingMode)? GetReq(item) != null : item.id.kind == Item.Kind.Food;
+  public void Feed(Item item)
+  {
+    bool next_lvl = GameState.Animals.Feed(type, item.id);
+    _feedingInfo.UpdateInfo();
+    isReady = true;
+    item.gameObject.SetActive(false);
+    if(!next_lvl)
+      AnimTalk();
+    else
+      AnimLvl();
+  }
+  public void Put(Item item)
   {
     //if(isReady)
     {
@@ -93,50 +150,32 @@ public class Animal : MonoBehaviour
         _garbagesCleared.Add(it);
         garbages.Remove(it);
         item.gameObject.SetActive(false);
-        if(!feedingMode)
+        GameObject model = null;
+        if(isReady)
         {
-          GameObject model = null;
+          model = item.mdl;
+          model.transform.parent = _garbageContainer;
+          model.transform.localPosition = Vector2.zero;
+          model.SetActive(true);
+        }
+
+        if(garbages.Count > 0)
+        {
           if(isReady)
           {
-            model = item.mdl;
-            model.transform.parent = _garbageContainer;
-            model.transform.localPosition = Vector2.zero;
-            model.SetActive(true);
-          }
-
-          if(garbages.Count > 0)
-          {
-            if(isReady)
+            AnimThrow();
+            StartCoroutine(_animator.InvokeForAnimStateEnd("itemPush", ()=> 
             {
-              AnimThrow();
-              StartCoroutine(_animator.InvokeForAnimStateEnd("itemPush", ()=> 
-              {
-                isReady = true;
-                model.SetActive(false);
-              }));
-            }
-            isReady = false;
+              isReady = true;
+              model.SetActive(false);
+            }));
           }
-          else
-          {
-            isReady = false;
-            Deactivate();
-          }
+          isReady = false;
         }
         else
         {
-          var model = item.mdl;
-          model.SetActive(false);
-          if(garbages.Count > 0)
-          {
-            isReady = true;
-            AnimTalk();
-          }
-          else
-          {
-            isReady = false;
-            Deactivate();  
-          }
+          isReady = false;
+          Deactivate();
         }
       }
     }

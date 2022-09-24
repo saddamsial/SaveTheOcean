@@ -52,6 +52,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 539588571715548367}
   - {fileID: 7176365723557189049}
+  - {fileID: 539588571715548367}
   _selectionModel: {fileID: 8698661391525078172}
   _state: 0
   _level: -1
