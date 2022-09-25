@@ -7,9 +7,6 @@ using GameLib.UI;
 
 public class EffectsManager : MonoBehaviour
 {
-  public static System.Action onPlayConfetti;
-
-  [ContextMenu("Test Confetti")] void TestConfetti() => onPlayConfetti?.Invoke();
   Camera mainCamera = null;
   ObjectShake cameraShakeContainer;
   UIInfoLabelManager infoLblMan,infoLblManDown;
@@ -20,7 +17,6 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] ObjectShakePreset objShakePresetHi;
     [SerializeField] float offsetToCamera = .25f;
   [Header("FX Systems")]
-    [SerializeField] ParticleSystem fxConfettiLevel = null;
     [SerializeField] ParticleSystem fxWaterSplash = null;
     [SerializeField] ParticleSystem fxHit = null;
     [SerializeField] ParticleSystem fxMagnet = null;
@@ -252,10 +248,6 @@ public class EffectsManager : MonoBehaviour
     }
     void OnLevelFinished(Level lvl) 
     {
-      if(lvl.succeed)
-        onPlayConfetti?.Invoke();
-      // if(lvl.Succeed)
-      //   fxConfettiLevel.Play();
       //cameraShakeContainer.Shake(objShakePresetHi);
     }
 }

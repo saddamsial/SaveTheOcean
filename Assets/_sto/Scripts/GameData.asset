@@ -64,13 +64,13 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: b8cead9ca37539f4ea98bb56649088ec, type: 3}
   - _kind: 5
     _items:
-    - {fileID: 6445466529311080229, guid: f507667425a32b34dacc7196b8844e67, type: 3}
-    - {fileID: 6445466529311080229, guid: bde382c2a5e89cb4aaf80c1d9f7407e8, type: 3}
-    - {fileID: 6445466529311080229, guid: 1e537a391193cc743b04725ced56831d, type: 3}
-    - {fileID: 6445466529311080229, guid: f6da49aad9a1f634fae9c9520eea33c8, type: 3}
-    - {fileID: 6445466529311080229, guid: 23337a9516cd58e409feb4515c4ebc07, type: 3}
-    - {fileID: 6445466529311080229, guid: 461c3825513b78342a843269dae8a34a, type: 3}
-    - {fileID: 6445466529311080229, guid: a0ec4cb78817ab449a7df898d7fef19b, type: 3}
+    - {fileID: 6445466529311080229, guid: 7b6a21117346d4e48a6d35aa93c769ec, type: 3}
+    - {fileID: 6445466529311080229, guid: e42b102b6e1f49147a9795f87ef88753, type: 3}
+    - {fileID: 6445466529311080229, guid: 95c74c30556bc4d40a481ad5d4bedf30, type: 3}
+    - {fileID: 6445466529311080229, guid: fbef5b98d0c29524585da54e16d7050a, type: 3}
+    - {fileID: 6445466529311080229, guid: a68b5d44c30134d4f8311910f9433591, type: 3}
+    - {fileID: 6445466529311080229, guid: bc2d3f59a7e65dc48948f0ed1744a6ac, type: 3}
+    - {fileID: 6445466529311080229, guid: 16e7b9a7ecf24fb41a4ed87f607e2d6e, type: 3}
   - _kind: 5
     _items:
     - {fileID: 6445466529311080229, guid: e8e1c0ce00723b94d97b32914cf307b6, type: 3}
@@ -107,21 +107,21 @@ MonoBehaviour:
   _gemsMax: 999
   _resouceItemsAmountFactor: 2
   _foods_chance:
-  - 0.33
-  - 0.33
-  - 0.33
+  - 0.5
+  - 0.3
+  - 0.2
   _rewards:
   - points2Chest: 0
     _reward:
       stamina: 0
       coins: 0
       gems: 0
-  - points2Chest: 16
+  - points2Chest: 8
     _reward:
-      stamina: 2
-      coins: 2
+      stamina: 1
+      coins: 1
       gems: 2
-  - points2Chest: 80
+  - points2Chest: 64
     _reward:
       stamina: 2
       coins: 4

@@ -572,8 +572,8 @@ public class Level : MonoBehaviour
     if(_itemSelected == null)
     {
       var animal = tid.GetClosestCollider(_inputRad, Animal.layerMask)?.GetComponent<Animal>();
-      if(animal)
-        FindObjectOfType<UIItemsInfo>().Show();
+      // if(animal)
+        // FindObjectOfType<UIItemsInfo>().Show();
     }
   }
   bool IsItemHit(TouchInputData tid)
