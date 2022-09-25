@@ -66,12 +66,12 @@ MonoBehaviour:
       _lvl: 4
       _kind: 5
   economy:
-    stamina: 20
-    coins: 33
+    stamina: 16
+    coins: 23
     gems: 25
     rewardPoints: 0
     rewardLevel: 0
-    lastStamina: -8585374769927213514
+    lastStamina: -8585374763927213514
   chest:
     shown: 0
     listStamina: []
@@ -88,37 +88,27 @@ MonoBehaviour:
   feeding:
     foods:
     - _id:
-        _type: 7
+        _type: 9
         _lvl: 0
         _kind: 5
-      _vgrid: {x: -1.5, y: -1}
+      _vgrid: {x: 1.5, y: -2}
     - _id:
-        _type: 7
-        _lvl: 1
-        _kind: 5
-      _vgrid: {x: -0.5, y: -2}
-    - _id:
-        _type: 8
+        _type: 9
         _lvl: 0
         _kind: 5
-      _vgrid: {x: -0.5, y: -1}
-    - _id:
-        _type: 7
-        _lvl: 0
-        _kind: 5
-      _vgrid: {x: 0.5, y: -2}
+      _vgrid: {x: 1.5, y: 1}
   events:
     tutIntroDone: 0
     tutPremiumDone: 0
     popupAllLocFinished: 0
   gameInfo:
-    appQuitTime: -8585374768036439446
+    appQuitTime: -8585374760580113518
   animals:
     animals:
     - type: 1
-      kcal: 100.5
-      lvl: 1
+      kcal: 126
+      lvl: 2
     - type: 2
-      kcal: 99
-      lvl: 0
+      kcal: 110.25
+      lvl: 1
   selectedTheme: 0

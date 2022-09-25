@@ -231,7 +231,7 @@ public class GameData : ScriptableObject
     public static int   gemsMax => get()._gemsMax;
     public static FoodDesc[] foodsDesc => get()._foodsDesc;
     public static float animalLevelFactor => get()._animalLevelFactor;
-    public static float GetFeedForLevel(int lvl) => (lvl > 0)? 100 * Mathf.Pow(GameData.Econo.animalLevelFactor,  lvl-1) : 0;
+    public static float GetFeedForLevel(int lvl, int baseLevelUp) => (lvl > 0)? baseLevelUp * Mathf.Pow(GameData.Econo.animalLevelFactor,  lvl-1) : 0;
 
     public static FoodDesc GetFoodDesc(Item.ID foodId)
     {

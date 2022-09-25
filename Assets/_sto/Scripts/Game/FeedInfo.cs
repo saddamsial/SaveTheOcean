@@ -17,6 +17,7 @@ public class FeedInfo : MonoBehaviour
   public static System.Action<FeedInfo> onShow, onHide;
 
   Animal.Type _animalType = Animal.Type.None;
+  int         _animalLevelUp = 0;
 
   float _destVal = 0;
   float _destBeg = 0;
@@ -32,7 +33,7 @@ public class FeedInfo : MonoBehaviour
 
   void SetupInfo()
   {
-    var info = GameState.Animals.GetInfo(_animalType);
+    var info = GameState.Animals.GetInfo(_animalType, _animalLevelUp);
     _destVal = _slider.value = info.kcal;
     _destBeg = _slider.minValue = info.lvlRng.beg;
     _destEnd = _slider.maxValue = info.lvlRng.end;
@@ -41,15 +42,16 @@ public class FeedInfo : MonoBehaviour
   }
   public void UpdateInfo()
   {
-    var info = GameState.Animals.GetInfo(_animalType);
+    var info = GameState.Animals.GetInfo(_animalType, _animalLevelUp);
     _destVal = info.kcal;
     _destBeg = info.lvlRng.beg;
     _destEnd = info.lvlRng.end;
     _destLvl = info.lvl;
   }
-  public void Show(Animal.Type animalType)
+  public void Show(Animal animal)
   {
-    _animalType = animalType;
+    _animalType = animal.type;
+    _animalLevelUp = animal.baseLevelUp;
     SetupInfo();
     _actObj.ActivateObject();
     onShow?.Invoke(this);

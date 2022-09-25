@@ -227,14 +227,14 @@ public class GameState : SavableScriptableObject
       return ret;
     }
     public bool DidAnimalAppear(Animal.Type type) => animals.Any((info) => type == info.type);
-    public bool Feed(Animal.Type type, float kcal)
+    public bool Feed(Animal.Type type, float kcal, int baseLevelUp)
     {
       bool ret = false;  
       var ainf = GetInfo(type);
       if(ainf != null)
       {
         ainf.Feed(kcal);
-        if(ainf.kcal > GameData.Econo.GetFeedForLevel(ainf.lvl+1))
+        if(ainf.kcal > GameData.Econo.GetFeedForLevel(ainf.lvl+1, baseLevelUp))
         {
           ainf.lvl++;
           ret = true;
@@ -495,16 +495,16 @@ public class GameState : SavableScriptableObject
   {
     public static bool AnimalAppears(Animal.Type type) => get().animals.AnimalAppeared(type);
     public static bool DidAnimalAppear(Animal.Type type) => get().animals.DidAnimalAppear(type);
-    public static bool Feed(Animal.Type type, Item.ID id)
+    public static bool Feed(Animal.Type type, Item.ID id, int baseLevelUp)
     {
       float kcal = GameData.Econo.GetResCount(id) * GameData.Econo.GetFoodDesc(id).kcal;
-      return get().animals.Feed(type, kcal);
+      return get().animals.Feed(type, kcal, baseLevelUp);
     }
-    public static (float kcal, mr.Range<int> lvlRng, int lvl) GetInfo(Animal.Type type)
+    public static (float kcal, mr.Range<int> lvlRng, int lvl) GetInfo(Animal.Type type, int baseLevelUp)
     {
       var ainfo = get().animals.GetInfo(type);
-      var lev_beg = (int)GameData.Econo.GetFeedForLevel(ainfo.lvl);
-      var lev_end = (int)GameData.Econo.GetFeedForLevel(ainfo.lvl+1);
+      var lev_beg = (int)GameData.Econo.GetFeedForLevel(ainfo.lvl, baseLevelUp);
+      var lev_end = (int)GameData.Econo.GetFeedForLevel(ainfo.lvl+1, baseLevelUp);
       return new (ainfo.kcal, new mr.Range<int>(lev_beg, lev_end), ainfo.lvl);
     }
   }

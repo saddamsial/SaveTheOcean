@@ -14,6 +14,7 @@ public class Animal : MonoBehaviour
 
   [Header("Props")]
   [SerializeField] Type _type;
+  [SerializeField] int  _baseLevelUp = 100;
 
   public enum Type
   {
@@ -28,6 +29,7 @@ public class Animal : MonoBehaviour
   List<Item>       _garbagesCleared = new List<Item>();
 
   public Type          type => _type;
+  public int           baseLevelUp => _baseLevelUp;
   public List<Item>    garbages {get; private set;} = new List<Item>();
   public bool          isActive  {get; private set;} = false;
   public bool          isReady  {get; private set;} = false;
@@ -52,7 +54,7 @@ public class Animal : MonoBehaviour
     if(!feedingMode)
       _garbageInfo.Show(garbages);
     else
-      _feedingInfo.Show(_type);  
+      _feedingInfo.Show(this);  
   }
   public void Init(GameData.GarbCats[] garbCats)
   {
@@ -130,7 +132,7 @@ public class Animal : MonoBehaviour
   public bool IsReq(Item item) => (!feedingMode)? GetReq(item) != null : item.id.kind == Item.Kind.Food;
   public void Feed(Item item)
   {
-    bool next_lvl = GameState.Animals.Feed(type, item.id);
+    bool next_lvl = GameState.Animals.Feed(type, item.id, _baseLevelUp);
     _feedingInfo.UpdateInfo();
     isReady = true;
     item.gameObject.SetActive(false);
