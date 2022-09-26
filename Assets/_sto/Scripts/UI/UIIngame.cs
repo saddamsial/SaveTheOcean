@@ -117,4 +117,8 @@ public class UIIngame : MonoBehaviour
     //   _progress.value = Mathf.Clamp01(1-_pollution);
     // }
   }
+
+  public void ShowMergeInfoWindow(){
+    FindObjectOfType<UIItemsInfo>().Show();
+  }
 }

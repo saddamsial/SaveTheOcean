@@ -55,20 +55,20 @@ MonoBehaviour:
   objShakePresetLo: {fileID: 11400000, guid: fb6db08f6b431a848ab3894142ffb394, type: 2}
   objShakePresetHi: {fileID: 11400000, guid: 96a47d80e34fc7d4fa5b769b38c123e6, type: 2}
   offsetToCamera: 1
-  fxConfettiLevel: {fileID: 0}
   fxWaterSplash: {fileID: 7477516348104327770}
   fxHit: {fileID: 676225068606840202}
   fxMagnet: {fileID: 973462670153670735}
-  _strNoMergeMaxed: maxed
-  _strNoMergeWrongType: not mergeable
+  _strNoMergeMaxed: Max Level!
+  _strNoMergeWrongType: Items do not match
   _strAnimalWrongItem: no need that
   _strNoCapacity: no room for item
-  _strNoSplittableItem: no splittable item
-  _strNoRoomOnGrid: no room on grid
-  _strEmpty: empty
-  _strFeedingNoRes: no coins
-  _strNotPushedGarbage: cannot store | garbages
-  _strNotPushedFood: cannot store | food
+  _strNoSplittableItem: Unable to split!
+  _strNoRoomOnGrid: No room on grid
+  _strEmpty: Empty
+  _strFeedingNoRes: No coins
+  _strNotPushedGarbage: Unable to store!
+  _strNotPushedFood: Unable to store!
+  _strCollected: +{0}
 --- !u!114 &8108016443953103903
 MonoBehaviour:
   m_ObjectHideFlags: 0

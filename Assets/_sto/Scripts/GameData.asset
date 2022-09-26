@@ -97,24 +97,24 @@ MonoBehaviour:
   - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
   _levelFeeding: {fileID: 2229698086017596401, guid: 0f8f314baaff79f4aa4d3cf15bcda573, type: 3}
   _staminaMax: 50
-  _staminaPlayCost: 5
-  _staminaFeedCost: 5
+  _staminaPlayCost: 10
+  _staminaFeedCost: 15
   _staminaAdReward: 25
-  _staminaRefillTime: 600
+  _staminaRefillTime: 900
   _coinFeedCost: 2
   _coinsMax: 999
   _gemsMax: 999
   _resouceItemsAmountFactor: 2
   _foodsDesc:
-  - name: food 0
-    foodChance: 0.33
+  - name: Crackers
+    foodChance: 0.5
     kcal: 1
-  - name: food 1
-    foodChance: 0.33
-    kcal: 1.25
-  - name: food 2
-    foodChance: 0.33
-    kcal: 1.5
+  - name: Squids
+    foodChance: 0.3
+    kcal: 2
+  - name: Sushi
+    foodChance: 0.2
+    kcal: 4
   _animalLevelFactor: 1.25
   _rewards:
   - points2Chest: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
       stamina: 0
       coins: 0
       gems: 0
-  - points2Chest: 8
+  - points2Chest: 24
     _reward:
       stamina: 1
       coins: 1
