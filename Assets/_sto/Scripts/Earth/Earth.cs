@@ -74,6 +74,9 @@ public class Earth : MonoBehaviour
     }
     _locations = listLocations.ToArray();
     locationsCnt = _locations.Length-1;
+
+    _feedLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
+    _locationsPath.SetActive(!GameState.Progress.Locations.AllStateFinished());    
   }
   public void Setup()
   {
@@ -245,5 +248,16 @@ public class Earth : MonoBehaviour
   {
     RotateToLocation();
     RotateFree();
+
+  #if UNITY_EDITOR
+    if(Input.GetKeyDown(KeyCode.Y))
+    {
+      for(int q = 0; q < Earth.locationsCnt; ++q)
+      {
+        GameState.Progress.Locations.SetLocationFinished(q);
+      }
+      UpdateLevelsStates();
+    }
+  #endif
   }
 }

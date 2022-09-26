@@ -78,12 +78,15 @@ public class GameState : SavableScriptableObject
     public void         PassLocation(int loc_idx)
     {
       var loc = FindLocation(loc_idx);
-      loc.date = CTime.get().ToBinary();
       if(loc == null)
-        _locations.Add(new LocationState(loc_idx, Level.State.Finished));
+      {
+        loc = new LocationState(loc_idx, Level.State.Finished);
+        _locations.Add(loc);
+      }
       else
         loc.state = Level.State.Finished;
 
+      loc.date = CTime.get().ToBinary();
       if(_locations.Count == Earth.locationsCnt)
       {
         if(_locationsPassedTime == 0)
@@ -280,7 +283,7 @@ public class GameState : SavableScriptableObject
       public static bool          AllStateFinished() => GetStates().All((state) => state >= Level.State.Finished);
       public static bool          AllStateFinished(Level.State[] states) => states.All((state) => state >= Level.State.Finished);
       public static int           GetFinishedCnt() => get().progress.locations.Count((loc) => loc.state >= Level.State.Finished);
-      public static float GetCompletionRate()
+      public static float         GetCompletionRate()
       {
         Level.State[] states = GetStates();
         float finishedCnt = states.Where((state) => state == Level.State.Finished).Count();
