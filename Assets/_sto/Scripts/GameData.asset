@@ -64,21 +64,20 @@ MonoBehaviour:
     - {fileID: 6445466529311080229, guid: b8cead9ca37539f4ea98bb56649088ec, type: 3}
   - _kind: 5
     _items:
-    - {fileID: 6445466529311080229, guid: f507667425a32b34dacc7196b8844e67, type: 3}
-    - {fileID: 6445466529311080229, guid: bde382c2a5e89cb4aaf80c1d9f7407e8, type: 3}
-    - {fileID: 6445466529311080229, guid: 1e537a391193cc743b04725ced56831d, type: 3}
-    - {fileID: 6445466529311080229, guid: f6da49aad9a1f634fae9c9520eea33c8, type: 3}
-    - {fileID: 6445466529311080229, guid: 23337a9516cd58e409feb4515c4ebc07, type: 3}
-    - {fileID: 6445466529311080229, guid: 461c3825513b78342a843269dae8a34a, type: 3}
-    - {fileID: 6445466529311080229, guid: a0ec4cb78817ab449a7df898d7fef19b, type: 3}
+    - {fileID: 6445466529311080229, guid: 7b6a21117346d4e48a6d35aa93c769ec, type: 3}
+    - {fileID: 6445466529311080229, guid: e42b102b6e1f49147a9795f87ef88753, type: 3}
+    - {fileID: 6445466529311080229, guid: 95c74c30556bc4d40a481ad5d4bedf30, type: 3}
+    - {fileID: 6445466529311080229, guid: fbef5b98d0c29524585da54e16d7050a, type: 3}
+    - {fileID: 6445466529311080229, guid: a68b5d44c30134d4f8311910f9433591, type: 3}
+    - {fileID: 6445466529311080229, guid: 16e7b9a7ecf24fb41a4ed87f607e2d6e, type: 3}
   - _kind: 5
     _items:
-    - {fileID: 6445466529311080229, guid: e8e1c0ce00723b94d97b32914cf307b6, type: 3}
-    - {fileID: 6445466529311080229, guid: 137b53615e08bf44f9cbb29e0d8e70af, type: 3}
-    - {fileID: 6445466529311080229, guid: 72ad7446cb521714ebcd578f6727b529, type: 3}
-    - {fileID: 6445466529311080229, guid: 1771413318a50c849a5bd8654a553dc5, type: 3}
-    - {fileID: 6445466529311080229, guid: 9b6f045255a179a478fbf8528b9abb11, type: 3}
-    - {fileID: 6445466529311080229, guid: 50711a15f337764448da281baf1bc051, type: 3}
+    - {fileID: 6445466529311080229, guid: 54c3d5a864c3a524090ba9c208797aa1, type: 3}
+    - {fileID: 6445466529311080229, guid: d96f46dc32749974a951a297bb289dbb, type: 3}
+    - {fileID: 6445466529311080229, guid: 76498e3106f1bd84eb661d63cf581a1d, type: 3}
+    - {fileID: 6445466529311080229, guid: c750ac0c263edaf41b4b411affc5e405, type: 3}
+    - {fileID: 6445466529311080229, guid: 5e4e8bfeec6e9104388d956ab16b8b48, type: 3}
+    - {fileID: 6445466529311080229, guid: 8d75cefea946e3b44896139ecec61750, type: 3}
   _gridTile: {fileID: 8178171026830446907, guid: 764369db777a63a4d9a3efac1f67b645, type: 3}
   _locationPrefab: {fileID: 4694188858287188799, guid: 7e2dc7caea333c54a97c83e5d2ddcc26, type: 3}
   _listLevels:
@@ -107,14 +106,14 @@ MonoBehaviour:
   _gemsMax: 999
   _resouceItemsAmountFactor: 2
   _foodsDesc:
-  - name: fishcooks
-    foodChance: 0.5
+  - name: food 0
+    foodChance: 0.33
     kcal: 1
-  - name: fishcooks1
-    foodChance: 0.4
+  - name: food 1
+    foodChance: 0.33
     kcal: 1.25
-  - name: fishcooks2
-    foodChance: 0.3
+  - name: food 2
+    foodChance: 0.33
     kcal: 1.5
   _animalLevelFactor: 1.25
   _rewards:
@@ -123,12 +122,12 @@ MonoBehaviour:
       stamina: 0
       coins: 0
       gems: 0
-  - points2Chest: 16
+  - points2Chest: 8
     _reward:
-      stamina: 2
-      coins: 2
+      stamina: 1
+      coins: 1
       gems: 2
-  - points2Chest: 80
+  - points2Chest: 64
     _reward:
       stamina: 2
       coins: 4

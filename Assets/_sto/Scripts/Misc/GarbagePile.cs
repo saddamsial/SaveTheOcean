@@ -17,7 +17,6 @@ public class GarbagePile : MonoBehaviour
     [SerializeField] ParticleSystem trashPopFX = null;
     
     Queue<GameObject> _pileQueue = new Queue<GameObject>();
-    float _pileRadius = 1f;
     
     Vector3 GetRandomPointInArea(float radius, float height) => new Vector3(Random.Range(-radius, radius), Random.Range(0f, height), Random.Range(-radius, radius));
 
@@ -41,7 +40,7 @@ public class GarbagePile : MonoBehaviour
 
     public void GeneratePile(int quantity){
         _pileQueue = new Queue<GameObject>();
-        _pileRadius = _areaMultiplier(quantity) * pileSize.x;
+        var _pileRadius = _areaMultiplier(quantity) * pileSize.x;
 
         for (int i = 0; i < Mathf.Clamp(quantity,0 ,maxPileCount); i++){
             var spawnOffset = GetRandomPointInArea(_pileRadius, pileSize.y);
@@ -58,10 +57,9 @@ public class GarbagePile : MonoBehaviour
     }
 
     public void PopTrash(){
-        Debug.Log("Trash Pile | " + invisibleItemCount + " | " + _pileQueue.Count);
-
         if (invisibleItemCount-- > 0) {
-            trashPopFX?.PlayAtPosition(transform.position + GetRandomPointInArea(pileSize.x * _pileRadius, pileSize.y), Vector3.up);
+            trashPopFX?.PlayAtPosition(_pileQueue.ToArray().OrderBy(x => System.Guid.NewGuid()).First().transform.position);
+            // trashPopFX?.PlayAtPosition(transform.position + GetRandomPointInArea(pileSize.x * _pileRadius, pileSize.y), Vector3.up);
             return;
         }
 
@@ -70,10 +68,5 @@ public class GarbagePile : MonoBehaviour
         lastObject.gameObject.SetActive(false);
         onGarbageRemoved?.Invoke(lastObject.transform);
         trashPopFX?.PlayAtPosition(lastObject.transform.position, Vector3.up);
-    }
-
-    private void OnDrawGizmos() {
-        Gizmos.color = Color.red;
-        GameLib.GizmosExtensions.DrawWireCircle(transform.position, _pileRadius, transform.up);
     }
 }

@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5891803879158435824, guid: 44fae97e37fb8114390716dd995abc45, type: 3}
       propertyPath: m_Name
-      value: fxConfettiLevel Variant
+      value: fxConfettiLevel
       objectReference: {fileID: 0}
     - target: {fileID: 8685270493710039733, guid: 44fae97e37fb8114390716dd995abc45, type: 3}
       propertyPath: m_RootOrder
@@ -123,5 +123,6 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5359432551676878984, guid: 44fae97e37fb8114390716dd995abc45, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44fae97e37fb8114390716dd995abc45, type: 3}
