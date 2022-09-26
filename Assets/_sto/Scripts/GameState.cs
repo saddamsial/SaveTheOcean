@@ -189,6 +189,7 @@ public class GameState : SavableScriptableObject
   {
     public bool  tutIntroDone = false;
     public bool  tutPremiumDone = false;
+    public bool  tutFeedingDone = false;
     public bool  popupAllLocFinished = false;
   }
   [SerializeField] EventsState events;
@@ -517,6 +518,7 @@ public class GameState : SavableScriptableObject
     {
       public static bool introDone {get => get().events.tutIntroDone; set => get().events.tutIntroDone = value;}
       public static bool premiumDone { get => get().events.tutPremiumDone; set => get().events.tutPremiumDone = value; }
+      public static bool feedDone { get => get().events.tutFeedingDone; set => get().events.tutFeedingDone = value; }
       // public static bool chestDone { get => get().tutorials.chestDone; set => get().tutorials.chestDone = value; }
       // public static bool storageDone { get => get().tutorials.storageDone; set => get().tutorials.storageDone = value; }
     }

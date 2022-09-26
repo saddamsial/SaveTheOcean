@@ -42,6 +42,7 @@ MonoBehaviour:
   events:
     tutIntroDone: 0
     tutPremiumDone: 0
+    tutFeedingDone: 0
     popupAllLocFinished: 0
   gameInfo:
     appQuitTime: 0
