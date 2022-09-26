@@ -407,8 +407,8 @@ MonoBehaviour:
   - 0
   <_resItemPerItems>k__BackingField: 6
   _resGemsPart: 0.1
-  _resCoinsPart: 0.3
-  _resStaminaPart: 0.6
+  _resCoinsPart: 0.6
+  _resStaminaPart: 0.3
   _lvlDescs: []
   isFeedingMode: 0
 --- !u!114 &8331011632689336855

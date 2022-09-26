@@ -6,7 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(Level))]
 [CanEditMultipleObjects]
 public class LevelEditor : Editor {
-    float timePerMove = 1.5f;
+    float timePerMove = .5f;
 
     Level level = null;
     private void OnEnable() {
