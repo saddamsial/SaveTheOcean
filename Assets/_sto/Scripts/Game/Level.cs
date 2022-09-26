@@ -334,7 +334,7 @@ public class Level : MonoBehaviour
           int cnt = Mathf.RoundToInt(resItems * extras[q].weight);
           for(int i = 0; i < cnt ; ++i)
           {
-            var spec_id = new Item.ID(0, 0, extras[q].kind);
+            var spec_id = new Item.ID(0, 0, extras[q].kind).Validate();
             ids.Add(spec_id);
           } 
         }
