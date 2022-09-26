@@ -8,4 +8,18 @@ public class UIDefaults
   public static string GetStaminaString(int value) => $"{staminaIco}{value}";
   public static string GetGemsString(int value) => $"{gemIco}{value}";
   public static string GetCoinsString(int value) => $"{coinIco}{value}";
+
+  public static string GetResString(Item.ID id)
+  {
+    string str = "";
+    int amount = GameData.Econo.GetResCount(id);
+    if(id.kind == Item.Kind.Stamina)
+      str = UIDefaults.GetStaminaString(amount);
+    else if(id.kind == Item.Kind.Coin)
+      str = UIDefaults.GetCoinsString(amount);
+    else if(id.kind == Item.Kind.Gem)
+      str = UIDefaults.GetGemsString(amount);
+    
+    return str;
+  }
 }
