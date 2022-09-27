@@ -733,7 +733,8 @@ PlayerSettings:
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
-    Android: 
+    Android: GOOGLE_PLAY_SERVICES
+    Standalone: GOOGLE_PLAY_SERVICES
     iPhone: LK_HAS_LION_ANALYTICS;gameanalytics_max_enabled
   additionalCompilerArguments: {}
   platformArchitecture: {}

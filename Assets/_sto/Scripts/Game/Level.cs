@@ -615,7 +615,7 @@ public class Level : MonoBehaviour
   bool IsAnimalHit(TouchInputData tid)
   {
     bool is_hit = false;
-    var animalHit = tid.GetClosestCollider(0.5f, Animal.layerMask)?.GetComponent<Animal>() ?? null;
+    var animalHit = tid.GetClosestCollider(_inputRad, Animal.layerMask)?.GetComponent<Animal>() ?? null;
     if(animalHit)
     {
       if(animalHit.IsReq(_itemSelected)) //CanPut(_itemSelected))
