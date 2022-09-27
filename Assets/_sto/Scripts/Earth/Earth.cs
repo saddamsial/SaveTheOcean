@@ -47,8 +47,10 @@ public class Earth : MonoBehaviour
 
   public Location   location(int idx) => idx switch 
   {
+
     Location.FeedLocation => _feedLocation,
     Location.CleanLocation => _cleanLocation,
+    -1 => null,
     _ => _locations[idx]
   };
   public static int locationsCnt {get; private set;}
@@ -214,8 +216,8 @@ public class Earth : MonoBehaviour
   void SelectLocation(Location location) => SelectLocation(location.idx);
   void SelectLocation(int loc)
   {
-    location(_selectedLocation).Select(false);
-    location(loc).Select(true);
+    location(_selectedLocation)?.Select(false);
+    location(loc)?.Select(true);
     _selectedLocation = loc;
     GameState.Progress.locationIdx = loc;
     onLevelSelected?.Invoke(loc);

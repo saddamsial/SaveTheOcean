@@ -100,8 +100,8 @@ public class GameState : SavableScriptableObject
     {
       if(loc_idx == Location.FeedLocation)
         return Level.State.Feeding;
-      // if(loc_idx == Location.CleanLocation)
-      //   return Level.State.Cleaning;
+      if(loc_idx == Location.CleanLocation)
+        return Level.State.Cleaning;
       var loc = FindLocation(loc_idx);
       return (loc != null) ? loc.state : Level.State.Locked;
     }
