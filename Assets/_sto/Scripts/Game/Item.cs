@@ -403,6 +403,31 @@ public class Item : MonoBehaviour
     vcps[2] = Vector3.Lerp(vcps[0], vcps[3], 0.55f) + new Vector3(0, 5, 0);
     Spawn(item_vgrid, vcps, -40.0f, 2);
   }
+  public void ThrowToAnimal(Vector3 animal_vpos, System.Action<Item> endAction)
+  {
+    _ready = false;
+
+    Vector3[] vcps = new Vector3[4];
+    vcps[0] = vwpos;
+    vcps[3] = animal_vpos;
+    vcps[1] = Vector3.Lerp(vcps[0], vcps[3], 0.45f) + new Vector3(0, 4, 0);
+    vcps[2] = Vector3.Lerp(vcps[0], vcps[3], 0.55f) + new Vector3(0, 4, 0);
+    StartCoroutine(coMovePathToAnim(vcps, endAction));
+  }  
+  IEnumerator coMovePathToAnim(Vector3[] vcps, System.Action<Item> action)
+  {
+    float t = 0.0f;
+    while(t <= 1)
+    {
+      float prev_t = t;
+      t += Time.deltaTime * 2;
+      float tc = Mathf.Clamp01(t);
+      vwpos = Vector3Ex.bezier(vcps, tc);
+      yield return null;
+    }
+
+    action?.Invoke(this);
+  }
 
   Vector3 _vsink = Vector3.zero;
   void Update()

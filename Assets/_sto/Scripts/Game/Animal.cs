@@ -34,7 +34,7 @@ public class Animal : MonoBehaviour
   public bool          isActive  {get; private set;} = false;
   public bool          isReady  {get; private set;} = false;
   public int           requests => garbages.Count;
-  //public Vector3       garbagePos => _garbageContainer.transform.position;
+  public Vector3       garbagePos => _garbageContainer.transform.position;
 
   static public int layer = 0;
   static public int layerMask = 0;

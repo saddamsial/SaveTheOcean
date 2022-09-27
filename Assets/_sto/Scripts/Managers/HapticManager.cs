@@ -12,7 +12,7 @@ public class HapticManager : MonoBehaviour
   {
     Level.onStart += VibMed;
     Level.onFinished += VibMed;
-    Level.onItemHovered += VibMed;
+    Level.onItemHovered += OnItemsHovered;
     Item.onMerged += VibMed;
     Item.onNoMerged += VibMed;
     Item.onPut += VibMed;
@@ -32,7 +32,7 @@ public class HapticManager : MonoBehaviour
   {
     Level.onStart -= VibMed;
     Level.onFinished -= VibMed;
-    Level.onItemHovered -= VibMed;
+    Level.onItemHovered -= OnItemsHovered;
     Item.onMerged -= VibMed;
     Item.onNoMerged -= VibMed;
     Item.onPut -= VibMed;
@@ -47,6 +47,22 @@ public class HapticManager : MonoBehaviour
     StorageBox.onNotPushed -= VibMed;
     FeedingMachine.onPoped -= VibMed;
     FeedingMachine.onNotPoped -= VibMed; 
+
+
+  }
+
+  void OnItemsHovered(Level lvl)
+  {
+    if(lvl.hoverItemMatch) 
+    {
+      VibMed(null);
+      Debug.Log("hovered M");
+    }
+    else
+    {
+      VibLo(null);
+      Debug.Log("hovered L");  
+    }
   }
 
   void VibLo0() => VibLo(null);

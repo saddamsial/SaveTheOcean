@@ -96,6 +96,7 @@ public class Level : MonoBehaviour
   public int      stars {get; set;}
   public int      itemsCount => _items.Count + _items2.Count;
   public int      initialItemsCnt => _initialItemsCnt;
+  public bool     hoverItemMatch = false;
   public Vector2Int dim => _dim;
   public Vector3  garbagePosition(int idx) => _items[idx].transform.position;
 
@@ -433,15 +434,13 @@ public class Level : MonoBehaviour
   {
     if(finished)
       return;
+
+    hoverItemMatch = false;  
     Item nearestItem = null;
     Animal nearestAnimal = null;
     if(_itemSelected && tid.RaycastData.HasValue)
     {
       var vpt = tid.RaycastData.Value.point;
-      //if(_grid.isOverAxisZ(tid.RaycastData.Value.point))
-      //voffs.y = Mathf.Lerp(voffs.y, 0.6f, Time.deltaTime * 10);
-      //else
-      //  voffs.y = Mathf.Clamp(1 + 0.20f * (vpt.z - _grid.getMaxZ()), 0, 2.0f);
       voffs.y = Mathf.Lerp(voffs.y, 2.0f, Time.deltaTime * 10);
       _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + _itemSelected.vbtmExtent, Time.deltaTime * 20);
 
@@ -451,7 +450,10 @@ public class Level : MonoBehaviour
       {
         nearestItem.Hover(true);
         if(nearestItem != _itemHovered)
+        {
+          hoverItemMatch = Item.Mergeable(_itemSelected, nearestItem);
           onItemHovered?.Invoke(this);
+        }
       }
       _itemHovered = nearestItem;
 
@@ -561,28 +563,37 @@ public class Level : MonoBehaviour
     else
     {
       var item = tid.GetClosestCollider(_inputRad, Item.layerMask)?.GetComponent<Item>();
-      if(item && item.id.IsSpecial)
+      if(item)
       {
         if(Time.timeAsDouble - tapTime < 1.0f)
         {
-          tapTime = 0;
-          int amount = GameState.Econo.AddRes(item.id);
-          _items.Remove(item);
-          _grid.set(item.vgrid, 0);
-          _uiStatusBar.MoveCollected(item, amount);
-          onItemCollected?.Invoke(item);
-          item.Hide();
-          SpawnItem(item.vgrid);
+          if(item.id.IsSpecial)
+          {
+            tapTime = 0;
+            int amount = GameState.Econo.AddRes(item.id);
+            _items.Remove(item);
+            _grid.set(item.vgrid, 0);
+            _uiStatusBar.MoveCollected(item, amount);
+            onItemCollected?.Invoke(item);
+            item.Hide();
+            SpawnItem(item.vgrid);
+          }
+          else if(item.id.kind == Item.Kind.Garbage)
+          {
+            for(int q = 0; q < _animals.Count; ++q)
+            {
+              var animal = _animals[q];
+              if(animal.isActive && animal.IsReq(item))
+              {
+                item.ThrowToAnimal(animal.transform.position + new Vector3(0,0.5f, 0), (Item item) => {PutItemToAnim(animal, item); CheckEnd();});
+                break;
+              }
+            }
+          } 
         }
         else
           tapTime = Time.timeAsDouble;
       }
-    }
-    if(_itemSelected == null)
-    {
-      var animal = tid.GetClosestCollider(_inputRad, Animal.layerMask)?.GetComponent<Animal>();
-      // if(animal)
-        // FindObjectOfType<UIItemsInfo>().Show();
     }
   }
   bool IsItemHit(TouchInputData tid)
@@ -614,6 +625,25 @@ public class Level : MonoBehaviour
 
     return is_hit;
   }
+  void PutItemToAnim(Animal animalHit, Item item)
+  {
+    Item.onPut?.Invoke(item);
+    if(!isFeedingMode)
+      animalHit.Put(item);
+    else
+      animalHit.Feed(item);  
+    onItemCleared?.Invoke(item);
+    _grid.set(item.vgrid, 0);
+    _items.Remove(item);
+    if(item.IsInMachine)
+      _splitMachine.RemoveFromSplitSlot(item);
+
+    _pollutionDest = PollutionRate();
+    onGarbageOut?.Invoke(this);
+    SpawnItem(item.vgrid);
+    if(isFeedingMode)
+      GameState.Feeding.Update(_items);  
+  }
   bool IsAnimalHit(TouchInputData tid)
   {
     bool is_hit = false;
@@ -622,23 +652,8 @@ public class Level : MonoBehaviour
     {
       if(animalHit.IsReq(_itemSelected)) //CanPut(_itemSelected))
       {
-        Item.onPut?.Invoke(_itemSelected);
-        if(!isFeedingMode)
-          animalHit.Put(_itemSelected);
-        else
-          animalHit.Feed(_itemSelected);  
-        onItemCleared?.Invoke(_itemSelected);
-        _grid.set(_itemSelected.vgrid, 0);
-        _items.Remove(_itemSelected);
-        if(_itemSelected.IsInMachine)
-          _splitMachine.RemoveFromSplitSlot(_itemSelected);
-
-        _pollutionDest = PollutionRate();
-        onGarbageOut?.Invoke(this);
-        SpawnItem(_itemSelected.vgrid);
+        PutItemToAnim(animalHit, _itemSelected);
         CheckEnd();
-        if(isFeedingMode)
-          GameState.Feeding.Update(_items);
         is_hit = true;
       }
       else
