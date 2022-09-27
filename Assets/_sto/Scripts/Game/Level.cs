@@ -9,7 +9,7 @@ using GarbCats = GameData.GarbCats;
 
 public class Level : MonoBehaviour
 {
-  public static System.Action<Level>   onCreate, onStart, onTutorialStart, onGarbageOut, onNoRoomOnGrid, onItemHovered;
+  public static System.Action<Level>   onCreate, onStart, onGarbageOut, onNoRoomOnGrid, onItemHovered;
   public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
   public static System.Action<Vector3> onMagnetBeg;
   public static System.Action<bool>    onMagnetEnd;
@@ -87,16 +87,17 @@ public class Level : MonoBehaviour
   }
   public int GetUnderwaterGarbagesCnt() => _items2.Count((item) => !item.id.IsSpecial);  
 
-  public int    locationIdx {get; private set;} = -1;
-  public bool   succeed {get; private set;}
-  public bool   finished {get; private set;}
-  public bool   wasPolluted {get; private set;} = false;
-  public bool   isFeedingMode = false;
-  public int    points {get; set;} = 0;
-  public int    stars {get; set;}
-  public int    itemsCount => _items.Count + _items2.Count;
-  public int    initialItemsCnt => _initialItemsCnt;
+  public int      locationIdx {get; private set;} = -1;
+  public bool     succeed {get; private set;}
+  public bool     finished {get; private set;}
+  public bool     wasPolluted {get; private set;} = false;
+  public bool     isFeedingMode = false;
+  public int      points {get; set;} = 0;
+  public int      stars {get; set;}
+  public int      itemsCount => _items.Count + _items2.Count;
+  public int      initialItemsCnt => _initialItemsCnt;
   public Vector2Int dim => _dim;
+  public Vector3  garbagePosition(int idx) => _items[idx].transform.position;
 
   UISummary    _uiSummary = null;
   UIStatusBar  _uiStatusBar = null;

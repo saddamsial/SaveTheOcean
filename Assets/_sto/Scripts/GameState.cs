@@ -339,7 +339,7 @@ public class GameState : SavableScriptableObject
       set 
       {
         var _prev_val = get().economy.stamina;
-        get().economy.stamina = Mathf.Clamp(value, 0, GameData.Econo.staminaMax);
+        get().economy.stamina = value; //Mathf.Clamp(value, 0, GameData.Econo.staminaMax);
         if(_prev_val != get().economy.stamina)
           onStaminaChanged?.Invoke(value);
       }
@@ -381,11 +381,15 @@ public class GameState : SavableScriptableObject
     public static bool  CanSpendCoins(int coins_cost) => coins >= coins_cost;
     public static float GetStaminaRefillPerc()
     {
-      var now = CTime.get();
-      var last = DateTime.FromBinary(get().economy.lastStamina);
-      var timeDiff = now - last;
-      float perc = 100*(float)((now - last).TotalSeconds / GameData.Econo.staminaRefillTime);
-      
+      float perc = 0;
+      if(stamina < GameData.Econo.staminaMax)
+      {
+        var now = CTime.get();
+        var last = DateTime.FromBinary(get().economy.lastStamina);
+        var timeDiff = now - last;
+        perc = 100*(float)((now - last).TotalSeconds / GameData.Econo.staminaRefillTime);
+      }
+
       return perc;
     }
     public static int   AddRes(Item.ID id) //without event
@@ -410,8 +414,13 @@ public class GameState : SavableScriptableObject
       if(timeDiff.TotalSeconds > GameData.Econo.staminaRefillTime)
       {
         int staminaToAdd = (int)(timeDiff.TotalSeconds / GameData.Econo.staminaRefillTime);
-        stamina += staminaToAdd;
-        eco.lastStamina = last.AddSeconds((double)staminaToAdd * GameData.Econo.staminaRefillTime).ToBinary();
+        if(stamina < GameData.Econo.staminaMax)
+        {
+          stamina = Mathf.Clamp(stamina + staminaToAdd, 0, GameData.Econo.staminaMax);
+          eco.lastStamina = last.AddSeconds((double)staminaToAdd * GameData.Econo.staminaRefillTime).ToBinary();
+        }
+        else
+          eco.lastStamina = CTime.get().ToBinary();
       }
     }
   }

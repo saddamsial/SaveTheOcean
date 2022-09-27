@@ -16,17 +16,23 @@ MonoBehaviour:
   dataPath: Data
   version: 0
   progress:
-    _location: -1
-    _locations: []
+    _location: 0
+    _locations:
+    - _idx: 0
+      _state: 1
+      _date: 0
     _locationsPassedTime: 0
-    _itemAppears: []
+    _itemAppears:
+    - _type: 0
+      _lvl: 0
+      _kind: 1
   economy:
-    stamina: 45
-    coins: 25
+    stamina: 25
+    coins: 30
     gems: 25
     rewardPoints: 0
     rewardLevel: 0
-    lastStamina: 0
+    lastStamina: -8585369987120278337
   chest:
     shown: 0
     listStamina: []
@@ -45,7 +51,7 @@ MonoBehaviour:
     tutFeedingDone: 0
     popupAllLocFinished: 0
   gameInfo:
-    appQuitTime: 0
+    appQuitTime: -8585371424515419104
   animals:
     animals:
     - type: 1

@@ -24,7 +24,7 @@ public class UIIngame : MonoBehaviour
     Level.onFinished += OnLevelFinished;
     Level.onStart += OnLevelStart;
     //Level.onHide += OnLevelHide;
-    Level.onTutorialStart += OnTutorialStart;
+    //Level.onTutorialStart += OnTutorialStart;
     Level.onDestroy += OnLevelDestroy;
     Level.onGarbageOut += OnLevelGarbageOut;
   }
@@ -35,7 +35,7 @@ public class UIIngame : MonoBehaviour
     Level.onFinished -= OnLevelFinished;
     Level.onStart -= OnLevelStart;
     //Level.onHide -= OnLevelHide;
-    Level.onTutorialStart -= OnTutorialStart;
+    //Level.onTutorialStart -= OnTutorialStart;
     Level.onDestroy -= OnLevelDestroy;
     Level.onGarbageOut -= OnLevelGarbageOut;
   }
@@ -95,10 +95,10 @@ public class UIIngame : MonoBehaviour
   {
     _pollutionDest = lvl.PollutionRate();
   }
-  void OnTutorialStart(Level lvl)
-  {
+  // void OnTutorialStart(Level lvl)
+  // {
 
-  }
+  // }
   public void OnBtnRestart()
   {
     FindObjectOfType<Game>()?.RestartLevel();

@@ -17,14 +17,14 @@ public class UITutorial : MonoBehaviour
   
   void Awake()
   {
-    Level.onStart += OnLevelCreated;
-    Level.onTutorialStart += OnTutorialStart;
+    Level.onCreate += OnLevelCreated;
+    Level.onStart += OnTutorialStart;
     Level.onFinished += OnLevelFinished;
   }
   void OnDestroy()
   {
+    Level.onCreate -= OnLevelCreated;
     Level.onStart -= OnLevelCreated;
-    Level.onTutorialStart -= OnTutorialStart;
     Level.onFinished -= OnLevelFinished;
   }
   void OnLevelCreated(Level lvl)
@@ -33,10 +33,15 @@ public class UITutorial : MonoBehaviour
   }
   void OnTutorialStart(Level lvl)
   {
-
+    if(lvl.locationIdx == 0)
+    {
+      //Vector3[] mm = new Vector3[]{lvl.garbagePosition(0), lvl.garbagePosition(1)};
+      //tutorial.Activate(mm);
+      //tutorial.Activate(new Vector3[]{new Vector3(-0.5f,0, 0), new Vector3(0.5f, 0, 0)});
+    }
   }
   void OnLevelFinished(Level lvl)
   {
-    //level = null;
+    tutorial.Deactivate();
   }
 }
