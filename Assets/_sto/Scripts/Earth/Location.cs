@@ -3,12 +3,23 @@ using UnityEngine;
 
 public class Location : MonoBehaviour
 {
-  [SerializeField] GameObject[] _stateModels;
+  [SerializeField] Marker[]     _stateModels;
   [SerializeField] GameObject   _selectionModel;
   [SerializeField] Level.State  _state = Level.State.Locked;
 
   [Header("IngameLevel")]
   [SerializeField] int _level = -1;
+
+  [System.Serializable]
+  class Marker
+  {
+    [SerializeField] string name;
+    public GameObject mdl;
+  }
+
+  public const int FeedLocation = 1000;
+  public const int CleanLocation = 1001;
+
 
   Quaternion _localDstRoto = Quaternion.identity;
   private int _idx = -1;
@@ -26,7 +37,8 @@ public class Location : MonoBehaviour
   public void Init(int idx, Transform levelTransf, float vert_roto_range, Level.State level_state)
   { 
     _idx = idx;
-    _level = Mathf.Clamp(idx, 0, GameData.Levels.levelsCnt-1);
+    _level = idx;
+    //_level = Mathf.Clamp(idx, 0, GameData.Levels.levelsCnt-1);
     state = level_state;
 
     vert_roto_range -= 5;
@@ -61,9 +73,9 @@ public class Location : MonoBehaviour
     int mi = State2MI(state);
     for(int q = 0; q < _stateModels.Length; ++q)
     {
-      if(_stateModels[q] != null)
-        _stateModels[q]?.SetActive(false);
+      if(_stateModels[q].mdl != null)
+        _stateModels[q].mdl?.SetActive(false);
     }
-    _stateModels[mi].SetActive(true);
+    _stateModels[mi].mdl.SetActive(true);
   }
 }

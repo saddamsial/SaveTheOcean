@@ -11,9 +11,11 @@ public class Earth : MonoBehaviour
   [SerializeField] GameObject     _earthPrefab;
   [SerializeField] GameObject     _locationsPath;
   [SerializeField] Transform      _levelsContainer;
+  [SerializeField] Transform      _feedingTransform;
   [SerializeField] Transform      _locationsContainer;
   [SerializeField] Transform      _fx;
   [SerializeField] Transform      _extras;
+  
 
   [Header("Earth fx")]
   [SerializeField] EarthFx      _earthFx;
@@ -39,11 +41,17 @@ public class Earth : MonoBehaviour
   Vector2        _vdragPrev;
   bool           _move2location = false;
   Location[]     _locations;
-  Location       _feedLocation => _locations.last();
+  Location       _feedLocation;
+  Location       _cleanLocation;
+  Location       _miscLocation;
 
-  public Location   location(int idx) => _locations[idx];
+  public Location   location(int idx) => idx switch 
+  {
+    Location.FeedLocation => _feedLocation,
+    Location.CleanLocation => _cleanLocation,
+    _ => _locations[idx]
+  };
   public static int locationsCnt {get; private set;}
-
 
   void Awake()
   {
@@ -73,10 +81,14 @@ public class Earth : MonoBehaviour
       }
     }
     _locations = listLocations.ToArray();
-    locationsCnt = _locations.Length-1;
+    locationsCnt = listLocations.Count;
 
+    _feedLocation = GameData.Prefabs.CreateLocation(_locationsContainer);
+    _feedLocation.Init(Location.FeedLocation, _feedingTransform, _rotateXRange, Level.State.Feeding);
+
+    _locations = listLocations.ToArray();
     _feedLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
-    _locationsPath.SetActive(!GameState.Progress.Locations.AllStateFinished());    
+    _locationsPath.SetActive(!GameState.Progress.Locations.AllStateFinished());
   }
   public void Setup()
   {
@@ -86,14 +98,14 @@ public class Earth : MonoBehaviour
       SelectLocation(0);
       _vessel.Init(Vector3.up);
       _vessel.transform.localRotation = Quaternion.AngleAxis(0, _vessel.vpos - _earthPrefab.transform.position);
-      _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
-      this.Invoke(()=>MoveVesselToLocation(_selectedLocation), 0.5f);
+      _fx.transform.localRotation = location(_selectedLocation).localDstRoto;
+      this.Invoke(()=>MoveVesselToLocation(location(_selectedLocation)), 0.5f);
     }
     else
     {
       SelectLocation(_selectedLocation);
-      _vessel.Init(_locations[_selectedLocation].transform.localPosition);
-      _fx.transform.localRotation = _locations[_selectedLocation].localDstRoto;
+      _vessel.Init(location(_selectedLocation).transform.localPosition);
+      _fx.transform.localRotation = location(_selectedLocation).localDstRoto;
     }
     _earthPrefab.SetActive(true);
     UpdateLevelsStates();
@@ -113,9 +125,9 @@ public class Earth : MonoBehaviour
     this.Invoke(()=> 
     {
       SelectLocation(location_idx); 
-      StartRotateToLocation(_locations[location_idx]);
+      StartRotateToLocation(location(location_idx));
       if(show_next)
-        MoveVesselToLocation(location_idx);
+        MoveVesselToLocation(location(location_idx));
 
       onShow?.Invoke(location_idx);
     }, 1.0f);
@@ -126,7 +138,7 @@ public class Earth : MonoBehaviour
     _fx.gameObject.SetActive(false);
     _extras.gameObject.SetActive(false);
   }
-  public int GetLevel(int locationIdx) => _locations[locationIdx].levelIdx;
+  public int  GetLevel(int locationIdx) => location(locationIdx).levelIdx;
 
   public void OnInputBeg(TouchInputData tid)
   {
@@ -165,7 +177,7 @@ public class Earth : MonoBehaviour
         {
           SelectLocation(location);
           StartRotateToLocation(location);
-          MoveVesselToLocation(location.idx);
+          MoveVesselToLocation(location);
         }
       }
     }
@@ -183,27 +195,41 @@ public class Earth : MonoBehaviour
   }
   void OnLocationPolluted(int locationIdx)
   {
-    _locations[locationIdx].state = GameState.Progress.Locations.GetLocationState(locationIdx);
+    location(locationIdx).state = GameState.Progress.Locations.GetLocationState(locationIdx);
   }  
   void UpdateLevelsStates()
   {
     for(int q = 0; q < _locations.Length; ++q)
       _locations[q].state = GameState.Progress.Locations.GetLocationState(q);
+    
+    _feedLocation.state = Level.State.Feeding; //GameState.Progress.Locations.GetLocationState(_feedLocation.idx);
   }
-  int  GetNextLocation(int location) => Mathf.Clamp(location + 1, 0, locationsCnt-1);  
+  int  GetNextLocation(int loc)
+  {
+    if(loc >= Location.FeedLocation)
+      return loc;
+    else  
+      return Mathf.Clamp(loc + 1, 0, locationsCnt-1);  
+  }
   void SelectLocation(Location location) => SelectLocation(location.idx);
-  void SelectLocation(int location)
+  void SelectLocation(int loc)
   {
-    if(_selectedLocation >=0)
-      _locations[_selectedLocation].Select(false);
-    _locations[location].Select(true);
-    _selectedLocation = location;
-    GameState.Progress.locationIdx = location;
-    onLevelSelected?.Invoke(location);
+    location(_selectedLocation).Select(false);
+    location(loc).Select(true);
+    _selectedLocation = loc;
+    GameState.Progress.locationIdx = loc;
+    onLevelSelected?.Invoke(loc);
+
+    // if(_selectedLocation >=0)
+    //   _locations[_selectedLocation].Select(false);
+    //_locations[location].Select(true);
+    //_selectedLocation = loc;
+    //GameState.Progress.locationIdx = location;
+    //onLevelSelected?.Invoke(loc);
   }
-  void MoveVesselToLocation(int location)
+  void MoveVesselToLocation(Location loca)
   {
-    _vessel.FlyTo(_locations[location].transform.localPosition);
+    _vessel.FlyTo(loca.transform.localPosition);
   }
   
   
@@ -216,7 +242,7 @@ public class Earth : MonoBehaviour
     if(_move2location)
     {
       _vrotateSpeed = Vector2.zero;
-      var rotDest = _locations[_selectedLocation].localDstRoto;
+      var rotDest = location(_selectedLocation).localDstRoto;
       _fx.transform.localRotation = Quaternion.Slerp(_fx.transform.localRotation, rotDest, _rotateToLocationSpeed * Time.deltaTime);
       if(Mathf.Abs(Quaternion.Angle(_fx.transform.localRotation, rotDest)) < 0.01f)
         _move2location = false;

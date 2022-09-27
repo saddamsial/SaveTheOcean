@@ -57,6 +57,7 @@ public class Level : MonoBehaviour
     Finished,
     Polluted,
     Feeding,
+    Cleaning,
   }
 
   [System.Serializable]

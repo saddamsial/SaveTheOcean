@@ -98,8 +98,10 @@ public class GameState : SavableScriptableObject
     }
     public Level.State  GetLocationState(int loc_idx)
     {
-      if(loc_idx >= Earth.locationsCnt)
+      if(loc_idx == Location.FeedLocation)
         return Level.State.Feeding;
+      // if(loc_idx == Location.CleanLocation)
+      //   return Level.State.Cleaning;
       var loc = FindLocation(loc_idx);
       return (loc != null) ? loc.state : Level.State.Locked;
     }
