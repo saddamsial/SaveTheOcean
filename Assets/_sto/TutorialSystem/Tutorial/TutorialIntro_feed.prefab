@@ -7,10 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 323184195867803254, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2570981072860930815, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -41,35 +37,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6594426750771199994, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: How to Split Items
+      value: Great!
       objectReference: {fileID: 0}
     - target: {fileID: 6747210803549513794, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_Name
-      value: TutorialIntro_removeGarbage
+      value: TutorialIntro_feed
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 512
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 58.85
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 320
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -125.425
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8171470983252514473, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_Pivot.x
@@ -157,7 +153,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: Just bring me this item and I'll take care of the rest!
+      value: Now bring this item to me, and I'll take care of the rest!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 1633247935003215395, guid: 859c244a32af674468eca55f556b07bd, type: 3}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: <_resItemPerItems>k__BackingField
-      value: 16
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4886946996522908060, guid: af94dd176a807204382d3b034b767ac9, type: 3}
       propertyPath: _lvlDescs.Array.data[0]._reqItems.Array.size
@@ -389,12 +389,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialSequence:
-  - <stepName>k__BackingField: resources intro
+  - <stepName>k__BackingField: ResourcesOnScreen
     <panel>k__BackingField: {fileID: 8124103945177977042, guid: 844ef06824b71224dae1c9c43c625e85, type: 3}
     <sender>k__BackingField: {fileID: 3127148435573647222}
-  - <stepName>k__BackingField: resources collect
+  - <stepName>k__BackingField: DoubleTap
     <panel>k__BackingField: {fileID: 5526002700576130272, guid: 25ab3cdd23fc5444d8c0fba412a14a60, type: 3}
     <sender>k__BackingField: {fileID: 0}
-  - <stepName>k__BackingField: storage
-    <panel>k__BackingField: {fileID: 80184091881380796, guid: c68faafa5872fe444a330a319aba4311, type: 3}
+  - <stepName>k__BackingField: ResourcesHint
+    <panel>k__BackingField: {fileID: 80184091881380796, guid: 074614f3b5c93d840a14891619227439, type: 3}
     <sender>k__BackingField: {fileID: 322523778237032055}

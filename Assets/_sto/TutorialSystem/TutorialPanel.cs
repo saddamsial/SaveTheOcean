@@ -12,10 +12,10 @@ namespace TutorialSystem
         [SerializeField] bool completeOnInput = true;
         private void OnEnable() {
             if (completeOnInput)
-                TouchInputManager.onAnyInputEnded += TutorialManger.Instance.ProgressTutorial;
+                TouchInputManager.onAnyInputStarted += TutorialManger.Instance.ProgressTutorial;
         }
         private void OnDisable() {
-            TouchInputManager.onAnyInputEnded -= TutorialManger.Instance.ProgressTutorial;            
+            TouchInputManager.onAnyInputStarted -= TutorialManger.Instance.ProgressTutorial;            
         }
 
         [SerializeField] RectTransform tutorialContainer = null;

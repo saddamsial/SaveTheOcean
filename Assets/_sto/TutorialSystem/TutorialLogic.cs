@@ -10,6 +10,7 @@ namespace TutorialSystem
     public abstract class TutorialLogic : MonoBehaviour
     {
         [SerializeField] protected TutorialSequence[] tutorialSequence = new TutorialSequence[]{};
+        public TutorialSequence[] TutorialSequence => tutorialSequence;
 
         void OnDestroy()
         {
@@ -22,7 +23,7 @@ namespace TutorialSystem
 
         public void ActivateTutorial(object sender = null){
             this.enabled = true;
-            TutorialManger.Instance?.RequestTutorial(tutorialSequence);
+            TutorialManger.Instance?.RequestTutorial(this);
         }
         public void ProgressTutorial() => ProgressTutorial(null);
         public void ProgressTutorial(object sender = null){
@@ -31,5 +32,6 @@ namespace TutorialSystem
                 this.enabled = false;
             }   
         }
+        public virtual void OnTutorialEnded(){}
     }
 }

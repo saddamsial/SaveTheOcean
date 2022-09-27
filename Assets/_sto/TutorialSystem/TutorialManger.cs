@@ -12,7 +12,10 @@ namespace TutorialSystem
         public static System.Action onTutorialStepCompleted;
         public static TutorialManger Instance = null;
 
-        TutorialSequence[] _activeTutorial = null;
+        [SerializeField] float minOnScreenTime = 1f;
+        float _tutorialMinViewedTime = 0f;
+
+        TutorialLogic _activeTutorial = null;
         public static bool IsTutorialActive => Instance._activeTutorial != null;
         int _activeTutorialSegment = 0;
         TutorialPanel _activeTutorialPanelInstance = null;
@@ -24,13 +27,16 @@ namespace TutorialSystem
         private void Awake() {
             Instance = this;
             if (!ShowTutorials){ Destroy(this.gameObject); }
-            //subscribe to event that deactivates game board
+
+            // Level.onCreate += ClearTutorial;
+            // Level.onDestroy += ClearTutorial;
         }
         private void OnDestroy() {
-            //unsubscribe from event that deactivates game board
+            // Level.onCreate -= ClearTutorial;
+            // Level.onDestroy -= ClearTutorial;
         }
 
-        public void RequestTutorial(TutorialSequence[] tutorial){
+        public void RequestTutorial(TutorialLogic tutorial){
             if (_activeTutorial != null) { Debug.Log("Tutorial | In progress ... requested tutorial will not be displayed!"); return; }
 
             Debug.Log("Tutorial | Tutorial Requested");
@@ -43,31 +49,36 @@ namespace TutorialSystem
         public void ProgressTutorial(){
             if (_activeTutorial == null) return;
 
-            _activeTutorialPanelInstance?.RemoveTutorial();
+            if (Time.time < _tutorialMinViewedTime) return;   
+
+            _activeTutorialPanelInstance?.RemoveTutorial(); 
             _activeTutorialPanelInstance = null;
                 
             onTutorialStepCompleted?.Invoke();
 
-            if(_activeTutorialSegment >= _activeTutorial.Length) {
+            if(_activeTutorialSegment >= _activeTutorial.TutorialSequence.Length) {
+                _activeTutorial.OnTutorialEnded();
                 _activeTutorial = null;
                 _activeTutorialPanelInstance = null;
                 Debug.Log("Tutorial | Tutorial Ended!");
                 return;
             }
 
-            var currentTutorialSegment = _activeTutorial[_activeTutorialSegment];
+            var currentTutorialSegment = _activeTutorial.TutorialSequence[_activeTutorialSegment];
 
-            Debug.Log("Tutorial | Step " + (_activeTutorialSegment + 1) + "/" + _activeTutorial.Length + " | " + currentTutorialSegment.stepName);
+            Debug.Log("Tutorial | Step " + (_activeTutorialSegment + 1) + "/" + _activeTutorial.TutorialSequence.Length + " | " + currentTutorialSegment.stepName);
 
             if (currentTutorialSegment.panel != null)
             {
                 _activeTutorialPanelInstance = Instantiate(currentTutorialSegment.panel, this.transform);
                 _activeTutorialPanelInstance.PlaceTutorialOverObject(currentTutorialSegment.sender);
                 _activeTutorialPanelInstance.ActivatePanel(tutorialStepDelay);
+                _tutorialMinViewedTime = Time.time + minOnScreenTime;
             }
 
             _activeTutorialSegment++;
         }
+        public void ClearTutorial(object sender) => ClearTutorial();
         public void ClearTutorial(){
             foreach (var tutorialPanel in GetComponentsInChildren<TutorialPanel>())
                 Destroy(tutorialPanel.gameObject);

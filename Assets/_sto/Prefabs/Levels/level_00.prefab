@@ -358,12 +358,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tutorialSequence:
-  - <stepName>k__BackingField: Welcome
+  - <stepName>k__BackingField: Hello
     <panel>k__BackingField: {fileID: 8124103945177977042, guid: 2392cfbd505f7fd4f8e08df70f55e1ea, type: 3}
     <sender>k__BackingField: {fileID: 3127148435573647222}
-  - <stepName>k__BackingField: CleearTheLevel
+  - <stepName>k__BackingField: MergeHint
+    <panel>k__BackingField: {fileID: 80184091881380796, guid: eebef2bd11ec0cd46bc8877541d7827b, type: 3}
+    <sender>k__BackingField: {fileID: 322523778237032055}
+  - <stepName>k__BackingField: FeedTheDolphin
     <panel>k__BackingField: {fileID: 8124103945177977042, guid: 0fb121c8bf263494980d992ec3a21c15, type: 3}
     <sender>k__BackingField: {fileID: 3127148435573647222}
-  - <stepName>k__BackingField: onScreenHint
-    <panel>k__BackingField: {fileID: 80184091881380796, guid: eebef2bd11ec0cd46bc8877541d7827b, type: 3}
+  - <stepName>k__BackingField: FeedHint
+    <panel>k__BackingField: {fileID: 80184091881380796, guid: f64f38602834d4348a6b557ce87f643f, type: 3}
     <sender>k__BackingField: {fileID: 322523778237032055}

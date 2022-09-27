@@ -12,9 +12,11 @@ namespace TutorialSystem
         }
         private void OnEnable() {
             ActivateTutorial();
+            Item.onMerged += ProgressTutorial;
             Level.onFinished += ProgressTutorial;
         }
         private void OnDisable() {
+            Item.onMerged -= ProgressTutorial;
             Level.onFinished -= ProgressTutorial;
         }
     }

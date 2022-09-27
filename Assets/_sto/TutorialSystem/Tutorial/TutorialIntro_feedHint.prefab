@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3332938878928711811, guid: 72320370dfb478840aa231c167463e2d, type: 3}
       propertyPath: m_text
-      value: Remove all items from the board to clear the level
+      value: Drag to dispose
       objectReference: {fileID: 0}
     - target: {fileID: 4279521455864736434, guid: 72320370dfb478840aa231c167463e2d, type: 3}
       propertyPath: m_Pivot.x
@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8913998851240667468, guid: 72320370dfb478840aa231c167463e2d, type: 3}
       propertyPath: m_Name
-      value: TutorialIntro_merge
+      value: TutorialIntro_feedHint
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72320370dfb478840aa231c167463e2d, type: 3}

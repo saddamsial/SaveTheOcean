@@ -8,27 +8,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2570981072860930815, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570981072860930815, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570981072860930815, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570981072860930815, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 640
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570981072860930815, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2570981072860930815, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3107357174490803090, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
@@ -63,10 +43,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TutorialResources_collect
       objectReference: {fileID: 0}
-    - target: {fileID: 6783125341865410006, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-      propertyPath: tutorialContainer
-      value: 
-      objectReference: {fileID: 4991989379503393657}
     - target: {fileID: 7606076826974335938, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -177,17 +153,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
       propertyPath: m_text
-      value: Double Tap the resources to collect them or marge them together to get
-        even larger rewards!
-      objectReference: {fileID: 0}
-    - target: {fileID: 8855155889036911656, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 24
+      value: 'Double Tap
+
+        to collect'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
---- !u!224 &4991989379503393657 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6329199350525489743, guid: 15bc04f6b5376c0499032490094b8ea2, type: 3}
-  m_PrefabInstance: {fileID: 1338359237942114614}
-  m_PrefabAsset: {fileID: 0}
