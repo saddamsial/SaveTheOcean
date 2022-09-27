@@ -9,7 +9,7 @@ using GarbCats = GameData.GarbCats;
 
 public class Level : MonoBehaviour
 {
-  public static System.Action<Level>   onCreate, onStart, onGarbageOut, onNoRoomOnGrid, onItemHovered;
+  public static System.Action<Level>   onCreate, onStart, onGarbageOut, onNoRoomOnGrid, onItemHovered, onAnimalHovered;
   public static System.Action<Level>   onDone, onFinished, onHide, onDestroy;
   public static System.Action<Vector3> onMagnetBeg;
   public static System.Action<bool>    onMagnetEnd;
@@ -461,6 +461,8 @@ public class Level : MonoBehaviour
       if(nearestAnimal && _animalSelected == null)
       {
         _animalSelected = nearestAnimal;
+        hoverItemMatch = _animalSelected.CanPut(_itemSelected);
+        onAnimalHovered?.Invoke(this);
         if(!isFeedingMode)
           _animalSelected.AnimTalk();
       }
