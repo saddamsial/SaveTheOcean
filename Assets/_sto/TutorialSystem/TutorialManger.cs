@@ -44,6 +44,8 @@ namespace TutorialSystem
             if (_activeTutorial == null) return;
 
             _activeTutorialPanelInstance?.RemoveTutorial();
+            _activeTutorialPanelInstance = null;
+                
             onTutorialStepCompleted?.Invoke();
 
             if(_activeTutorialSegment >= _activeTutorial.Length) {
@@ -55,13 +57,16 @@ namespace TutorialSystem
 
             var currentTutorialSegment = _activeTutorial[_activeTutorialSegment];
 
-            _activeTutorialPanelInstance = Instantiate(currentTutorialSegment.panel, this.transform);
-            _activeTutorialPanelInstance.PlaceTutorialOverObject(currentTutorialSegment.sender);
-            _activeTutorialPanelInstance.ActivatePanel(tutorialStepDelay);
-
             Debug.Log("Tutorial | Step " + (_activeTutorialSegment + 1) + "/" + _activeTutorial.Length + " | " + currentTutorialSegment.stepName);
 
-            _activeTutorialSegment++;   
+            if (currentTutorialSegment.panel != null)
+            {
+                _activeTutorialPanelInstance = Instantiate(currentTutorialSegment.panel, this.transform);
+                _activeTutorialPanelInstance.PlaceTutorialOverObject(currentTutorialSegment.sender);
+                _activeTutorialPanelInstance.ActivatePanel(tutorialStepDelay);
+            }
+
+            _activeTutorialSegment++;
         }
         public void ClearTutorial(){
             foreach (var tutorialPanel in GetComponentsInChildren<TutorialPanel>())

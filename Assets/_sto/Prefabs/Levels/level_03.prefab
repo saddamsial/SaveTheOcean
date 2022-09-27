@@ -387,6 +387,9 @@ MonoBehaviour:
   - <stepName>k__BackingField: ChestOnScreen
     <panel>k__BackingField: {fileID: 8124103945177977042, guid: 5c7aa6b041a2d8145ba27093d8950fbf, type: 3}
     <sender>k__BackingField: {fileID: 3127148435573647222}
+  - <stepName>k__BackingField: wait
+    <panel>k__BackingField: {fileID: 0}
+    <sender>k__BackingField: {fileID: 0}
   - <stepName>k__BackingField: ChestOpened
     <panel>k__BackingField: {fileID: 8124103945177977042, guid: d5a0ca199e3d0454fb3de77d38678c0a, type: 3}
     <sender>k__BackingField: {fileID: 3127148435573647222}
