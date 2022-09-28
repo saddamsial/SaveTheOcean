@@ -47,7 +47,7 @@ MonoBehaviour:
   autoActivateTutorialPanel: 1
   completeOnInput: 1
   tutorialPanelPrefab: {fileID: 2462225775060664802, guid: 65366b09ed7bc524a88eb003d4dd49c3, type: 3}
-  tutorialSender: {fileID: 8040060938242806650}
+  tutorialSender: {fileID: 3127148435573647222}
   InputOverlayTargets: []
 --- !u!1 &3201448503419943228
 GameObject:
@@ -145,7 +145,7 @@ MonoBehaviour:
   autoActivateTutorialPanel: 1
   completeOnInput: 0
   tutorialPanelPrefab: {fileID: 0}
-  tutorialSender: {fileID: 0}
+  tutorialSender: {fileID: 8040060938242806650}
   InputOverlayTargets: []
 --- !u!1001 &6710529463363994221
 PrefabInstance:
