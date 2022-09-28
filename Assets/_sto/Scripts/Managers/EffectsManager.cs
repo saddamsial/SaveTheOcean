@@ -33,6 +33,7 @@ public class EffectsManager : MonoBehaviour
     [SerializeField] string _strNotPushedGarbage = "cannot store garbages";
     [SerializeField] string _strNotPushedFood = "cannot store food";
     [SerializeField] string _strCollected = "+{0}";
+    [SerializeField] string _strAnimalLevelUp = "Level Up!";
 
     List<GameLib.ObjectFracture> listFractures = new List<GameLib.ObjectFracture>();
 
@@ -60,6 +61,8 @@ public class EffectsManager : MonoBehaviour
       Item.onPut += OnItemPut;
       Item.onNoPut += OnItemNoPut;
       Item.onDropped += OnItemDropped;
+
+      Animal.onLevelUp += OnAnimalLevelUp;
 
       SplitMachine.onSplitted += OnSplitMachineSplitted;
       SplitMachine.onDropped += OnSplitMachineDrop;
@@ -90,6 +93,8 @@ public class EffectsManager : MonoBehaviour
       Item.onPut -= OnItemPut;
       Item.onNoPut -= OnItemNoPut;
       Item.onDropped -= OnItemDropped;
+
+      Animal.onLevelUp -= OnAnimalLevelUp;
 
       SplitMachine.onSplitted -= OnSplitMachineSplitted;
       SplitMachine.onDropped -= OnSplitMachineDrop;
@@ -233,6 +238,10 @@ public class EffectsManager : MonoBehaviour
     void OnItemDestroy(Item sender)
     {
 
+    }
+    void OnAnimalLevelUp(Animal sender)
+    {
+      infoLblMan.ShowTextPopup(sender.transform.position + new Vector3(0, 2, 0), _strAnimalLevelUp);
     }
     void OnMagnetBeg(Vector3 vpos)
     {

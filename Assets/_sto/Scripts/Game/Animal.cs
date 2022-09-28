@@ -16,6 +16,9 @@ public class Animal : MonoBehaviour
   [SerializeField] Type _type;
   [SerializeField] int  _baseLevelUp = 100;
 
+
+  public static System.Action<Animal> onLevelUp;
+
   public enum Type
   {
     None,
@@ -134,6 +137,8 @@ public class Animal : MonoBehaviour
   {
     bool next_lvl = GameState.Animals.Feed(type, item.id, _baseLevelUp);
     _feedingInfo.UpdateInfo();
+    if(next_lvl)
+      onLevelUp?.Invoke(this);    
     isReady = true;
     item.gameObject.SetActive(false);
     if(!next_lvl)
