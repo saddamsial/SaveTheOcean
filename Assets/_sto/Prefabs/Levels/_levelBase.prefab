@@ -43,6 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3745317107744565915}
+  - component: {fileID: 8994780526877938228}
   m_Layer: 0
   m_Name: tutorials
   m_TagString: Untagged
@@ -65,6 +66,19 @@ Transform:
   m_Father: {fileID: 2424569502049627348}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8994780526877938228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513692929150132796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eaf18eeb349d624aad7d72462ceb33a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialDelay: 2
 --- !u!1 &529243477404288419
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +425,7 @@ MonoBehaviour:
   _resStaminaPart: 0.3
   _lvlDescs: []
   isFeedingMode: 0
+  hoverItemMatch: 0
 --- !u!114 &8331011632689336855
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 using GameLib;
 using GameLib.UI;
 using GameLib.InputSystem;
@@ -9,22 +11,20 @@ namespace TutorialSystem
 {
     public class TutorialPanel : UIPanel
     {
-        [SerializeField] bool completeOnInput = true;
-        private void OnEnable() {
-            if (completeOnInput)
-                TouchInputManager.onAnyInputStarted += TutorialManger.Instance.ProgressTutorial;
-        }
-        private void OnDisable() {
-            TouchInputManager.onAnyInputStarted -= TutorialManger.Instance.ProgressTutorial;            
-        }
-
         [SerializeField] RectTransform tutorialContainer = null;
-        public void PlaceTutorialOverObject(Transform transform){
-            if (transform == null) return;
-            tutorialContainer.SetAnchors(UIManager.GetViewportPosition(transform.position));
+        Transform tutorialSender = null;
+
+        public void ShowTutorial(Transform sender = null){
+            transform.SetParent(TutorialManger.Instance.transform);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+            rectTransform.localScale = Vector3.one;
+            PlaceOverObject(sender);
+            ActivatePanel();            
         }
-        public void RemoveTutorial(){
-            DeactivatePanel( () => Destroy(this.gameObject));
+        void PlaceOverObject(Transform sender){
+            if (sender == null) return;
+            tutorialContainer.SetAnchors(UIManager.GetViewportPosition(sender.position));
         }
     }
 }

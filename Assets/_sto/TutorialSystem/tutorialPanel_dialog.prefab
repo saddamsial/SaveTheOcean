@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: OH Hello there!
+  m_text: Lorem ipsum
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a3672f9347d108459507139351a0d9b, type: 2}
   m_sharedMaterial: {fileID: 6192141425101575685, guid: 4a3672f9347d108459507139351a0d9b, type: 2}
@@ -152,7 +152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5468516708170585125
 RectTransform:
   m_ObjectHideFlags: 0
@@ -489,7 +489,6 @@ MonoBehaviour:
   activateOnAwake: 0
   activateOnTop: 0
   activationDelay: 0
-  completeOnInput: 1
   tutorialContainer: {fileID: 2570981072860930815}
 --- !u!1 &7146790041854743016
 GameObject:
@@ -633,11 +632,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Help me & my friends to clean up the Oceans!
+  m_text: 'Lorem ipsum
 
-
-    to do so merge as many
-    garbage as possible!'
+    Lorem ipsum'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4a3672f9347d108459507139351a0d9b, type: 2}
   m_sharedMaterial: {fileID: 6192141425101575685, guid: 4a3672f9347d108459507139351a0d9b, type: 2}
