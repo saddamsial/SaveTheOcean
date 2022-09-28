@@ -15,7 +15,6 @@ namespace TutorialSystem
             tutorialSequence = GetComponentsInChildren<TutorialStep>();
             System.Array.ForEach(tutorialSequence, x => x.enabled = false);            
         }
-
         IEnumerator Start() {
             yield return new WaitForSeconds(initialDelay);
             Debug.Log("Tutorial Started");
