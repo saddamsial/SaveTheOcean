@@ -33,7 +33,8 @@ public class Level : MonoBehaviour
   [SerializeField] Vector2Int _dim;
   [SerializeField] float      _gridSpace = 1.0f;
   [SerializeField] Color      _waterColor;
-  [SerializeField] float      _inputRad = 0.5f;
+  [SerializeField] float      _inputRad = 1.5f;
+  [SerializeField] float      _inputAnimRad = 2.0f;
   [Header("LvlDesc")]
   [SerializeField] float[]    _chanceToDowngradeItem = new float[6];
   [field:SerializeField] public int  _resItemPerItems {get; private set;}= 0;
@@ -420,7 +421,23 @@ public class Level : MonoBehaviour
     _animals.ForEach((animal) => requests += animal.requests);
     return (float)requests / _requestCnt;
   }
-
+  
+  Item GetNerestItemInRange(Item[] arr)
+  {
+    Item item = null;
+    
+    if(arr != null && arr.Length > 0)
+    {
+      System.Array.Sort(arr, (it0, it1) => Mathf.RoundToInt(Mathf.Sign((it0.vwpos - _itemSelected.vwpos).get_xz().sqrMagnitude - (it1.vwpos - _itemSelected.vwpos).get_xz().sqrMagnitude)));
+      item = arr[0];
+      var match = System.Array.Find(arr, (it) => Item.Mergeable(_itemSelected, it));
+      if(match)
+        item = match;
+      else
+        item = null;  
+    }
+    return item;
+  }
   public void OnInputBeg(TouchInputData tid)
   {
     _itemSelected = null;
@@ -444,30 +461,35 @@ public class Level : MonoBehaviour
       voffs.y = Mathf.Lerp(voffs.y, 2.0f, Time.deltaTime * 10);
       _itemSelected.vwpos = Vector3.Lerp(_itemSelected.vwpos, vpt + voffs + _itemSelected.vbtmExtent, Time.deltaTime * 20);
 
-      var _nearestHit = tid.GetClosestCollider(_inputRad, Item.layerMask | Animal.layerMask);//?.GetComponent<Item>() ?? null;
-      nearestItem = _nearestHit?.GetComponent<Item>();
-      if(nearestItem)
+      //nearest item
       {
-        nearestItem.Hover(true);
-        if(nearestItem != _itemHovered)
+        nearestItem = GetNerestItemInRange(tid.GetObjectsInRange<Item>(_inputRad, Item.layerMask));
+        if(nearestItem)
         {
-          hoverItemMatch = Item.Mergeable(_itemSelected, nearestItem);
-          onItemHovered?.Invoke(this);
+          nearestItem.Hover(true);
+          if(nearestItem != _itemHovered)
+          {
+            hoverItemMatch = Item.Mergeable(_itemSelected, nearestItem);
+            onItemHovered?.Invoke(this);
+          }
         }
+        _itemHovered = nearestItem;
       }
-      _itemHovered = nearestItem;
 
-      nearestAnimal = _nearestHit?.GetComponent<Animal>();
-      if(nearestAnimal && _animalSelected == null)
+      //nearest animal
       {
-        _animalSelected = nearestAnimal;
-        hoverItemMatch = _animalSelected.CanPut(_itemSelected);
-        onAnimalHovered?.Invoke(this);
-        if(!isFeedingMode)
-          _animalSelected.AnimTalk();
+        nearestAnimal = tid.GetClosestObjectInRange<Animal>(_inputAnimRad, Animal.layerMask);
+        if(nearestAnimal && _animalSelected == null)
+        {
+          _animalSelected = nearestAnimal;
+          hoverItemMatch = _animalSelected.CanPut(_itemSelected);
+          onAnimalHovered?.Invoke(this);
+          if(!isFeedingMode)
+            _animalSelected.AnimTalk();
+        }
+        else
+          _animalSelected = null;
       }
-      else
-        _animalSelected = null;
     }
 
     _grid.hovers(false);
@@ -601,7 +623,7 @@ public class Level : MonoBehaviour
   bool IsItemHit(TouchInputData tid)
   {
     bool is_hit = false;
-    var itemHit = tid.GetClosestCollider(_inputRad, Item.layerMask)?.GetComponent<Item>() ?? null;
+    var itemHit = GetNerestItemInRange(tid.GetObjectsInRange<Item>(_inputRad, Item.layerMask));//     tid.GetClosestCollider(_inputRad, Item.layerMask)?.GetComponent<Item>() ?? null;
     bool is_merged = false;
     if(itemHit && itemHit != _itemSelected && !itemHit.IsInMachine)
     {
@@ -649,7 +671,7 @@ public class Level : MonoBehaviour
   bool IsAnimalHit(TouchInputData tid)
   {
     bool is_hit = false;
-    var animalHit = tid.GetClosestCollider(_inputRad, Animal.layerMask)?.GetComponent<Animal>() ?? null;
+    var animalHit = tid.GetClosestCollider(_inputAnimRad, Animal.layerMask)?.GetComponent<Animal>() ?? null;
     if(animalHit)
     {
       if(animalHit.IsReq(_itemSelected)) //CanPut(_itemSelected))
