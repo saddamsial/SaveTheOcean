@@ -6,9 +6,10 @@ namespace TutorialSystem
 {
     public class TutorialStepChestShow : TutorialStep
     {
+        [SerializeField] RewardChest _rewardChest = null;
+
         protected override void OnEnabled(){
-            //TODO: Activate chest
-            //TODO: Set chest state in save
+            _rewardChest.Show();
             Debug.Log("A chest pops up!");
         }
         protected override void OnDisabled(){

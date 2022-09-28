@@ -49,6 +49,7 @@ MonoBehaviour:
   tutorialPanelPrefab: {fileID: 2462225775060664802, guid: 65366b09ed7bc524a88eb003d4dd49c3, type: 3}
   tutorialSender: {fileID: 3127148435573647222}
   InputOverlayTargets: []
+  _rewardChest: {fileID: 847466618467890274}
 --- !u!1 &3201448503419943228
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,8 +146,9 @@ MonoBehaviour:
   autoActivateTutorialPanel: 1
   completeOnInput: 0
   tutorialPanelPrefab: {fileID: 0}
-  tutorialSender: {fileID: 8040060938242806650}
-  InputOverlayTargets: []
+  tutorialSender: {fileID: 0}
+  InputOverlayTargets:
+  - {fileID: 8040060938242806650}
 --- !u!1001 &6710529463363994221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -508,6 +510,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+--- !u!114 &847466618467890274 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6260663843842504207, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+  m_PrefabInstance: {fileID: 6710529463363994221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e99301180b1c8554d9e40a087e4296ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &3127148435573647222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8522299307696825627, guid: af94dd176a807204382d3b034b767ac9, type: 3}

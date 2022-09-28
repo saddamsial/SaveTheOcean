@@ -6,18 +6,27 @@ namespace TutorialSystem
 {
     public class TutorialStepResources : TutorialStep
     {
+        bool _shown = false;
+        void Awake()
+        {
+          //Level.onPremiumItem += OnShowPremiumItem;
+        }
         protected override void OnEnabled(){
-            //TODO: not working when it's on initial grid? 
-            Level.onPremiumItem += OnShowPremiumItem;
+          Item.onShown += OnShowPremiumItem;
         }
         protected override void OnDisabled(){
-            Level.onPremiumItem -= OnShowPremiumItem;
+
+          Item.onShown -= OnShowPremiumItem;
         }
         void OnShowPremiumItem(Item sender){
-            Debug.Log("Premium Item visible!");
-            this.enabled = true;
-            ActivateTutorialPanel();
-            NextTutorial.InputOverlayTargets = new List<Transform>(){sender.transform};
+            if(sender.id.IsSpecial && !_shown) // NextTutorial == null)
+            {
+              _shown = true;
+              Debug.Log("Premium Item visible!");
+              //this.enabled = true;
+              ActivateTutorialPanel();
+              NextTutorial.InputOverlayTargets = new List<Transform>(){sender.transform};
+            }
         }
     }
 }

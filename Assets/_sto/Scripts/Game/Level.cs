@@ -100,7 +100,9 @@ public class Level : MonoBehaviour
   public int      initialItemsCnt => _initialItemsCnt;
   public bool     hoverItemMatch = false;
   public Vector2Int dim => _dim;
-  public Vector3  garbagePosition(int idx) => _items[idx].transform.position;
+  public List<Item> listItems => _items;
+
+  //public Vector3  garbagePosition(int idx) => _items[idx].transform.position;
 
   UISummary    _uiSummary = null;
   UIStatusBar  _uiStatusBar = null;
@@ -236,6 +238,8 @@ public class Level : MonoBehaviour
   }
   IEnumerator Start()
   {
+    yield return null;
+    yield return null; //do not remove!
     Init();
     yield return null;
 
@@ -255,7 +259,7 @@ public class Level : MonoBehaviour
 
     onStart?.Invoke(this);
 
-    if(GetComponentInChildren<TutorialSystem.TutorialRewardChest>() != null || GameState.Chest.shown)
+    if(GameState.Chest.shown)
       _rewardChest.Show();
 
     CheckMatchingItems();
@@ -378,17 +382,17 @@ public class Level : MonoBehaviour
     }
     _initialItemsCnt = itemsCount;
   }
-  bool  firstPremium = false;
+  //bool  firstPremium = false;
   void  AddItem(Item item)
   {
     _items.Add(item);
     _grid.set(item.vgrid, 1, item.id.kind);
     GameState.Progress.Items.ItemAppears(item.id);
-    if(!GameState.Events.Tutorials.premiumDone && !firstPremium && item.id.IsSpecial)
-    {
-      firstPremium = true;
-      onPremiumItem?.Invoke(item);
-    }
+    // if(!GameState.Events.Tutorials.premiumDone && !firstPremium && item.id.IsSpecial)
+    // {
+    //   firstPremium = true;
+    //   this.Invoke(()=>onPremiumItem?.Invoke(item), 2.5f);
+    // }
   }
   void  SpawnItem(Vector2 vgrid)
   {
