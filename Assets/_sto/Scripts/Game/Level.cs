@@ -111,7 +111,7 @@ public class Level : MonoBehaviour
 
   Item        _itemSelected;
   Item        _itemHovered;
-  Animal      _animalSelected;
+  Animal      _animalHovered;
   List<Item>  _items = new List<Item>();
   List<Item>  _items2 = new List<Item>();
   int         _requestCnt = 0;
@@ -455,7 +455,7 @@ public class Level : MonoBehaviour
       return;
 
     hoverItemMatch = false;  
-    Item nearestItem = null;
+    Item   nearestItem = null;
     Animal nearestAnimal = null;
     if(_itemSelected && tid.RaycastData.HasValue)
     {
@@ -481,16 +481,17 @@ public class Level : MonoBehaviour
       //nearest animal
       {
         nearestAnimal = tid.GetClosestObjectInRange<Animal>(_inputAnimRad, Animal.layerMask);
-        if(nearestAnimal && _animalSelected == null)
+        if(nearestAnimal)
         {
-          _animalSelected = nearestAnimal;
-          hoverItemMatch = _animalSelected.CanPut(_itemSelected);
-          onAnimalHovered?.Invoke(this);
-          if(!isFeedingMode)
-            _animalSelected.AnimTalk();
+          if(nearestAnimal != _animalHovered)
+          {
+            hoverItemMatch = nearestAnimal.CanPut(_itemSelected);
+            onAnimalHovered?.Invoke(this);
+            if(!isFeedingMode && hoverItemMatch)
+              nearestAnimal.AnimTalk();
+          }
         }
-        else
-          _animalSelected = null;
+        _animalHovered = nearestAnimal;
       }
     }
 
