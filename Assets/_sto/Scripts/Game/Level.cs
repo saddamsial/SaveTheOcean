@@ -20,6 +20,7 @@ public class Level : MonoBehaviour
   [SerializeField] Transform      _tilesContainer;
   //[SerializeField] Transform      _animalsContainer;
   [SerializeField] Transform[]    _animalContainers;
+  public Transform GetPrimaryAnimalContainer() => _animalContainers.FirstOrDefault();
   [SerializeField] Renderer       _waterRenderer;
   [SerializeField] RewardChest    _rewardChest;
   [SerializeField] SplitMachine   _splitMachine;
