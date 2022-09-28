@@ -427,19 +427,16 @@ public class Level : MonoBehaviour
     return (float)requests / _requestCnt;
   }
   
-  Item GetNerestItemInRange(Item[] arr)
+  Item GetNearestItem(Item[] arr)
   {
     Item item = null;
     
-    if(arr != null && arr.Length > 0)
+    if(arr.Length > 0)
     {
-      System.Array.Sort(arr, (it0, it1) => Mathf.RoundToInt(Mathf.Sign((it0.vwpos - _itemSelected.vwpos).get_xz().sqrMagnitude - (it1.vwpos - _itemSelected.vwpos).get_xz().sqrMagnitude)));
-      item = arr[0];
+      item = System.Array.Find(arr, (it) => (_itemSelected.vwpos - it.vwpos).get_xz().magnitude < 1.0f);
       var match = System.Array.Find(arr, (it) => Item.Mergeable(_itemSelected, it));
       if(match)
         item = match;
-      else
-        item = null;  
     }
     return item;
   }
@@ -468,7 +465,7 @@ public class Level : MonoBehaviour
 
       //nearest item
       {
-        nearestItem = GetNerestItemInRange(tid.GetObjectsInRange<Item>(_inputRad, Item.layerMask));
+        nearestItem = GetNearestItem(tid.GetObjectsInRange<Item>(_inputRad, Item.layerMask, true));
         if(nearestItem)
         {
           nearestItem.Hover(true);
@@ -628,7 +625,7 @@ public class Level : MonoBehaviour
   bool IsItemHit(TouchInputData tid)
   {
     bool is_hit = false;
-    var itemHit = GetNerestItemInRange(tid.GetObjectsInRange<Item>(_inputRad, Item.layerMask));//     tid.GetClosestCollider(_inputRad, Item.layerMask)?.GetComponent<Item>() ?? null;
+    var itemHit = GetNearestItem(tid.GetObjectsInRange<Item>(_inputRad, Item.layerMask, true));//     tid.GetClosestCollider(_inputRad, Item.layerMask)?.GetComponent<Item>() ?? null;
     bool is_merged = false;
     if(itemHit && itemHit != _itemSelected && !itemHit.IsInMachine)
     {
