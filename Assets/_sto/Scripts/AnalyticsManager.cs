@@ -41,7 +41,6 @@ public class AnalyticsManager : MonoBehaviour
         ByteBrew.NewProgressionEvent(progressionType, GetEventEnvironmentName(activeAnalyticsEnvironment, sender), GetLevelID(sender));
         
         if (activeAnalyticsEnvironment == AnalyticsEnvironment.Production) return;
-
         Debug.Log(
             "<color=cyan> Analytics Event " + _div +
             GetEventEnvironmentName(activeAnalyticsEnvironment, sender) + _div +
@@ -62,6 +61,15 @@ public class AnalyticsManager : MonoBehaviour
             };
         string GetEventEnvironmentName(AnalyticsEnvironment environment, Level level = null){
             if (environment == AnalyticsEnvironment.Test) return "TestEnvironment";
+
+
+            //level.isRegular; //regular level
+            //level.isPolluted //level polluted in late stage
+            //level.isFeedingMode //feeding level
+            //level.isCleanupMode //cleanup level
+            //level.visitsCnt //level visited times
+              
+
             return level.isFeedingMode ? "FeedingPhase" : "CleanupPhase";
         }
 

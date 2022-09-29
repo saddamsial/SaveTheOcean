@@ -11,11 +11,13 @@ public class Earth : MonoBehaviour
   [SerializeField] GameObject     _earthPrefab;
   [SerializeField] GameObject     _locationsPath;
   [SerializeField] Transform      _levelsContainer;
-  [SerializeField] Transform      _feedingTransform;
   [SerializeField] Transform      _locationsContainer;
   [SerializeField] Transform      _fx;
   [SerializeField] Transform      _extras;
-  
+
+  [Header("SpecialLocs")]
+  [SerializeField] Transform _feedingTransform;
+  [SerializeField] Transform _cleanupTransform;
 
   [Header("Earth fx")]
   [SerializeField] EarthFx      _earthFx;
@@ -30,43 +32,48 @@ public class Earth : MonoBehaviour
   [SerializeField] float _rotateDamping = 0;
   [SerializeField] float _rotateXRange = 45;
 
-  public static System.Action<int> onShow;
-  public static System.Action onHide;
-  public static System.Action<int> onLevelStart, onLevelSelected;
+  public static System.Action<Earth> onShow;
+  public static System.Action        onHide;
+  public static System.Action<int>   onLevelStart, onLevelSelected;
+  public static System.Action        onAllLocationFinished;
+
+  public static int locationsCnt { get; private set; }
 
   int            _selectedLocation = 0;
-  //float          _rotateSpeed = 0;
   Vector2        _vrotateSpeed = Vector2.zero;
   Vector2?       _vdragBeg = null;
   Vector2        _vdragPrev;
   bool           _move2location = false;
   Location[]     _locations;
   Location       _feedLocation;
-  Location       _cleanLocation;
+  Location       _clearupLocation;
   Location       _miscLocation;
+  bool           _showAllLocationTut = false;
 
-  public Location   location(int idx) => idx switch 
+
+  public int      selectedLocation => _selectedLocation;
+  public Location location(int idx) => idx switch 
   {
 
     Location.FeedLocation => _feedLocation,
-    Location.CleanLocation => _cleanLocation,
+    Location.ClearLocation => _clearupLocation,
     -1 => null,
     _ => _locations[idx]
   };
-  public static int locationsCnt {get; private set;}
+ 
 
   void Awake()
   {
     InitLocations();
     GameState.Progress.Locations.onLocationPolluted += OnLocationPolluted;
+    GameState.Progress.Locations.onAllLocationFinished += OnAllLocationFinished;
     UIEarth.onBtnPlay += OnBtnPlay;
-    UIEarth.onBtnFeed += OnBtnFeed;
   }
   void OnDestroy()
   {
-    UIEarth.onBtnPlay -= OnBtnPlay;
-    UIEarth.onBtnFeed -= OnBtnFeed;
     GameState.Progress.Locations.onLocationPolluted -= OnLocationPolluted;
+    GameState.Progress.Locations.onAllLocationFinished -= OnAllLocationFinished;
+    UIEarth.onBtnPlay -= OnBtnPlay;
   }
 
   private void InitLocations()
@@ -87,6 +94,9 @@ public class Earth : MonoBehaviour
 
     _feedLocation = GameData.Prefabs.CreateLocation(_locationsContainer);
     _feedLocation.Init(Location.FeedLocation, _feedingTransform, _rotateXRange, Level.State.Feeding);
+
+    _clearupLocation = GameData.Prefabs.CreateLocation(_locationsContainer);
+    _clearupLocation.Init(Location.ClearLocation, _cleanupTransform, _rotateXRange, Level.State.Clearing);
 
     _locations = listLocations.ToArray();
     _feedLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
@@ -111,7 +121,7 @@ public class Earth : MonoBehaviour
     }
     _earthPrefab.SetActive(true);
     UpdateLevelsStates();
-    onShow?.Invoke(_selectedLocation);
+    onShow?.Invoke(this);
   }
   public void Show(int indexLocation, bool show_next)
   {
@@ -131,7 +141,13 @@ public class Earth : MonoBehaviour
       if(show_next)
         MoveVesselToLocation(location(location_idx));
 
-      onShow?.Invoke(location_idx);
+      onShow?.Invoke(this);
+
+      if(_showAllLocationTut)
+      {
+        this.Invoke(() => onAllLocationFinished?.Invoke(), 1.0f);
+        _showAllLocationTut = false;
+      }      
     }, 1.0f);
   }
   public void Hide()
@@ -185,15 +201,14 @@ public class Earth : MonoBehaviour
     }
     _vdragBeg = null;
   }
-  void OnBtnPlay()
+  void OnBtnPlay(Level.Mode mode)
   {
-    Level.mode = Level.Mode.Clearing;
+    Level.mode = mode;
     onLevelStart?.Invoke(_selectedLocation);
   }
-  void OnBtnFeed()
+  void OnAllLocationFinished()
   {
-    Level.mode = Level.Mode.Feeding;
-    onLevelStart?.Invoke(_selectedLocation);
+    _showAllLocationTut = true;
   }
   void OnLocationPolluted(int locationIdx)
   {
@@ -221,19 +236,11 @@ public class Earth : MonoBehaviour
     _selectedLocation = loc;
     GameState.Progress.locationIdx = loc;
     onLevelSelected?.Invoke(loc);
-
-    // if(_selectedLocation >=0)
-    //   _locations[_selectedLocation].Select(false);
-    //_locations[location].Select(true);
-    //_selectedLocation = loc;
-    //GameState.Progress.locationIdx = location;
-    //onLevelSelected?.Invoke(loc);
   }
   void MoveVesselToLocation(Location loca)
   {
     _vessel.FlyTo(loca.transform.localPosition);
   }
-  
   
   void StartRotateToLocation(Location location)
   {
@@ -280,10 +287,11 @@ public class Earth : MonoBehaviour
   #if UNITY_EDITOR
     if(Input.GetKeyDown(KeyCode.Y))
     {
-      for(int q = 0; q < Earth.locationsCnt; ++q)
+      for(int q = 0; q < Earth.locationsCnt - 1; ++q)
       {
         GameState.Progress.Locations.SetLocationFinished(q);
       }
+      GameState.Progress.Locations.SetLocationUnlocked(Earth.locationsCnt-1);
       UpdateLevelsStates();
     }
   #endif

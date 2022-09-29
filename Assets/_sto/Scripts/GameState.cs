@@ -25,15 +25,25 @@ public class GameState : SavableScriptableObject
   {
     [SerializeField] int _idx = 0;
     [SerializeField] Level.State _state = Level.State.Locked;
+    [SerializeField] int _visits = 0;
     [SerializeField] long _date = 0;
 
-    public LocationState(int loc_idx, Level.State st = Level.State.Locked)
+    public LocationState(int loc_idx, Level.State st) // = Level.State.Locked)
     {
       _idx = loc_idx;
       _state = st;
     }
+    public LocationState(int loc_idx)
+    {
+      _idx = loc_idx;
+      if(loc_idx == Location.FeedLocation)
+        _state = Level.State.Feeding;
+      else if(loc_idx == Location.ClearLocation)
+        _state = Level.State.Clearing;
+    }
     public int idx => _idx;
     public Level.State state { get => _state; set => _state = value;}
+    public int  visits {get => _visits; set => _visits = value;}
     public long date {get => _date; set => _date = value;}
   }
 
@@ -42,6 +52,7 @@ public class GameState : SavableScriptableObject
   {
     [SerializeField] int _location = 0;
     [SerializeField] List<LocationState> _locations;
+    [SerializeField] List<LocationState> _locationsSpec;
     [SerializeField] long _locationsPassedTime = 0;
     [SerializeField] List<Item.ID>    _itemAppears = new List<Item.ID>();
 
@@ -50,9 +61,15 @@ public class GameState : SavableScriptableObject
     public  int  location { get => _location; set => _location = value; }
     public  long locationsPassTime { get => _locationsPassedTime; set => _locationsPassedTime = value;}
     public  List<LocationState> locations { get => _locations; }
+    public  List<LocationState> locationsSpec {get => _locationsSpec;}
     public  LocationState  FindLocation(int loc_idx)
     {
-      return _locations.Find((loc) => loc.idx == loc_idx);
+      LocationState loc_state = null;
+      if(loc_idx < Location.SpecialLocBeg)
+        loc_state = _locations.Find((loc) => loc.idx == loc_idx);
+      else
+        loc_state = _locationsSpec.Find((loc) => loc.idx == loc_idx);  
+      return loc_state;
     }
     public  bool        IsLocationUnlocked(int loc_idx)
     {
@@ -66,33 +83,39 @@ public class GameState : SavableScriptableObject
     }
     public  void        UnlockLocation(int loc_idx)
     {
-      var loc = FindLocation(loc_idx);
-      if(loc == null)
-        _locations.Add(new LocationState(loc_idx, Level.State.Unlocked));
-      else
+      if(loc_idx < Location.SpecialLocBeg)
       {
-        if(loc.state == Level.State.Locked)
-          loc.state = Level.State.Unlocked;
+        var loc = FindLocation(loc_idx);
+        if(loc == null)
+          _locations.Add(new LocationState(loc_idx, Level.State.Unlocked));
+        else
+        {
+          if(loc.state == Level.State.Locked)
+            loc.state = Level.State.Unlocked;
+        }
       }
     }
     public void         PassLocation(int loc_idx)
     {
-      var loc = FindLocation(loc_idx);
-      if(loc == null)
+      if(loc_idx < Location.SpecialLocBeg)
       {
-        loc = new LocationState(loc_idx, Level.State.Finished);
-        _locations.Add(loc);
-      }
-      else
-        loc.state = Level.State.Finished;
-
-      loc.date = CTime.get().ToBinary();
-      if(_locations.Count == Earth.locationsCnt)
-      {
-        if(_locationsPassedTime == 0)
+        var loc = FindLocation(loc_idx);
+        if(loc == null)
         {
-          _locationsPassedTime = CTime.get().ToBinary();
-          onAllLocationFinished?.Invoke();
+          loc = new LocationState(loc_idx, Level.State.Finished);
+          _locations.Add(loc);
+        }
+        else
+          loc.state = Level.State.Finished;
+
+        loc.date = CTime.get().ToBinary();
+        if(_locations.Count >= Earth.locationsCnt)
+        {
+          if(_locationsPassedTime == 0)
+          {
+            _locationsPassedTime = CTime.get().ToBinary();
+            GameState.Progress.Locations.onAllLocationFinished?.Invoke();
+          }
         }
       }
     }
@@ -100,10 +123,37 @@ public class GameState : SavableScriptableObject
     {
       if(loc_idx == Location.FeedLocation)
         return Level.State.Feeding;
-      if(loc_idx == Location.CleanLocation)
-        return Level.State.Cleaning;
+      if(loc_idx == Location.ClearLocation)
+        return Level.State.Clearing;
       var loc = FindLocation(loc_idx);
       return (loc != null) ? loc.state : Level.State.Locked;
+    }
+    public void         VisitLocation(int loc_idx)
+    {
+      var loc = FindLocation(loc_idx);
+      if(loc == null)
+      {
+        if(loc_idx < Location.SpecialLocBeg)
+        {
+          _locations.Add(new LocationState(loc_idx, Level.State.Unlocked));
+          loc = _locations.last();
+        }
+        else
+        {
+          _locationsSpec.Add(new LocationState(loc_idx));
+          loc = _locationsSpec.last();
+        }
+      }
+      loc.visits++;
+    }
+    public int          GetLocationVisits(int loc_idx)
+    {
+      int visits = 0;
+      var loc = FindLocation(loc_idx);
+      if(loc != null)
+        visits = loc.visits;
+      
+      return visits;  
     }
     public bool         ItemAppeared(Item.ID id)
     {
@@ -264,7 +314,8 @@ public class GameState : SavableScriptableObject
     public static int locationIdx {get => get().progress.location; set => get().progress.location = value;}
     public static class Locations
     {
-      public static Action<int>   onLocationPolluted;  
+      public static Action<int>   onLocationPolluted;
+      public static Action        onAllLocationFinished;
 
       public static Level.State   GetLocationState(int loc_idx) => get().progress.GetLocationState(loc_idx);
       //public static void        SetLocationState(int loc_idx, Location.State state) => get().progress.SetLocationState(loc_idx, state);
@@ -272,9 +323,11 @@ public class GameState : SavableScriptableObject
       public static bool          IsLocationFinished(int loc_idx) => get().progress.IsLocationPassed(loc_idx);
       public static void          SetLocationFinished(int loc_idx) => get().progress.PassLocation(loc_idx);
       public static void          SetLocationFinished() => SetLocationFinished(locationIdx);
-      //public static void          UnlockNextLocation(int loc_idx) => get().progress.UnlockLocation(GameData.Levels.NextLocation(loc_idx));
+      public static void          SetLocationUnlocked(int loc_idx) => get().progress.UnlockLocation(loc_idx);
       public static void          UnlockNextLocation(int loc_idx) => get().progress.UnlockLocation(GameData.Locations.NextLocation(loc_idx));
       public static void          UnlockNextLocation() => UnlockNextLocation(locationIdx);
+      public static void          VisitLocation(int loc_idx) => get().progress.VisitLocation(loc_idx);
+      public static int           GetLocationVisits(int loc_idx) => get().progress.GetLocationVisits(loc_idx);
       public static Level.State[] GetStates()
       {
         var states = new Level.State[Earth.locationsCnt];

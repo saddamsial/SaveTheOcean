@@ -2668,7 +2668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8048711394836306712, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 512
+      value: 576
       objectReference: {fileID: 0}
     - target: {fileID: 8048711394836306712, guid: 216bb3ab6fd8170429b691ede3e4c13e, type: 3}
       propertyPath: m_SizeDelta.y

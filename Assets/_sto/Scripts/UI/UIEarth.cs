@@ -14,7 +14,7 @@ public class UIEarth : MonoBehaviour
   [SerializeField] TMPLbl  _btnActionInfo;
   [SerializeField] TMPLbl  _btnStaminaInfo;
 
-  public static System.Action onBtnPlay, onBtnFeed;
+  public static System.Action<Level.Mode> onBtnPlay;
 
   Earth   _earth = null;
   UIPanel _earthPanel = null;
@@ -42,12 +42,10 @@ public class UIEarth : MonoBehaviour
     Earth.onLevelSelected -= UpdateLevelInfo;
     Earth.onLevelStart -= OnEarthHide;
   }
-  private void OnEarthShow(int levelIdx) => Show(levelIdx);
-  private void OnEarthHide(int levelIdx) => Hide();
+  private void OnEarthShow(Earth earth) => Show(earth.selectedLocation);
+  private void OnEarthHide(int idx) => Hide();
   public void  Show(int lvlIdx)
   {
-    //_btnFeed.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
-    
     _earthPanel.ActivatePanel();
     UpdateLevelInfo(lvlIdx);
     this.Invoke(()=> _cleanDst = GameState.Progress.Locations.GetCompletionRate(), 0.25f);
@@ -69,35 +67,44 @@ public class UIEarth : MonoBehaviour
     var state = GameState.Progress.Locations.GetLocationState(location);
     if(state == Level.State.Feeding)
       _btnActionInfo.text = "Feed";
+    else if(state == Level.State.Clearing)
+      _btnActionInfo.text = "Clearing";  
     else
       _btnActionInfo.text = "Play";
   }
 
+  bool IsMode(int loc_idx, Level.Mode mode)
+  {
+    if(mode == Level.Mode.Standard)
+      return loc_idx < Location.SpecialLocBeg;
+    if(mode == Level.Mode.Feeding)  
+      return loc_idx == Location.FeedLocation;
+    if(mode == Level.Mode.Clearing)
+      return loc_idx == Location.ClearLocation;
+    
+    return false;    
+  }
   public void OnBtnPlay()
   {
-    var state = GameState.Progress.Locations.GetLocationState(GameState.Progress.locationIdx);
-    if(state != Level.State.Feeding)
+    (int cost, Level.Mode mode)[] modes = 
     {
-      if(GameState.Econo.CanSpendStamina(GameData.Econo.staminaCost))
+      new (GameData.Econo.staminaCost, Level.Mode.Standard),
+      new (GameData.Econo.staminaFeedCost, Level.Mode.Feeding),
+      new (GameData.Econo.staminaClearCost, Level.Mode.Clearing),
+    };
+    for(int q = 0; q < modes.Length; ++q)
+    {
+      if(IsMode(GameState.Progress.locationIdx, modes[q].mode))
       {
-        GameState.Econo.stamina -= GameData.Econo.staminaCost;
-        onBtnPlay?.Invoke();
+        if(GameState.Econo.CanSpendStamina(modes[q].cost))
+        {
+          GameState.Econo.stamina -= GameData.Econo.staminaCost;
+          onBtnPlay?.Invoke(modes[q].mode);
+        }
+        else
+          FindObjectOfType<UIPopupStamina>(true)?.Show();
       }
-      else
-        FindObjectOfType<UIPopupStamina>(true)?.Show();
     }
-    else
-      OnBtnFeed();
-  }
-  public void OnBtnFeed()
-  {
-    if(GameState.Econo.CanSpendStamina(GameData.Econo.staminaFeedCost))
-    {
-      GameState.Econo.stamina -= GameData.Econo.staminaFeedCost;
-      onBtnFeed?.Invoke();
-    }
-    else
-      FindObjectOfType<UIPopupStamina>(true)?.Show();
   }
 
   void UpdateSlider()

@@ -17,9 +17,10 @@ public class Location : MonoBehaviour
     public GameObject mdl;
   }
 
+  public const int SpecialLocBeg = 1000;
   public const int FeedLocation = 1000;
-  public const int CleanLocation = 1001;
-
+  public const int ClearLocation = 1001;
+  
 
   Quaternion _localDstRoto = Quaternion.identity;
   private int _idx = -1;
@@ -38,7 +39,6 @@ public class Location : MonoBehaviour
   { 
     _idx = idx;
     _level = idx;
-    //_level = Mathf.Clamp(idx, 0, GameData.Levels.levelsCnt-1);
     state = level_state;
 
     vert_roto_range -= 5;

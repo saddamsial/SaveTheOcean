@@ -18,6 +18,8 @@ public class StorageBox : MonoBehaviour
 
   public static int layerMask = 1;
 
+  public bool isActive => _content.activeInHierarchy;
+
   public enum PushState
   {
     Ok,
@@ -33,6 +35,7 @@ public class StorageBox : MonoBehaviour
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
 
     _content.SetActive(false);
+    GetComponent<Collider>().enabled = false;
     if(GameState.StorageBox.ShouldShow())
       Show(1);
   }
@@ -45,6 +48,7 @@ public class StorageBox : MonoBehaviour
   {
     UpdateInfo();
     _content.SetActive(true);
+    GetComponent<Collider>().enabled = false;
     GameState.StorageBox.shown = true;
     this.Invoke(() => { GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this); }, delay);
   }

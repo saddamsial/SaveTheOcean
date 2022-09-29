@@ -37,6 +37,7 @@ public class RewardChest : MonoBehaviour
     OnRewardChanged(_rewardPointsMov);
 
     _content.SetActive(false);
+    GetComponent<Collider>().enabled = false;
   }
   void OnDestroy()
   {
@@ -48,6 +49,7 @@ public class RewardChest : MonoBehaviour
   {
     _lidAngle = (_resCnt == 0) ? 0 : 90;
     _content.SetActive(true);
+    GetComponent<Collider>().enabled = true;
     GameState.Chest.shown = true;
     this.Invoke(() => { GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this); }, 1.0f);
   }

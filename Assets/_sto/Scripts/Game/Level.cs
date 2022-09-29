@@ -20,7 +20,6 @@ public class Level : MonoBehaviour
   [SerializeField] Transform      _tilesContainer;
   //[SerializeField] Transform      _animalsContainer;
   [SerializeField] Transform[]    _animalContainers;
-  public Transform GetPrimaryAnimalContainer() => _animalContainers.FirstOrDefault();
   [SerializeField] Renderer       _waterRenderer;
   [SerializeField] RewardChest    _rewardChest;
   [SerializeField] SplitMachine   _splitMachine;
@@ -46,10 +45,11 @@ public class Level : MonoBehaviour
 
   public enum Mode
   {
+    Standard,
     Clearing,
     Feeding,
   };
-  static public Mode mode {get; set;} = Mode.Clearing;
+  static public Mode mode {get; set;} = Mode.Standard;
 
   public enum State
   {
@@ -59,7 +59,7 @@ public class Level : MonoBehaviour
     Finished,
     Polluted,
     Feeding,
-    Cleaning,
+    Clearing,
   }
 
   [System.Serializable]
@@ -80,20 +80,19 @@ public class Level : MonoBehaviour
     public Item items(int idx) => GameData.Prefabs.GetGarbagePrefab(_itemsCats[idx]);
   }
 
-  public int GetNumberOfMovesToSolve(){
+  public int       GetNumberOfMovesToSolve(){
     var solution = 0;
     foreach (var animal in  _lvlDescs){
         solution += animal.GetSolutionMoveCount();
     }
     return solution;
   }
-  public int GetUnderwaterGarbagesCnt() => _items2.Count((item) => !item.id.IsSpecial);  
+  public Transform GetPrimaryAnimalContainer() => _animalContainers.FirstOrDefault();  
+  public int       GetUnderwaterGarbagesCnt() => _items2.Count((item) => !item.id.IsSpecial);  
 
   public int      locationIdx {get; private set;} = -1;
   public bool     succeed {get; private set;}
   public bool     finished {get; private set;}
-  public bool     wasPolluted {get; private set;} = false;
-  public bool     isFeedingMode = false;
   public int      points {get; set;} = 0;
   public int      stars {get; set;}
   public int      itemsCount => _items.Count + _items2.Count;
@@ -101,8 +100,12 @@ public class Level : MonoBehaviour
   public bool     hoverItemMatch = false;
   public Vector2Int dim => _dim;
   public List<Item> listItems => _items;
-
-  //public Vector3  garbagePosition(int idx) => _items[idx].transform.position;
+  
+  public bool isRegular => locationIdx < Location.SpecialLocBeg && !isPolluted;
+  public bool isPolluted => GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Polluted;
+  public bool isFeedingMode => locationIdx == Location.FeedLocation;
+  public bool isCleanupMode => locationIdx == Location.ClearLocation;
+  public int  visitsCnt => GameState.Progress.Locations.GetLocationVisits(locationIdx);
 
   UISummary    _uiSummary = null;
   UIStatusBar  _uiStatusBar = null;
@@ -221,11 +224,10 @@ public class Level : MonoBehaviour
     _mpb.SetColor("_BaseColor", _waterColor);
     _waterRenderer.SetPropertyBlock(_mpb);
 
-    isFeedingMode = mode == Mode.Feeding;
-    wasPolluted = GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Polluted;
+    GameState.Progress.Locations.VisitLocation(locationIdx);
 
     _splitMachine.Init(_items);
-    _splitMachine.gameObject.SetActive(!isFeedingMode && false);
+    _splitMachine.gameObject.SetActive(false);
     _feedingMachine.gameObject.SetActive(isFeedingMode);
 
     _storageBox = GetComponentInChildren<StorageBox>();
@@ -298,7 +300,8 @@ public class Level : MonoBehaviour
     }
     vs.shuffle(100);
     vs.Reverse();
-    if(!isFeedingMode)
+
+    if(isRegular || isPolluted || isCleanupMode)
     {
       Item.ID id = new Item.ID();
       List<Item.ID> ids = new List<Item.ID>();
@@ -405,7 +408,7 @@ public class Level : MonoBehaviour
       AddItem(item);
     }
   }
-  void MoveItemBack(Item item)
+  void  MoveItemBack(Item item)
   {
     item.Select(false);
     item.MoveBack();
@@ -547,8 +550,8 @@ public class Level : MonoBehaviour
         Vector3  vbeg = Vector3.zero;
         if(vg != null)
         {
-          var chest = box.GetComponent<RewardChest>();
           Item.ID? id = null;
+          var chest = box.GetComponent<RewardChest>();
           if(chest)
           {
             id = chest.Pop();
@@ -821,6 +824,9 @@ public class Level : MonoBehaviour
   }
   void CheckEnd()
   {
+    if(isFeedingMode)
+      return;
+
     int activeAnimals = _animals.Count((animal) => animal.isActive);
     if(!finished && activeAnimals == 0)
     {

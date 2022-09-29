@@ -15,6 +15,7 @@ public class FeedingMachine : MonoBehaviour
   {
     layerMask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
   }
+
   void FillFood()
   {
     var foodDescs = GameData.Econo.foodsDesc;
