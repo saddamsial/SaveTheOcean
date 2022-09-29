@@ -125,6 +125,7 @@ public class GameData : ScriptableObject
 
   [Header("--Settings--")]
   [SerializeField] int        _feedingAvailLoc = 3;
+  [SerializeField] int        _clearingAvailLoc = 4;
 
   [SerializeField] Color[]    themeColors;
   public static Color[]       GetThemeColors() => get().themeColors;
@@ -210,6 +211,7 @@ public class GameData : ScriptableObject
     static public int   levelsCnt => get()._listLevels.Count;
     //static public Vector2Int feedingDim => get()._feedingBoardDim;
     static public int   GetFeedingAvailLoc() => get()._feedingAvailLoc;
+    static public int   GetClearingAvailLoc() => get()._clearingAvailLoc;
   }
   public static class Locations
   {
