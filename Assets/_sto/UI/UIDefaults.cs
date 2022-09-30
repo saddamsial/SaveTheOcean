@@ -22,4 +22,16 @@ public class UIDefaults
     
     return str;
   }
+
+  public static string GetResSymbol(Item.ID id)
+  {
+    string str = "";
+    if(id.kind == Item.Kind.Stamina)
+      str = staminaIco;
+    else if(id.kind == Item.Kind.Coin)
+      str = coinIco;
+    else if(id.kind == Item.Kind.Gem)
+      str = gemIco;
+    return str;  
+  }
 }

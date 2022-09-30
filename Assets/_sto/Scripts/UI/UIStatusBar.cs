@@ -11,6 +11,7 @@ public class UIStatusBar : MonoBehaviour
   [SerializeField] UIInfoBox _coins;
   [SerializeField] UIInfoBox _gems;
   [SerializeField] Transform _movesContainer;
+  [SerializeField] TMPLbl    _moveLbl;
   [Header("Settings")]
   [SerializeField] float _moveSpeed = 5.0f;
   [SerializeField] float _moveDelay = 0.05f;
@@ -24,10 +25,12 @@ public class UIStatusBar : MonoBehaviour
   struct Move
   {
     public Vector3          vdst;
+    public Vector2          vdstUI;
     public List<GameObject> objects;
     public List<float>      delays;
   }
   List<Move> moves = new List<Move>();
+
 
   void Awake()
   {
@@ -84,11 +87,12 @@ public class UIStatusBar : MonoBehaviour
       Item.Kind.Stamina => _stamina.transform.position,
       Item.Kind.Coin => _coins.transform.position,
       Item.Kind.Gem => _gems.transform.position,
-      _ => Vector3.zero
+      _ => Vector2.zero
     };
 
     float dist = Mathf.Abs(uiCam.transform.position.z - vdstPos.z);
     move.vdst = uiCam.ScreenToWorldPoint(new Vector3(vdstPos.x, vdstPos.y, dist));// -Camera.main.nearClipPlane + dist + 32));
+    move.vdstUI = vdstPos;
     move.objects = new List<GameObject>();
     move.delays = new List<float>();
     move.objects.AddRange(GameData.Prefabs.CreateStaticItemModels(item.id, _movesContainer, amount));
@@ -127,13 +131,69 @@ public class UIStatusBar : MonoBehaviour
         moves.RemoveAt(q--);
       ++q;
     }
+  }  
+  public void MoveCollectedUI(Item item, int amount)
+  {
+    Move move = new Move();
+    Vector3 vdstPos = item.id.kind switch
+    {
+      Item.Kind.Stamina => _stamina.GetComponent<RectTransform>().position,
+      Item.Kind.Coin => _coins.GetComponent<RectTransform>().position,
+      Item.Kind.Gem => _gems.GetComponent<RectTransform>().position,
+      _ => Vector2.zero
+    };
+
+    move.vdstUI = uiCam.WorldToViewportPoint(vdstPos);
+    move.objects = new List<GameObject>();
+    move.delays = new List<float>();
+
+    for(int q = 0; q < amount; ++q)
+    {
+      var lbl = Instantiate(_moveLbl, _movesContainer);
+      lbl.GetComponent<RectTransform>().anchorMin = UIManager.GetViewportPosition(item.vwpos);
+      lbl.GetComponent<RectTransform>().anchorMax = UIManager.GetViewportPosition(item.vwpos);
+      lbl.text = UIDefaults.GetResSymbol(item.id);
+      move.objects.Add(lbl.gameObject);
+      move.delays.Add(-_moveDelay * q);
+    }
+    moves.Add(move);
+  }
+  void ProcessMovesUI()
+  {
+    for(int q = 0; q < moves.Count;)
+    {
+      Move move = moves[q];
+      for(int o = 0; o < move.objects.Count;)
+      {
+        move.delays[o] += Time.deltaTime;
+        if(move.delays[o] > 0)
+        {
+          var rc = move.objects[o].GetComponent<RectTransform>();
+          rc.anchorMin = Vector3.Lerp(rc.anchorMin, move.vdstUI, Time.deltaTime * _moveSpeed);
+          rc.anchorMax = rc.anchorMin;
+          if(Vector3.Distance(rc.anchorMin, move.vdstUI) < 0.01f)
+          {
+            Destroy(move.objects[o].gameObject);
+            move.objects.RemoveAt(o);
+            move.delays.RemoveAt(o);
+            --o;
+            UpdateDisp();
+          }
+        }
+        ++o;
+      }
+      if(move.objects.Count > 0)
+        moves[q] = move;
+      else
+        moves.RemoveAt(q--);
+      ++q;
+    }
   }
 
   void Update()
   {
-    ProcessMoves();
-    float perc = GameState.Econo.GetStaminaRefillPerc();
-    _stamina.progressVal = perc;
+    ProcessMovesUI();
+    _stamina.progressVal = GameState.Econo.GetStaminaRefillPerc();
   }
 }
 

@@ -603,7 +603,7 @@ public class Level : MonoBehaviour
             int amount = GameState.Econo.AddRes(item.id);
             _items.Remove(item);
             _grid.set(item.vgrid, 0);
-            _uiStatusBar.MoveCollected(item, amount);
+            _uiStatusBar.MoveCollectedUI(item, amount);
             onItemCollected?.Invoke(item);
             item.Hide();
             SpawnItem(item.vgrid);
