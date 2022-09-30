@@ -94,12 +94,13 @@ public class Earth : MonoBehaviour
 
     _feedLocation = GameData.Prefabs.CreateLocation(_locationsContainer);
     _feedLocation.Init(Location.FeedLocation, _feedingTransform, _rotateXRange, Level.State.Feeding);
+    _feedingTransform.gameObject.SetActive(false);
 
     _clearupLocation = GameData.Prefabs.CreateLocation(_locationsContainer);
     _clearupLocation.Init(Location.ClearLocation, _cleanupTransform, _rotateXRange, Level.State.Clearing);
+    _cleanupTransform.gameObject.SetActive(false);
 
     _locations = listLocations.ToArray();
-    
     _locationsPath.SetActive(!GameState.Progress.Locations.AllStateFinished());
   }
   public void Setup()
@@ -223,9 +224,7 @@ public class Earth : MonoBehaviour
     _clearupLocation.state = Level.State.Clearing;
 
     _feedLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
-    _feedingTransform.gameObject.SetActive(_feedLocation.gameObject.activeSelf);
     _clearupLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetClearingAvailLoc());
-    _cleanupTransform.gameObject.SetActive(_clearupLocation.gameObject.activeSelf);    
   }
   int  GetNextLocation(int loc)
   {
