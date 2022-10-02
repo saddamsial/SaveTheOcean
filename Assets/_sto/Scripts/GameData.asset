@@ -95,6 +95,12 @@ MonoBehaviour:
   - {fileID: 2229698086017596401, guid: 93525a29511690a429c79db24d386ae3, type: 3}
   - {fileID: 2229698086017596401, guid: 1cb798866eea0174c9574667ac1f9aa9, type: 3}
   - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
+  - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
+  - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
+  - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
+  - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
+  - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
+  - {fileID: 2229698086017596401, guid: 9ce70ebf71e65f4478f202d782476aa5, type: 3}
   _levelFeeding: {fileID: 2229698086017596401, guid: 0f8f314baaff79f4aa4d3cf15bcda573, type: 3}
   _levelClearing: {fileID: 2229698086017596401, guid: 8974ce46b8281204fac9988f26433c68, type: 3}
   _staminaMax: 50
@@ -180,6 +186,7 @@ MonoBehaviour:
       coins: 22
       gems: 1
   _feedingAvailLoc: 3
+  _clearingAvailLoc: 4
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
   - {r: 0.1882353, g: 0.17254902, b: 0.17254902, a: 1}

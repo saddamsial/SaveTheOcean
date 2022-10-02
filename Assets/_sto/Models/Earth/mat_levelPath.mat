@@ -141,6 +141,6 @@ Material:
     - _Emission: {r: 12271.9375, g: 6617.851, b: 0, a: 1}
     - _EmissionColor: {r: 16, g: 12.800001, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _TextureTiling: {r: 96, g: 1, b: 0, a: 0}
+    - _TextureTiling: {r: 64, g: 1, b: 0, a: 0}
     - _Tiling: {r: 96, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []

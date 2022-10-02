@@ -3795,14 +3795,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: _earth
       objectReference: {fileID: 0}
-    - target: {fileID: 5357800890766683375, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6118107097608509547, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a65d4a98e3582eb42aa650ee85cc7e2b, type: 3}
 --- !u!1001 &1086501284687257921

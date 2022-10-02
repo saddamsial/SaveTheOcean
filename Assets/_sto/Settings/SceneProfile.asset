@@ -15,13 +15,13 @@ MonoBehaviour:
   active: 1
   threshold:
     m_OverrideState: 1
-    m_Value: 1.5
+    m_Value: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.25
   scatter:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.7
   clamp:
     m_OverrideState: 0
     m_Value: 65472
@@ -33,7 +33,7 @@ MonoBehaviour:
     m_Value: 0
   skipIterations:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 2
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -67,7 +67,7 @@ MonoBehaviour:
           time: 0
           value: 0
           inSlope: 0
-          outSlope: 0.59710145
+          outSlope: 0.43301532
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -75,8 +75,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 0.3361304
-          outSlope: 0.3361304
+          inSlope: 0.6254665
+          outSlope: 0.6254665
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -106,8 +106,8 @@ MonoBehaviour:
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 1
-          outSlope: 1
+          inSlope: 0.7651918
+          outSlope: 0.7651918
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
@@ -158,7 +158,7 @@ MonoBehaviour:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
+          value: 0.006557405
           inSlope: 0
           outSlope: 1.1337085
           tangentMode: 0
@@ -338,7 +338,7 @@ MonoBehaviour:
     m_Value: {x: 0.82748353, y: 0.9462704, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 1, z: 1, w: -0.15531495}
+    m_Value: {x: 1, y: 1, z: 1, w: -0.19891168}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.875303, z: 0.77622736, w: 0.21567689}
+    m_Value: {x: 1, y: 0.875303, z: 0.77622736, w: 0.2701728}

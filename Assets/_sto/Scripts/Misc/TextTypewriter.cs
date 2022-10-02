@@ -30,8 +30,7 @@ public class TextTypewriter : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (progressIndex > messageLength) {
-            Debug.Log("Text printed | " + progressIndex + "/" + messageLength);
+        if (progressIndex >= messageLength) {
             this.enabled = false;
             return;
         }
