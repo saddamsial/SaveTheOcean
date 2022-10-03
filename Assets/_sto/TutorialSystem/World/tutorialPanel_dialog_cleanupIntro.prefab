@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2570981072860930815, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -128
+      objectReference: {fileID: 0}
     - target: {fileID: 3107357174490803090, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -35,13 +39,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3478561753085588041, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_text
+      value: Clean up!
+      objectReference: {fileID: 0}
     - target: {fileID: 6594426750771199994, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
       value: Welcome!
       objectReference: {fileID: 0}
     - target: {fileID: 6747210803549513794, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_Name
-      value: tutorialPanel_dialog_world_intro
+      value: tutorialPanel_dialog_cleanupIntro
+      objectReference: {fileID: 0}
+    - target: {fileID: 6783125341865410006, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: nameLabel
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7672507756468798793, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_IsActive
@@ -157,7 +169,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: Let's start here!
+      value: 'Great job! You cleared all levels but the real challange just starts!
+
+
+        Visit
+        this level to clean Save the Ocean!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

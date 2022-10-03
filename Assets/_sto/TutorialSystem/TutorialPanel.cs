@@ -29,13 +29,17 @@ namespace TutorialSystem
             var viewportPosition = UIManager.GetViewportPosition(sender.position);
 
             if (sender != null){
-                focusFade?.material.SetVector("_ViewportPosition", viewportPosition);
                 PlaceInViewport(viewportPosition);
+
+                if (focusFade != null) {
+                    focusFade.material = Instantiate(focusFade.material);
+                    focusFade?.material.SetVector("_ViewportPosition", viewportPosition);
+                }
             }
 
             var senderAnimal = sender?.GetComponentInChildren<Animal>();
             if (sender != null && nameLabel != null)
-                nameLabel.text = senderAnimal.DisplayName;
+                nameLabel.text = senderAnimal?.DisplayName??"-";
 
             ActivatePanel();            
         }

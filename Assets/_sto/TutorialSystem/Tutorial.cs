@@ -9,7 +9,7 @@ namespace TutorialSystem
     [DefaultExecutionOrder(-10)]
     public class Tutorial : MonoBehaviour
     {
-        [SerializeField] float initialDelay = 2f;
+        [SerializeField] protected float initialDelay = 2f;
         TutorialStep[] tutorialSequence = new TutorialStep[]{};
         protected virtual bool IsTutorialCompleted() => false;
         private void Awake(){
