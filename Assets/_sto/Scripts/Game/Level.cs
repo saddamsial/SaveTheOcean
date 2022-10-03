@@ -597,7 +597,7 @@ public class Level : MonoBehaviour
             item.vgrid = vg.Value;
             AddItem(item);
             item.Throw(vbeg, item.vgrid);
-            GameState.Feeding.Update(_items);
+            CacheItems();
           }
         }
         else
@@ -632,6 +632,7 @@ public class Level : MonoBehaviour
               if(animal.isActive && animal.IsReq(item))
               {
                 item.ThrowToAnimal(animal.transform.position + new Vector3(0,0.5f, 0), (Item item) => {PutItemToAnim(animal, item); CheckEnd();});
+                CacheItems();
                 break;
               }
             }
@@ -660,8 +661,7 @@ public class Level : MonoBehaviour
         GameState.Progress.Items.ItemAppears(newItem.id);
         SpawnItem(_itemSelected.vgrid);
         is_merged = true;
-        if(isFeedingMode)
-          GameState.Feeding.Update(_items);
+        CacheItems();  
       }
     }
     if(is_hit && !is_merged)
@@ -687,8 +687,7 @@ public class Level : MonoBehaviour
     _pollutionDest = PollutionRate();
     onGarbageOut?.Invoke(this);
     SpawnItem(item.vgrid);
-    if(isFeedingMode)
-      GameState.Feeding.Update(_items);  
+    CacheItems();
   }
   bool IsAnimalHit(TouchInputData tid)
   {
@@ -756,8 +755,7 @@ public class Level : MonoBehaviour
         _itemSelected.MoveToGrid();
         is_hit = true;
         _grid.hovers(false);
-        if(isFeedingMode)
-          GameState.Feeding.Update(_items);
+        CacheItems();
       }
     }
     return is_hit;
@@ -791,6 +789,15 @@ public class Level : MonoBehaviour
       chest.NoPush(_itemSelected.id);
     
     return is_hit;
+  }
+  void CacheItems()
+  {
+    if(isFeedingMode)
+      GameState.Feeding.CacheItems(_items);
+    else if(isCleanupMode)
+      GameState.Cleanup.CacheItems(_items, _items2);  
+    else //regular or polluted
+      GameState.Progress.Locations.CacheItems(locationIdx, _items, _items2);  
   }
   public void End()
   {
