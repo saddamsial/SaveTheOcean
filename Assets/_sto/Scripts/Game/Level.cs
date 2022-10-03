@@ -393,9 +393,9 @@ public class Level : MonoBehaviour
       }
       _items2.shuffle(_items2.Count * 5);      
     }
-    else //feeding
+    else if(isFeedingMode)//feeding
     {
-      for(int q = 0; q < GameState.Feeding.FoodCnt; ++q)
+      for(int q = 0; q < GameState.Feeding.foodCnt; ++q)
       {
         var food = GameState.Feeding.GetFood(q);
         var item = GameData.Prefabs.CreateItem(food.id, _itemsContainer);

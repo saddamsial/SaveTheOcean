@@ -25,7 +25,8 @@ public class GameState : SavableScriptableObject
   {
     [SerializeField] int _idx = 0;
     [SerializeField] Level.State _state = Level.State.Locked;
-    [SerializeField] int _visits = 0;
+    [SerializeField] int _visits = 0; //visited times
+    [SerializeField] int _passed = 0; //passed times
     [SerializeField] long _date = 0;
 
     public LocationState(int loc_idx, Level.State st) // = Level.State.Locked)
@@ -40,6 +41,8 @@ public class GameState : SavableScriptableObject
         _state = Level.State.Feeding;
       else if(loc_idx == Location.ClearLocation)
         _state = Level.State.Clearing;
+      else
+        _state = Level.State.Locked;
     }
     public int idx => _idx;
     public Level.State state { get => _state; set => _state = value;}
@@ -97,25 +100,29 @@ public class GameState : SavableScriptableObject
     }
     public void         PassLocation(int loc_idx)
     {
-      if(loc_idx < Location.SpecialLocBeg)
+      var loc = FindLocation(loc_idx);
+      if(loc == null)
       {
-        var loc = FindLocation(loc_idx);
-        if(loc == null)
-        {
-          loc = new LocationState(loc_idx, Level.State.Finished);
-          _locations.Add(loc);
-        }
-        else
-          loc.state = Level.State.Finished;
+        loc = new LocationState(loc_idx, Level.State.Finished);
+        _locations.Add(loc);
+      }
 
-        loc.date = CTime.get().ToBinary();
-        if(_locations.Count >= Earth.locationsCnt)
+      if(loc.idx == Location.FeedLocation)
+      {
+        //GameState.Feeding.levels++;
+      }
+      else if(loc.idx == Location.ClearLocation)
+        GameState.Cleanup.level++;
+      else
+        loc.state = Level.State.Finished;
+
+      loc.date = CTime.get().ToBinary();
+      if(_locations.Count >= Earth.locationsCnt)
+      {
+        if(_locationsPassedTime == 0)
         {
-          if(_locationsPassedTime == 0)
-          {
-            _locationsPassedTime = CTime.get().ToBinary();
-            GameState.Progress.Locations.onAllLocationFinished?.Invoke();
-          }
+          _locationsPassedTime = CTime.get().ToBinary();
+          GameState.Progress.Locations.onAllLocationFinished?.Invoke();
         }
       }
     }
@@ -144,7 +151,12 @@ public class GameState : SavableScriptableObject
           loc = _locationsSpec.last();
         }
       }
-      loc.visits++;
+      if(loc != null)
+        loc.visits++;
+      if(loc.idx == Location.FeedLocation)
+        GameState.Feeding.visits++;  
+      if(loc.idx == Location.ClearLocation)
+        GameState.Cleanup.visits++;
     }
     public int          GetLocationVisits(int loc_idx)
     {
@@ -233,8 +245,18 @@ public class GameState : SavableScriptableObject
       }
     }
     public List<Food> foods = new List<Food>();
+    public int visits = 0;
+    public int animalsLevelUps = 0;
   }
   [SerializeField] FeedingState feeding;
+
+  [System.Serializable]
+  class CleanupState
+  {
+    public int visits = 0;
+    public int level = 0;
+  }
+  [SerializeField] CleanupState cleanup;
 
   [System.Serializable]
   class EventsState
@@ -556,8 +578,14 @@ public class GameState : SavableScriptableObject
           get().feeding.foods.Add(new FeedingState.Food(items[q]));
       }
     }
-    public static int   FoodCnt => get().feeding.foods.Count;
+    public static int   foodCnt => get().feeding.foods.Count;
     public static (Item.ID id, Vector2 vgrid) GetFood(int idx) => new (get().feeding.foods[idx]._id, get().feeding.foods[idx]._vgrid);
+    public static int   visits {get => get().feeding.visits; set => get().feeding.visits = value;}
+  }
+  public static class Cleanup
+  {
+    public static int visits {get => get().cleanup.visits; set => get().cleanup.visits = value;}
+    public static int level  {get => get().cleanup.level; set => get().cleanup.level = value;}
   }
   public static class Animals
   {

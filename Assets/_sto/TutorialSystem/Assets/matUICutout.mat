@@ -138,5 +138,5 @@ Material:
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Vector2: {r: 0, g: -0.54, b: 0, a: 0}
     - _ViewPortPosition: {r: 0, g: 0, b: 0, a: 0}
-    - _ViewportPosition: {r: 0.5, g: 0.619895, b: 0, a: 0}
+    - _ViewportPosition: {r: 0.5, g: 0.6199077, b: 0, a: 0}
   m_BuildTextureStacks: []
