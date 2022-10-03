@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3745317107744565915}
-  - component: {fileID: 8994780526877938228}
+  - component: {fileID: 1439018624680882000}
   m_Layer: 0
   m_Name: tutorials
   m_TagString: Untagged
@@ -66,7 +66,7 @@ Transform:
   m_Father: {fileID: 2424569502049627348}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8994780526877938228
+--- !u!114 &1439018624680882000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 513692929150132796}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eaf18eeb349d624aad7d72462ceb33a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2311e5bb195b64a41b0f8b4e524e1122, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initialDelay: 2
@@ -412,6 +412,7 @@ MonoBehaviour:
   _gridSpace: 1.5
   _waterColor: {r: 0, g: 0.5647059, b: 1, a: 1}
   _inputRad: 1.5
+  _inputAnimRad: 2
   _chanceToDowngradeItem:
   - 0
   - 0

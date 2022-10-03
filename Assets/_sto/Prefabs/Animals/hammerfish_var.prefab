@@ -281,10 +281,6 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6324146311187289965, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7143939878425974827, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
       propertyPath: m_Controller
       value: 
@@ -297,6 +293,10 @@ PrefabInstance:
       propertyPath: _armature
       value: 
       objectReference: {fileID: 5710749982799269582}
+    - target: {fileID: 7550348234537763363, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: <DisplayName>k__BackingField
+      value: Hoom-E
+      objectReference: {fileID: 0}
     - target: {fileID: 8714682521566971472, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
       propertyPath: m_Name
       value: hammerfish_var

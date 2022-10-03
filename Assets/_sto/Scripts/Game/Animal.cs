@@ -6,6 +6,7 @@ using GameLib;
 
 public class Animal : MonoBehaviour
 {
+  [field: SerializeField] public string DisplayName { get; private set; } = ""; 
   [Header("Refs")]
   [SerializeField] Animator     _animator;
   [SerializeField] Transform    _garbageContainer;

@@ -18,8 +18,13 @@ namespace TutorialSystem
         public void SetSender(Transform transform) => tutorialSender = transform;
         TutorialPanel tutorialPanelInstance = null;
 
+        [SerializeField] float minViewTime = 1f;
+        float _tutorialDisplayTime = float.MaxValue;
+        bool _tutorialViewed => Time.time > _tutorialDisplayTime + minViewTime;
+
         protected void ActivateTutorialPanel(object sender) => ActivateTutorialPanel();
         protected void ActivateTutorialPanel(Transform sender = null) {
+            _tutorialDisplayTime = Time.time;
             tutorialPanelInstance?.ShowTutorial(sender??tutorialSender);
             if (completeOnInput)
                 TouchInputManager.onAnyInputStarted += MoveToNextStep;              
@@ -80,6 +85,7 @@ namespace TutorialSystem
         }
         protected void MoveToNextStep(object sender) => MoveToNextStep();
         public void MoveToNextStep(){
+            if (!_tutorialViewed) return;
             this.enabled = false;
             NextTutorial?.InitializeTutorial();
             if (NextTutorial == null) OnTutorialCompleted();

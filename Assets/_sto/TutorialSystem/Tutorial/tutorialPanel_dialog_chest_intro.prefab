@@ -153,10 +153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: 'Let''s see what''s inside!
+      value: 'OH! Look a Treasure Chest, let''s see what''s inside!
 
 
-        Merge more items to unlock it!'
+        Merge
+        more items to unlock it!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

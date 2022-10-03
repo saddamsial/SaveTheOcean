@@ -35,13 +35,29 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3254218348865933881, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478561753085588041, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_fontStyle
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478561753085588041, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 6594426750771199994, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: Nice!
+      value: Oh hello there!
       objectReference: {fileID: 0}
     - target: {fileID: 6747210803549513794, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_Name
-      value: tutorialPanel_dialog_gameplay_intro_feed
+      value: tutorialPanel_dialog_gameplay_intro_merge
+      objectReference: {fileID: 0}
+    - target: {fileID: 7505829846207902510, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -24
       objectReference: {fileID: 0}
     - target: {fileID: 8166349094586520168, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -153,7 +169,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: Great! Now pass the item to me and I'll take care of the rest!
+      value: 'Oh hello there! Will you help me get rid of this pile of garbege from
+        my habitat?
+
+
+        Let''s start by merging those two items together!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

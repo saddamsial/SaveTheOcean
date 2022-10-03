@@ -9,6 +9,7 @@ namespace TutorialSystem
     {
         protected override void OnEnabled() {
             InputOverlayTargets = GetActiveLevel().listItems.Take(2).Select(x => x.transform).ToList();
+
             Item.onMerged += MoveToNextStep;
             Item.onDropped += UpdateInputOverlay;
         }

@@ -1,1 +1,5 @@
-dialogWindow,0,832,192,192
+dialogArrow,256,944,64,80
+dialogWindow,0,768,256,256
+hintStorage,0,256,432,128
+hintFeed,0,128,432,128
+hintMerge,0,0,432,128

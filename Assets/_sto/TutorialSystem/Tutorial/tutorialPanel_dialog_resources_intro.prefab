@@ -153,8 +153,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: Resources will be extra helpful in our jurney, let's collect them right
-        away!
+      value: 'I see something!
+
+
+        Resources will be extra helpful in our jurney,
+        let''s collect them right away!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

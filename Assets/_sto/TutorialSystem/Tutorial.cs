@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using GameLib;
 
 namespace TutorialSystem
 {
@@ -10,25 +11,24 @@ namespace TutorialSystem
     {
         [SerializeField] float initialDelay = 2f;
         TutorialStep[] tutorialSequence = new TutorialStep[]{};
-        protected virtual bool IsTutorialCompleted()
-        {
-          var state = GameState.Progress.Locations.GetLocationState(GameState.Progress.locationIdx);
-          return  state > Level.State.Unlocked;
-        }
-        private void Awake() {
-
+        protected virtual bool IsTutorialCompleted() => false;
+        private void Awake(){
             if(IsTutorialCompleted())
+            {
               Destroy(this.gameObject);
-            else  
+            }
+            else
             {
               tutorialSequence = GetComponentsInChildren<TutorialStep>();
-              System.Array.ForEach(tutorialSequence, x => x.enabled = false);            
+              System.Array.ForEach(tutorialSequence, x => x.enabled = false);
             }
         }
-        IEnumerator Start() {
-            yield return new WaitForSeconds(initialDelay);
-            Debug.Log("Tutorial Started");
-            tutorialSequence.FirstOrDefault()?.InitializeTutorial();            
+        private void OnEnable(){
+          this.InvokeWithDelay(() => StartTutorial(), initialDelay);
+        }
+        public void StartTutorial(){
+          tutorialSequence.FirstOrDefault()?.InitializeTutorial();
+          Debug.Log("Tutorial Started");
         }
     }
 }

@@ -7,7 +7,7 @@ using GameLib.UI;
 
 namespace TutorialSystem
 {
-    [DefaultExecutionOrder(-10)]
+    [DefaultExecutionOrder(-50)]
     public class TutorialManger : MonoBehaviour
     {
         public static System.Action onTutorialStepCompleted;

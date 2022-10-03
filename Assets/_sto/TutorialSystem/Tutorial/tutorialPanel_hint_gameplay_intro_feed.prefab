@@ -33,7 +33,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3332938878928711811, guid: 72320370dfb478840aa231c167463e2d, type: 3}
       propertyPath: m_text
-      value: Drag to dispose
+      value: Drag or Double Tap
       objectReference: {fileID: 0}
     - target: {fileID: 4279521455864736434, guid: 72320370dfb478840aa231c167463e2d, type: 3}
       propertyPath: m_Pivot.x
@@ -146,14 +146,14 @@ PrefabInstance:
     - target: {fileID: 6802673252270277936, guid: 72320370dfb478840aa231c167463e2d, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8838926873807073263, guid: 09c41f2fc2d5a894ba45adda6e83d68f, type: 3}
+      objectReference: {fileID: -7832253477242601154, guid: 2cbf8de92ec67cc41b5a6456f66109b8, type: 3}
     - target: {fileID: 8222654179838923834, guid: 72320370dfb478840aa231c167463e2d, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8913998851240667468, guid: 72320370dfb478840aa231c167463e2d, type: 3}
       propertyPath: m_Name
-      value: tutorialPanel_hint_feed
+      value: tutorialPanel_hint_gameplay_intro_feed
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72320370dfb478840aa231c167463e2d, type: 3}

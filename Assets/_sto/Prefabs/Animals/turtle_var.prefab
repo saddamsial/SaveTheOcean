@@ -664,6 +664,10 @@ PrefabInstance:
       propertyPath: _armature
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7550348234537763363, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
+      propertyPath: <DisplayName>k__BackingField
+      value: Terr-Y
+      objectReference: {fileID: 0}
     - target: {fileID: 8714682521566971472, guid: a6ced6d1ce438154aa7377eb6a95d5c2, type: 3}
       propertyPath: m_Name
       value: turtle_var
