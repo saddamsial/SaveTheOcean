@@ -48,7 +48,7 @@ public class StorageBox : MonoBehaviour
   {
     UpdateInfo();
     _content.SetActive(true);
-    GetComponent<Collider>().enabled = false;
+    GetComponent<Collider>().enabled = true;
     GameState.StorageBox.shown = true;
     this.Invoke(() => { GetComponent<ActivatableObject>().ActivateObject(); onShow?.Invoke(this); }, delay);
   }
