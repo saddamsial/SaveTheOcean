@@ -304,94 +304,122 @@ public class Level : MonoBehaviour
 
     if(isRegular || isPolluted || isCleanupMode)
     {
-      Item.ID id = new Item.ID();
-      List<Item.ID> ids = new List<Item.ID>();
-      for(int q = 0; q < _lvlDescs.Length; ++q)
+      if(GameState.Progress.Locations.GetLocationVisits(locationIdx) <= 1)
       {
-        var lvlDesc = _lvlDescs[q];
-        _requestCnt += lvlDesc.itemsCats.Length;
-        for(int i = 0; i < lvlDesc.itemsCats.Length; ++i)
+        Item.ID id = new Item.ID();
+        List<Item.ID> ids = new List<Item.ID>();
+        for(int q = 0; q < _lvlDescs.Length; ++q)
         {
-          var item = _lvlDescs[q].items(i);
-          int itemLevel = item.id.lvl;
-          id.type = item.id.type;
-          id.kind = item.id.kind;
-          id.lvl = item.id.lvl;
-          int vi = (levels_idx.Count > 0)? levels_idx[Random.Range(0, levels_idx.Count-1)] : 0;
-          if(vi < itemLevel)
+          var lvlDesc = _lvlDescs[q];
+          _requestCnt += lvlDesc.itemsCats.Length;
+          for(int i = 0; i < lvlDesc.itemsCats.Length; ++i)
           {
-            for(int d = 0; d < 1 << (itemLevel-vi); ++d)
+            var item = _lvlDescs[q].items(i);
+            int itemLevel = item.id.lvl;
+            id.type = item.id.type;
+            id.kind = item.id.kind;
+            id.lvl = item.id.lvl;
+            int vi = (levels_idx.Count > 0)? levels_idx[Random.Range(0, levels_idx.Count-1)] : 0;
+            if(vi < itemLevel)
             {
-              id.lvl = vi;
+              for(int d = 0; d < 1 << (itemLevel-vi); ++d)
+              {
+                id.lvl = vi;
+                ids.Add(id);
+              }
+            }
+            else
+            {
               ids.Add(id);
             }
           }
+        }
+        ids.shuffle(ids.Count * 5);
+
+        List<Item.ID> specIds = new List<Item.ID>();
+        if(_resItemPerItems > 0)
+        {
+          int resItems = ids.Count / _resItemPerItems;
+          var extras = new (Item.Kind kind, float weight)[]
+          {
+            new (Item.Kind.Stamina, _resStaminaPart),
+            new (Item.Kind.Coin, _resCoinsPart),
+            new (Item.Kind.Gem, _resGemsPart),
+          };
+
+          for(int q = 0; q < extras.Length; ++q)
+          {
+            int cnt = Mathf.RoundToInt(resItems * extras[q].weight);
+            for(int i = 0; i < cnt ; ++i)
+            {
+              var spec_id = new Item.ID(0, 0, extras[q].kind).Validate();
+              specIds.Add(spec_id);
+            } 
+          }
+          specIds.shuffle(100);
+        }
+
+        for(int q = 0; q < ids.Count; ++q)
+        {
+          var item = GameData.Prefabs.CreateItem(ids[q], _itemsContainer);
+          if(vs.Count > 0)
+          {
+            item.Init(vs.first());
+            vs.RemoveAt(0);
+            item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
+            AddItem(item);
+          }
           else
           {
-            ids.Add(id);
+            item.Init(Vector2.zero);
+            _items2.Add(item);
+            item.gameObject.SetActive(false);
           }
         }
-      }
-      ids.shuffle(ids.Count * 5);
-
-      List<Item.ID> specIds = new List<Item.ID>();
-      if(_resItemPerItems > 0)
-      {
-        int resItems = ids.Count / _resItemPerItems;
-        var extras = new (Item.Kind kind, float weight)[]
+        for(int q = 0; q < specIds.Count; ++q)
         {
-          new (Item.Kind.Stamina, _resStaminaPart),
-          new (Item.Kind.Coin, _resCoinsPart),
-          new (Item.Kind.Gem, _resGemsPart),
-        };
-
-        for(int q = 0; q < extras.Length; ++q)
-        {
-          int cnt = Mathf.RoundToInt(resItems * extras[q].weight);
-          for(int i = 0; i < cnt ; ++i)
+          var item = GameData.Prefabs.CreateItem(specIds[q], _itemsContainer);
+          if(vs.Count > 0)
           {
-            var spec_id = new Item.ID(0, 0, extras[q].kind).Validate();
-            specIds.Add(spec_id);
-          } 
+            item.Init(vs.first());
+            vs.RemoveAt(0);
+            item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
+            AddItem(item);
+          }
+          else
+          {
+            item.Init(Vector2.zero);
+            _items2.Add(item);
+            item.gameObject.SetActive(false);
+          }
         }
-        specIds.shuffle(100);
+        _items2.shuffle(_items2.Count * 5);
       }
+      else
+      {
+        (GameState.ItemCache[] items, GameState.ItemCache[] items2) itemsAll = new (null, null);
+        if(isRegular || isPolluted)
+          itemsAll = GameState.Progress.Locations.GetItemsCache(locationIdx);
+        else if(isCleanupMode)
+          itemsAll = GameState.Cleanup.GetItemsCache();
 
-      for(int q = 0; q < ids.Count; ++q)
-      {
-        var item = GameData.Prefabs.CreateItem(ids[q], _itemsContainer);
-        if(vs.Count > 0)
+        for(int q = 0; q < itemsAll.items.Length; ++q)
         {
-          item.Init(vs.first());
-          vs.RemoveAt(0);
+          var cache = itemsAll.items[q];
+          var item = GameData.Prefabs.CreateItem(cache.id, _itemsContainer);
+          item.Init(cache.vgrid);
           item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
           AddItem(item);
         }
-        else
+        for(int q = 0; q < itemsAll.items2.Length; ++q)
         {
-          item.Init(Vector2.zero);
+          var cache = itemsAll.items2[q];
+          var item = GameData.Prefabs.CreateItem(cache.id, _itemsContainer);
+          item.Init(cache.vgrid);
           _items2.Add(item);
           item.gameObject.SetActive(false);
         }
       }
-      for(int q = 0; q < specIds.Count; ++q)
-      {
-        var item = GameData.Prefabs.CreateItem(specIds[q], _itemsContainer);
-        if(vs.Count > 0)
-        {
-          item.Init(vs.first());
-          vs.RemoveAt(0);
-          item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
-          AddItem(item);
-        }
-        else
-        {
-          item.Init(Vector2.zero);
-          _items2.Add(item);
-          item.gameObject.SetActive(false);
-        }
-      }
-      _items2.shuffle(_items2.Count * 5);      
     }
     else if(isFeedingMode)//feeding
     {
@@ -405,6 +433,7 @@ public class Level : MonoBehaviour
       }
     }
     _initialItemsCnt = itemsCount;
+    CacheItems();
   }
   //bool  firstPremium = false;
   void  AddItem(Item item)

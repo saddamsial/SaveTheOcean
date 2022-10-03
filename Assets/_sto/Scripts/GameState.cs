@@ -23,12 +23,12 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   public struct ItemCache
   {
-    public Item.ID _id;
-    public Vector2 _vgrid;
+    public Item.ID id;
+    public Vector2 vgrid;
     public ItemCache(Item item)
     {
-      _id = item.id;
-      _vgrid = item.vgrid;
+      id = item.id;
+      vgrid = item.vgrid;
     }
   }
 
@@ -207,7 +207,7 @@ public class GameState : SavableScriptableObject
       loc.items.Clear();
       listItems.ForEach((item) => loc.items.Add(new ItemCache(item)));
       loc.items2.Clear();
-      listItems.ForEach((item) => loc.items2.Add(new ItemCache(item)));
+      listItems2.ForEach((item) => loc.items2.Add(new ItemCache(item)));
     }
   }
   [SerializeField] ProgressState progress;
@@ -604,7 +604,7 @@ public class GameState : SavableScriptableObject
       }
     }
     public static int   foodCnt => get().feeding.foods.Count;
-    public static (Item.ID id, Vector2 vgrid) GetFood(int idx) => new (get().feeding.foods[idx]._id, get().feeding.foods[idx]._vgrid);
+    public static (Item.ID id, Vector2 vgrid) GetFood(int idx) => new (get().feeding.foods[idx].id, get().feeding.foods[idx].vgrid);
     public static int   visits {get => get().feeding.visits; set => get().feeding.visits = value;}
   }
   public static class Cleanup
@@ -616,10 +616,11 @@ public class GameState : SavableScriptableObject
       get().cleanup.items2.Clear();
       items2.ForEach((item) => get().cleanup.items2.Add(new ItemCache(item)));
     }
-    public static int items => get().cleanup.items.Count;
-    public static int items2 => get().cleanup.items.Count;
+    static List<ItemCache> items => get().cleanup.items;
+    static List<ItemCache> items2 => get().cleanup.items2;
     public static int visits {get => get().cleanup.visits; set => get().cleanup.visits = value;}
     public static int level  {get => get().cleanup.level; set => get().cleanup.level = value;}
+    public static (ItemCache[] items, ItemCache[] items2) GetItemsCache() => new (items.ToArray(), items2.ToArray());
   }
   public static class Animals
   {
