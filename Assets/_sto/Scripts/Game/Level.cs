@@ -242,6 +242,7 @@ public class Level : MonoBehaviour
   {
     yield return null;
     yield return null; //do not remove!
+    yield return null; //do not remove!
     Init();
     yield return null;
 
@@ -331,6 +332,9 @@ public class Level : MonoBehaviour
           }
         }
       }
+      ids.shuffle(ids.Count * 5);
+
+      List<Item.ID> specIds = new List<Item.ID>();
       if(_resItemPerItems > 0)
       {
         int resItems = ids.Count / _resItemPerItems;
@@ -347,11 +351,11 @@ public class Level : MonoBehaviour
           for(int i = 0; i < cnt ; ++i)
           {
             var spec_id = new Item.ID(0, 0, extras[q].kind).Validate();
-            ids.Add(spec_id);
+            specIds.Add(spec_id);
           } 
         }
+        specIds.shuffle(100);
       }
-      ids.shuffle(500);
 
       for(int q = 0; q < ids.Count; ++q)
       {
@@ -370,7 +374,24 @@ public class Level : MonoBehaviour
           item.gameObject.SetActive(false);
         }
       }
-
+      for(int q = 0; q < specIds.Count; ++q)
+      {
+        var item = GameData.Prefabs.CreateItem(specIds[q], _itemsContainer);
+        if(vs.Count > 0)
+        {
+          item.Init(vs.first());
+          vs.RemoveAt(0);
+          item.Spawn(item.vgrid, null, 15, Random.Range(0.5f, 1.5f));
+          AddItem(item);
+        }
+        else
+        {
+          item.Init(Vector2.zero);
+          _items2.Add(item);
+          item.gameObject.SetActive(false);
+        }
+      }
+      _items2.shuffle(_items2.Count * 5);      
     }
     else //feeding
     {
@@ -391,11 +412,6 @@ public class Level : MonoBehaviour
     _items.Add(item);
     _grid.set(item.vgrid, 1, item.id.kind);
     GameState.Progress.Items.ItemAppears(item.id);
-    // if(!GameState.Events.Tutorials.premiumDone && !firstPremium && item.id.IsSpecial)
-    // {
-    //   firstPremium = true;
-    //   this.Invoke(()=>onPremiumItem?.Invoke(item), 2.5f);
-    // }
   }
   void  SpawnItem(Vector2 vgrid)
   {
