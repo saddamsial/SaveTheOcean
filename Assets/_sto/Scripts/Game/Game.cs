@@ -106,8 +106,10 @@ public class Game : MonoBehaviour
   }
   public void RestartLevel()
   {
+    // if(_level)
+    //   _level.End();
     if(_level)
-      _level.End();
+      GameState.Progress.Locations.ClearCache(_level.locationIdx);
     onLevelRestart?.Invoke(_level);
     CreateLevel();
   }
@@ -127,7 +129,7 @@ public class Game : MonoBehaviour
   {
     if(_level)
     {
-      _level.End();
+      //_level.End();
       Destroy(_level.gameObject);
     }
     _level = null;

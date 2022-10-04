@@ -29,16 +29,19 @@ public class Animal : MonoBehaviour
     Octopus,
   }
 
-  List<Item.ID>    _garbages = new List<Item.ID>();
+  List<Item.ID>    _garbagesIds = new List<Item.ID>(); //initial garbages
+  List<Item.ID>    _garbages = new List<Item.ID>(); //garbages left
   List<Item>       _garbagesCleared = new List<Item>();
 
   public Type          type => _type;
   public int           baseLevelUp => _baseLevelUp;
-  public List<Item>    garbages {get; private set;} = new List<Item>();
+  public List<Item>    garbagesView {get; private set;} = new List<Item>();
   public bool          isActive  {get; private set;} = false;
   public bool          isReady  {get; private set;} = false;
-  public int           requests => garbages.Count;
-  public Vector3       garbagePos => _garbageContainer.transform.position;
+  public int           requests => garbagesView.Count;
+  public List<Item.ID> garbages => _garbages;
+  public List<Item.ID> garbagesIds => _garbagesIds;
+  //public Vector3       garbagePos => _garbageContainer.transform.position;
 
   static public int layer = 0;
   static public int layerMask = 0;
@@ -56,13 +59,13 @@ public class Animal : MonoBehaviour
     yield return _animator.WaitForAnimState("_active");
     isReady = true;
     if(!feedingMode)
-      _garbageInfo.Show(garbages);
+      _garbageInfo.Show(garbagesView);
     else
       _feedingInfo.Show(this);  
   }
   public void Init(GameData.GarbCats[] garbCats)
   {
-    _garbages = new List<Item.ID>();
+    _garbagesIds = new List<Item.ID>();
     feedingMode = Level.mode == Level.Mode.Feeding;
 
     if(!feedingMode)
@@ -70,18 +73,30 @@ public class Animal : MonoBehaviour
       foreach(var gcat in garbCats)
       {
         var item = GameData.Prefabs.GetGarbagePrefab(gcat);
-        _garbages.Add(item.id);
+        _garbagesIds.Add(item.id);
       }
-      foreach(var id in _garbages)
+      _garbages.AddRange(_garbagesIds);
+      foreach(var id in _garbagesIds)
       {
-        garbages.Add(GameData.Prefabs.CreateStaticItem(id, _garbageInfo.itemContainer));
+        garbagesView.Add(GameData.Prefabs.CreateStaticItem(id, _garbageInfo.itemContainer));
       }
-    }
-    else
-    {
-      
     }
   }
+  public void Init(List<Item.ID> ids)
+  {
+    _garbagesIds = new List<Item.ID>();
+    feedingMode = Level.mode == Level.Mode.Feeding;
+    if(!feedingMode)
+    {
+      _garbagesIds.AddRange(ids);
+      foreach(var id in _garbagesIds)
+      {
+        garbagesView.Add(GameData.Prefabs.CreateStaticItem(id, _garbageInfo.itemContainer));
+      }
+      _garbages.AddRange(_garbagesIds);
+    }
+  }
+
   public void Activate(bool show_info)
   { 
     isActive = true;
@@ -98,6 +113,13 @@ public class Animal : MonoBehaviour
     _animator.SetTrigger("deactivate");
     GetComponent<Collider>().enabled = false;
     _animator.InvokeForAnimStateEnd("_deactivate", ()=> gameObject.SetActive(false));
+  }
+  public void SetInactive()
+  {
+    isReady = false;
+    isActive = false;
+    GetComponent<Collider>().enabled = false;
+    gameObject.SetActive(false);
   }
   public void AnimLvl()
   {
@@ -132,7 +154,7 @@ public class Animal : MonoBehaviour
     }
     return ret;
   }
-  public Item GetReq(Item item) => garbages.Find((garbage) => Item.EqType(item, garbage));
+  public Item GetReq(Item item) => garbagesView.Find((garbage) => Item.EqType(item, garbage));
   public bool IsReq(Item item) => (!feedingMode)? GetReq(item) != null : item.id.kind == Item.Kind.Food;
   public void Feed(Item item)
   {
@@ -151,12 +173,13 @@ public class Animal : MonoBehaviour
   {
     //if(isReady)
     {
-      Item it = garbages.Find((garbage) => Item.EqType(garbage, item));
+      Item it = garbagesView.Find((garbage) => Item.EqType(garbage, item));
       if(it)
       {
         _garbageInfo.Remove(it.id);
         _garbagesCleared.Add(it);
-        garbages.Remove(it);
+        _garbages.Remove(it.id);
+        garbagesView.Remove(it);
         item.gameObject.SetActive(false);
         GameObject model = null;
         if(isReady)
@@ -167,7 +190,7 @@ public class Animal : MonoBehaviour
           model.SetActive(true);
         }
 
-        if(garbages.Count > 0)
+        if(_garbages.Count > 0)
         {
           if(isReady)
           {

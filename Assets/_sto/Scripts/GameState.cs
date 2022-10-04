@@ -31,6 +31,30 @@ public class GameState : SavableScriptableObject
       vgrid = item.vgrid;
     }
   }
+  [System.Serializable]
+  public struct RequestCache
+  {
+    public List<Item.ID> ids;
+    public RequestCache(List<Item.ID> itemIds)
+    {
+      ids = new List<Item.ID>();
+      ids.AddRange(itemIds);
+    }
+  }
+  [System.Serializable]
+  public class LocationCache
+  {
+    public List<ItemCache>    items = new List<ItemCache>();
+    public List<ItemCache>    items2 = new List<ItemCache>();
+    public List<RequestCache> requests = new List<RequestCache>();
+
+    public void Clear()
+    {
+      items.Clear();
+      items2.Clear();
+      requests.Clear();
+    }
+  }
 
   [System.Serializable]
   class LocationState
@@ -40,8 +64,7 @@ public class GameState : SavableScriptableObject
     [SerializeField] int _visits = 0; //visited times
     [SerializeField] int _passed = 0; //passed times
     [SerializeField] long _date = 0;
-    [SerializeField] List<ItemCache> _items = new List<ItemCache>();
-    [SerializeField] List<ItemCache> _items2 = new List<ItemCache>();
+    [SerializeField] LocationCache _cache = new LocationCache();
 
     public LocationState(int loc_idx, Level.State st) // = Level.State.Locked)
     {
@@ -62,18 +85,17 @@ public class GameState : SavableScriptableObject
     public Level.State state { get => _state; set => _state = value;}
     public int  visits {get => _visits; set => _visits = value;}
     public long date {get => _date; set => _date = value;}
-    public List<ItemCache> items => _items;
-    public List<ItemCache> items2 => _items2;
+    public LocationCache cache => _cache;
   }
 
   [System.Serializable]
   class ProgressState
   {
-    [SerializeField] int _location = 0;
+    [SerializeField] int                 _location = 0;
     [SerializeField] List<LocationState> _locations;
     [SerializeField] List<LocationState> _locationsSpec;
-    [SerializeField] long _locationsPassedTime = 0;
-    [SerializeField] List<Item.ID>    _itemAppears = new List<Item.ID>();
+    [SerializeField] long                _locationsPassedTime = 0;
+    [SerializeField] List<Item.ID>       _itemAppears = new List<Item.ID>();
 
     public static Action onAllLocationFinished;
 
@@ -196,19 +218,36 @@ public class GameState : SavableScriptableObject
     }
     public bool         DidItemAppear(Item.ID id) => _itemAppears.Any((iid) => Item.ID.Eq(iid, id));
 
-    public (ItemCache[] items, ItemCache[] items2) GetItemsCache(int loc_idx)
+    public bool         IsLocCache(int loc_idx)
     {
       var loc = FindLocation(loc_idx);
-      return new (loc.items.ToArray(), loc.items2.ToArray());
+      if(loc != null)
+        return loc.cache.items.Count > 0 || loc.cache.items2.Count > 0 || loc.cache.requests.Count > 0;
+      else
+        return false;
     }
-    public void         CacheItems(int loc_idx, List<Item> listItems, List<Item> listItems2)
+    public LocationCache GetLocCache(int loc_idx)
     {
       var loc = FindLocation(loc_idx);
-      loc.items.Clear();
-      listItems.ForEach((item) => loc.items.Add(new ItemCache(item)));
-      loc.items2.Clear();
-      listItems2.ForEach((item) => loc.items2.Add(new ItemCache(item)));
+      return loc?.cache;
     }
+    public void         CacheLoc(Level lvl)
+    {
+      var loc_idx = lvl.locationIdx;
+      var listItems = lvl.listItems;
+      var listItems2 = lvl.listItems2;
+      var loc = FindLocation(loc_idx);
+      loc.cache.items.Clear();
+      listItems.ForEach((item) => loc.cache.items.Add(new ItemCache(item)));
+      loc.cache.items2.Clear();
+      listItems2.ForEach((item) => loc.cache.items2.Add(new ItemCache(item)));
+      loc.cache.requests.Clear();
+      for(int q = 0; q < lvl.animals.Count; ++q)
+      {
+        loc.cache.requests.Add(new RequestCache(lvl.animals[q].garbages));
+      }
+    }
+    public void         ClearLocCache(int loc_idx) => FindLocation(loc_idx)?.cache.Clear();
   }
   [SerializeField] ProgressState progress;
 
@@ -264,7 +303,6 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class FeedingState
   {
-    public List<ItemCache> foods = new List<ItemCache>();
     public int visits = 0;
     public int animalsLevelUps = 0;
   }
@@ -273,8 +311,6 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class CleanupState
   {
-    public List<ItemCache> items = new List<ItemCache>();
-    public List<ItemCache> items2 = new List<ItemCache>();
     public int visits = 0;
     public int level = 0;
   }
@@ -390,8 +426,10 @@ public class GameState : SavableScriptableObject
         return finishedCnt / Earth.locationsCnt;
       }
 
-      public static (ItemCache[] items, ItemCache[] items2) GetItemsCache(int loc_idx) => get().progress.GetItemsCache(loc_idx);
-      public static void CacheItems(int loc_idx, List<Item> items, List<Item> items2) => get().progress.CacheItems(loc_idx, items, items2);
+      public static void ClearCache(int loc_idx) => get().progress.ClearLocCache(loc_idx);
+      public static LocationCache GetCache(int loc_idx) => get().progress.GetLocCache(loc_idx);
+      public static void Cache(Level lvl) => get().progress.CacheLoc(lvl);
+      public static bool IsCache(int loc_idx) => get().progress.IsLocCache(loc_idx);
 
       static int _timer = 0;
       static DateTime prevTime;
@@ -594,33 +632,15 @@ public class GameState : SavableScriptableObject
   }
   public static class Feeding
   {
-    public static void CacheItems(List<Item> items)
-    {
-      get().feeding.foods.Clear();
-      for(int q = 0; q < items.Count; ++q)
-      {
-        if(items[q].id.kind == Item.Kind.Food)
-          get().feeding.foods.Add(new ItemCache(items[q]));
-      }
-    }
-    public static int   foodCnt => get().feeding.foods.Count;
-    public static (Item.ID id, Vector2 vgrid) GetFood(int idx) => new (get().feeding.foods[idx].id, get().feeding.foods[idx].vgrid);
+    public static void Cache(Level lvl) => GameState.Progress.Locations.Cache(lvl);
+    public static LocationCache GetCache() => get().progress.GetLocCache(Location.FeedLocation);
     public static int   visits {get => get().feeding.visits; set => get().feeding.visits = value;}
   }
   public static class Cleanup
   {
-    public static void CacheItems(List<Item> items, List<Item> items2)
-    {
-      get().cleanup.items.Clear();
-      items.ForEach((item) => get().cleanup.items.Add(new ItemCache(item)));
-      get().cleanup.items2.Clear();
-      items2.ForEach((item) => get().cleanup.items2.Add(new ItemCache(item)));
-    }
-    static List<ItemCache> items => get().cleanup.items;
-    static List<ItemCache> items2 => get().cleanup.items2;
-    public static int visits {get => get().cleanup.visits; set => get().cleanup.visits = value;}
-    public static int level  {get => get().cleanup.level; set => get().cleanup.level = value;}
-    public static (ItemCache[] items, ItemCache[] items2) GetItemsCache() => new (items.ToArray(), items2.ToArray());
+    public static void Cache(Level lvl) => GameState.Progress.Locations.Cache(lvl);
+    public static int  visits {get => get().cleanup.visits; set => get().cleanup.visits = value;}
+    public static int  level  {get => get().cleanup.level; set => get().cleanup.level = value;}
   }
   public static class Animals
   {

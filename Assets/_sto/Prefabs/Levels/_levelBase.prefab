@@ -412,7 +412,7 @@ MonoBehaviour:
   _gridSpace: 1.5
   _waterColor: {r: 0, g: 0.5647059, b: 1, a: 1}
   _inputRad: 1.5
-  _inputAnimRad: 2
+  _inputAnimRad: 1.75
   _chanceToDowngradeItem:
   - 0
   - 0
@@ -425,7 +425,6 @@ MonoBehaviour:
   _resCoinsPart: 0.6
   _resStaminaPart: 0.3
   _lvlDescs: []
-  isFeedingMode: 0
   hoverItemMatch: 0
 --- !u!114 &8331011632689336855
 MonoBehaviour:

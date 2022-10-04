@@ -105,6 +105,7 @@ public class UIIngame : MonoBehaviour
   }
   public void OnBtnQuit()
   {
+    _lvl?.Quit();
     Hide();
     FindObjectOfType<Game>().ShowEarth(false);
   }
