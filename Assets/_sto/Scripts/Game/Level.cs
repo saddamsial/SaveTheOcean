@@ -883,7 +883,8 @@ public class Level : MonoBehaviour
     if(!isFeedingMode)
     {
       GameState.Progress.Locations.SetLocationFinished();
-      GameState.Progress.Locations.UnlockNextLocation();
+      if(!isCleanupMode)
+        GameState.Progress.Locations.UnlockNextLocation();
     }
     yield return new WaitForSeconds(0.5f);
     GameState.Progress.Locations.ClearCache(locationIdx);
