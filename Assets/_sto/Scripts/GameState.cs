@@ -220,6 +220,8 @@ public class GameState : SavableScriptableObject
 
     public bool         IsLocCache(int loc_idx)
     {
+      if(loc_idx == Location.FeedLocation)
+        return true;
       var loc = FindLocation(loc_idx);
       if(loc != null)
         return loc.cache.items.Count > 0 || loc.cache.items2.Count > 0 || loc.cache.requests.Count > 0;

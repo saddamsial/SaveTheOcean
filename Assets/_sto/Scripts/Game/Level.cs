@@ -433,17 +433,21 @@ public class Level : MonoBehaviour
   void RestoreAnimals()
   {
     var cache = GameState.Progress.Locations.GetCache(locationIdx);
-    for(int q = 0; q < _lvlDescs.Length; ++q)
+    if(!isFeedingMode)
     {
-      Animal animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
-      animal.Init(cache.requests[q].ids);
-      if(cache.requests[q].ids.Count > 0)
-        animal.Activate(true);
-      else
-        animal.SetInactive();
-
-      _animals.Add(animal);
+      for(int q = 0; q < _lvlDescs.Length; ++q)
+      {
+        Animal animal = Instantiate(_lvlDescs[q].animal, _animalContainers[q]);
+        animal.Init(cache.requests[q].ids);
+        if(cache.requests[q].ids.Count > 0)
+          animal.Activate(true);
+        else
+          animal.SetInactive();
+        _animals.Add(animal);
+      }
     }
+    else
+      InitAnimals();
   }
   //bool  firstPremium = false;
   void  AddItem(Item item)
