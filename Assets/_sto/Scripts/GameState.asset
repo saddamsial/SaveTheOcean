@@ -16,18 +16,54 @@ MonoBehaviour:
   dataPath: Data
   version: 0
   progress:
-    _location: -1
-    _locations: []
+    _location: 2
+    _locations:
+    - _idx: 0
+      _state: 3
+      _visits: 1
+      _passed: 0
+      _date: -8585366310415328456
+      _cache:
+        items: []
+        items2: []
+        requests: []
+    - _idx: 1
+      _state: 3
+      _visits: 1
+      _passed: 0
+      _date: -8585366310235094961
+      _cache:
+        items: []
+        items2: []
+        requests: []
+    - _idx: 2
+      _state: 1
+      _visits: 0
+      _passed: 0
+      _date: 0
+      _cache:
+        items: []
+        items2: []
+        requests: []
     _locationsSpec: []
     _locationsPassedTime: 0
-    _itemAppears: []
+    _itemAppears:
+    - _type: 0
+      _lvl: 0
+      _kind: 1
+    - _type: 0
+      _lvl: 1
+      _kind: 1
+    - _type: 1
+      _lvl: 0
+      _kind: 1
   economy:
-    stamina: 45
+    stamina: 5
     coins: 25
     gems: 25
     rewardPoints: 0
     rewardLevel: 0
-    lastStamina: 0
+    lastStamina: -8585366310619931479
   chest:
     shown: 0
     listStamina: []
@@ -39,19 +75,17 @@ MonoBehaviour:
   splitMachine:
     _capacity: 1
   feeding:
-    foods: []
-    visits: 0
     animalsLevelUps: 0
   cleanup:
-    visits: 0
     level: 0
   events:
     tutIntroDone: 0
     tutPremiumDone: 0
     tutFeedingDone: 0
     popupAllLocFinished: 0
+    popupNoStamina: 1
   gameInfo:
-    appQuitTime: 0
+    appQuitTime: -8585366309572658132
   animals:
     animals:
     - type: 1

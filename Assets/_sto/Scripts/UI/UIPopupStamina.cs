@@ -9,18 +9,56 @@ public class UIPopupStamina : MonoBehaviour
   [SerializeField] Transform _content;
   [SerializeField] TMPLbl    _lblReward;
 
+  bool _showAd = false;
+  void Awake()
+  {
+    UnityAdsRewarded.onCompleted += OnRewardedComplete;
+  }
+  void OnDestroy()
+  {
+    UnityAdsRewarded.onCompleted -= OnRewardedComplete;
+  }
   public void Show()
   {
-    _lblReward.text = "+" + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
+    _showAd = UnityAdsRewarded.IsReady();
+    if(GameState.Events.Popups.noStaminaShown == 0)
+    {
+      _lblReward.text = "Free " + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
+      _showAd = false;
+    }
+    else
+    {
+      if(_showAd)
+        _lblReward.text = "+" + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
+      else
+        _lblReward.text = @"no ad :\";  
+
+      #if UNITY_EDITOR
+        _lblReward.text = $"UDBG! + {UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward)}";
+      #endif  
+    }
+    
     GetComponent<UIPanel>()?.ActivatePanel();
   }
   public void Hide()
   {
     GetComponent<UIPanel>()?.DeactivatePanel();
   }
-  public void OnBtnClick()
+  void OnRewardedComplete(string adId)
   {
     GameState.Econo.stamina += GameData.Econo.staminaAdReward;
+    GameState.Events.Popups.noStaminaShown++;
+  }
+  public void OnBtnClick()
+  {
+    //GameState.Econo.stamina += GameData.Econo.staminaAdReward;
+    if(GameState.Events.Popups.noStaminaShown == 0)
+      OnRewardedComplete("");
+    else
+    {  
+      if(_showAd)
+        UnityAdsRewarded.Show();
+    }
     Hide();
   }
 }

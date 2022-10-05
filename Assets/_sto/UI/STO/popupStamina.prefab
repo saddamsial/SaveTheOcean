@@ -301,6 +301,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7895521975112452319}
     m_Modifications:
+    - target: {fileID: 2189917887827081817, guid: c3dbd9ba8f7192647b4fdef6f06412a0, type: 3}
+      propertyPath: m_MinWidth
+      value: 480
+      objectReference: {fileID: 0}
+    - target: {fileID: 2189917887827081817, guid: c3dbd9ba8f7192647b4fdef6f06412a0, type: 3}
+      propertyPath: m_PreferredWidth
+      value: 480
+      objectReference: {fileID: 0}
     - target: {fileID: 3725032724697821220, guid: c3dbd9ba8f7192647b4fdef6f06412a0, type: 3}
       propertyPath: m_text
       value: +15<sprite name="icoStamina">
@@ -371,7 +379,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6112233120455012589, guid: c3dbd9ba8f7192647b4fdef6f06412a0, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 384
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 6112233120455012589, guid: c3dbd9ba8f7192647b4fdef6f06412a0, type: 3}
       propertyPath: m_SizeDelta.y

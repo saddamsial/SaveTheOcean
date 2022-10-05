@@ -319,6 +319,7 @@ public class GameState : SavableScriptableObject
     public bool  tutPremiumDone = false;
     public bool  tutFeedingDone = false;
     public bool  popupAllLocFinished = false;
+    public int   popupNoStamina = 0;
   }
   [SerializeField] EventsState events;
 
@@ -668,6 +669,7 @@ public class GameState : SavableScriptableObject
     public static class Popups
     {
       public static bool allLevelsFinished {get => get().events.popupAllLocFinished; set => get().events.popupAllLocFinished = value;}
+      public static int  noStaminaShown {get => get().events.popupNoStamina; set => get().events.popupNoStamina = value;}
     }
   }
   public static class GameInfo
