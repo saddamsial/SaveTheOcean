@@ -56,6 +56,9 @@ public class UIPopupStamina : MonoBehaviour
       OnRewardedComplete("");
     else
     {  
+    #if UNITY_EDITOR
+      OnRewardedComplete("");
+    #endif
       if(_showAd)
         UnityAdsRewarded.Show();
     }

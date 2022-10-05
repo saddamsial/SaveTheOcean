@@ -68,6 +68,16 @@ public class Level : MonoBehaviour
     [SerializeField] Animal _animal;
     [SerializeField] GarbCats[] _itemsCats;
 
+    public void IncCats(int incBy)
+    {
+      for(int i = 0; i <_itemsCats.Length ; i++)
+      {
+        var id = GameData.Prefabs.GetGarbagePrefab(_itemsCats[i]).id;
+        id.lvl = Mathf.Clamp(id.lvl + incBy, 0, id.LevelsCnt-1);
+        _itemsCats[i] = (GarbCats)(id.type * 10 + id.lvl);
+      }
+    }
+
     public int GetSolutionMoveCount() {
       var solution = 0;
       for (int i = 0; i <_itemsCats.Length ; i++)
@@ -82,7 +92,7 @@ public class Level : MonoBehaviour
 
   public int       GetNumberOfMovesToSolve(){
     var solution = 0;
-    foreach (var animal in  _lvlDescs){
+    foreach (var animal in _lvlDescs){
         solution += animal.GetSolutionMoveCount();
     }
     return solution;
@@ -302,6 +312,9 @@ public class Level : MonoBehaviour
       List<Item.ID> ids = new List<Item.ID>();
       for(int q = 0; q < _lvlDescs.Length; ++q)
       {
+        if(isCleanupMode)
+          _lvlDescs[q].IncCats(GameState.Cleanup.level);
+
         var lvlDesc = _lvlDescs[q];
         _requestCnt += lvlDesc.itemsCats.Length;
         for(int i = 0; i < lvlDesc.itemsCats.Length; ++i)

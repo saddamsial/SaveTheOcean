@@ -62,7 +62,7 @@ public class GameState : SavableScriptableObject
     [SerializeField] int _idx = 0;
     [SerializeField] Level.State _state = Level.State.Locked;
     [SerializeField] int _visits = 0; //visited times
-    [SerializeField] int _passed = 0; //passed times
+    [SerializeField] int _passes = 0; //passed times
     [SerializeField] long _date = 0;
     [SerializeField] LocationCache _cache = new LocationCache();
 
@@ -84,6 +84,7 @@ public class GameState : SavableScriptableObject
     public int idx => _idx;
     public Level.State state { get => _state; set => _state = value;}
     public int  visits {get => _visits; set => _visits = value;}
+    public int  passes {get => _passes; set => _passes = value;}
     public long date {get => _date; set => _date = value;}
     public LocationCache cache => _cache;
   }
@@ -145,7 +146,7 @@ public class GameState : SavableScriptableObject
         loc = new LocationState(loc_idx, Level.State.Finished);
         _locations.Add(loc);
       }
-
+      loc.passes++;
       if(loc.idx == Location.FeedLocation)
       {
         //GameState.Feeding.levels++;

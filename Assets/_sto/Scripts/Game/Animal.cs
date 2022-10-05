@@ -72,7 +72,8 @@ public class Animal : MonoBehaviour
     {
       foreach(var gcat in garbCats)
       {
-        var item = GameData.Prefabs.GetGarbagePrefab(gcat);
+        var gcatup = gcat;
+        var item = GameData.Prefabs.GetGarbagePrefab(gcatup);
         _garbagesIds.Add(item.id);
       }
       _garbages.AddRange(_garbagesIds);
