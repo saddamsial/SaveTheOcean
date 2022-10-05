@@ -34,7 +34,7 @@ public class Earth : MonoBehaviour
 
   public static System.Action<Earth> onShow;
   public static System.Action        onHide;
-  public static System.Action<int>   onLevelStart, onLevelSelected;
+  public static System.Action<int>   onLevelStart, onLevelSelected, onLocationFocused;
   public static System.Action        onAllLocationFinished;
 
   public static int locationsCnt { get; private set; }
@@ -49,7 +49,8 @@ public class Earth : MonoBehaviour
   Location       _clearupLocation;
   Location       _miscLocation;
   bool           _showAllLocationTut = false;
-
+  bool           _showFeedingLoc = false;
+  bool           _showClearingLoc = false;
 
   public int      selectedLocation => _selectedLocation;
   public Location location(int idx) => idx switch 
@@ -130,11 +131,16 @@ public class Earth : MonoBehaviour
     _fx.gameObject.SetActive(true);
     _extras.gameObject.SetActive(true);
 
-    _feedLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
     _locationsPath.SetActive(!GameState.Progress.Locations.AllStateFinished());
 
     UpdateLevelsStates();
-    int location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;
+    int location_idx = indexLocation;
+    if(_showFeedingLoc)
+      location_idx = Location.FeedLocation;
+    else if(_showClearingLoc)
+      location_idx = Location.ClearLocation;
+    else
+      location_idx = (show_next)? GetNextLocation(indexLocation) : indexLocation;
     this.Invoke(()=> 
     {
       SelectLocation(location_idx); 
@@ -220,8 +226,11 @@ public class Earth : MonoBehaviour
     for(int q = 0; q < _locations.Length; ++q)
       _locations[q].state = GameState.Progress.Locations.GetLocationState(q);
     
-    _feedLocation.state = Level.State.Feeding; //GameState.Progress.Locations.GetLocationState(_feedLocation.idx);
+    _feedLocation.state = Level.State.Feeding;
     _clearupLocation.state = Level.State.Clearing;
+
+    _showFeedingLoc = GameState.Progress.Locations.GetFinishedCnt() == GameData.Levels.GetFeedingAvailLoc();
+    _showClearingLoc = GameState.Progress.Locations.GetFinishedCnt() == GameData.Levels.GetClearingAvailLoc();
 
     _feedLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetFeedingAvailLoc());
     _clearupLocation.gameObject.SetActive(GameState.Progress.Locations.GetFinishedCnt() >= GameData.Levels.GetClearingAvailLoc());
@@ -259,7 +268,10 @@ public class Earth : MonoBehaviour
       var rotDest = location(_selectedLocation).localDstRoto;
       _fx.transform.localRotation = Quaternion.Slerp(_fx.transform.localRotation, rotDest, _rotateToLocationSpeed * Time.deltaTime);
       if(Mathf.Abs(Quaternion.Angle(_fx.transform.localRotation, rotDest)) < 0.01f)
+      {
         _move2location = false;
+        onLocationFocused?.Invoke(_selectedLocation);
+      }
     }
   }
   void RotateFree()

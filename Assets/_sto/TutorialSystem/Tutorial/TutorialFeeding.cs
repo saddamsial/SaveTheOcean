@@ -5,5 +5,5 @@ using TutorialSystem;
 
 public class TutorialFeeding : Tutorial
 {
-    protected override bool IsTutorialCompleted() => false;     //change to feeding visited count > 0
+  protected override bool IsTutorialCompleted() => GameState.Feeding.visits > 0;
 }

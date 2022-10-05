@@ -66,11 +66,20 @@ public class UIEarth : MonoBehaviour
     _lblLevelInfo.text = "LEVEL " + (location + 1);
     var state = GameState.Progress.Locations.GetLocationState(location);
     if(state == Level.State.Feeding)
+    {
       _btnActionInfo.text = "Feed";
+      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaFeedCost);
+    }
     else if(state == Level.State.Clearing)
-      _btnActionInfo.text = "Clearing";  
+    {
+      _btnActionInfo.text = "Clearing";
+      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaClearCost);
+    }
     else
+    {
       _btnActionInfo.text = "Play";
+      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaCost);
+    }
   }
 
   bool IsMode(int loc_idx, Level.Mode mode)
@@ -98,7 +107,7 @@ public class UIEarth : MonoBehaviour
       {
         if(GameState.Econo.CanSpendStamina(modes[q].cost))
         {
-          GameState.Econo.stamina -= GameData.Econo.staminaCost;
+          GameState.Econo.stamina -= modes[q].cost;
           onBtnPlay?.Invoke(modes[q].mode);
         }
         else

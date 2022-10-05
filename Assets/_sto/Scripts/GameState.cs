@@ -192,10 +192,6 @@ public class GameState : SavableScriptableObject
       }
       if(loc != null)
         loc.visits++;
-      if(loc.idx == Location.FeedLocation)
-        GameState.Feeding.visits++;  
-      if(loc.idx == Location.ClearLocation)
-        GameState.Cleanup.visits++;
     }
     public int          GetLocationVisits(int loc_idx)
     {
@@ -305,7 +301,6 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class FeedingState
   {
-    public int visits = 0;
     public int animalsLevelUps = 0;
   }
   [SerializeField] FeedingState feeding;
@@ -313,7 +308,6 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class CleanupState
   {
-    public int visits = 0;
     public int level = 0;
   }
   [SerializeField] CleanupState cleanup;
@@ -636,12 +630,12 @@ public class GameState : SavableScriptableObject
   {
     public static void Cache(Level lvl) => GameState.Progress.Locations.Cache(lvl);
     public static LocationCache GetCache() => get().progress.GetLocCache(Location.FeedLocation);
-    public static int   visits {get => get().feeding.visits; set => get().feeding.visits = value;}
+    public static int visits => GameState.Progress.Locations.GetLocationVisits(Location.FeedLocation);
   }
   public static class Cleanup
   {
     public static void Cache(Level lvl) => GameState.Progress.Locations.Cache(lvl);
-    public static int  visits {get => get().cleanup.visits; set => get().cleanup.visits = value;}
+    public static int  visits => GameState.Progress.Locations.GetLocationVisits(Location.ClearLocation);
     public static int  level  {get => get().cleanup.level; set => get().cleanup.level = value;}
   }
   public static class Animals
