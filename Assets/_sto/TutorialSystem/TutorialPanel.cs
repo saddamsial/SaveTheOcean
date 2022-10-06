@@ -30,7 +30,6 @@ namespace TutorialSystem
 
             var viewportPosition = UIManager.GetViewportPosition(sender.position);
 
-            rectTransform.ContainWithin(GetComponentInParent<RectTransform>(), Camera.main, screenMargin);
 
             if (sender != null){
                 PlaceInViewport(viewportPosition);
@@ -40,6 +39,7 @@ namespace TutorialSystem
                     focusFade?.material.SetVector("_ViewportPosition", viewportPosition);
                 }
             }
+            rectTransform.ContainWithin(GetComponentInParent<RectTransform>(), Camera.main, screenMargin);
 
             var senderAnimal = sender?.GetComponentInChildren<Animal>();
             if (sender != null && nameLabel != null)

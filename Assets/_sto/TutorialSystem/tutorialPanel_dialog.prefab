@@ -426,8 +426,8 @@ GameObject:
   - component: {fileID: 5468516708170585125}
   - component: {fileID: 1834968540694945959}
   - component: {fileID: 88678677808781879}
-  - component: {fileID: 1582032376219270530}
-  - component: {fileID: 1329847367593452552}
+  - component: {fileID: 7449400836402146657}
+  - component: {fileID: 6386393435107736420}
   m_Layer: 5
   m_Name: blocker
   m_TagString: Untagged
@@ -493,7 +493,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!225 &1582032376219270530
+--- !u!225 &7449400836402146657
 CanvasGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -505,7 +505,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &1329847367593452552
+--- !u!114 &6386393435107736420
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -518,7 +518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <rectTransform>k__BackingField: {fileID: 5468516708170585125}
-  <canvasGroup>k__BackingField: {fileID: 1582032376219270530}
+  <canvasGroup>k__BackingField: {fileID: 7449400836402146657}
   registerAnimator: 1
   initialDelay: 0
   activateAnimationPreset: {fileID: 11400000, guid: fcc6c277b48cee24bae1a3fc77687365, type: 2}
@@ -748,7 +748,7 @@ RectTransform:
   m_GameObject: {fileID: 6691344561150958235}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2570981072860930815}
@@ -757,7 +757,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -64, y: -32}
-  m_SizeDelta: {x: 128, y: 128}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0.6, y: 0.25}
 --- !u!222 &6598537521907273409
 CanvasRenderer:
@@ -842,11 +842,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <rectTransform>k__BackingField: {fileID: 5468516708170585125}
-  <canvasGroup>k__BackingField: {fileID: 1582032376219270530}
+  <canvasGroup>k__BackingField: {fileID: 5806329370935001209}
   registerAnimator: 1
   initialDelay: 0
-  activateAnimationPreset: {fileID: 11400000, guid: fcc6c277b48cee24bae1a3fc77687365, type: 2}
-  deactivateAnimationPreset: {fileID: 11400000, guid: 6f026fdf47cc1054db36b8213e2ce2a1, type: 2}
+  activateAnimationPreset: {fileID: 11400000, guid: 77505c0c0726874419b8ca0010be36e6, type: 2}
+  deactivateAnimationPreset: {fileID: 11400000, guid: a528e4653df7b3d41bf6afa9d49d2a41, type: 2}
 --- !u!114 &1527136800188635549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -955,6 +955,7 @@ MonoBehaviour:
   tutorialContainer: {fileID: 2570981072860930815}
   focusFade: {fileID: 88678677808781879}
   nameLabel: {fileID: 3478561753085588041}
+  screenMargin: 64
 --- !u!1 &7146790041854743016
 GameObject:
   m_ObjectHideFlags: 0
