@@ -444,7 +444,8 @@ MonoBehaviour:
   activateOnAwake: 0
   activateOnTop: 0
   activationDelay: 0
+  inputBlocker: {fileID: 0}
   tutorialContainer: {fileID: 8222654179838923834}
-  headerLabel: {fileID: 3332938878928711811}
-  bodyLabel: {fileID: 0}
-  mainIcon: {fileID: 6802673252270277936}
+  focusFade: {fileID: 0}
+  nameLabel: {fileID: 0}
+  fitMargin: 32

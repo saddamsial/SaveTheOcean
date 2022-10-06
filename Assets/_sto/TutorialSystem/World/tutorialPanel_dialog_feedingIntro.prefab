@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: nameLabel
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7505829846207902510, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 7672507756468798793, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -169,10 +173,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: 'New Game Mode unlocked!
+      value: 'Feeding Mode unlocked!
 
 
-        Visit this level to feed you friends
+        Visit this area to feed your friends
         and upgrade their abilities!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []

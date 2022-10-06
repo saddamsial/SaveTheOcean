@@ -18,7 +18,9 @@ namespace TutorialSystem
 
         [SerializeField] TextMeshProUGUI nameLabel = null;
         public void SetSenderName(string name) => nameLabel.text = name;
+        [SerializeField] float screenMargin = 64f;
 
+        Vector2 dialogRectSize = Vector2.zero;
 
         public void ShowTutorial(Transform sender = null){
             transform.SetParent(TutorialManger.Instance.transform);
@@ -27,6 +29,8 @@ namespace TutorialSystem
             rectTransform.localScale = Vector3.one;
 
             var viewportPosition = UIManager.GetViewportPosition(sender.position);
+
+            rectTransform.ContainWithin(GetComponentInParent<RectTransform>(), Camera.main, screenMargin);
 
             if (sender != null){
                 PlaceInViewport(viewportPosition);

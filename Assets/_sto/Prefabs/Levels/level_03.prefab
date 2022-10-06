@@ -48,6 +48,7 @@ MonoBehaviour:
   completeOnInput: 1
   tutorialPanelPrefab: {fileID: 2462225775060664802, guid: 65366b09ed7bc524a88eb003d4dd49c3, type: 3}
   tutorialSender: {fileID: 3127148435573647222}
+  minViewTime: 1
   InputOverlayTargets: []
   _rewardChest: {fileID: 847466618467890274}
 --- !u!1 &3201448503419943228
@@ -80,7 +81,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7987869438681835766}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5766578135838725076
 MonoBehaviour:
@@ -94,10 +95,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6633f916fcf7f4a4abd463d60940e011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  autoActivateTutorialPanel: 0
+  autoActivateTutorialPanel: 1
   completeOnInput: 1
   tutorialPanelPrefab: {fileID: 2462225775060664802, guid: f5007965d4fac2d4c91b5c3e017ddb8b, type: 3}
   tutorialSender: {fileID: 3127148435573647222}
+  minViewTime: 1
+  InputOverlayTargets: []
+--- !u!1 &6546302163018403019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8317156766763130071}
+  - component: {fileID: 627888986480168470}
+  m_Layer: 0
+  m_Name: chestUnlockHint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8317156766763130071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546302163018403019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 7987869438681835766}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &627888986480168470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546302163018403019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a58917941f6a704391260ca55e15d05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoActivateTutorialPanel: 1
+  completeOnInput: 0
+  tutorialPanelPrefab: {fileID: 80184091881380796, guid: ad98aa93aef865a418136ebb4173fcf8, type: 3}
+  tutorialSender: {fileID: 322523778237032055}
+  minViewTime: 1
   InputOverlayTargets: []
 --- !u!1 &7627859857375334417
 GameObject:
@@ -129,7 +181,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7987869438681835766}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8259463414428197902
 MonoBehaviour:
@@ -147,6 +199,7 @@ MonoBehaviour:
   completeOnInput: 0
   tutorialPanelPrefab: {fileID: 0}
   tutorialSender: {fileID: 0}
+  minViewTime: 1
   InputOverlayTargets:
   - {fileID: 8040060938242806650}
 --- !u!1001 &6710529463363994221
@@ -510,6 +563,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+--- !u!4 &322523778237032055 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6438251173982364698, guid: af94dd176a807204382d3b034b767ac9, type: 3}
+  m_PrefabInstance: {fileID: 6710529463363994221}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &847466618467890274 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6260663843842504207, guid: af94dd176a807204382d3b034b767ac9, type: 3}

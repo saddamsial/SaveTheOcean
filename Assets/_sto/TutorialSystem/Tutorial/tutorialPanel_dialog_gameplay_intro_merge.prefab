@@ -169,7 +169,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8855155889036911656, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_text
-      value: 'Oh hello there! Will you help me get rid of this pile of garbege from
+      value: 'Oh hello there! Will you help me get rid of this pile of garbage from
         my habitat?
 
 

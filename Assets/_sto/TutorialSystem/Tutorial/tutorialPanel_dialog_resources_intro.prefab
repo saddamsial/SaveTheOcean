@@ -156,8 +156,8 @@ PrefabInstance:
       value: 'I see something!
 
 
-        Resources will be extra helpful in our jurney,
-        let''s collect them right away!'
+        Resources will be extra helpful in our journey,
+        lets collect them right away!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

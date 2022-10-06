@@ -157,7 +157,7 @@ PrefabInstance:
 
 
         You
-        can always return to this level to continue from where you left!'
+        can always return to this level to continue from where you left off!'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}

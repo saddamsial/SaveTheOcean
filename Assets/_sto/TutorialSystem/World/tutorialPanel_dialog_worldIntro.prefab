@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: nameLabel
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7505829846207902510, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 7672507756468798793, guid: aacd1c249efaaad459eae8210d5af3e1, type: 3}
       propertyPath: m_IsActive
       value: 0

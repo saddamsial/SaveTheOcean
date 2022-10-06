@@ -185,7 +185,7 @@ MonoBehaviour:
       stamina: 1
       coins: 22
       gems: 1
-  _feedingAvailLoc: 3
+  _feedingAvailLoc: 6
   _clearingAvailLoc: 20
   themeColors:
   - {r: 0.78, g: 0.7532353, b: 0.7532353, a: 1}
