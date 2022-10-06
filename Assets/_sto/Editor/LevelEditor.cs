@@ -16,6 +16,7 @@ public class LevelEditor : Editor {
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
         GUILayout.Label("Dev Info");
+        GUILayout.Label("Solvable: " + level.IsSolvable() + " / max level items do not apply"); 
         int moves = level.GetNumberOfMovesToSolve();
         GUILayout.Label("Moves: " + moves); 
         GUILayout.Label("Rewards: " + (level._resItemPerItems == 0 ? "-" : Mathf.RoundToInt(moves/level._resItemPerItems))); 

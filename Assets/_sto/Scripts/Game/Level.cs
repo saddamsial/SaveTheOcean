@@ -43,6 +43,13 @@ public class Level : MonoBehaviour
   [SerializeField] float      _resStaminaPart = 0.5f;
   [SerializeField] LvlDesc[]  _lvlDescs;
 
+  public bool IsSolvable(){
+    var allItems = new List<GarbCats>();
+    foreach(var x in _lvlDescs)
+      allItems.AddRange(x.itemsCats);
+    return allItems.Count == allItems.Distinct().Count();
+  }
+
   public enum Mode
   {
     Standard,
