@@ -104,12 +104,12 @@ MonoBehaviour:
   _levelFeeding: {fileID: 2229698086017596401, guid: 0f8f314baaff79f4aa4d3cf15bcda573, type: 3}
   _levelClearing: {fileID: 2229698086017596401, guid: 8974ce46b8281204fac9988f26433c68, type: 3}
   _staminaMax: 50
-  _staminaPlayCost: 10
-  _staminaFeedCost: 15
+  _staminaPlayCost: 5
+  _staminaFeedCost: 10
   _staminaClearCost: 10
   _staminaAdReward: 25
   _staminaRefillTime: 900
-  _coinFeedCost: 2
+  _coinFeedCost: 1
   _coinsMax: 999
   _gemsMax: 999
   _resouceItemsAmountFactor: 2
@@ -123,7 +123,7 @@ MonoBehaviour:
   - name: Sushi
     foodChance: 0.2
     kcal: 4
-  _animalLevelFactor: 1.25
+  _animalLevelFactor: 2
   _rewards:
   - points2Chest: 0
     _reward:
