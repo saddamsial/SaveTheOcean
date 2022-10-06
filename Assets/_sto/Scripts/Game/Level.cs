@@ -48,6 +48,7 @@ public class Level : MonoBehaviour
     Standard,
     Clearing,
     Feeding,
+    Polluted,
   };
   static public Mode mode {get; set;} = Mode.Standard;
 
@@ -117,6 +118,17 @@ public class Level : MonoBehaviour
   public bool isPolluted => GameState.Progress.Locations.GetLocationState(locationIdx) == Level.State.Polluted;
   public bool isFeedingMode => locationIdx == Location.FeedLocation;
   public bool isCleanupMode => locationIdx == Location.ClearLocation;
+  public Mode GetMode()
+  {
+    if(isFeedingMode)
+      return Mode.Feeding;
+    else if(isCleanupMode)
+      return Mode.Clearing;
+    else if(isPolluted)
+      return Mode.Polluted;
+    else
+      return Mode.Standard;  
+  }
   public int  visitsCnt => GameState.Progress.Locations.GetLocationVisits(locationIdx);
 
   UISummary    _uiSummary = null;
