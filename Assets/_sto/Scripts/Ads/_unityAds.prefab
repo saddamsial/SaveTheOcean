@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f365d486915ebf40903217adae7aa4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _androidGameId: androidId
-  _iOSGameId: iosid
+  _androidGameId: 4959224
+  _iOSGameId: 4959225
   _testMode: 1
 --- !u!114 &3021026639340354809
 MonoBehaviour:
@@ -60,5 +60,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29a62cc29a84be44acb20e716495651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _androidAdUnitId: Interstitial_Android
-  _iOsAdUnitId: Interstitial_iOS
+  _androidAdUnitId: Rewarded_Android
+  _iOsAdUnitId: Rewarded_iOS

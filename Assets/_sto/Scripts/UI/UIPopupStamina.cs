@@ -32,10 +32,6 @@ public class UIPopupStamina : MonoBehaviour
         _lblReward.text = "+" + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
       else
         _lblReward.text = @"no ad :\";  
-
-      #if UNITY_EDITOR
-        _lblReward.text = $"UDBG! + {UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward)}";
-      #endif  
     }
     
     GetComponent<UIPanel>()?.ActivatePanel();
@@ -56,9 +52,6 @@ public class UIPopupStamina : MonoBehaviour
       OnRewardedComplete("");
     else
     {  
-    #if UNITY_EDITOR
-      OnRewardedComplete("");
-    #endif
       if(_showAd)
         UnityAdsRewarded.Show();
     }

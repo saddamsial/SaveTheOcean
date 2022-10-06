@@ -3,16 +3,19 @@ using UnityEngine.Advertisements;
  
 public class UnityAdsRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
-	[SerializeField] string _androidAdUnitId = "Interstitial_Android";
-	[SerializeField] string _iOsAdUnitId = "Interstitial_iOS";
+	[SerializeField] string _androidAdUnitId = "Rewarded_Android";
+	[SerializeField] string _iOsAdUnitId = "Rewarded_iOS";
 	string _adUnitId;
+  bool   _adReady = false;
+
 
 	static UnityAdsRewarded _this = null;
 	
 	public static System.Action<string> onCompleted;
 
+  public static bool IsReady() => _this._adReady;
 	public static void Show() => Advertisement.Show(_this?._adUnitId ?? "", _this);
-	public static bool IsReady() => Advertisement.IsReady();
+
 	void Awake()
 	{
 		_this = this;
@@ -48,6 +51,7 @@ public class UnityAdsRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
 	public void OnUnityAdsAdLoaded(string adUnitId)
 	{
 		// Optionally execute code if the Ad Unit successfully loads content.
+    _adReady = true;
 	}
 
 	public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
