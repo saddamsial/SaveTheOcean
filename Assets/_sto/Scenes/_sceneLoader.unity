@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37089851, g: 0.3783701, b: 0.3572253, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f4b56c5100b8c5429296c2e4bf1cbde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeAnalyticsEnvironment: 0
+  activeAnalyticsEnvironment: 1
 --- !u!1 &66226963
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,9 +555,9 @@ MonoBehaviour:
   id: 1753816211
   <SmallIconID>k__BackingField: icon_0
   <LargeIconID>k__BackingField: 
-  <Title>k__BackingField: Hello!
+  <Title>k__BackingField: Oh no! An area got polluted!
   <NotificationText>k__BackingField:
-  - It's time to play!
+  - See what happened and help your Animal fiends to clean the Ocen!
   repeatInterval: 24
   showTime: 12
 --- !u!114 &679447188
@@ -576,11 +576,11 @@ MonoBehaviour:
   id: 1473013918
   <SmallIconID>k__BackingField: icon_0
   <LargeIconID>k__BackingField: 
-  <Title>k__BackingField: Hello!
+  <Title>k__BackingField: Oh no! An Environmental Crisis!
   <NotificationText>k__BackingField:
-  - It's time to play!
+  - Come back and help your Animal friends clean up the Oceans!
   repeatInterval: 24
-  showTime: 16
+  showTime: 17
 --- !u!114 &679447189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,11 +597,11 @@ MonoBehaviour:
   id: 1428843512
   <SmallIconID>k__BackingField: icon_0
   <LargeIconID>k__BackingField: 
-  <Title>k__BackingField: Hello!
+  <Title>k__BackingField: The Oceans need your help!
   <NotificationText>k__BackingField:
-  - It's time to play!
+  - Your Animal friends need your help to Clean up the Oceans!
   repeatInterval: 24
-  showTime: 20
+  showTime: 21
 --- !u!1 &932860206
 GameObject:
   m_ObjectHideFlags: 0

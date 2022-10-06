@@ -40,7 +40,8 @@ public class AnalyticsManager : MonoBehaviour
     void LogEvent(ByteBrewProgressionTypes progressionType, Level sender){
         ByteBrew.NewProgressionEvent(progressionType, GetEventEnvironmentName(activeAnalyticsEnvironment, sender), GetLevelID(sender));
         
-        if (activeAnalyticsEnvironment == AnalyticsEnvironment.Production) return;
+        // if (activeAnalyticsEnvironment == AnalyticsEnvironment.Production) return;
+        
         Debug.Log(
             "<color=cyan> Analytics Event " + _div +
             GetEventEnvironmentName(activeAnalyticsEnvironment, sender) + _div +
@@ -53,27 +54,18 @@ public class AnalyticsManager : MonoBehaviour
     #region formatters
 
         const string _div = " | ";
-        string GetProgressionTypeName(ByteBrewProgressionTypes progressionType) => progressionType switch {
-            ByteBrewProgressionTypes.Started => "Level Started",
-            ByteBrewProgressionTypes.Completed => "Level Completed",
-            ByteBrewProgressionTypes.Failed => "Level Restarted",
-            _=>""       
-            };
+        string GetProgressionTypeName(ByteBrewProgressionTypes progressionType) => progressionType.ToString();
         string GetEventEnvironmentName(AnalyticsEnvironment environment, Level level = null){
             if (environment == AnalyticsEnvironment.Test) return "TestEnvironment";
 
-
-            //level.isRegular; //regular level
-            //level.isPolluted //level polluted in late stage
-            //level.isFeedingMode //feeding level
-            //level.isCleanupMode //cleanup level
-            //level.visitsCnt //level visited times
-              
-
-            return level.isFeedingMode ? "FeedingPhase" : "CleanupPhase";
+            return level.GetMode().ToString();
         }
 
-        string GetLevelID(Level level) => "Level_" + level.locationIdx.ToString("0000");
+        string GetLevelID(Level level) => level.GetMode() switch{
+            Level.Mode.Feeding => level.visitsCnt.ToString("000"),
+            Level.Mode.Clearing => level.visitsCnt.ToString("000"),
+            _ => level.locationIdx.ToString("0000")
+        };
 
     #endregion
 }
