@@ -84,7 +84,7 @@ public class UIEarth : MonoBehaviour
 
   bool IsMode(int loc_idx, Level.Mode mode)
   {
-    if(mode == Level.Mode.Standard)
+    if(mode == Level.Mode.Standard || mode == Level.Mode.Polluted)
       return loc_idx < Location.SpecialLocBeg;
     if(mode == Level.Mode.Feeding)  
       return loc_idx == Location.FeedLocation;
