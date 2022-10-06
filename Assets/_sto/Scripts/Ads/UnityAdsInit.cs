@@ -5,14 +5,12 @@ public class UnityAdsInit : MonoBehaviour, IUnityAdsInitializationListener
 {
 	[SerializeField] string _androidGameId;
 	[SerializeField] string _iOSGameId;
-	[SerializeField] bool 	_testMode = true;
 	private string 					_gameId;
 
 	public static System.Action onInitialized;
 
 	void Awake()
 	{
-		_testMode = Debug.isDebugBuild;
 		InitializeAds();
 	}
 
@@ -20,11 +18,12 @@ public class UnityAdsInit : MonoBehaviour, IUnityAdsInitializationListener
 	{
 	#if UNITY_ANDROID
 		_gameId = _androidGameId;
-	#elif UNITY_IOS
+#elif UNITY_IOS
 		_gameId = _iOSGameId
-	#endif
+#endif
 
-		Advertisement.Initialize(_gameId, _testMode, this);
+    //Advertisement.Initialize(_gameId, Debug.isDebugBuild, this);
+		Advertisement.Initialize(_gameId, false, this);
 	}
 
 	public void OnInitializationComplete()
