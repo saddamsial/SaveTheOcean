@@ -63,7 +63,7 @@ public class UnityAdsRewarded : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsS
 	public void OnUnityAdsFailedToLoad(string adUnitId, UnityAdsLoadError error, string message)
 	{
 		Debug.Log($"Error loading Ad Unit: {adUnitId} - {error.ToString()} - {message}");
-		// Optionally execute code if the Ad Unit fails to load, such as attempting to try again.
+    // Optionally execute code if the Ad Unit fails to load, such as attempting to try again.
     LoadAd();
 	}
 
