@@ -814,6 +814,7 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     UNet: 1
+    Unity Ads: 1
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -827,11 +828,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: 8cdcdf0e-f02f-48fb-88b8-19312102644e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: Save the Ocean UnityAds
+  organizationId: nawia-games
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
