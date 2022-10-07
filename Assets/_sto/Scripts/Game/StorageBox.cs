@@ -36,7 +36,7 @@ public class StorageBox : MonoBehaviour
 
     _content.SetActive(false);
     GetComponent<Collider>().enabled = false;
-    if(GameState.StorageBox.ShouldShow())
+    if(GameState.StorageBox.shown)
       Show(1);
   }
   void OnDestroy()

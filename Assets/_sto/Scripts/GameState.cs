@@ -627,7 +627,6 @@ public class GameState : SavableScriptableObject
     }
     public static int  itemsCnt => get().storage.listItems.Count;
     public static bool shown {get => get().storage.shown; set => get().storage.shown = value;}
-    public static bool ShouldShow() => shown;
   }
   public static class Feeding
   {
