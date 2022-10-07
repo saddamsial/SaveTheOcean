@@ -26,16 +26,22 @@ public class AnalyticsManager : MonoBehaviour
         Level.onStart += LogLevelStartData;
         Level.onFinished += LogLevelSummarySuccess;
         Game.onLevelRestart += LogLevelSummaryFail;
+        //Animal.onFeed += LogAnimalFeed;
+        Animal.onLevelUp += LogAnimalLevelUp;
     }
     private void OnDisable() {
         Level.onStart -= LogLevelStartData;
         Level.onFinished -= LogLevelSummarySuccess;
         Game.onLevelRestart -= LogLevelSummaryFail;
+        //Animal.onFeed -= LogAnimalFeed;
+        Animal.onLevelUp -= LogAnimalLevelUp;
     }
 
     void LogLevelStartData(Level sender) => LogEvent(ByteBrewProgressionTypes.Started, sender);
     void LogLevelSummarySuccess(Level sender) => LogEvent(ByteBrewProgressionTypes.Completed, sender);
     void LogLevelSummaryFail(Level sender) => LogEvent(ByteBrewProgressionTypes.Failed, sender);
+    //void LogAnimalFeed(Animal sender) => ByteBrew.NewCustomEvent("AnimaFed", sender.type.ToString());
+    void LogAnimalLevelUp(Animal sender) => ByteBrew.NewCustomEvent("AnimalLevelUp", sender.type.ToString());
 
     void LogEvent(ByteBrewProgressionTypes progressionType, Level sender){
         ByteBrew.NewProgressionEvent(progressionType, GetEventEnvironmentName(activeAnalyticsEnvironment, sender), GetLevelID(sender));
