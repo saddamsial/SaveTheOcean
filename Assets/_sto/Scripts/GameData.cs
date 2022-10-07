@@ -117,6 +117,7 @@ public class GameData : ScriptableObject
   [SerializeField] float      _staminaRefillTime = 60.0f;
   [SerializeField] int        _coinFeedCost = 1;
   [SerializeField] int        _coinsMax = 999;
+  [SerializeField] int        _gemsStaminaRefillCost = 10;
   [SerializeField] int        _gemsMax = 999;
   [SerializeField] float      _resouceItemsAmountFactor = 1.5f;
   [SerializeField] FoodDesc[] _foodsDesc = null;
@@ -226,14 +227,15 @@ public class GameData : ScriptableObject
   }  
   public static class Econo
   {
-    public static int   staminaCost => get()._staminaPlayCost;
-    public static int   staminaFeedCost => get()._staminaFeedCost;
-    public static int   staminaClearCost => get()._staminaClearCost;
+    public static int   staminaPlayCost => get()._staminaPlayCost;
+    public static int   staminaPlayFeedCost => get()._staminaFeedCost;
+    public static int   staminaPlayClearCost => get()._staminaClearCost;
     public static int   staminaAdReward => get()._staminaAdReward;
     public static float staminaRefillTime => get()._staminaRefillTime;
     public static int   staminaMax => get()._staminaMax;
     public static int   coinsMax => get()._coinsMax;
     public static int   coinFeedCost => get()._coinFeedCost;
+    public static int   staminaRefillGemsCost => get()._gemsStaminaRefillCost;
     public static int   gemsMax => get()._gemsMax;
     public static FoodDesc[] foodsDesc => get()._foodsDesc;
     public static float animalLevelFactor => get()._animalLevelFactor;

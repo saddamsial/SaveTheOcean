@@ -316,10 +316,11 @@ public class GameState : SavableScriptableObject
   [System.Serializable]
   class EventsState
   {
-    public bool  tutIntroDone = false;
-    public bool  tutPremiumDone = false;
-    public bool  tutFeedingDone = false;
-    public bool  popupAllLocFinished = false;
+    //public bool  tutIntroDone = false;
+    //public bool  tutPremiumDone = false;
+    //public bool  tutFeedingDone = false;
+    //public bool  popupAllLocFinished = false;
+    public bool  tutStorageBoxDone = false;
     public int   popupNoStamina = 0;
   }
   [SerializeField] EventsState events;
@@ -662,15 +663,10 @@ public class GameState : SavableScriptableObject
   {
     public static class Tutorials
     {
-      public static bool introDone {get => get().events.tutIntroDone; set => get().events.tutIntroDone = value;}
-      public static bool premiumDone { get => get().events.tutPremiumDone; set => get().events.tutPremiumDone = value; }
-      public static bool feedDone { get => get().events.tutFeedingDone; set => get().events.tutFeedingDone = value; }
-      // public static bool chestDone { get => get().tutorials.chestDone; set => get().tutorials.chestDone = value; }
-      // public static bool storageDone { get => get().tutorials.storageDone; set => get().tutorials.storageDone = value; }
+      public static bool storgeBoxDone { get => get().events.tutStorageBoxDone; set => get().events.tutStorageBoxDone = value;}
     }
     public static class Popups
     {
-      public static bool allLevelsFinished {get => get().events.popupAllLocFinished; set => get().events.popupAllLocFinished = value;}
       public static int  noStaminaShown {get => get().events.popupNoStamina; set => get().events.popupNoStamina = value;}
     }
   }

@@ -867,19 +867,18 @@ public class Level : MonoBehaviour
     
     return is_hit;
   }
+  bool IsTutorial<T>() where T : TutorialSystem.TutorialStep
+  {
+    return GetComponentInChildren<T>(true) != null;
+  }
   void CacheLoc()
   {
     GameState.Progress.Locations.Cache(this);  
   }
-  // private void End()
-  // {
-  //   Item[] itms = _items.FindAll((Item item) => item.id.IsSpecial).ToArray();
-  //   foreach(var itm in itms)
-  //   {
-  //     _storageBox.Push(itm.id);
-  //     DestroyItem(itm);
-  //   }
-  // }
+  void CacheClear()
+  {
+    GameState.Progress.Locations.ClearCache(locationIdx);
+  }
   public void Quit()
   {
     CacheLoc();

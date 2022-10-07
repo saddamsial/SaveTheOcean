@@ -21,6 +21,7 @@ namespace TutorialSystem
         void OnShowPremiumItem(Item sender){
             if(sender.id.IsSpecial && !_shown) // NextTutorial == null)
             {
+              GameState.StorageBox.shown = true;
               _shown = true;
               Debug.Log("Premium Item visible!");
               //this.enabled = true;

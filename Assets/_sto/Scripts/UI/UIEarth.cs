@@ -34,7 +34,7 @@ public class UIEarth : MonoBehaviour
     _slider.maxValue = 1;
     _slider.value = _cleanDst;
 
-    _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaCost);
+    _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaPlayCost);
   }
   void OnDestroy()
   {
@@ -68,17 +68,17 @@ public class UIEarth : MonoBehaviour
     if(state == Level.State.Feeding)
     {
       _btnActionInfo.text = "Feed";
-      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaFeedCost);
+      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaPlayFeedCost);
     }
     else if(state == Level.State.Clearing)
     {
       _btnActionInfo.text = "Clearing";
-      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaClearCost);
+      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaPlayClearCost);
     }
     else
     {
       _btnActionInfo.text = "Play";
-      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaCost);
+      _btnStaminaInfo.text = UIDefaults.GetStaminaString(GameData.Econo.staminaPlayCost);
     }
   }
 
@@ -97,9 +97,9 @@ public class UIEarth : MonoBehaviour
   {
     (int cost, Level.Mode mode)[] modes = 
     {
-      new (GameData.Econo.staminaCost, Level.Mode.Standard),
-      new (GameData.Econo.staminaFeedCost, Level.Mode.Feeding),
-      new (GameData.Econo.staminaClearCost, Level.Mode.Clearing),
+      new (GameData.Econo.staminaPlayCost, Level.Mode.Standard),
+      new (GameData.Econo.staminaPlayFeedCost, Level.Mode.Feeding),
+      new (GameData.Econo.staminaPlayClearCost, Level.Mode.Clearing),
     };
     for(int q = 0; q < modes.Length; ++q)
     {

@@ -6,8 +6,14 @@ using GameLib.UI;
 
 public class UIPopupStamina : MonoBehaviour
 {
-  [SerializeField] Transform _content;
-  [SerializeField] TMPLbl    _lblReward;
+  [SerializeField] Transform  _content;
+  [SerializeField] TMPLbl     _lblFreeReward;
+  [SerializeField] TMPLbl     _lblAdReward;
+  [SerializeField] TMPLbl     _lblGemsReward;
+  [SerializeField] UIPanel    _freeStaminaPanel;
+  [SerializeField] UIPanel    _adStaminaPanel;
+  [SerializeField] UIPanel    _gemsStaminaPanel;
+  [SerializeField] TMPLbl     _lblGemsCost;
 
   bool _showAd = false;
   void Awake()
@@ -20,41 +26,52 @@ public class UIPopupStamina : MonoBehaviour
   }
   public void Show()
   {
-    _showAd = UnityAdsRewarded.IsReady();
+    GetComponent<UIPanel>()?.ActivatePanel();
     if(GameState.Events.Popups.noStaminaShown == 0)
     {
-      _lblReward.text = "Free " + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
-      _showAd = false;
+      _lblFreeReward.text = "+" + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
+      _freeStaminaPanel.ActivatePanel();
+    }
+    else if(UnityAdsRewarded.IsReady())
+    {
+      _lblAdReward.text = "+" + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
+      _adStaminaPanel.ActivatePanel();
     }
     else
     {
-      if(_showAd)
-        _lblReward.text = "+" + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
-      else
-        _lblReward.text = @"no ad :\";  
+      _lblGemsReward.text = "+" + UIDefaults.GetStaminaString(GameData.Econo.staminaAdReward);
+      _lblGemsCost.text = UIDefaults.GetGemsString(GameData.Econo.staminaRefillGemsCost);
+      _gemsStaminaPanel.ActivatePanel();
     }
-    
-    GetComponent<UIPanel>()?.ActivatePanel();
   }
   public void Hide()
   {
     GetComponent<UIPanel>()?.DeactivatePanel();
   }
+
   void OnRewardedComplete(string adId)
+  {
+    AddStamina();
+  }
+  void AddStamina()
   {
     GameState.Econo.stamina += GameData.Econo.staminaAdReward;
     GameState.Events.Popups.noStaminaShown++;
   }
-  public void OnBtnClick()
+  public void OnBtnFreeClick()
   {
-    //GameState.Econo.stamina += GameData.Econo.staminaAdReward;
-    if(GameState.Events.Popups.noStaminaShown == 0)
-      OnRewardedComplete("");
-    else
-    {  
-      if(_showAd)
-        UnityAdsRewarded.Show();
-    }
+    AddStamina();
+    Hide();
+  }
+  public void OnBtnAdClick()
+  {
+    UnityAdsRewarded.Show();
+    Hide();
+  }
+  public void OnBtnGemsClick()
+  {
+    GameState.Econo.gems -= GameData.Econo.staminaRefillGemsCost;
+    AddStamina();
     Hide();
   }
 }
