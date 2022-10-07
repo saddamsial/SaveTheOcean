@@ -18,7 +18,7 @@ public class HapticManager : MonoBehaviour
     Item.onNoMerged += VibMed;
     Item.onPut += VibMed;
     Item.onNoPut += VibMed;
-
+    Animal.onFeed += VibMed;
 
     RewardChest.onPoped += VibMed;
     RewardChest.onNotPoped += VibMed;
@@ -40,6 +40,7 @@ public class HapticManager : MonoBehaviour
     Item.onNoMerged -= VibMed;
     Item.onPut -= VibMed;
     Item.onNoPut -= VibMed;
+    Animal.onFeed -= VibMed;
 
     RewardChest.onPoped -= VibMed;
     RewardChest.onNotPoped -= VibMed;

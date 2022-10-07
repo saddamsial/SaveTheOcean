@@ -642,11 +642,12 @@ public class GameState : SavableScriptableObject
   }
   public static class Animals
   {
-    public static bool AnimalAppears(Animal.Type type) => get().animals.AnimalAppeared(type);
-    public static bool DidAnimalAppear(Animal.Type type) => get().animals.DidAnimalAppear(type);
-    public static bool Feed(Animal.Type type, Item.ID id, int baseLevelUp)
+    public static bool  AnimalAppears(Animal.Type type) => get().animals.AnimalAppeared(type);
+    public static bool  DidAnimalAppear(Animal.Type type) => get().animals.DidAnimalAppear(type);
+    public static float GetFoodCal(Item.ID id) => GameData.Econo.GetResCount(id) * GameData.Econo.GetFoodDesc(id).kcal;
+    public static bool  Feed(Animal.Type type, Item.ID id, int baseLevelUp) 
     {
-      float kcal = GameData.Econo.GetResCount(id) * GameData.Econo.GetFoodDesc(id).kcal;
+      float kcal = GetFoodCal(id);
       return get().animals.Feed(type, kcal, baseLevelUp);
     }
     public static (float kcal, mr.Range<int> lvlRng, int lvl) GetInfo(Animal.Type type, int baseLevelUp)

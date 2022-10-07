@@ -753,7 +753,7 @@ public class Level : MonoBehaviour
     if(!isFeedingMode)
       animalHit.Put(item);
     else
-      animalHit.Feed(item);  
+      animalHit.Feed(item);
     onItemCleared?.Invoke(item);
     _grid.set(item.vgrid, 0);
     _items.Remove(item);

@@ -42,6 +42,7 @@ public class Animal : MonoBehaviour
   public List<Item.ID> garbages => _garbages;
   public List<Item.ID> garbagesIds => _garbagesIds;
   //public Vector3       garbagePos => _garbageContainer.transform.position;
+  public float         lastkCal {get; private set;} = 0;
 
   static public int layer = 0;
   static public int layerMask = 0;
@@ -161,6 +162,7 @@ public class Animal : MonoBehaviour
   {
     bool next_lvl = GameState.Animals.Feed(type, item.id, _baseLevelUp);
     _feedingInfo.UpdateInfo();
+    lastkCal = GameState.Animals.GetFoodCal(item.id);
     onFeed?.Invoke(this);
     if(next_lvl)
       onLevelUp?.Invoke(this);    
